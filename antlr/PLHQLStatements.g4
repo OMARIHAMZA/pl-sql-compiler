@@ -7,11 +7,11 @@ program : block EOF;
 block : ((begin_end_block | stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
 begin_end_block :
-       declare_block? T_BEGIN block exception_block? block_end
+       declare_block? T_BEGIN block block_end
      ;
 
 single_block_stmt :                                      // Single BEGIN END block (but nested blocks are possible) or single statement
-       T_BEGIN block exception_block? block_end
+       T_BEGIN block  block_end
      | stmt T_SEMICOLON?
      ;
 
@@ -26,18 +26,8 @@ proc_block :
 
 stmt :
        assignment_stmt
-     | allocate_cursor_stmt
-     | alter_table_stmt
-     | associate_locator_stmt
-     | begin_transaction_stmt
      | break_stmt
      | call_stmt
-     | collect_stats_stmt
-     | close_stmt
-     | cmp_stmt
-     | copy_from_local_stmt
-     | copy_stmt
-     | commit_stmt
      | create_database_stmt
      | create_function_stmt
      | create_index_stmt
@@ -47,39 +37,11 @@ stmt :
      | create_procedure_stmt
      | create_table_stmt
      | declare_stmt
-     | describe_stmt
-     | drop_stmt
-     | end_transaction_stmt
      | exec_stmt
-     | exit_stmt
-     | fetch_stmt
-     | for_cursor_stmt
      | for_range_stmt
      | if_stmt
-     | include_stmt
-
-     | get_diag_stmt
-     | grant_stmt
-     | leave_stmt
-     | map_object_stmt
-     | merge_stmt
-     | open_stmt
-     | print_stmt
-     | quit_stmt
-     | raise_stmt
-     | resignal_stmt
      | return_stmt
-     | rollback_stmt
      | select_stmt
-     | signal_stmt
-     | summary_stmt
-     | update_stmt
-     | use_stmt
-     | truncate_stmt
-     | values_into_stmt
-     | label
-     | hive
-     | host
      | null_stmt
      | expr_stmt
      | semicolon_stmt      // Placed here to allow null statements ;;...
@@ -90,13 +52,6 @@ semicolon_stmt :
      | '@' | '#' | '/'
      ;
 
-exception_block :       // Exception block
-       T_EXCEPTION exception_block_item+
-     ;
-
-exception_block_item :
-       T_WHEN L_ID T_THEN block ~(T_WHEN | T_END)
-     ;
 
 null_stmt :             // NULL statement (no operation)
        T_NULL
@@ -107,8 +62,7 @@ expr_stmt :             // Standalone expression
      ;
 
 assignment_stmt :       // Assignment statement
-       T_SET set_session_option
-     | T_SET? assignment_stmt_item (T_COMMA assignment_stmt_item)*
+       T_SET? assignment_stmt_item (T_COMMA assignment_stmt_item)*
      ;
 
 assignment_stmt_item :
@@ -129,19 +83,6 @@ assignment_stmt_multiple_item :
 assignment_stmt_select_item :
        (ident | (T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P)) T_COLON? T_EQUAL T_OPEN_P select_stmt T_CLOSE_P
      ;
-
-allocate_cursor_stmt:
-       T_ALLOCATE ident T_CURSOR T_FOR ((T_RESULT T_SET) | T_PROCEDURE) ident
-     ;
-
-associate_locator_stmt :
-       T_ASSOCIATE (T_RESULT T_SET)? (T_LOCATOR | T_LOCATORS) T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_WITH T_PROCEDURE ident
-     ;
-
-begin_transaction_stmt :
-       T_BEGIN T_TRANSACTION
-     ;
-
 break_stmt :
        T_BREAK
      ;
@@ -163,11 +104,7 @@ declare_block_inplace :
      ;
 
 declare_stmt_item :
-       declare_cursor_item
-     | declare_condition_item
-     | declare_handler_item
-     | declare_var_item
-     | declare_temporary_table_item
+      declare_var_item
      ;
 
 declare_var_item :
@@ -175,29 +112,6 @@ declare_var_item :
      | ident T_CONSTANT T_AS? dtype dtype_len? dtype_default
      ;
 
-declare_condition_item :    // Condition declaration
-       ident T_CONDITION
-     ;
-
-declare_cursor_item :      // Cursor declaration
-       (T_CURSOR ident | ident T_CURSOR) (cursor_with_return | cursor_without_return)? (T_IS | T_AS | T_FOR) (select_stmt | expr )
-     ;
-
-cursor_with_return :
-       T_WITH T_RETURN T_ONLY? (T_TO (T_CALLER | T_CLIENT))?
-     ;
-
-cursor_without_return :
-       T_WITHOUT T_RETURN
-     ;
-
-declare_handler_item :     // Condition handler declaration
-       (T_CONTINUE | T_EXIT) T_HANDLER T_FOR (T_SQLEXCEPTION | T_SQLWARNING | T_NOT T_FOUND | ident) single_block_stmt
-     ;
-
-declare_temporary_table_item :     // DECLARE TEMPORARY TABLE statement
-       T_GLOBAL? T_TEMPORARY T_TABLE ident create_table_preoptions? create_table_definition
-     ;
 
 create_table_stmt :
        T_CREATE T_TABLE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
@@ -236,7 +150,7 @@ create_table_column_inline_cons :
      ;
 
 create_table_column_cons :
-       T_PRIMARY T_KEY T_CLUSTERED? T_OPEN_P ident (T_ASC | T_DESC)? (T_COMMA ident (T_ASC | T_DESC)?)* T_CLOSE_P T_ENABLE? index_storage_clause?
+       T_PRIMARY T_KEY T_CLUSTERED? T_OPEN_P ident (T_ASC | T_DESC)? (T_COMMA ident (T_ASC | T_DESC)?)* T_CLOSE_P T_ENABLE?
      | T_FOREIGN T_KEY T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_REFERENCES table_name T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P create_table_fk_action*
     ;
 
@@ -322,24 +236,6 @@ create_table_options_mysql_item :
      | T_COMMENT T_EQUAL? expr
      | T_DEFAULT? (T_CHARACTER T_SET | T_CHARSET) T_EQUAL? expr
      | T_ENGINE T_EQUAL? expr
-     ;
-
-alter_table_stmt :
-       T_ALTER T_TABLE table_name alter_table_item
-     ;
-
-alter_table_item :
-       alter_table_add_constraint
-     ;
-
-alter_table_add_constraint :
-       T_ADD2 (T_CONSTRAINT ident)? alter_table_add_constraint_item
-     ;
-
-alter_table_add_constraint_item :
-       T_PRIMARY T_KEY T_CLUSTERED? T_OPEN_P ident (T_ASC | T_DESC)? (T_COMMA ident (T_ASC | T_DESC)?)* T_CLOSE_P T_ENABLE? index_storage_clause?
-     | T_FOREIGN T_KEY T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_REFERENCES table_name T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P create_table_fk_action*
-     | T_DEFAULT expr T_FOR ident
      ;
 
 dtype :                  // Data types
@@ -442,8 +338,9 @@ package_body_item :
     | create_procedure_stmt
     ;
 
+
 create_procedure_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC) ident create_routine_params? create_routine_options? (T_AS | T_IS)? declare_block_inplace? label? proc_block (ident T_SEMICOLON)?
+      ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC) ident create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
     ;
 
 create_routine_params :
@@ -461,27 +358,12 @@ create_routine_param_item :
      | ident (T_IN | T_OUT | T_INOUT | T_IN T_OUT)? dtype dtype_len? dtype_attr* dtype_default?
      ;
 
-create_routine_options :
-       create_routine_option+
-     ;
-create_routine_option :
-       T_LANGUAGE T_SQL
-     | T_SQL T_SECURITY (T_CREATOR | T_DEFINER | T_INVOKER | T_OWNER)
-     | T_DYNAMIC? T_RESULT T_SETS L_INT
-     ;
 
-drop_stmt :             // DROP statement
-       T_DROP T_TABLE (T_IF T_EXISTS)? table_name
-     | T_DROP (T_DATABASE | T_SCHEMA) (T_IF T_EXISTS)? expr
-     ;
-
-end_transaction_stmt :
-       T_END T_TRANSACTION
-     ;
 
 exec_stmt :             // EXEC, EXECUTE IMMEDIATE statement
-       (T_EXEC | T_EXECUTE) T_IMMEDIATE? expr (T_OPEN_P expr_func_params T_CLOSE_P | expr_func_params)? (T_INTO L_ID (T_COMMA L_ID)*)? using_clause?
+       (T_EXEC | T_EXECUTE) T_IMMEDIATE? expr (T_OPEN_P expr_func_params T_CLOSE_P | expr_func_params)? (T_INTO L_ID (T_COMMA L_ID)*)? 
      ;
+     
 
 if_stmt :               // IF statement
        if_plsql_stmt
@@ -509,128 +391,6 @@ else_block :
        T_ELSE block
      ;
 
-include_stmt :          // INCLUDE statement
-       T_INCLUDE (file_name | expr)
-     ;
-
-insert_stmt :           // INSERT statement
-       T_INSERT (T_OVERWRITE T_TABLE | T_INTO T_TABLE?) table_name insert_stmt_cols? (select_stmt | insert_stmt_rows)
-     ;
-
-insert_stmt_cols :
-       T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P
-     ;
-
-insert_stmt_rows :
-       T_VALUES insert_stmt_row (T_COMMA insert_stmt_row)*
-     ;
-
-insert_stmt_row:
-       T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
-     ;
-
-insert_directory_stmt :
-       T_INSERT T_OVERWRITE T_LOCAL? T_DIRECTORY expr_file expr_select
-     ;
-
-exit_stmt :
-       T_EXIT L_ID? (T_WHEN bool_expr)?
-     ;
-
-get_diag_stmt :         // GET DIAGNOSTICS statement
-       T_GET T_DIAGNOSTICS get_diag_stmt_item
-     ;
-
-get_diag_stmt_item :
-       get_diag_stmt_exception_item
-     | get_diag_stmt_rowcount_item
-     ;
-
-get_diag_stmt_exception_item :
-       T_EXCEPTION L_INT ident T_EQUAL T_MESSAGE_TEXT
-     ;
-
-get_diag_stmt_rowcount_item :
-       ident T_EQUAL T_ROW_COUNT
-     ;
-
-grant_stmt :
-       T_GRANT grant_stmt_item (T_COMMA grant_stmt_item)* T_TO T_ROLE ident
-     ;
-
-grant_stmt_item :
-       T_EXECUTE T_ON T_PROCEDURE ident
-     ;
-
-leave_stmt :
-       T_LEAVE L_ID?
-     ;
-
-map_object_stmt :
-       T_MAP T_OBJECT expr (T_TO expr)? (T_AT expr)?
-     ;
-
-open_stmt :             // OPEN cursor statement
-       T_OPEN L_ID (T_FOR (select_stmt | expr))?
-     ;
-
-fetch_stmt :            // FETCH cursor statement
-       T_FETCH T_FROM? L_ID T_INTO L_ID (T_COMMA L_ID)*
-     ;
-
-collect_stats_stmt :
-       T_COLLECT (T_STATISTICS | T_STATS) T_ON table_name collect_stats_clause?
-     ;
-
-collect_stats_clause :
-       T_COLUMN T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P
-     ;
-
-close_stmt :            // CLOSE cursor statement
-       T_CLOSE L_ID
-     ;
-
-cmp_stmt :              // CMP statement
-       T_CMP (T_ROW_COUNT | T_SUM) cmp_source T_COMMA cmp_source
-     ;
-
-cmp_source :
-      (table_name where_clause? | T_OPEN_P select_stmt T_CLOSE_P) (T_AT ident)?
-     ;
-
-copy_from_local_stmt :  // COPY FROM LOCAL statement
-       T_COPY T_FROM T_LOCAL copy_source (T_COMMA copy_source)* T_TO copy_target copy_file_option*
-     ;
-
-copy_stmt :             // COPY statement
-       T_COPY (table_name | T_OPEN_P select_stmt T_CLOSE_P) T_TO T_HDFS? copy_target copy_option*
-     ;
-
-copy_source :
-       (file_name | expr)
-     ;
-
-copy_target :
-       (file_name | expr)
-     ;
-
-copy_option :
-       T_AT ident
-     | T_BATCHSIZE expr
-     | T_DELIMITER expr
-     | T_SQLINSERT ident
-     ;
-
-copy_file_option :
-       T_DELETE
-     | T_IGNORE
-     | T_OVERWRITE
-     ;
-
-commit_stmt :           // COMMIT statement
-       T_COMMIT T_WORK?
-     ;
-
 create_index_stmt :     // CREATE INDEX statement
        T_CREATE T_UNIQUE? T_INDEX ident T_ON table_name T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
      ;
@@ -639,101 +399,14 @@ create_index_col :
        ident (T_ASC | T_DESC)?
      ;
 
-index_storage_clause :
-      index_mssql_storage_clause
-    ;
-
-index_mssql_storage_clause :
-      T_WITH T_OPEN_P ident T_EQUAL ident (T_COMMA ident T_EQUAL ident)* T_CLOSE_P create_table_options_mssql_item*
-    ;
-
-print_stmt :            // PRINT statement
-       T_PRINT expr
-     | T_PRINT T_OPEN_P expr T_CLOSE_P
-     ;
-
-quit_stmt :
-       '.'? T_QUIT expr?
-     ;
-
-raise_stmt :
-       T_RAISE
-     ;
-
-resignal_stmt :         // RESIGNAL statement
-       T_RESIGNAL (T_SQLSTATE T_VALUE? expr (T_SET T_MESSAGE_TEXT T_EQUAL expr)? )?
-     ;
 
 return_stmt :           // RETURN statement
        T_RETURN expr?
      ;
 
-rollback_stmt :         // ROLLBACK statement
-       T_ROLLBACK T_WORK?
-     ;
-
-set_session_option :
-       set_current_schema_option
-     | set_mssql_session_option
-     | set_teradata_session_option
-     ;
-
-set_current_schema_option :
-       ((T_CURRENT? T_SCHEMA) | T_CURRENT_SCHEMA) T_EQUAL? expr
-     ;
-
-set_mssql_session_option :
-     ( T_ANSI_NULLS
-     | T_ANSI_PADDING
-     | T_NOCOUNT
-     | T_QUOTED_IDENTIFIER
-     | T_XACT_ABORT )
-     (T_ON | T_OFF)
-     ;
-
-set_teradata_session_option :
-       T_QUERY_BAND T_EQUAL (expr | T_NONE) T_UPDATE? T_FOR (T_TRANSACTION | T_SESSION)
-     ;
-
-signal_stmt :          // SIGNAL statement
-       T_SIGNAL ident
-     ;
-
-summary_stmt :         // SUMMARY statement
-       T_SUMMARY (T_TOP expr)? T_FOR (select_stmt | table_name where_clause? (T_LIMIT expr)?)
-     ;
-
-truncate_stmt :
-       T_TRUNCATE T_TABLE? table_name
-     ;
-
-use_stmt :              // USE statement
-       T_USE expr
-     ;
-
-values_into_stmt :     // VALUES INTO statement
-       T_VALUES T_OPEN_P? expr (T_COMMA expr)* T_CLOSE_P? T_INTO T_OPEN_P? ident (T_COMMA ident)* T_CLOSE_P?
-     ;
-
-while_stmt :            // WHILE loop statement
-       T_WHILE bool_expr (T_DO | T_LOOP | T_THEN | T_BEGIN) block T_END (T_WHILE | T_LOOP)?
-     ;
-
-for_cursor_stmt :       // FOR (cursor) statement
-       T_FOR L_ID T_IN T_OPEN_P? select_stmt T_CLOSE_P? T_LOOP block T_END T_LOOP
-     ;
 
 for_range_stmt :        // FOR (Integer range) statement
        T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP block T_END T_LOOP
-     ;
-
-label :
-       L_LABEL
-     | T_LESS T_LESS L_ID T_GREATER T_GREATER
-     ;
-
-using_clause :          // USING var,... clause
-       T_USING expr (T_COMMA expr)*
      ;
 
 select_stmt :            // SELECT statement
@@ -768,7 +441,7 @@ fullselect_set_clause :
      ;
 
 subselect_stmt :
-       (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? select_options?
+       (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? 
      ;
 
 select_list :
@@ -874,56 +547,6 @@ order_by_clause :
        T_ORDER T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
      ;
 
-select_options :
-       select_options_item+
-     ;
-
-select_options_item :
-       T_LIMIT expr
-     | T_WITH (T_RR | T_RS | T_CS | T_UR) (T_USE T_AND T_KEEP (T_EXCLUSIVE | T_UPDATE | T_SHARE) T_LOCKS)?
-     ;
-
-update_stmt :                              // UPDATE statement
-       T_UPDATE update_table T_SET update_assignment where_clause? update_upsert?
-     ;
-
-update_assignment :
-       assignment_stmt_item (T_COMMA assignment_stmt_item)*
-     ;
-
-update_table :
-       (table_name from_clause? | T_OPEN_P select_stmt T_CLOSE_P) (T_AS? ident)?
-     ;
-
-update_upsert :
-       T_ELSE insert_stmt
-     ;
-
-merge_stmt :                              // MERGE statement
-       T_MERGE T_INTO merge_table T_USING merge_table T_ON bool_expr merge_condition+
-     ;
-
-merge_table :
-       (table_name | (T_OPEN_P select_stmt T_CLOSE_P)) (T_AS? ident)?
-     ;
-
-merge_condition :
-       T_WHEN T_NOT? T_MATCHED (T_AND bool_expr)? T_THEN merge_action
-     | T_ELSE T_IGNORE
-     ;
-
-merge_action :
-       T_INSERT insert_stmt_cols? T_VALUES insert_stmt_row
-     | T_UPDATE T_SET assignment_stmt_item (T_COMMA assignment_stmt_item)* where_clause?
-     | T_DELETE
-     ;
-
-
-
-
-describe_stmt :
-       (T_DESCRIBE | T_DESC) T_TABLE? table_name
-     ;
 
 bool_expr :                               // Boolean condition
        T_NOT? T_OPEN_P bool_expr T_CLOSE_P
@@ -985,7 +608,6 @@ expr :
      | expr_interval
      | expr_concat
      | expr_case
-     | expr_cursor_attribute
      | expr_agg_window_func
      | expr_spec_func
      | expr_func
@@ -1041,9 +663,6 @@ expr_case_searched :
        T_CASE (T_WHEN bool_expr T_THEN expr)+ (T_ELSE expr)? T_END
      ;
 
-expr_cursor_attribute :
-      ident '%' (T_ISOPEN | T_FOUND | T_NOTFOUND)
-    ;
 
 expr_agg_window_func :
        T_AVG T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
@@ -1116,37 +735,6 @@ expr_select :
      | expr
      ;
 
-expr_file :
-       file_name
-     | expr
-     ;
-
-hive :
-       T_HIVE hive_item*
-     ;
-
-hive_item :
-       T_SUB ident expr
-     | T_SUB ident L_ID T_EQUAL expr
-     | T_SUB ident
-     ;
-
-host :
-       '!' host_cmd  ';'                   // OS command
-     | host_stmt
-     ;
-
-host_cmd :
-       .*?
-     ;
-
-host_stmt :
-       T_HOST expr
-     ;
-
-file_name :
-       L_FILE | ('/' | '.' '/')? ident ('/' ident)*
-     ;
 
 date_literal :                             // DATE 'YYYY-MM-DD' literal
        T_DATE string
