@@ -3,11 +3,13 @@ package models;
 public class Token {
 
     private String text;
+    private TokenType tokenType;
     private Integer startIndex, endIndex;
 
 
-    public Token(String text, Integer startIndex, Integer endIndex) {
+    public Token(String text, TokenType tokenType, Integer startIndex, Integer endIndex) {
         this.text = text;
+        this.tokenType = tokenType;
         this.startIndex = startIndex;
         this.endIndex = endIndex + 1;
     }
@@ -18,6 +20,14 @@ public class Token {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public TokenType getTokenType() {
+        return tokenType;
+    }
+
+    public void setTokenType(TokenType tokenType) {
+        this.tokenType = tokenType;
     }
 
     public Integer getStartIndex() {

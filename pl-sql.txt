@@ -1,1 +1,2 @@
-INSERT INTO ZUCC 
+1.0 
+'sgtring' 

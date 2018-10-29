@@ -1,5 +1,8 @@
 package utils;
 
+import Listeners.StatementsListener;
+import antlr.PLHQLStatementsLexer;
+import antlr.PLHQLStatementsParser;
 import antlr.PLSQLKeywordLexer;
 import antlr.PLSQLKeywordParserParser;
 import models.Token;
@@ -16,14 +19,14 @@ public class AntlrUtils {
 
     public static ArrayList<Token> getTokensFromText(String text){
         CharStream charStream = new ANTLRInputStream(text);
-        PLSQLKeywordLexer lexer = new PLSQLKeywordLexer(charStream);
+        PLHQLStatementsLexer lexer = new PLHQLStatementsLexer(charStream);
         CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
-        PLSQLKeywordParserParser parser = new PLSQLKeywordParserParser(commonTokenStream);
-        ParseTree parseTree = parser.statement();
+        PLHQLStatementsParser parser = new PLHQLStatementsParser(commonTokenStream);
+        ParseTree parseTree = parser.program();
         ParseTreeWalker walker = new ParseTreeWalker();
-        KeywordsListener keywordsListener = new KeywordsListener();
-        walker.walk(keywordsListener, parseTree);
-        return keywordsListener.getKeywords();
+        StatementsListener statementsListener = new StatementsListener();
+        walker.walk(statementsListener, parseTree);
+        return statementsListener.getTokens();
     }
 
 }
