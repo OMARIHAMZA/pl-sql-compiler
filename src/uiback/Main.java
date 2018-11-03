@@ -2,17 +2,17 @@ package uiback;
 
 import javafx.application.Application;
 import javafx.concurrent.Task;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import models.Token;
+import models.TokenType;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
-import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.Subscription;
+import sun.rmi.runtime.Log;
 import utils.AntlrUtils;
 import utils.CustomLineNumberFactory;
 import utils.FilesUtils;
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,7 +39,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         executor = Executors.newSingleThreadExecutor();
         codeArea = new CodeArea();
-        codeArea.replaceText(FilesUtils.getPreviousSession());
         codeArea.setParagraphGraphicFactory(CustomLineNumberFactory.get(codeArea));
         Subscription cleanupWhenDone = codeArea.multiPlainChanges()
                 .successionEnds(Duration.ofMillis(1))
@@ -53,6 +53,7 @@ public class Main extends Application {
                     }
                 })
                 .subscribe(this::applyHighlighting);
+        codeArea.replaceText(FilesUtils.getPreviousSession());
         Scene scene = new Scene(new StackPane(new VirtualizedScrollPane<>(codeArea)), 600, 400);
         scene.getStylesheets().add(Main.class.getResource("/uifront/pl-sql-keywords.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -87,11 +88,31 @@ public class Main extends Application {
         FilesUtils.saveSession(text);
         StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
         int lastKwEnd = 0;
-        for (Token keyword : AntlrUtils.getTokensFromText(text)) {
-            String styleClass = "keyword";
-            spansBuilder.add(Collections.emptyList(), (keyword.getStartIndex() - lastKwEnd));
-            spansBuilder.add(Collections.singleton(styleClass), (keyword.getEndIndex() - keyword.getStartIndex()));
-            lastKwEnd = keyword.getEndIndex();
+        List<Token> mTokens = AntlrUtils.getTokensFromText(text);
+        System.out.println("Size: " + mTokens.size());
+        for (Token token : AntlrUtils.getTokensFromText(text)) {
+            String styleClass = "";
+            switch (token.getTokenType()) {
+                case IDENTIFIER:
+                    styleClass = "identifier";
+                    break;
+
+                case KEYWORD:
+                    styleClass = "keyword";
+                    break;
+
+                case NUMBER:
+                    styleClass = "number";
+                    break;
+
+                case STRING:
+                    styleClass = "string";
+                    break;
+            }
+            System.err.println("Style Span Length: " + token.getStartIndex() + "-" + lastKwEnd);
+            spansBuilder.add(Collections.emptyList(), (token.getStartIndex() - lastKwEnd));
+            spansBuilder.add(Collections.singleton(styleClass), (token.getEndIndex() - token.getStartIndex()));
+            lastKwEnd = token.getEndIndex();
         }
         spansBuilder.add(Collections.emptyList(), (text.length() - lastKwEnd));
         return spansBuilder.create();

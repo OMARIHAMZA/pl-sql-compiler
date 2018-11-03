@@ -16,11 +16,11 @@ public class KeywordsListener extends PLSQLKeywordParserBaseListener {
 
     @Override
     public void enterStatement(PLSQLKeywordParserParser.StatementContext ctx) {
-        for (PLSQLKeywordParserParser.KeywordContext keywordContext : ctx.keyword()) {
+        /*for (PLSQLKeywordParserParser.KeywordContext keywordContext : ctx.keyword()) {
             tokens.add(new Token(keywordContext.KEYWORD().getText(),
                     keywordContext.KEYWORD().getSymbol().getStartIndex(),
                     keywordContext.KEYWORD().getSymbol().getStopIndex()));
-        }
+        }*/
         super.enterStatement(ctx);
     }
 

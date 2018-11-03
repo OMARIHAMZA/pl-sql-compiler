@@ -1,6 +1,19 @@
+
 .keyword {
     -fx-fill: #3132FF;
     -fx-font-weight: bold;
+}
+
+.identifier{
+    -fx-fill: #9876AA;
+}
+
+.string{
+    -fx-fill: #DF0002;
+}
+
+.number{
+    -fx-fill: #227A53;
 }
 .semicolon {
     -fx-font-weight: bold;
@@ -16,9 +29,6 @@
 .brace {
     -fx-fill: teal;
     -fx-font-weight: bold;
-}
-.string {
-    -fx-fill: blue;
 }
 
 .comment {

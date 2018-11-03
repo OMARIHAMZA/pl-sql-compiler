@@ -1485,9 +1485,9 @@ T_SUB          : '-' ;
 
 L_ID        : L_ID_PART                                                // Identifier
             ;
-L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted string literal
+L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted STRING literal
             ;
-L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted string literal
+L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted STRING literal
             ;
 L_INT       : L_DIGIT+ ;                                               // Integer
 L_DEC       : L_DIGIT+ '.' ~'.' L_DIGIT*                               // Decimal number
@@ -1513,7 +1513,7 @@ L_ID_PART  :
             | '`' .*? '`'
             ;
 fragment
-L_STR_ESC_D :                                                          // Double quoted string escape sequence
+L_STR_ESC_D :                                                          // Double quoted STRING escape sequence
               '""' | '\\"'
             ;
 fragment

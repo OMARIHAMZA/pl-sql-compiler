@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/Dropbox/Compilers/Assets/antlr-4.7.1-complete.jar!/" />
+          <root url="jar://E:/Dropbox/Dropbox/Compilers/Assets/antlr-4.7.1-complete.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/Dropbox/Compilers/Assets/richtextfx-fat-0.9.1.jar!/" />
+          <root url="jar://E:/Dropbox/Dropbox/Compilers/Assets/richtextfx-fat-0.9.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
