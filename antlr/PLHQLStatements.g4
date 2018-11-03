@@ -11,6 +11,7 @@ error_stmt:
     |error_missing_right_p
     |error_missing_end
     |error_string
+    |error_missing_bool_expr
     ;
 
 
@@ -546,6 +547,10 @@ table_name :
 
 where_clause :
        T_WHERE bool_expr
+     ;
+
+error_missing_bool_expr :
+       T_WHERE
      ;
 
 group_by_clause :

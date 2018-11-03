@@ -1007,6 +1007,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitWhere_clause(PLHQLStatementsParser.Where_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_missing_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_missing_bool_expr(PLHQLStatementsParser.Error_missing_bool_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_missing_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_missing_bool_expr(PLHQLStatementsParser.Error_missing_bool_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#group_by_clause}.
 	 * @param ctx the parse tree
 	 */

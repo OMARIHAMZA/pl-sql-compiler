@@ -1215,6 +1215,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_missing_bool_expr(PLHQLStatementsParser.Error_missing_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_missing_bool_expr(PLHQLStatementsParser.Error_missing_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGroup_by_clause(PLHQLStatementsParser.Group_by_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

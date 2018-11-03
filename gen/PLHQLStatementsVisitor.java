@@ -610,6 +610,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhere_clause(PLHQLStatementsParser.Where_clauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_missing_bool_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_missing_bool_expr(PLHQLStatementsParser.Error_missing_bool_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#group_by_clause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
