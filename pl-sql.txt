@@ -1,1 +1,2 @@
-INSERT INTO ZUCC 
+x number;
+x := 2

@@ -1,4 +1,4 @@
-// Generated from E:/Github/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -27,6 +27,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitBlock(PLHQLStatementsParser.BlockContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_stmt(PLHQLStatementsParser.Error_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_stmt(PLHQLStatementsParser.Error_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#begin_end_block}.
 	 * @param ctx the parse tree
 	 */
@@ -36,6 +46,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBegin_end_block(PLHQLStatementsParser.Begin_end_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_missing_end}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_missing_end(PLHQLStatementsParser.Error_missing_endContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_missing_end}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_missing_end(PLHQLStatementsParser.Error_missing_endContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#single_block_stmt}.
 	 * @param ctx the parse tree
@@ -76,16 +96,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStmt(PLHQLStatementsParser.StmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#semicolon_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#semicolon_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#null_stmt}.
 	 * @param ctx the parse tree
@@ -577,6 +587,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
 	 * @param ctx the parse tree
 	 */
@@ -806,6 +826,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_subselect}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_subselect(PLHQLStatementsParser.Error_subselectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_subselect}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_subselect(PLHQLStatementsParser.Error_subselectContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#select_list}.
 	 * @param ctx the parse tree
@@ -1277,15 +1307,15 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitFunc_param(PLHQLStatementsParser.Func_paramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#expr_select}.
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_missing_right_p}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr_select(PLHQLStatementsParser.Expr_selectContext ctx);
+	void enterError_missing_right_p(PLHQLStatementsParser.Error_missing_right_pContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#expr_select}.
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_missing_right_p}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr_select(PLHQLStatementsParser.Expr_selectContext ctx);
+	void exitError_missing_right_p(PLHQLStatementsParser.Error_missing_right_pContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#date_literal}.
 	 * @param ctx the parse tree

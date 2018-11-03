@@ -1,4 +1,4 @@
-// Generated from E:/Github/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -22,11 +22,23 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlock(PLHQLStatementsParser.BlockContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_stmt(PLHQLStatementsParser.Error_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#begin_end_block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBegin_end_block(PLHQLStatementsParser.Begin_end_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_missing_end}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_missing_end(PLHQLStatementsParser.Error_missing_endContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#single_block_stmt}.
 	 * @param ctx the parse tree
@@ -51,12 +63,6 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStmt(PLHQLStatementsParser.StmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#semicolon_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#null_stmt}.
 	 * @param ctx the parse tree
@@ -352,6 +358,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -489,6 +501,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_subselect}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_subselect(PLHQLStatementsParser.Error_subselectContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#select_list}.
 	 * @param ctx the parse tree
@@ -772,11 +790,11 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc_param(PLHQLStatementsParser.Func_paramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#expr_select}.
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_missing_right_p}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr_select(PLHQLStatementsParser.Expr_selectContext ctx);
+	T visitError_missing_right_p(PLHQLStatementsParser.Error_missing_right_pContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#date_literal}.
 	 * @param ctx the parse tree

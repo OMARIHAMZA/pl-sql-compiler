@@ -4,11 +4,24 @@ grammar PLHQLStatements;
 
 program : block EOF;
 
-block : ((begin_end_block | stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
+block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
+
+error_stmt:
+    error_subselect
+    |error_missing_right_p
+    |error_missing_semicolon
+    |error_missing_end
+    ;
+
 
 begin_end_block :
        declare_block? T_BEGIN block block_end
      ;
+
+error_missing_end:
+    declare_block? T_BEGIN block
+    ;
+
 
 single_block_stmt :                                      // Single BEGIN END block (but nested blocks are possible) or single statement
        T_BEGIN block  block_end
@@ -19,10 +32,12 @@ block_end :
        {!_input.LT(2).getText().equalsIgnoreCase("TRANSACTION")}? T_END
      ;
 
+
 proc_block :
        begin_end_block
      | stmt+ T_GO?
      ;
+
 
 stmt :
        assignment_stmt
@@ -43,13 +58,8 @@ stmt :
      | return_stmt
      | select_stmt
      | null_stmt
-     | expr_stmt
-     | semicolon_stmt      // Placed here to allow null statements ;;...
-     ;
-
-semicolon_stmt :
-       T_SEMICOLON
-     | '@' | '#' | '/'
+    // | expr_stmt
+   //  | semicolon_stmt      // Placed here to allow null statements ;;...
      ;
 
 
@@ -332,6 +342,10 @@ package_body :
       package_body_item T_SEMICOLON (package_body_item T_SEMICOLON)*
     ;
 
+error_missing_semicolon:
+     package_body_item (~T_SEMICOLON)*
+;
+
 package_body_item :
       declare_stmt_item
     | create_function_stmt
@@ -441,8 +455,14 @@ fullselect_set_clause :
      ;
 
 subselect_stmt :
-       (T_SELECT | T_SEL) select_list into_clause? from_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause? 
+       (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
+
+error_subselect :
+       (T_SELECT | T_SEL) select_list into_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
+
+;
+
 
 select_list :
        select_list_set? select_list_limit? select_list_item (T_COMMA select_list_item)*
@@ -557,7 +577,7 @@ bool_expr :                               // Boolean condition
 bool_expr_atom :
       bool_expr_unary
     | bool_expr_binary
-    | expr
+  //  | expr
     ;
 
 bool_expr_unary :
@@ -730,11 +750,9 @@ func_param :
        {!_input.LT(1).getText().equalsIgnoreCase("INTO")}? (ident T_EQUAL T_GREATER?)? expr
      ;
 
-expr_select :
-       select_stmt
-     | expr
-     ;
-
+error_missing_right_p:
+    T_OPEN_P (~T_CLOSE_P)*
+;
 
 date_literal :                             // DATE 'YYYY-MM-DD' literal
        T_DATE string
