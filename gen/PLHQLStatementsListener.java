@@ -587,16 +587,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
-	 * @param ctx the parse tree
-	 */
-	void enterError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
-	 * @param ctx the parse tree
-	 */
-	void exitError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
 	 * @param ctx the parse tree
 	 */
@@ -1370,6 +1360,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDouble_quotedString(PLHQLStatementsParser.Double_quotedStringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_string}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_string(PLHQLStatementsParser.Error_stringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_string}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_string(PLHQLStatementsParser.Error_stringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#int_number}.
 	 * @param ctx the parse tree

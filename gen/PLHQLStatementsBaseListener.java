@@ -711,18 +711,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPackage_body_item(PLHQLStatementsParser.Package_body_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1642,6 +1630,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDouble_quotedString(PLHQLStatementsParser.Double_quotedStringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_string(PLHQLStatementsParser.Error_stringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_string(PLHQLStatementsParser.Error_stringContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

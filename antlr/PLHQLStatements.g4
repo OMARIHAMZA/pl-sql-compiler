@@ -9,8 +9,8 @@ block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple
 error_stmt:
     error_subselect
     |error_missing_right_p
-    |error_missing_semicolon
     |error_missing_end
+    |error_string
     ;
 
 
@@ -342,9 +342,6 @@ package_body :
       package_body_item T_SEMICOLON (package_body_item T_SEMICOLON)*
     ;
 
-error_missing_semicolon:
-     package_body_item (~T_SEMICOLON)*
-;
 
 package_body_item :
       declare_stmt_item
@@ -770,6 +767,11 @@ string :                                   // String literal (single or double q
        L_S_STRING                          # single_quotedString
      | L_D_STRING                          # double_quotedString
      ;
+
+error_string:
+    L_S_STRING_MISSING_RIGHT
+    |L_D_STRING_MISSING_RIGHT
+;
 
 int_number :                               // Integer (positive or negative)
      ('-' | '+')? L_INT
@@ -1485,9 +1487,17 @@ T_SUB          : '-' ;
 
 L_ID        : L_ID_PART                                                // Identifier
             ;
+
 L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted STRING literal
             ;
-L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted STRING literal
+
+L_S_STRING_MISSING_RIGHT:
+     '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* ~('\'')*         // Single quoted STRING literal
+     ;
+
+L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'    ;                          // Double quoted STRING literal
+
+L_D_STRING_MISSING_RIGHT  : '"' (L_STR_ESC_D | .)*? ~('"')*
             ;
 L_INT       : L_DIGIT+ ;                                               // Integer
 L_DEC       : L_DIGIT+ '.' ~'.' L_DIGIT*                               // Decimal number
@@ -1507,7 +1517,7 @@ fragment
 L_ID_PART  :
              [a-zA-Z] ([a-zA-Z] | L_DIGIT | '_')*                           // Identifier part
             | '$' '{' .*? '}'
-            | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' | '@' | ':' | '#' | '$')+     // (at least one char must follow special char)
+            | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' | '@' | '#' | '$')+     // (at least one char must follow special char)
             | '"' .*? '"'                                                   // Quoted identifiers
             | '[' .*? ']'
             | '`' .*? '`'

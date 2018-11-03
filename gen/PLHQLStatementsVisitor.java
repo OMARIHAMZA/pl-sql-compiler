@@ -358,12 +358,6 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_missing_semicolon}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitError_missing_semicolon(PLHQLStatementsParser.Error_missing_semicolonContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -827,6 +821,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDouble_quotedString(PLHQLStatementsParser.Double_quotedStringContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_string}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_string(PLHQLStatementsParser.Error_stringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#int_number}.
 	 * @param ctx the parse tree
