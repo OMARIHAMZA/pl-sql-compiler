@@ -79,6 +79,13 @@ public class PLHQLStatementsBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitNull_stmt(PLHQLStatementsParser.Null_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

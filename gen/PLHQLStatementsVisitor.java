@@ -64,6 +64,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmt(PLHQLStatementsParser.StmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#semicolon_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#null_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

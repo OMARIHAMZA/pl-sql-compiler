@@ -60,9 +60,16 @@ stmt :
      | select_stmt
      | null_stmt
     // | expr_stmt
-   //  | semicolon_stmt      // Placed here to allow null statements ;;...
+    | semicolon_stmt      // Placed here to allow null statements ;;...
      ;
 
+semicolon_stmt:
+    T_SEMICOLON
+    |'@'
+    |'#'
+    |'/'
+
+;
 
 null_stmt :             // NULL statement (no operation)
        T_NULL
