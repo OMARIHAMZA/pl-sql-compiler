@@ -12,6 +12,10 @@ error_stmt:
     |error_missing_end
     |error_string
     |error_missing_bool_expr
+    |error_T_create_index_stmt
+    |error_if_stmt
+    |error_create_table_stmt
+
     ;
 
 
@@ -134,7 +138,9 @@ declare_var_item :
 create_table_stmt :
        T_CREATE T_TABLE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
      ;
-
+error_create_table_stmt :
+       T_CREATE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
+     ;
 create_local_temp_table_stmt :
        T_CREATE (T_LOCAL T_TEMPORARY | (T_SET | T_MULTISET)? T_VOLATILE) T_TABLE ident create_table_preoptions? create_table_definition
      ;
@@ -389,19 +395,29 @@ if_stmt :               // IF statement
      | if_tsql_stmt
      | if_bteq_stmt
      ;
-
+error_if_stmt :               // IF statement
+       error_if_plsql_stmt
+     | error_if_tsql_stmt
+     | error_if_bteq_stmt
+     ;
 if_plsql_stmt :
        T_IF bool_expr T_THEN block elseif_block* else_block? T_END T_IF
      ;
-
+error_if_plsql_stmt :
+       T_IF  T_THEN block elseif_block* else_block? T_END T_IF
+     ;
 if_tsql_stmt :
        T_IF bool_expr single_block_stmt (T_ELSE single_block_stmt)?
      ;
-
+error_if_tsql_stmt :
+       T_IF  single_block_stmt (T_ELSE single_block_stmt)?
+     ;
 if_bteq_stmt :
        '.' T_IF bool_expr T_THEN single_block_stmt
      ;
-
+error_if_bteq_stmt :
+       '.' T_IF  T_THEN single_block_stmt
+     ;
 elseif_block :
        (T_ELSIF | T_ELSEIF) bool_expr T_THEN block
      ;
@@ -413,7 +429,9 @@ else_block :
 create_index_stmt :     // CREATE INDEX statement
        T_CREATE T_UNIQUE? T_INDEX ident T_ON table_name T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
      ;
-
+error_T_create_index_stmt :     // CREATE INDEX statement
+       T_CREATE T_UNIQUE?  T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
+     ;
 create_index_col :
        ident (T_ASC | T_DESC)?
      ;
