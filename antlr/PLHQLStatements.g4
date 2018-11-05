@@ -17,6 +17,8 @@ error_stmt:
     |error_if_stmt
     |error_create_table_stmt
     |error_for_range_stmt
+    |error_delcare_stmt
+    |error_invalid_token
     ;
 
 
@@ -117,6 +119,10 @@ call_stmt :
 declare_stmt :          // Declaration statement
        T_DECLARE declare_stmt_item (T_COMMA declare_stmt_item)*
      ;
+
+error_delcare_stmt:
+    declare_stmt_item (T_COMMA declare_stmt_item)*
+    ;
 
 declare_block :         // Declaration block
        T_DECLARE declare_stmt_item T_SEMICOLON (declare_stmt_item T_SEMICOLON)*
@@ -491,7 +497,7 @@ subselect_stmt :
 
 error_subselect :
        (T_SELECT | T_SEL) select_list into_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
-
+       | error_from_clause
 ;
 
 
@@ -528,6 +534,10 @@ into_clause :
 from_clause :
        T_FROM from_table_clause (from_join_clause)*
      ;
+
+error_from_clause:
+            T_FROM (from_join_clause)*
+;
 
 from_table_clause :
        from_table_name_clause
@@ -798,7 +808,7 @@ timestamp_literal :                       // TIMESTAMP 'YYYY-MM-DD HH:MI:SS.FFF'
      ;
 
 ident :
-       (L_ID | non_reserved_words) ('.' (L_ID | non_reserved_words))*
+       L_ID   ('.' L_ID )*
      ;
 
 string :                                   // String literal (single or double quoted)
@@ -1157,3 +1167,6 @@ non_reserved_words :                      // Tokens that are not reserved words 
      | T_YES
      ;
 
+error_invalid_token:
+    L_INVALID_TOKEN
+    ;

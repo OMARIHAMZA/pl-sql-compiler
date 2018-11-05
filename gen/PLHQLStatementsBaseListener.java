@@ -255,6 +255,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_delcare_stmt(PLHQLStatementsParser.Error_delcare_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_delcare_stmt(PLHQLStatementsParser.Error_delcare_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclare_block(PLHQLStatementsParser.Declare_blockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1191,6 +1203,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_from_clause(PLHQLStatementsParser.Error_from_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_from_clause(PLHQLStatementsParser.Error_from_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFrom_table_clause(PLHQLStatementsParser.From_table_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1810,6 +1834,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNon_reserved_words(PLHQLStatementsParser.Non_reserved_wordsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_invalid_token(PLHQLStatementsParser.Error_invalid_tokenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_invalid_token(PLHQLStatementsParser.Error_invalid_tokenContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

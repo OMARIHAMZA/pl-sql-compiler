@@ -207,6 +207,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitDeclare_stmt(PLHQLStatementsParser.Declare_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_delcare_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_delcare_stmt(PLHQLStatementsParser.Error_delcare_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_delcare_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_delcare_stmt(PLHQLStatementsParser.Error_delcare_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#declare_block}.
 	 * @param ctx the parse tree
 	 */
@@ -987,6 +997,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_from_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_from_clause(PLHQLStatementsParser.Error_from_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_from_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_from_clause(PLHQLStatementsParser.Error_from_clauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#from_table_clause}.
 	 * @param ctx the parse tree
 	 */
@@ -1510,4 +1530,14 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNon_reserved_words(PLHQLStatementsParser.Non_reserved_wordsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_invalid_token}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_invalid_token(PLHQLStatementsParser.Error_invalid_tokenContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_invalid_token}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_invalid_token(PLHQLStatementsParser.Error_invalid_tokenContext ctx);
 }

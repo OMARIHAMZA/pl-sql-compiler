@@ -393,11 +393,14 @@ L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File p
 L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
             ;
 
+L_INVALID_TOKEN: .
+;
+
 fragment
 L_ID_PART  :
              [a-zA-Z] ([a-zA-Z] | L_DIGIT | '_')*                           // Identifier part
             | '$' '{' .*? '}'
-            | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' | '@' | '#' | '$')+     // (at least one char must follow special char)
+            | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' |':'| '@' | '#' | '$')+     // (at least one char must follow special char)
             | '"' .*? '"'                                                   // Quoted identifiers
             | '[' .*? ']'
             | '`' .*? '`'

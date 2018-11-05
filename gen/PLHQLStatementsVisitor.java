@@ -130,6 +130,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclare_stmt(PLHQLStatementsParser.Declare_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_delcare_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_delcare_stmt(PLHQLStatementsParser.Error_delcare_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#declare_block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -598,6 +604,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_from_clause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_from_clause(PLHQLStatementsParser.Error_from_clauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#from_table_clause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -911,4 +923,10 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNon_reserved_words(PLHQLStatementsParser.Non_reserved_wordsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_invalid_token}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_invalid_token(PLHQLStatementsParser.Error_invalid_tokenContext ctx);
 }
