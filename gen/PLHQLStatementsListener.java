@@ -257,6 +257,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_table_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_create_table_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_local_temp_table_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -657,6 +667,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_if_stmt(PLHQLStatementsParser.Error_if_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_if_stmt(PLHQLStatementsParser.Error_if_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_plsql_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -666,6 +686,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_plsql_stmt(PLHQLStatementsParser.If_plsql_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_plsql_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_if_plsql_stmt(PLHQLStatementsParser.Error_if_plsql_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_if_plsql_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_if_plsql_stmt(PLHQLStatementsParser.Error_if_plsql_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_tsql_stmt}.
 	 * @param ctx the parse tree
@@ -677,6 +707,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitIf_tsql_stmt(PLHQLStatementsParser.If_tsql_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_tsql_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_if_tsql_stmt(PLHQLStatementsParser.Error_if_tsql_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_if_tsql_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_if_tsql_stmt(PLHQLStatementsParser.Error_if_tsql_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_bteq_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -686,6 +726,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_bteq_stmt(PLHQLStatementsParser.If_bteq_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_bteq_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_if_bteq_stmt(PLHQLStatementsParser.Error_if_bteq_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_if_bteq_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_if_bteq_stmt(PLHQLStatementsParser.Error_if_bteq_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#elseif_block}.
 	 * @param ctx the parse tree
@@ -717,6 +767,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_index_stmt(PLHQLStatementsParser.Create_index_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_T_create_index_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_T_create_index_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_index_col}.
 	 * @param ctx the parse tree
 	 */
@@ -746,6 +806,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_for_range_stmt(PLHQLStatementsParser.Error_for_range_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_for_range_stmt(PLHQLStatementsParser.Error_for_range_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#select_stmt}.
 	 * @param ctx the parse tree

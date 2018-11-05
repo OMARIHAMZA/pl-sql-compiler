@@ -315,6 +315,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreate_local_temp_table_stmt(PLHQLStatementsParser.Create_local_temp_table_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -795,6 +807,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_if_stmt(PLHQLStatementsParser.Error_if_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_if_stmt(PLHQLStatementsParser.Error_if_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIf_plsql_stmt(PLHQLStatementsParser.If_plsql_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -802,6 +826,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIf_plsql_stmt(PLHQLStatementsParser.If_plsql_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_if_plsql_stmt(PLHQLStatementsParser.Error_if_plsql_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_if_plsql_stmt(PLHQLStatementsParser.Error_if_plsql_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -819,6 +855,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_if_tsql_stmt(PLHQLStatementsParser.Error_if_tsql_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_if_tsql_stmt(PLHQLStatementsParser.Error_if_tsql_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIf_bteq_stmt(PLHQLStatementsParser.If_bteq_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -826,6 +874,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIf_bteq_stmt(PLHQLStatementsParser.If_bteq_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_if_bteq_stmt(PLHQLStatementsParser.Error_if_bteq_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_if_bteq_stmt(PLHQLStatementsParser.Error_if_bteq_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -867,6 +927,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreate_index_col(PLHQLStatementsParser.Create_index_colContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -898,6 +970,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterError_for_range_stmt(PLHQLStatementsParser.Error_for_range_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_for_range_stmt(PLHQLStatementsParser.Error_for_range_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
