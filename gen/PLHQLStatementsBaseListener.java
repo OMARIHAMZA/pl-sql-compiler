@@ -327,6 +327,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -771,6 +783,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreate_routine_params(PLHQLStatementsParser.Create_routine_paramsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -939,13 +963,13 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx) { }
+	@Override public void enterError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx) { }
+	@Override public void exitError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

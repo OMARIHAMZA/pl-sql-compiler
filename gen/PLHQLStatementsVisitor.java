@@ -166,6 +166,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_create_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_create_table_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -388,6 +394,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_create_procedure_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#create_routine_params}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -472,11 +484,11 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_index_stmt(PLHQLStatementsParser.Create_index_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_T_create_index_stmt}.
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_create_index_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx);
+	T visitError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#create_index_col}.
 	 * @param ctx the parse tree

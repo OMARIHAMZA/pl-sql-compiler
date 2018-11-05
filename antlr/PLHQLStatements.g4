@@ -13,9 +13,8 @@ error_stmt:
     |error_missing_end
     |error_string
     |error_missing_bool_expr
-    |error_T_create_index_stmt
     |error_if_stmt
-    |error_create_table_stmt
+    |error_create_stmt
     |error_for_range_stmt
     |error_delcare_stmt
     |error_invalid_token
@@ -145,6 +144,13 @@ declare_var_item :
 create_table_stmt :
        T_CREATE T_TABLE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
      ;
+
+error_create_stmt:
+    error_create_table_stmt
+    |error_create_index_stmt
+    |error_create_procedure_stmt
+;
+
 error_create_table_stmt :
        T_CREATE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
      ;
@@ -375,6 +381,10 @@ create_procedure_stmt :
       ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC) ident create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
     ;
 
+error_create_procedure_stmt :
+      ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC)  create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
+    ;
+
 create_routine_params :
        T_OPEN_P T_CLOSE_P
      | T_OPEN_P create_routine_param_item (T_COMMA create_routine_param_item)* T_CLOSE_P
@@ -436,7 +446,7 @@ else_block :
 create_index_stmt :     // CREATE INDEX statement
        T_CREATE T_UNIQUE? T_INDEX ident T_ON table_name T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
      ;
-error_T_create_index_stmt :     // CREATE INDEX statement
+error_create_index_stmt :     // CREATE INDEX statement
        T_CREATE T_UNIQUE?  T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
      ;
 create_index_col :

@@ -267,6 +267,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_create_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_table_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -637,6 +647,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_procedure_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_create_procedure_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_routine_params}.
 	 * @param ctx the parse tree
 	 */
@@ -777,15 +797,15 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_index_stmt(PLHQLStatementsParser.Create_index_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_T_create_index_stmt}.
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_index_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx);
+	void enterError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_T_create_index_stmt}.
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#error_create_index_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx);
+	void exitError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_index_col}.
 	 * @param ctx the parse tree

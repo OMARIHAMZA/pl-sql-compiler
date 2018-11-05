@@ -198,6 +198,13 @@ public class PLHQLStatementsBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitError_create_stmt(PLHQLStatementsParser.Error_create_stmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitError_create_table_stmt(PLHQLStatementsParser.Error_create_table_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -457,6 +464,13 @@ public class PLHQLStatementsBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitError_create_procedure_stmt(PLHQLStatementsParser.Error_create_procedure_stmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitCreate_routine_params(PLHQLStatementsParser.Create_routine_paramsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -555,7 +569,7 @@ public class PLHQLStatementsBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitError_T_create_index_stmt(PLHQLStatementsParser.Error_T_create_index_stmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitError_create_index_stmt(PLHQLStatementsParser.Error_create_index_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
