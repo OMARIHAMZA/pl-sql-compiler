@@ -340,6 +340,24 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

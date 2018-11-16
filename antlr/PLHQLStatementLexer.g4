@@ -304,6 +304,7 @@ T_VAR             : V A R ;
 T_VARCHAR         : V A R C H A R ;
 T_VARCHAR2        : V A R C H A R '2' ;
 T_VARYING         : V A R Y I N G ;
+T_VOID            :V O I D         ;
 T_VOLATILE        : V O L A T I L E ;
 T_WHEN            : W H E N ;
 T_WHERE           : W H E R E ;

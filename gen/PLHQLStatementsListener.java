@@ -557,6 +557,36 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
 	 * @param ctx the parse tree
 	 */

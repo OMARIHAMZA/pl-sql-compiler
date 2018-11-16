@@ -312,6 +312,7 @@ dtype :                  // Data types
      | T_VARCHAR
      | T_VARCHAR2
      | T_XML
+     |T_VOID
      | ident ('%' (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
      ;
 
@@ -337,6 +338,18 @@ create_database_stmt :
 create_database_option :
       T_COMMENT expr
     | T_LOCATION expr
+    ;
+
+c_function_header:
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_SEMICOLON
+   ;
+
+c_function_parameter_list:
+    c_function_parameter_item (T_COMMA c_function_parameter_item)*
+    ;
+
+c_function_parameter_item:
+    dtype ident
     ;
 
 create_function_stmt :
