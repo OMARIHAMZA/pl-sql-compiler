@@ -1,4 +1,4 @@
-// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -87,6 +87,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitProc_block(PLHQLStatementsParser.Proc_blockContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_stmt(PLHQLStatementsParser.C_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_stmt(PLHQLStatementsParser.C_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -137,6 +147,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitAssignment_stmt(PLHQLStatementsParser.Assignment_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_c_stmt(PLHQLStatementsParser.Assignment_c_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_c_stmt(PLHQLStatementsParser.Assignment_c_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_item}.
 	 * @param ctx the parse tree
 	 */
@@ -146,6 +166,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment_stmt_item(PLHQLStatementsParser.Assignment_stmt_itemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_c_stmt_item(PLHQLStatementsParser.Assignment_c_stmt_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_c_stmt_item(PLHQLStatementsParser.Assignment_c_stmt_itemContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_single_item}.
 	 * @param ctx the parse tree
@@ -157,6 +187,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitAssignment_stmt_single_item(PLHQLStatementsParser.Assignment_stmt_single_itemContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_single_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_single_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_multiple_item}.
 	 * @param ctx the parse tree
 	 */
@@ -166,6 +206,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment_stmt_multiple_item(PLHQLStatementsParser.Assignment_stmt_multiple_itemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_multiple_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_c_stmt_multiple_item(PLHQLStatementsParser.Assignment_c_stmt_multiple_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_multiple_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_c_stmt_multiple_item(PLHQLStatementsParser.Assignment_c_stmt_multiple_itemContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_select_item}.
 	 * @param ctx the parse tree
@@ -557,15 +607,15 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function}.
 	 * @param ctx the parse tree
 	 */
-	void enterC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	void enterC_function(PLHQLStatementsParser.C_functionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function}.
 	 * @param ctx the parse tree
 	 */
-	void exitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	void exitC_function(PLHQLStatementsParser.C_functionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
 	 * @param ctx the parse tree
@@ -727,15 +777,15 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_c_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	void enterIf_c_stmt(PLHQLStatementsParser.If_c_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#if_c_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	void exitIf_c_stmt(PLHQLStatementsParser.If_c_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
 	 * @param ctx the parse tree
@@ -877,15 +927,15 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#for_c_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
+	void enterFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#for_c_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
+	void exitFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree

@@ -45,6 +45,13 @@ proc_block :
      | stmt+ T_GO?
      ;
 
+c_stmt:
+    assignment_c_stmt T_SEMICOLON
+    |break_stmt T_SEMICOLON
+    |if_c_stmt
+    |for_c_stmt
+    |return_stmt T_SEMICOLON
+;
 
 stmt :
        assignment_stmt
@@ -62,9 +69,9 @@ stmt :
      | exec_stmt
      | for_range_stmt
      | if_stmt
-
-     |if_function_stmt
-     |for_function_stmt
+     |c_function
+     |if_c_stmt
+     |for_c_stmt
      | return_stmt
      | select_stmt
      | null_stmt
@@ -89,7 +96,11 @@ expr_stmt :             // Standalone expression
      ;
 
 assignment_stmt :       // Assignment statement
-       T_SET? assignment_stmt_item (T_COMMA assignment_stmt_item)*
+      assignment_stmt_item (T_COMMA assignment_stmt_item)*
+     ;
+
+assignment_c_stmt :       // Assignment statement
+      assignment_c_stmt_item (T_COMMA assignment_c_stmt_item)*
      ;
 
 assignment_stmt_item :
@@ -98,14 +109,27 @@ assignment_stmt_item :
      | assignment_stmt_select_item
      ;
 
+assignment_c_stmt_item :
+     assignment_c_stmt_single_item
+     | assignment_c_stmt_multiple_item
+     ;
+
 assignment_stmt_single_item :
        ident T_COLON? T_EQUAL expr
      | T_OPEN_P ident T_CLOSE_P T_COLON? T_EQUAL expr
      ;
 
+assignment_c_stmt_single_item :
+      ident T_EQUAL expr
+      ;
+
 assignment_stmt_multiple_item :
        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
      ;
+
+assignment_c_stmt_multiple_item :
+        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+      ;
 
 assignment_stmt_select_item :
        (ident | (T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P)) T_COLON? T_EQUAL T_OPEN_P select_stmt T_CLOSE_P
@@ -343,8 +367,8 @@ create_database_option :
     | T_LOCATION expr
     ;
 
-c_function_header:
-   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_SEMICOLON
+c_function:
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_OPEN_B c_stmt* T_CLOSE_B
    ;
  c_function_parameter_list:
     c_function_parameter_item (T_COMMA c_function_parameter_item)*
@@ -425,9 +449,8 @@ if_stmt:
          | if_tsql_stmt
          | if_bteq_stmt;
 
-if_function_stmt:
-     T_IF T_OPEN_P bool_expr T_CLOSE_P
-     T_OPEN_B block T_CLOSE_B
+if_c_stmt:
+     T_IF T_OPEN_P bool_expr T_CLOSE_P ((c_stmt) | (T_OPEN_B c_stmt+ T_CLOSE_B))
      ;
 
 
@@ -481,9 +504,14 @@ return_stmt :           // RETURN statement
 for_range_stmt :        // FOR (Integer range) statement
        T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP block T_END T_LOOP
      ;
-for_function_stmt :        // FOR (Integer range) statement
+/*for_function_stmt :        // FOR (Integer range) statement
        T_FOR T_OPEN_P  expr T_EQUAL  expr T_SEMICOLON expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ? expr T_SEMICOLON expr T_ADD T_ADD  T_CLOSE_P T_OPEN_B stmt (stmt)*  T_CLOSE_B
-     ;
+     ;*/
+for_c_stmt :
+      T_FOR T_OPEN_P assignment_c_stmt? T_SEMICOLON bool_expr? T_SEMICOLON assignment_c_stmt? T_CLOSE_P ((c_stmt) | (T_OPEN_B (c_stmt)+ T_CLOSE_B));
+
+
+
      //for(assignment; boolean ;
 
 error_for_range_stmt :        // FOR (Integer range) statement

@@ -1,4 +1,4 @@
-// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -111,6 +111,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterC_stmt(PLHQLStatementsParser.C_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitC_stmt(PLHQLStatementsParser.C_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStmt(PLHQLStatementsParser.StmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -171,6 +183,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignment_c_stmt(PLHQLStatementsParser.Assignment_c_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_c_stmt(PLHQLStatementsParser.Assignment_c_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssignment_stmt_item(PLHQLStatementsParser.Assignment_stmt_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -178,6 +202,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignment_stmt_item(PLHQLStatementsParser.Assignment_stmt_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignment_c_stmt_item(PLHQLStatementsParser.Assignment_c_stmt_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_c_stmt_item(PLHQLStatementsParser.Assignment_c_stmt_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -195,6 +231,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssignment_stmt_multiple_item(PLHQLStatementsParser.Assignment_stmt_multiple_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,6 +250,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignment_stmt_multiple_item(PLHQLStatementsParser.Assignment_stmt_multiple_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignment_c_stmt_multiple_item(PLHQLStatementsParser.Assignment_c_stmt_multiple_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_c_stmt_multiple_item(PLHQLStatementsParser.Assignment_c_stmt_multiple_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -675,13 +735,13 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterC_function_header(PLHQLStatementsParser.C_function_headerContext ctx) { }
+	@Override public void enterC_function(PLHQLStatementsParser.C_functionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx) { }
+	@Override public void exitC_function(PLHQLStatementsParser.C_functionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -879,13 +939,13 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx) { }
+	@Override public void enterIf_c_stmt(PLHQLStatementsParser.If_c_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx) { }
+	@Override public void exitIf_c_stmt(PLHQLStatementsParser.If_c_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1059,13 +1119,13 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx) { }
+	@Override public void enterFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx) { }
+	@Override public void exitFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

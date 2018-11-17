@@ -1,4 +1,4 @@
-// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -58,6 +58,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProc_block(PLHQLStatementsParser.Proc_blockContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_stmt(PLHQLStatementsParser.C_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -88,11 +94,23 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment_stmt(PLHQLStatementsParser.Assignment_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_c_stmt(PLHQLStatementsParser.Assignment_c_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAssignment_stmt_item(PLHQLStatementsParser.Assignment_stmt_itemContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_c_stmt_item(PLHQLStatementsParser.Assignment_c_stmt_itemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_single_item}.
 	 * @param ctx the parse tree
@@ -100,11 +118,23 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment_stmt_single_item(PLHQLStatementsParser.Assignment_stmt_single_itemContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_single_item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_multiple_item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAssignment_stmt_multiple_item(PLHQLStatementsParser.Assignment_stmt_multiple_itemContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_c_stmt_multiple_item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_c_stmt_multiple_item(PLHQLStatementsParser.Assignment_c_stmt_multiple_itemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_select_item}.
 	 * @param ctx the parse tree
@@ -340,11 +370,11 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	T visitC_function(PLHQLStatementsParser.C_functionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
 	 * @param ctx the parse tree
@@ -442,11 +472,11 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_c_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	T visitIf_c_stmt(PLHQLStatementsParser.If_c_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
 	 * @param ctx the parse tree
@@ -532,11 +562,11 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#for_c_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
+	T visitFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree
