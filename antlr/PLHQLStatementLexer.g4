@@ -340,7 +340,7 @@ T_STDEV                : S T D E V ;
 T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
-
+T_VOID                 :V O I D ;
 T_ADD          : '+' ;
 T_COLON        : ':' ;
 T_COMMA        : ',' ;

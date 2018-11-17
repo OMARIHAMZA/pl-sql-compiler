@@ -62,6 +62,9 @@ stmt :
      | exec_stmt
      | for_range_stmt
      | if_stmt
+
+     |if_function_stmt
+     |for_function_stmt
      | return_stmt
      | select_stmt
      | null_stmt
@@ -310,9 +313,10 @@ dtype :                  // Data types
      | T_TIMESTAMP
      | T_TINYINT
      | T_VARCHAR
+     | T_VOID
      | T_VARCHAR2
      | T_XML
-     | ident ('%' (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
+     | ident ( ('%') (T_TYPE | T_ROWTYPE))?             // User-defined or derived data type
      ;
 
 dtype_len :             // Data type length or size specification
@@ -337,6 +341,15 @@ create_database_stmt :
 create_database_option :
       T_COMMENT expr
     | T_LOCATION expr
+    ;
+c_function_header:
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_SEMICOLON
+   ;
+ c_function_parameter_list:
+    c_function_parameter_item (T_COMMA c_function_parameter_item)*
+    ;
+ c_function_parameter_item:
+    dtype ident
     ;
 
 create_function_stmt :
@@ -405,13 +418,22 @@ create_routine_param_item :
 exec_stmt :             // EXEC, EXECUTE IMMEDIATE statement
        (T_EXEC | T_EXECUTE) T_IMMEDIATE? expr (T_OPEN_P expr_func_params T_CLOSE_P | expr_func_params)? (T_INTO L_ID (T_COMMA L_ID)*)? 
      ;
-     
 
-if_stmt :               // IF statement
-       if_plsql_stmt
-     | if_tsql_stmt
-     | if_bteq_stmt
+if_stmt:
+         if_plsql_stmt
+         | if_tsql_stmt
+         | if_bteq_stmt;
+
+if_FUNCTION_stmt :               // IF statement
+
+     if_function_stmt
      ;
+     if_function_stmt:
+     T_IF T_OPEN_P expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ?T_NOTEQUAL2 ?T_EQUAL2 ? expr(T_PIPE expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ?T_NOTEQUAL2 ?T_EQUAL2 ?expr )  * T_CLOSE_P
+     T_OPEN_B stmt T_CLOSE_B
+     ;
+
+
 error_if_stmt :               // IF statement
        error_if_plsql_stmt
      | error_if_tsql_stmt
@@ -461,6 +483,9 @@ return_stmt :           // RETURN statement
 
 for_range_stmt :        // FOR (Integer range) statement
        T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP block T_END T_LOOP
+     ;
+for_function_stmt :        // FOR (Integer range) statement
+       T_FOR T_OPEN_P  expr T_EQUAL  expr T_SEMICOLON expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ? expr T_SEMICOLON expr T_ADD T_ADD  T_CLOSE_P T_OPEN_B stmt (stmt)*  T_CLOSE_B
      ;
 
 error_for_range_stmt :        // FOR (Integer range) statement

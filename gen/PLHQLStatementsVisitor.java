@@ -1,4 +1,4 @@
-// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/muhammad_Q/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -340,6 +340,24 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -424,6 +442,18 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -507,6 +537,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree

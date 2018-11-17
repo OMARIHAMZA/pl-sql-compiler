@@ -1,4 +1,4 @@
-// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/muhammad_Q/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -557,6 +557,36 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_header}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_header(PLHQLStatementsParser.C_function_headerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_list}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_parameter_list(PLHQLStatementsParser.C_function_parameter_listContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_function_parameter_item}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -697,6 +727,26 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_function_stmt(PLHQLStatementsParser.If_function_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_if_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -836,6 +886,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFor_range_stmt(PLHQLStatementsParser.For_range_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#for_function_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor_function_stmt(PLHQLStatementsParser.For_function_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree
