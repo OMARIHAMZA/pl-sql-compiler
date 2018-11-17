@@ -1,4 +1,4 @@
-// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/antlr\PLHQLStatementLexer.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatementLexer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
