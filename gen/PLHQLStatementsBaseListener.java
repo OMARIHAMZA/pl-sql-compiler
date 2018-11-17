@@ -1,4 +1,4 @@
-// Generated from C:/Users/muhammad_Q/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -874,18 +874,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

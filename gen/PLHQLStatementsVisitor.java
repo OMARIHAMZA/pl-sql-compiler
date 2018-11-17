@@ -1,4 +1,4 @@
-// Generated from C:/Users/muhammad_Q/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -441,12 +441,6 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
 	 * @param ctx the parse tree

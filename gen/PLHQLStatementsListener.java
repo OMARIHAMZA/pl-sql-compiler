@@ -1,4 +1,4 @@
-// Generated from C:/Users/muhammad_Q/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
+// Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/antlr\PLHQLStatements.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -726,16 +726,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_stmt(PLHQLStatementsParser.If_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#if_FUNCTION_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitIf_FUNCTION_stmt(PLHQLStatementsParser.If_FUNCTION_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#if_function_stmt}.
 	 * @param ctx the parse tree

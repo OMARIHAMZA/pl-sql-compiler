@@ -342,6 +342,7 @@ create_database_option :
       T_COMMENT expr
     | T_LOCATION expr
     ;
+
 c_function_header:
    dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_SEMICOLON
    ;
@@ -424,13 +425,9 @@ if_stmt:
          | if_tsql_stmt
          | if_bteq_stmt;
 
-if_FUNCTION_stmt :               // IF statement
-
-     if_function_stmt
-     ;
-     if_function_stmt:
-     T_IF T_OPEN_P expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ?T_NOTEQUAL2 ?T_EQUAL2 ? expr(T_PIPE expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ?T_NOTEQUAL2 ?T_EQUAL2 ?expr )  * T_CLOSE_P
-     T_OPEN_B stmt T_CLOSE_B
+if_function_stmt:
+     T_IF T_OPEN_P bool_expr T_CLOSE_P
+     T_OPEN_B block T_CLOSE_B
      ;
 
 
@@ -487,6 +484,7 @@ for_range_stmt :        // FOR (Integer range) statement
 for_function_stmt :        // FOR (Integer range) statement
        T_FOR T_OPEN_P  expr T_EQUAL  expr T_SEMICOLON expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ? expr T_SEMICOLON expr T_ADD T_ADD  T_CLOSE_P T_OPEN_B stmt (stmt)*  T_CLOSE_B
      ;
+     //for(assignment; boolean ;
 
 error_for_range_stmt :        // FOR (Integer range) statement
        T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)?  block T_END T_LOOP
@@ -686,8 +684,7 @@ bool_expr_logical_operator :
      ;
 
 bool_expr_binary_operator :
-       T_EQUAL
-     | T_EQUAL2
+        T_EQUAL2
      | T_NOTEQUAL
      | T_NOTEQUAL2
      | T_LESS
