@@ -64,6 +64,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitC_stmt(PLHQLStatementsParser.C_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#c_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitC_block(PLHQLStatementsParser.C_blockContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -567,6 +573,18 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#general_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGeneral_delcaration_c_stmt(PLHQLStatementsParser.General_delcaration_c_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#for_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor_delcaration_c_stmt(PLHQLStatementsParser.For_delcaration_c_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree

@@ -51,6 +51,11 @@ c_stmt:
     |if_c_stmt
     |for_c_stmt
     |return_stmt T_SEMICOLON
+    |c_block
+;
+
+c_block:
+    (T_OPEN_B c_stmt+ T_CLOSE_B)
 ;
 
 stmt :
@@ -450,7 +455,7 @@ if_stmt:
          | if_bteq_stmt;
 
 if_c_stmt:
-     T_IF T_OPEN_P bool_expr T_CLOSE_P ((c_stmt) | (T_OPEN_B c_stmt+ T_CLOSE_B))
+     T_IF T_OPEN_P bool_expr T_CLOSE_P c_stmt
      ;
 
 
@@ -508,8 +513,16 @@ for_range_stmt :        // FOR (Integer range) statement
        T_FOR T_OPEN_P  expr T_EQUAL  expr T_SEMICOLON expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ? expr T_SEMICOLON expr T_ADD T_ADD  T_CLOSE_P T_OPEN_B stmt (stmt)*  T_CLOSE_B
      ;*/
 for_c_stmt :
-      T_FOR T_OPEN_P assignment_c_stmt? T_SEMICOLON bool_expr? T_SEMICOLON assignment_c_stmt? T_CLOSE_P ((c_stmt) | (T_OPEN_B (c_stmt)+ T_CLOSE_B));
+      T_FOR T_OPEN_P for_delcaration_c_stmt? bool_expr? T_SEMICOLON assignment_c_stmt? T_CLOSE_P c_stmt
+      ;
 
+general_delcaration_c_stmt:
+dtype ident (T_EQUAL expr)? T_SEMICOLON
+;
+
+for_delcaration_c_stmt:
+dtype? ident T_EQUAL expr T_SEMICOLON
+;
 
 
      //for(assignment; boolean ;

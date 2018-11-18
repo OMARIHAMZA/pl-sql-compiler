@@ -97,6 +97,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitC_stmt(PLHQLStatementsParser.C_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_block}.
+	 * @param ctx the parse tree
+	 */
+	void enterC_block(PLHQLStatementsParser.C_blockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#c_block}.
+	 * @param ctx the parse tree
+	 */
+	void exitC_block(PLHQLStatementsParser.C_blockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -936,6 +946,26 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFor_c_stmt(PLHQLStatementsParser.For_c_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#general_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterGeneral_delcaration_c_stmt(PLHQLStatementsParser.General_delcaration_c_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#general_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitGeneral_delcaration_c_stmt(PLHQLStatementsParser.General_delcaration_c_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#for_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor_delcaration_c_stmt(PLHQLStatementsParser.For_delcaration_c_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#for_delcaration_c_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor_delcaration_c_stmt(PLHQLStatementsParser.For_delcaration_c_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_for_range_stmt}.
 	 * @param ctx the parse tree
