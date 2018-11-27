@@ -5,24 +5,23 @@ import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import models.DataMember;
+import models.DataType;
 import models.Token;
-import models.TokenType;
+import models.TypeRepository;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
+import org.json.JSONException;
 import org.reactfx.Subscription;
-import sun.rmi.runtime.Log;
 import utils.AntlrUtils;
 import utils.CustomLineNumberFactory;
 import utils.FilesUtils;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,7 +30,7 @@ public class Main extends Application {
     private CodeArea codeArea;
     private ExecutorService executor;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, JSONException {
         launch(args);
     }
 
