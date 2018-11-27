@@ -1587,6 +1587,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitTimestamp_literal(PLHQLStatementsParser.Timestamp_literalContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_operator(PLHQLStatementsParser.Assignment_operatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#assignment_operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_operator(PLHQLStatementsParser.Assignment_operatorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#ident}.
 	 * @param ctx the parse tree
 	 */

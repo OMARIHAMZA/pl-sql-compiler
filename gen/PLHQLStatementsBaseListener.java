@@ -1911,6 +1911,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignment_operator(PLHQLStatementsParser.Assignment_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_operator(PLHQLStatementsParser.Assignment_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIdent(PLHQLStatementsParser.IdentContext ctx) { }
 	/**
 	 * {@inheritDoc}

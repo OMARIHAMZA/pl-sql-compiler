@@ -958,6 +958,12 @@ public interface PLHQLStatementsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTimestamp_literal(PLHQLStatementsParser.Timestamp_literalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PLHQLStatementsParser#assignment_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_operator(PLHQLStatementsParser.Assignment_operatorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PLHQLStatementsParser#ident}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

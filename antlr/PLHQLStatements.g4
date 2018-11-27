@@ -50,12 +50,15 @@ c_stmt:
     |break_stmt T_SEMICOLON
     |if_c_stmt
     |for_c_stmt
+    |c_function
     |return_stmt T_SEMICOLON
     |c_block
+    |general_delcaration_c_stmt
+    |call_stmt T_SEMICOLON
 ;
 
 c_block:
-    (T_OPEN_B c_stmt+ T_CLOSE_B)
+    T_OPEN_B c_stmt* T_CLOSE_B
 ;
 
 stmt :
@@ -125,11 +128,11 @@ assignment_stmt_single_item :
      ;
 
 assignment_c_stmt_single_item :
-      ident T_EQUAL expr
+      ident assignment_operator expr
       ;
 
 assignment_stmt_multiple_item :
-       T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+       T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
      ;
 
 assignment_c_stmt_multiple_item :
@@ -144,7 +147,7 @@ break_stmt :
      ;
 
 call_stmt :
-       T_CALL ident (T_OPEN_P expr_func_params? T_CLOSE_P | expr_func_params)?
+        ident (T_OPEN_P expr_func_params? T_CLOSE_P )
      ;
 
 declare_stmt :          // Declaration statement
@@ -373,7 +376,7 @@ create_database_option :
     ;
 
 c_function:
-   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  T_OPEN_B c_stmt* T_CLOSE_B
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block
    ;
  c_function_parameter_list:
     c_function_parameter_item (T_COMMA c_function_parameter_item)*
@@ -513,19 +516,21 @@ for_range_stmt :        // FOR (Integer range) statement
        T_FOR T_OPEN_P  expr T_EQUAL  expr T_SEMICOLON expr T_LESSEQUAL?T_LESS ?T_GREATEREQUAL?T_GREATER ? expr T_SEMICOLON expr T_ADD T_ADD  T_CLOSE_P T_OPEN_B stmt (stmt)*  T_CLOSE_B
      ;*/
 for_c_stmt :
-      T_FOR T_OPEN_P for_delcaration_c_stmt? bool_expr? T_SEMICOLON assignment_c_stmt? T_CLOSE_P c_stmt
+      T_FOR T_OPEN_P for_delcaration_c_stmt? T_SEMICOLON bool_expr? T_SEMICOLON assignment_c_stmt? T_CLOSE_P c_stmt
       ;
 
 general_delcaration_c_stmt:
-dtype ident (T_EQUAL expr)? T_SEMICOLON
+dtype ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
 ;
+
+
+
 
 for_delcaration_c_stmt:
-dtype? ident T_EQUAL expr T_SEMICOLON
+dtype? ident T_EQUAL expr
 ;
 
 
-     //for(assignment; boolean ;
 
 error_for_range_stmt :        // FOR (Integer range) statement
        T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)?  block T_END T_LOOP
@@ -879,6 +884,15 @@ date_literal :                             // DATE 'YYYY-MM-DD' literal
 timestamp_literal :                       // TIMESTAMP 'YYYY-MM-DD HH:MI:SS.FFF' literal
        T_TIMESTAMP string
      ;
+
+assignment_operator:
+    T_EQUAL
+    |T_MOD_EQUAL
+    |T_DIVIDE_EQUAL
+    |T_TIMES_EQUAL
+    |T_MINUS_EQUAL
+    |T_PLUS_EQUAL
+;
 
 ident :
        L_ID   ('.' L_ID )*
