@@ -107,7 +107,12 @@ public class TypeRepository {
                     e.printStackTrace();
                 }
             } else {
-                result.append(flatten(entry.getValue().getType()));
+                JSONArray recursiveJSONArray = new JSONArray(flatten(entry.getValue().getType()));
+                //Add every object of deep (recursive) arrays to result array
+                for (Object member : recursiveJSONArray) {
+                    jsonArray.put(member);
+                }
+
             }
         }
 
