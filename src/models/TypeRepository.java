@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class TypeRepository {
@@ -17,7 +16,7 @@ public class TypeRepository {
 
     public static void addDataType(DataType dataType) {
         typeHashMap.put(dataType.getName(), dataType);
-        writeDataToFile("C:\\Users\\HAMZA\\Desktop\\output.txt");
+        writeDataToFile("output.txt");
     }
 
     public static JSONArray getMember(String name) throws JSONException {
