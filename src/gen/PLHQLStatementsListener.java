@@ -1,6 +1,5 @@
 // Generated from C:/Users/ALIENWARE/IdeaProjects/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7
 package gen;
-
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

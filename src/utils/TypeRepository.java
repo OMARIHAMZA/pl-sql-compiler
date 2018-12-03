@@ -1,5 +1,7 @@
-package models;
+package utils;
 
+import models.DataMember;
+import models.DataType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
