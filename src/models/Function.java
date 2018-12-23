@@ -4,22 +4,23 @@ import java.util.ArrayList;
 
 public class Function extends ScopeSymbol {
 
-    private ArrayList<Variable> variables;
+    private ArrayList<Variable> parameters;
 
     public Function(String name, String type) {
         super(name, type);
+        parameters = new ArrayList<>();
     }
 
-    public Function(String name, String type, ArrayList<Variable> variables) {
+    public Function(String name, String type, ArrayList<Variable> parameters) {
         super(name, type);
-        this.variables = variables;
+        this.parameters = parameters;
     }
 
-    public ArrayList<Variable> getVariables() {
-        return variables;
+    public ArrayList<Variable> getParameters() {
+        return parameters;
     }
 
-    public void setVariables(ArrayList<Variable> variables) {
-        this.variables = variables;
+    public void setParameters(ArrayList<Variable> parameters) {
+        this.parameters = parameters;
     }
 }

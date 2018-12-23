@@ -21,14 +21,11 @@ public class Main {
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             PLHQLStatementsParser parser = new PLHQLStatementsParser(tokenStream);
             ParseTree parseTree = parser.c_stmt();
-            ParseTreeWalker walker  = new ParseTreeWalker();
+            ParseTreeWalker walker = new ParseTreeWalker();
             StatementsListener listener = new StatementsListener();
             walker.walk(listener, parseTree);
-            System.out.println(listener.scopes.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
-

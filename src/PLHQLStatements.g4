@@ -701,7 +701,7 @@ bool_expr :                               // Boolean condition
 bool_expr_atom :
       bool_expr_unary
     | bool_expr_binary
-  //  | expr
+    | bool_literal
     ;
 
 bool_expr_unary :

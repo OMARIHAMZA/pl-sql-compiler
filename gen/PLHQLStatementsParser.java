@@ -1,5 +1,4 @@
 // Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7
-package gen;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -360,6 +359,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitProgram(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitProgram(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -419,6 +423,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBlock(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBlock(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -534,6 +543,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -660,6 +674,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBegin_end_block(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBegin_end_block(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Begin_end_blockContext begin_end_block() throws RecognitionException {
@@ -717,6 +736,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_missing_end(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_missing_end(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -777,6 +801,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSingle_block_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSingle_block_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -905,6 +934,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBlock_end(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBlock_end(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Block_endContext block_end() throws RecognitionException {
@@ -952,6 +986,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitProc_block(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitProc_block(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1058,6 +1097,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitC_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitC_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1172,6 +1216,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitC_block(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitC_block(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1291,6 +1340,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitStmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitStmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1482,6 +1536,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSemicolon_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSemicolon_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Semicolon_stmtContext semicolon_stmt() throws RecognitionException {
@@ -1528,6 +1587,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitNull_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitNull_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Null_stmtContext null_stmt() throws RecognitionException {
@@ -1566,6 +1630,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1614,6 +1683,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1680,6 +1754,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_c_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_c_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Assignment_c_stmtContext assignment_c_stmt() throws RecognitionException {
@@ -1741,6 +1820,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_stmt_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_stmt_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1804,6 +1888,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_c_stmt_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_c_stmt_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Assignment_c_stmt_itemContext assignment_c_stmt_item() throws RecognitionException {
@@ -1864,6 +1953,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_stmt_single_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_stmt_single_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1958,6 +2052,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_c_stmt_single_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_c_stmt_single_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Assignment_c_stmt_single_itemContext assignment_c_stmt_single_item() throws RecognitionException {
@@ -2025,6 +2124,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_stmt_multiple_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_stmt_multiple_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2142,6 +2246,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_c_stmt_multiple_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_c_stmt_multiple_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Assignment_c_stmt_multiple_itemContext assignment_c_stmt_multiple_item() throws RecognitionException {
@@ -2246,6 +2355,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_stmt_select_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_stmt_select_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Assignment_stmt_select_itemContext assignment_stmt_select_item() throws RecognitionException {
@@ -2340,6 +2454,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBreak_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBreak_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Break_stmtContext break_stmt() throws RecognitionException {
@@ -2383,6 +2502,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCall_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCall_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2446,6 +2570,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDeclare_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDeclare_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2514,6 +2643,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_delcare_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_delcare_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_delcare_stmtContext error_delcare_stmt() throws RecognitionException {
@@ -2579,6 +2713,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDeclare_block(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDeclare_block(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2647,6 +2786,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDeclare_block_inplace(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDeclare_block_inplace(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Declare_block_inplaceContext declare_block_inplace() throws RecognitionException {
@@ -2706,6 +2850,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDeclare_stmt_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDeclare_stmt_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2769,6 +2918,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDeclare_var_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDeclare_var_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2925,6 +3079,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_stmtContext create_table_stmt() throws RecognitionException {
@@ -3001,6 +3160,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_create_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_create_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_create_stmtContext error_create_stmt() throws RecognitionException {
@@ -3069,6 +3233,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_create_table_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_create_table_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3150,6 +3319,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_local_temp_table_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_local_temp_table_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3256,6 +3430,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_definition(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_definition(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_definitionContext create_table_definition() throws RecognitionException {
@@ -3361,6 +3540,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_columns(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_columns(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_columnsContext create_table_columns() throws RecognitionException {
@@ -3441,6 +3625,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_columns_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_columns_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3554,6 +3743,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitColumn_name(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitColumn_name(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Column_nameContext column_name() throws RecognitionException {
@@ -3623,6 +3817,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_column_inline_cons(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_column_inline_cons(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3818,6 +4017,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_column_cons(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_column_cons(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4025,6 +4229,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_fk_action(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_fk_action(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_fk_actionContext create_table_fk_action() throws RecognitionException {
@@ -4118,6 +4327,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_preoptions(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_preoptions(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_preoptionsContext create_table_preoptions() throws RecognitionException {
@@ -4173,6 +4387,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_preoptions_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_preoptions_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4230,6 +4449,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_preoptions_td_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_preoptions_td_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4291,6 +4515,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4369,6 +4598,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4493,6 +4727,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_ora_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_ora_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4671,6 +4910,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_db2_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_db2_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_options_db2_itemContext create_table_options_db2_item() throws RecognitionException {
@@ -4841,6 +5085,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_td_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_td_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_options_td_itemContext create_table_options_td_item() throws RecognitionException {
@@ -4938,6 +5187,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_hive_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_hive_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_options_hive_itemContext create_table_options_hive_item() throws RecognitionException {
@@ -5001,6 +5255,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_hive_row_format(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_hive_row_format(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5079,6 +5338,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_hive_row_format_fields(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_hive_row_format_fields(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5205,6 +5469,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_mssql_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_mssql_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_table_options_mssql_itemContext create_table_options_mssql_item() throws RecognitionException {
@@ -5270,6 +5539,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_table_options_mysql_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_table_options_mysql_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5458,6 +5732,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDtype(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDtype(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5807,6 +6086,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDtype_len(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDtype_len(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Dtype_lenContext dtype_len() throws RecognitionException {
@@ -5894,6 +6178,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDtype_attr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDtype_attr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5990,6 +6279,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDtype_default(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDtype_default(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6092,6 +6386,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_database_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_database_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_database_stmtContext create_database_stmt() throws RecognitionException {
@@ -6177,6 +6476,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_database_option(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_database_option(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_database_optionContext create_database_option() throws RecognitionException {
@@ -6246,6 +6550,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitC_function(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitC_function(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final C_functionContext c_function() throws RecognitionException {
@@ -6311,6 +6620,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitC_function_parameter_list(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitC_function_parameter_list(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final C_function_parameter_listContext c_function_parameter_list() throws RecognitionException {
@@ -6369,6 +6683,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitC_function_parameter_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitC_function_parameter_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6429,6 +6748,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_function_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_function_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6557,6 +6881,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_function_return(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_function_return(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_function_returnContext create_function_return() throws RecognitionException {
@@ -6631,6 +6960,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_package_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_package_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6745,6 +7079,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitPackage_spec(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitPackage_spec(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Package_specContext package_spec() throws RecognitionException {
@@ -6814,6 +7153,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitPackage_spec_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitPackage_spec_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6927,6 +7271,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_package_body_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_package_body_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7043,6 +7392,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitPackage_body(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitPackage_body(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Package_bodyContext package_body() throws RecognitionException {
@@ -7106,6 +7460,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitPackage_body_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitPackage_body_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7185,6 +7544,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_procedure_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_procedure_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7338,6 +7702,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_create_procedure_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_create_procedure_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_create_procedure_stmtContext error_create_procedure_stmt() throws RecognitionException {
@@ -7480,6 +7849,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_routine_params(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_routine_params(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_routine_paramsContext create_routine_params() throws RecognitionException {
@@ -7600,6 +7974,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_routine_param_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_routine_param_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7807,6 +8186,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExec_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExec_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Exec_stmtContext exec_stmt() throws RecognitionException {
@@ -7924,6 +8308,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIf_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIf_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final If_stmtContext if_stmt() throws RecognitionException {
@@ -7989,6 +8378,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIf_c_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIf_c_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final If_c_stmtContext if_c_stmt() throws RecognitionException {
@@ -8041,6 +8435,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_if_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_if_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8118,6 +8517,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIf_plsql_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIf_plsql_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8208,6 +8612,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_if_plsql_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_if_plsql_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_if_plsql_stmtContext error_if_plsql_stmt() throws RecognitionException {
@@ -8288,6 +8697,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIf_tsql_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIf_tsql_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final If_tsql_stmtContext if_tsql_stmt() throws RecognitionException {
@@ -8348,6 +8762,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_if_tsql_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_if_tsql_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_if_tsql_stmtContext error_if_tsql_stmt() throws RecognitionException {
@@ -8406,6 +8825,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIf_bteq_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIf_bteq_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final If_bteq_stmtContext if_bteq_stmt() throws RecognitionException {
@@ -8454,6 +8878,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_if_bteq_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_if_bteq_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8505,6 +8934,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitElseif_block(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitElseif_block(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8560,6 +8994,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitElse_block(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitElse_block(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8620,6 +9059,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_index_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_index_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8712,6 +9156,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_create_index_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_create_index_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_create_index_stmtContext error_create_index_stmt() throws RecognitionException {
@@ -8786,6 +9235,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCreate_index_col(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCreate_index_col(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Create_index_colContext create_index_col() throws RecognitionException {
@@ -8844,6 +9298,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitReturn_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitReturn_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8911,6 +9370,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFor_range_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFor_range_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9016,6 +9480,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFor_c_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFor_c_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final For_c_stmtContext for_c_stmt() throws RecognitionException {
@@ -9117,6 +9586,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitGeneral_delcaration_c_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitGeneral_delcaration_c_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final General_delcaration_c_stmtContext general_delcaration_c_stmt() throws RecognitionException {
@@ -9208,6 +9682,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFor_delcaration_c_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFor_delcaration_c_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final For_delcaration_c_stmtContext for_delcaration_c_stmt() throws RecognitionException {
@@ -9278,6 +9757,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_for_range_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_for_range_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9478,6 +9962,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Select_stmtContext select_stmt() throws RecognitionException {
@@ -9535,6 +10024,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCte_select_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCte_select_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9603,6 +10097,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCte_select_stmt_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCte_select_stmt_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Cte_select_stmt_itemContext cte_select_stmt_item() throws RecognitionException {
@@ -9669,6 +10168,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitCte_select_cols(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitCte_select_cols(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9739,6 +10243,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFullselect_stmt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFullselect_stmt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Fullselect_stmtContext fullselect_stmt() throws RecognitionException {
@@ -9802,6 +10311,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFullselect_stmt_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFullselect_stmt_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Fullselect_stmt_itemContext fullselect_stmt_item() throws RecognitionException {
@@ -9861,6 +10375,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFullselect_set_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFullselect_set_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9976,6 +10495,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSubselect_stmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSubselect_stmt(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10107,6 +10631,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_subselect(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_subselect(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10243,6 +10772,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Select_listContext select_list() throws RecognitionException {
@@ -10321,6 +10855,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list_set(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list_set(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Select_list_setContext select_list_set() throws RecognitionException {
@@ -10369,6 +10908,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list_limit(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list_limit(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10420,6 +10964,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10501,6 +11050,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list_alias(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list_alias(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Select_list_aliasContext select_list_alias() throws RecognitionException {
@@ -10570,6 +11124,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSelect_list_asterisk(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSelect_list_asterisk(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Select_list_asteriskContext select_list_asterisk() throws RecognitionException {
@@ -10629,6 +11188,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitInto_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitInto_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10697,6 +11261,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final From_clauseContext from_clause() throws RecognitionException {
@@ -10759,6 +11328,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_from_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_from_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_from_clauseContext error_from_clause() throws RecognitionException {
@@ -10820,6 +11394,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_table_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_table_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10885,6 +11464,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_table_name_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_table_name_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final From_table_name_clauseContext from_table_name_clause() throws RecognitionException {
@@ -10938,6 +11522,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_subselect_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_subselect_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10999,6 +11588,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_join_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_join_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11068,6 +11662,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_join_type_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_join_type_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11171,6 +11770,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_table_values_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_table_values_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final From_table_values_clauseContext from_table_values_clause() throws RecognitionException {
@@ -11253,6 +11857,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_table_values_row(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_table_values_row(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11337,6 +11946,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFrom_alias_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFrom_alias_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11427,6 +12041,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitTable_name(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitTable_name(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Table_nameContext table_name() throws RecognitionException {
@@ -11467,6 +12086,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitWhere_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitWhere_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Where_clauseContext where_clause() throws RecognitionException {
@@ -11505,6 +12129,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_missing_bool_expr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_missing_bool_expr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11553,6 +12182,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitGroup_by_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitGroup_by_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11617,6 +12251,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitHaving_clause(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitHaving_clause(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Having_clauseContext having_clause() throws RecognitionException {
@@ -11658,6 +12297,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitQualify_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitQualify_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11716,6 +12360,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitOrder_by_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitOrder_by_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11828,6 +12477,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_exprContext bool_expr() throws RecognitionException {
@@ -11936,6 +12590,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_atom(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_atom(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_expr_atomContext bool_expr_atom() throws RecognitionException {
@@ -12014,6 +12673,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_unary(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_unary(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12141,6 +12805,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_single_in(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_single_in(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_expr_single_inContext bool_expr_single_in() throws RecognitionException {
@@ -12251,6 +12920,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_multi_in(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_multi_in(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_expr_multi_inContext bool_expr_multi_in() throws RecognitionException {
@@ -12335,6 +13009,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_binary(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_binary(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_expr_binaryContext bool_expr_binary() throws RecognitionException {
@@ -12376,6 +13055,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_logical_operator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_logical_operator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12432,6 +13116,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_expr_binary_operator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_expr_binary_operator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12586,6 +13275,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12797,6 +13491,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_atom(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_atom(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_atomContext expr_atom() throws RecognitionException {
@@ -12895,6 +13594,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_interval(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_interval(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_intervalContext expr_interval() throws RecognitionException {
@@ -12940,6 +13644,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitInterval_item(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitInterval_item(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12999,6 +13708,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_concat(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_concat(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13096,6 +13810,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_concat_item(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_concat_item(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_concat_itemContext expr_concat_item() throws RecognitionException {
@@ -13183,6 +13902,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_case(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_case(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_caseContext expr_case() throws RecognitionException {
@@ -13248,6 +13972,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_case_simple(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_case_simple(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13344,6 +14073,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_case_searched(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_case_searched(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13450,6 +14184,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_agg_window_func(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_agg_window_func(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14086,6 +14825,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_func_all_distinct(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_func_all_distinct(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_func_all_distinctContext expr_func_all_distinct() throws RecognitionException {
@@ -14139,6 +14883,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_func_over_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_func_over_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14212,6 +14961,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_func_partition_by_clause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_func_partition_by_clause(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14315,6 +15069,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_spec_func(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_spec_func(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14954,6 +15713,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_func(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_func(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Expr_funcContext expr_func() throws RecognitionException {
@@ -15013,6 +15777,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitExpr_func_params(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitExpr_func_params(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15076,6 +15845,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitFunc_param(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitFunc_param(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15143,6 +15917,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_missing_right_p(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_missing_right_p(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_missing_right_pContext error_missing_right_p() throws RecognitionException {
@@ -15209,6 +15988,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDate_literal(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDate_literal(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Date_literalContext date_literal() throws RecognitionException {
@@ -15250,6 +16034,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitTimestamp_literal(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitTimestamp_literal(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15294,6 +16083,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitAssignment_operator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitAssignment_operator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15343,6 +16137,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitIdent(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitIdent(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15408,6 +16207,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDouble_quotedString(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDouble_quotedString(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class Single_quotedStringContext extends StringContext {
 		public TerminalNode L_S_STRING() { return getToken(PLHQLStatementsParser.L_S_STRING, 0); }
@@ -15419,6 +16223,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitSingle_quotedString(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitSingle_quotedString(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15475,6 +16284,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_string(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_string(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Error_stringContext error_string() throws RecognitionException {
@@ -15520,6 +16334,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitInt_number(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitInt_number(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15576,6 +16395,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitDec_number(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitDec_number(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15634,6 +16458,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitBool_literal(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitBool_literal(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Bool_literalContext bool_literal() throws RecognitionException {
@@ -15679,6 +16508,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitNull_const(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitNull_const(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16034,6 +16868,11 @@ public class PLHQLStatementsParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitNon_reserved_words(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitNon_reserved_words(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final Non_reserved_wordsContext non_reserved_words() throws RecognitionException {
@@ -16079,6 +16918,11 @@ public class PLHQLStatementsParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PLHQLStatementsListener ) ((PLHQLStatementsListener)listener).exitError_invalid_token(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PLHQLStatementsVisitor ) return ((PLHQLStatementsVisitor<? extends T>)visitor).visitError_invalid_token(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
