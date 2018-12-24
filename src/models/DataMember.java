@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Data member class of a certain type
+ */
 public class DataMember {
 
     private final String name;

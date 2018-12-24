@@ -2,6 +2,9 @@ package models;
 
 import java.util.HashMap;
 
+/**
+ * Data type class
+ */
 public class DataType {
 
     private final String name;
