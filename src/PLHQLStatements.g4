@@ -58,7 +58,7 @@ c_stmt:
 ;
 
 c_block:
-    T_OPEN_B c_stmt* T_CLOSE_B
+    T_OPEN_B stmt* T_CLOSE_B
 ;
 
 stmt :
@@ -77,9 +77,7 @@ stmt :
      | exec_stmt
      | for_range_stmt
      | if_stmt
-     |c_function
-     |if_c_stmt
-     |for_c_stmt
+     | c_stmt
      | return_stmt
      | select_stmt
      | null_stmt
@@ -129,7 +127,13 @@ assignment_stmt_single_item :
 
 assignment_c_stmt_single_item :
       ident assignment_operator expr
+      | increment_decrement_assignment
       ;
+
+increment_decrement_assignment :
+      ident (T_PLUS_PLUS | T_MINUS_MINUS)
+      | (T_PLUS_PLUS | T_MINUS_MINUS) ident
+     ;
 
 assignment_stmt_multiple_item :
        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
@@ -202,7 +206,7 @@ create_table_columns :
      ;
 
 create_table_columns_item :
-       column_name dtype dtype_len? dtype_attr* create_table_column_inline_cons*
+       dtype dtype_len? dtype_attr* column_name create_table_column_inline_cons*
      | (T_CONSTRAINT ident)? create_table_column_cons
      ;
 
@@ -520,7 +524,7 @@ for_c_stmt :
       ;
 
 general_delcaration_c_stmt:
-dtype ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
+(dtype | T_VAR) ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
 ;
 
 
@@ -705,7 +709,7 @@ bool_expr_atom :
     ;
 
 bool_expr_unary :
-      expr T_IS T_NOT? T_NULL
+      expr T_IS T_NOT? (T_NULL | T_FALSE | T_TRUE)
     | expr T_BETWEEN expr T_AND expr
     | T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
     | bool_expr_single_in
@@ -748,6 +752,7 @@ expr :
      | expr T_SUB expr
      | T_OPEN_P select_stmt T_CLOSE_P
      | T_OPEN_P expr T_CLOSE_P
+     | expr T_OPEN_SB expr T_CLOSE_SB
      | expr_interval
      | expr_concat
      | expr_case
@@ -755,7 +760,9 @@ expr :
      | expr_spec_func
      | expr_func
      | expr_atom
+     | select_stmt
      ;
+
 
 expr_atom :
        date_literal
@@ -823,7 +830,6 @@ expr_agg_window_func :
      | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_STDEV T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      | T_SUM T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_VAR T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      ;
 
@@ -895,7 +901,7 @@ assignment_operator:
 ;
 
 ident :
-       L_ID   ('.' L_ID )*
+       (L_ID | non_reserved_words)  ('.' (L_ID | non_reserved_words))*
      ;
 
 string :                                   // String literal (single or double quoted)
