@@ -342,6 +342,7 @@ T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
 T_ADD          : '+' ;
+T_AND_AND      : '&&' ;
 T_COLON        : ':' ;
 T_COMMA        : ',' ;
 T_PIPE         : '||' ;

@@ -66,12 +66,8 @@ stmt :
      | break_stmt
      | call_stmt
      | create_database_stmt
-     | create_function_stmt
      | create_index_stmt
      | create_local_temp_table_stmt
-     | create_package_stmt
-     | create_package_body_stmt
-     | create_procedure_stmt
      | create_table_stmt
      | declare_stmt
      | exec_stmt
@@ -95,10 +91,6 @@ semicolon_stmt:
 
 null_stmt :             // NULL statement (no operation)
        T_NULL
-     ;
-
-expr_stmt :             // Standalone expression
-       {!_input.LT(1).getText().equalsIgnoreCase("GO")}? expr
      ;
 
 assignment_stmt :       // Assignment statement
@@ -387,48 +379,6 @@ c_function:
     ;
  c_function_parameter_item:
     dtype ident
-    ;
-
-create_function_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_FUNCTION ident create_routine_params? create_function_return (T_AS | T_IS)? declare_block_inplace? single_block_stmt
-    ;
-
-create_function_return :
-       (T_RETURN | T_RETURNS) dtype dtype_len?
-     ;
-
-create_package_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_PACKAGE ident (T_AS | T_IS) package_spec T_END (ident T_SEMICOLON)?
-    ;
-
-package_spec :
-      package_spec_item T_SEMICOLON (package_spec_item T_SEMICOLON)*
-    ;
-
-package_spec_item :
-      declare_stmt_item
-    | T_FUNCTION ident create_routine_params? create_function_return
-    | (T_PROCEDURE | T_PROC) ident create_routine_params?
-    ;
-
-create_package_body_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_PACKAGE T_BODY ident (T_AS | T_IS) package_body T_END (ident T_SEMICOLON)?
-    ;
-
-package_body :
-      package_body_item T_SEMICOLON (package_body_item T_SEMICOLON)*
-    ;
-
-
-package_body_item :
-      declare_stmt_item
-    | create_function_stmt
-    | create_procedure_stmt
-    ;
-
-
-create_procedure_stmt :
-      ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC) ident create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
     ;
 
 error_create_procedure_stmt :
@@ -729,8 +679,18 @@ bool_expr_binary :
      ;
 
 bool_expr_logical_operator :
-       T_AND
-     | T_OR
+      bool_and
+      | bool_or
+     ;
+
+bool_and :
+     T_AND
+     | T_AND_AND
+     ;
+
+bool_or:
+     T_OR
+     | T_PIPE
      ;
 
 bool_expr_binary_operator :
@@ -788,7 +748,7 @@ interval_item :
      ;
 
 expr_concat :                  // String concatenation operator
-       expr_concat_item (T_PIPE | T_CONCAT) expr_concat_item ((T_PIPE | T_CONCAT) expr_concat_item)*
+       expr_concat_item (T_CONCAT) expr_concat_item ((T_CONCAT) expr_concat_item)*
      ;
 
 expr_concat_item :
