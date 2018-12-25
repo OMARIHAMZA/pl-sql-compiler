@@ -2,10 +2,7 @@ package utils;
 
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
-import models.Function;
-import models.Scope;
-import models.ScopeSymbol;
-import models.Variable;
+import models.*;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -49,9 +46,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void exitC_block(PLHQLStatementsParser.C_blockContext ctx) {
         super.exitC_block(ctx);
-        for (HashMap.Entry<String, ScopeSymbol> entry : scopes.peek().getSymbolTable().entrySet()) {
-            System.out.println(entry.getValue().getType() + " " + entry.getValue().getName());
-        }
         scopes.pop();
     }
 
@@ -65,11 +59,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void enterC_function(PLHQLStatementsParser.C_functionContext ctx) {
         super.enterC_function(ctx);
         Function function = new Function(ctx.ident().getText(), ctx.dtype().getText());
-        ctx.c_function_parameter_list().c_function_parameter_item().forEach(param -> {
-            function.getParameters().add(new Variable(param.ident().getText(), param.dtype().getText()));
-            parameters.add(new Variable(param.ident().getText(), param.dtype().getText()));
-            //Add function parameters to temporary queue
-        });
+        if (ctx.c_function_parameter_list() != null) {
+            ctx.c_function_parameter_list().c_function_parameter_item().forEach(param -> {
+                function.getParameters().add(new Variable(param.ident().getText(), param.dtype().getText()));
+                parameters.add(new Variable(param.ident().getText(), param.dtype().getText()));
+                //Add function parameters to temporary queue
+            });
+        }
         scopes.peek().addSymbol(function); //Add function to parent scope
     }
 
@@ -85,5 +81,28 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     scopes.peek().addSymbol(new Variable(identifier.getText(), ctx.dtype().getText()));
                 }
         );
+    }
+
+    @Override
+    public void enterCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx) {
+        super.enterCreate_table_stmt(ctx);
+        DataType dataType = new DataType(ctx.table_name().getText());
+        ctx.create_table_definition().create_table_columns().create_table_columns_item().forEach(column -> {
+            DataMember dataMember = new DataMember(column.column_name().getText(), column.dtype().getText());
+            dataType.getMembers().put(dataMember.getName(), dataMember);
+        });
+        TypeRepository.addDataType(dataType);
+    }
+
+    @Override
+    public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
+        super.enterProgram(ctx);
+        scopes.add(new Scope());
+    }
+
+    @Override
+    public void exitProgram(PLHQLStatementsParser.ProgramContext ctx) {
+        super.exitProgram(ctx);
+        scopes.pop();
     }
 }

@@ -138,16 +138,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitNull_stmt(PLHQLStatementsParser.Null_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#expr_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpr_stmt(PLHQLStatementsParser.Expr_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#expr_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpr_stmt(PLHQLStatementsParser.Expr_stmtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -207,6 +197,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#increment_decrement_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncrement_decrement_assignment(PLHQLStatementsParser.Increment_decrement_assignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#increment_decrement_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncrement_decrement_assignment(PLHQLStatementsParser.Increment_decrement_assignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#assignment_stmt_multiple_item}.
 	 * @param ctx the parse tree
@@ -647,96 +647,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_function_stmt(PLHQLStatementsParser.Create_function_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_function_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_function_stmt(PLHQLStatementsParser.Create_function_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_function_return}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_function_return(PLHQLStatementsParser.Create_function_returnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_function_return}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_function_return(PLHQLStatementsParser.Create_function_returnContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_package_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_package_stmt(PLHQLStatementsParser.Create_package_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_package_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_package_stmt(PLHQLStatementsParser.Create_package_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_spec}.
-	 * @param ctx the parse tree
-	 */
-	void enterPackage_spec(PLHQLStatementsParser.Package_specContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#package_spec}.
-	 * @param ctx the parse tree
-	 */
-	void exitPackage_spec(PLHQLStatementsParser.Package_specContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_spec_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterPackage_spec_item(PLHQLStatementsParser.Package_spec_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#package_spec_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitPackage_spec_item(PLHQLStatementsParser.Package_spec_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_package_body_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_package_body_stmt(PLHQLStatementsParser.Create_package_body_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_package_body_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_package_body_stmt(PLHQLStatementsParser.Create_package_body_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_body}.
-	 * @param ctx the parse tree
-	 */
-	void enterPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#package_body}.
-	 * @param ctx the parse tree
-	 */
-	void exitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterPackage_body_item(PLHQLStatementsParser.Package_body_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#package_body_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitPackage_body_item(PLHQLStatementsParser.Package_body_itemContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_procedure_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_procedure_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#error_create_procedure_stmt}.
 	 * @param ctx the parse tree
@@ -1377,6 +1287,26 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBool_expr_logical_operator(PLHQLStatementsParser.Bool_expr_logical_operatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_and}.
+	 * @param ctx the parse tree
+	 */
+	void enterBool_and(PLHQLStatementsParser.Bool_andContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#bool_and}.
+	 * @param ctx the parse tree
+	 */
+	void exitBool_and(PLHQLStatementsParser.Bool_andContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_or}.
+	 * @param ctx the parse tree
+	 */
+	void enterBool_or(PLHQLStatementsParser.Bool_orContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#bool_or}.
+	 * @param ctx the parse tree
+	 */
+	void exitBool_or(PLHQLStatementsParser.Bool_orContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_expr_binary_operator}.
 	 * @param ctx the parse tree

@@ -171,18 +171,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr_stmt(PLHQLStatementsParser.Expr_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpr_stmt(PLHQLStatementsParser.Expr_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAssignment_stmt(PLHQLStatementsParser.Assignment_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -250,6 +238,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignment_c_stmt_single_item(PLHQLStatementsParser.Assignment_c_stmt_single_itemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIncrement_decrement_assignment(PLHQLStatementsParser.Increment_decrement_assignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIncrement_decrement_assignment(PLHQLStatementsParser.Increment_decrement_assignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -778,114 +778,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitC_function_parameter_item(PLHQLStatementsParser.C_function_parameter_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_function_stmt(PLHQLStatementsParser.Create_function_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_function_stmt(PLHQLStatementsParser.Create_function_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_function_return(PLHQLStatementsParser.Create_function_returnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_function_return(PLHQLStatementsParser.Create_function_returnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_package_stmt(PLHQLStatementsParser.Create_package_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_package_stmt(PLHQLStatementsParser.Create_package_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPackage_spec(PLHQLStatementsParser.Package_specContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPackage_spec(PLHQLStatementsParser.Package_specContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPackage_spec_item(PLHQLStatementsParser.Package_spec_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPackage_spec_item(PLHQLStatementsParser.Package_spec_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_package_body_stmt(PLHQLStatementsParser.Create_package_body_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_package_body_stmt(PLHQLStatementsParser.Create_package_body_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPackage_body(PLHQLStatementsParser.Package_bodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPackage_body(PLHQLStatementsParser.Package_bodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPackage_body_item(PLHQLStatementsParser.Package_body_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPackage_body_item(PLHQLStatementsParser.Package_body_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_procedure_stmt(PLHQLStatementsParser.Create_procedure_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1654,6 +1546,30 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBool_expr_logical_operator(PLHQLStatementsParser.Bool_expr_logical_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool_and(PLHQLStatementsParser.Bool_andContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool_and(PLHQLStatementsParser.Bool_andContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool_or(PLHQLStatementsParser.Bool_orContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool_or(PLHQLStatementsParser.Bool_orContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

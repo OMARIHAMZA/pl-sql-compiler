@@ -26,7 +26,7 @@ public class TypeRepository {
      */
     public static void addDataType(DataType dataType) {
         typeHashMap.put(dataType.getName(), dataType);
-        writeDataToFile("output.txt");
+        writeDataToFile("output.json");
     }
 
     /**
@@ -162,8 +162,8 @@ public class TypeRepository {
      */
     private static boolean isPrimitive(String type) {
         return type.equalsIgnoreCase("int")
-                || type.equalsIgnoreCase("real")
-                || type.equalsIgnoreCase("boolean")
+                || type.equalsIgnoreCase("float")
+                || type.equalsIgnoreCase("bool")
                 || type.equalsIgnoreCase("string");
     }
 

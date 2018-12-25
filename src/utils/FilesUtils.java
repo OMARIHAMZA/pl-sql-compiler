@@ -1,6 +1,12 @@
 package utils;
 
+import gen.PLHQLStatementsLexer;
+import gen.PLHQLStatementsParser;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -29,4 +35,11 @@ public class FilesUtils {
         }
     }
 
+    public static PLHQLStatementsParser.ProgramContext parse(File file) throws IOException {
+        String code = new Scanner(new FileInputStream(file)).useDelimiter("\\Z").next();
+        PLHQLStatementsLexer lexer = new PLHQLStatementsLexer(CharStreams.fromString(code));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        PLHQLStatementsParser parser = new PLHQLStatementsParser(tokens);
+        return parser.program();
+    }
 }
