@@ -342,6 +342,7 @@ T_SYSDATE              : S Y S D A T E ;
 T_VARIANCE             : V A R I A N C E ;
 T_USER                 : U S E R;
 T_ADD          : '+' ;
+T_AND_AND      : '&&' ;
 T_COLON        : ':' ;
 T_COMMA        : ',' ;
 T_PIPE         : '||' ;
@@ -361,9 +362,11 @@ T_GREATEREQUAL : '>=' ;
 T_LESS         : '<' ;
 T_LESSEQUAL    : '<=' ;
 T_MUL          : '*' ;
+T_MINUS_MINUS  : '--' ;
 T_OPEN_B       : '{' ;
 T_OPEN_P       : '(' ;
 T_OPEN_SB      : '[' ;
+T_PLUS_PLUS    : '++' ;
 T_CLOSE_B      : '}' ;
 T_CLOSE_P      : ')' ;
 T_CLOSE_SB     : ']' ;
@@ -391,7 +394,7 @@ L_DEC       : L_DIGIT+ '.' ~'.' L_DIGIT*                               // Decima
             ;
 L_WS        : L_BLANK+ -> skip ;                                       // Whitespace
 L_M_COMMENT : '/*' .*? '*/' -> channel(HIDDEN) ;                       // Multiline comment
-L_S_COMMENT : ('--' | '//')  .*? '\r'? '\n' -> channel(HIDDEN) ;       // Single line comment
+L_S_COMMENT : ('//')  .*? '\r'? '\n' -> channel(HIDDEN) ;       // Single line comment
 
 L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File path (a/b/c Linux path causes conflicts with division operator and handled at parser level)
             ;
@@ -408,7 +411,6 @@ L_ID_PART  :
             | '$' '{' .*? '}'
             | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' |':'| '@' | '#' | '$')+     // (at least one char must follow special char)
             | '"' .*? '"'                                                   // Quoted identifiers
-            | '[' .*? ']'
             | '`' .*? '`'
             ;
 fragment

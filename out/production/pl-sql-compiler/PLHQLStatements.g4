@@ -58,7 +58,7 @@ c_stmt:
 ;
 
 c_block:
-    T_OPEN_B c_stmt* T_CLOSE_B
+    T_OPEN_B stmt* T_CLOSE_B
 ;
 
 stmt :
@@ -66,20 +66,14 @@ stmt :
      | break_stmt
      | call_stmt
      | create_database_stmt
-     | create_function_stmt
      | create_index_stmt
      | create_local_temp_table_stmt
-     | create_package_stmt
-     | create_package_body_stmt
-     | create_procedure_stmt
      | create_table_stmt
      | declare_stmt
      | exec_stmt
      | for_range_stmt
      | if_stmt
-     |c_function
-     |if_c_stmt
-     |for_c_stmt
+     | c_stmt
      | return_stmt
      | select_stmt
      | null_stmt
@@ -97,10 +91,6 @@ semicolon_stmt:
 
 null_stmt :             // NULL statement (no operation)
        T_NULL
-     ;
-
-expr_stmt :             // Standalone expression
-       {!_input.LT(1).getText().equalsIgnoreCase("GO")}? expr
      ;
 
 assignment_stmt :       // Assignment statement
@@ -129,7 +119,13 @@ assignment_stmt_single_item :
 
 assignment_c_stmt_single_item :
       ident assignment_operator expr
+      | increment_decrement_assignment
       ;
+
+increment_decrement_assignment :
+      ident (T_PLUS_PLUS | T_MINUS_MINUS)
+      | (T_PLUS_PLUS | T_MINUS_MINUS) ident
+     ;
 
 assignment_stmt_multiple_item :
        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
@@ -202,7 +198,7 @@ create_table_columns :
      ;
 
 create_table_columns_item :
-       column_name dtype dtype_len? dtype_attr* create_table_column_inline_cons*
+       dtype dtype_len? dtype_attr* column_name create_table_column_inline_cons*
      | (T_CONSTRAINT ident)? create_table_column_cons
      ;
 
@@ -385,48 +381,6 @@ c_function:
     dtype ident
     ;
 
-create_function_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_FUNCTION ident create_routine_params? create_function_return (T_AS | T_IS)? declare_block_inplace? single_block_stmt
-    ;
-
-create_function_return :
-       (T_RETURN | T_RETURNS) dtype dtype_len?
-     ;
-
-create_package_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_PACKAGE ident (T_AS | T_IS) package_spec T_END (ident T_SEMICOLON)?
-    ;
-
-package_spec :
-      package_spec_item T_SEMICOLON (package_spec_item T_SEMICOLON)*
-    ;
-
-package_spec_item :
-      declare_stmt_item
-    | T_FUNCTION ident create_routine_params? create_function_return
-    | (T_PROCEDURE | T_PROC) ident create_routine_params?
-    ;
-
-create_package_body_stmt :
-      (T_ALTER | T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? T_PACKAGE T_BODY ident (T_AS | T_IS) package_body T_END (ident T_SEMICOLON)?
-    ;
-
-package_body :
-      package_body_item T_SEMICOLON (package_body_item T_SEMICOLON)*
-    ;
-
-
-package_body_item :
-      declare_stmt_item
-    | create_function_stmt
-    | create_procedure_stmt
-    ;
-
-
-create_procedure_stmt :
-      ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC) ident create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
-    ;
-
 error_create_procedure_stmt :
       ( T_CREATE (T_OR T_REPLACE)? | T_REPLACE)? (T_PROCEDURE | T_PROC)  create_routine_params?  (T_AS | T_IS)? declare_block_inplace?  proc_block (ident T_SEMICOLON)?
     ;
@@ -520,7 +474,7 @@ for_c_stmt :
       ;
 
 general_delcaration_c_stmt:
-dtype ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
+(dtype | T_VAR) ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
 ;
 
 
@@ -705,7 +659,7 @@ bool_expr_atom :
     ;
 
 bool_expr_unary :
-      expr T_IS T_NOT? T_NULL
+      expr T_IS T_NOT? (T_NULL | T_FALSE | T_TRUE)
     | expr T_BETWEEN expr T_AND expr
     | T_NOT? T_EXISTS T_OPEN_P select_stmt T_CLOSE_P
     | bool_expr_single_in
@@ -725,8 +679,18 @@ bool_expr_binary :
      ;
 
 bool_expr_logical_operator :
-       T_AND
-     | T_OR
+      bool_and
+      | bool_or
+     ;
+
+bool_and :
+     T_AND
+     | T_AND_AND
+     ;
+
+bool_or:
+     T_OR
+     | T_PIPE
      ;
 
 bool_expr_binary_operator :
@@ -748,6 +712,7 @@ expr :
      | expr T_SUB expr
      | T_OPEN_P select_stmt T_CLOSE_P
      | T_OPEN_P expr T_CLOSE_P
+     | expr T_OPEN_SB expr T_CLOSE_SB
      | expr_interval
      | expr_concat
      | expr_case
@@ -755,7 +720,9 @@ expr :
      | expr_spec_func
      | expr_func
      | expr_atom
+     | select_stmt
      ;
+
 
 expr_atom :
        date_literal
@@ -781,7 +748,7 @@ interval_item :
      ;
 
 expr_concat :                  // String concatenation operator
-       expr_concat_item (T_PIPE | T_CONCAT) expr_concat_item ((T_PIPE | T_CONCAT) expr_concat_item)*
+       expr_concat_item (T_CONCAT) expr_concat_item ((T_CONCAT) expr_concat_item)*
      ;
 
 expr_concat_item :
@@ -823,7 +790,6 @@ expr_agg_window_func :
      | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_STDEV T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      | T_SUM T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_VAR T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
      ;
 
@@ -895,7 +861,7 @@ assignment_operator:
 ;
 
 ident :
-       L_ID   ('.' L_ID )*
+       (L_ID | non_reserved_words)  ('.' (L_ID | non_reserved_words))*
      ;
 
 string :                                   // String literal (single or double quoted)

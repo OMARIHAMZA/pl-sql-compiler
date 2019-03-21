@@ -1,3 +1,4 @@
+/*
 package utils;
 
 import java.util.function.Function;
@@ -65,3 +66,4 @@ public class CustomLineNumberFactory implements IntFunction<Node> {
         DEFAULT_BACKGROUND = new Background(new BackgroundFill(Color.web("#F0F0F0"), (CornerRadii)null, (Insets)null));
     }
 }
+*/

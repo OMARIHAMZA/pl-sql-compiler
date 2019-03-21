@@ -6,15 +6,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * A class to store type systems
  */
+@SuppressWarnings("ALL")
 public class TypeRepository {
 
     public static HashMap<String, DataType> typeHashMap = new HashMap<>();
@@ -167,4 +171,7 @@ public class TypeRepository {
                 || type.equalsIgnoreCase("string");
     }
 
+    public static void createDirectories(String name) {
+        new File("Tables/" + name).mkdirs();
+    }
 }
