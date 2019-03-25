@@ -58,7 +58,7 @@ public class TypeRepository {
      * @param filePath where the data json array to be written
      */
     public static void writeDataToFile(String filePath) {
-        JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArray = parseOutputFile(filePath);
         for (HashMap.Entry<String, DataType> entry : typeHashMap.entrySet()) {
             //name:string, members:array
             //member:object -> name:string, type:string
@@ -72,6 +72,8 @@ public class TypeRepository {
                     membersJSONArray.put(member);
                 }
                 jsonObject.put("name", entry.getKey());
+                jsonObject.put("location", entry.getValue().getTableLocation());
+                jsonObject.put("field_terminator", entry.getValue().getFieldTerminator());
                 jsonObject.put("members", membersJSONArray);
                 jsonArray.put(jsonObject);
             } catch (JSONException e) {
@@ -120,6 +122,20 @@ public class TypeRepository {
         for (HashMap.Entry<String, DataMember> entry : dataType.getMembers().entrySet()) {
             System.out.println(entry.getKey());
         }
+    }
+
+
+    private static JSONArray parseOutputFile(String filePath) {
+        File file = new File(filePath);
+        try {
+            return new JSONArray(new Scanner(file).useDelimiter("\\Z").next());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return new JSONArray();
     }
 
     /**
@@ -171,7 +187,11 @@ public class TypeRepository {
                 || type.equalsIgnoreCase("string");
     }
 
-    public static void createDirectories(String name) {
+    public static void createTable(String name) {
         new File("Tables/" + name).mkdirs();
+    }
+
+    public static void createDirectories(String path, String name) {
+        new File(path + "/" + name).mkdirs();
     }
 }

@@ -1,5 +1,4 @@
-// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7
-package gen;
+package gen;// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -438,16 +437,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_preoptions(PLHQLStatementsParser.Create_table_preoptionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_table_preoptions_item}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_table_preoptions_item(PLHQLStatementsParser.Create_table_preoptions_itemContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_table_preoptions_item}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_table_preoptions_item(PLHQLStatementsParser.Create_table_preoptions_itemContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_table_preoptions_td_item}.
 	 * @param ctx the parse tree
 	 */
@@ -527,16 +516,6 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCreate_table_hive_row_format(PLHQLStatementsParser.Create_table_hive_row_formatContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_table_hive_row_format_fields}.
-	 * @param ctx the parse tree
-	 */
-	void enterCreate_table_hive_row_format_fields(PLHQLStatementsParser.Create_table_hive_row_format_fieldsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PLHQLStatementsParser#create_table_hive_row_format_fields}.
-	 * @param ctx the parse tree
-	 */
-	void exitCreate_table_hive_row_format_fields(PLHQLStatementsParser.Create_table_hive_row_format_fieldsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#create_table_options_mssql_item}.
 	 * @param ctx the parse tree

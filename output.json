@@ -1,1 +1,47 @@
-[{"members":[{"name":"birthday","type":"string"},{"name":"GSM","type":"string"},{"name":"is_vip","type":"bool"},{"name":"name","type":"string"},{"name":"salary","type":"int"}],"name":"CUSTOMER"},{"members":[{"name":"duration","type":"float"},{"name":"cost","type":"int"},{"name":"from_customer","type":"string"},{"name":"to_customer","type":"string"},{"name":"date_key","type":"string"}],"name":"CALLS"}]
+[
+  {
+    "members": [
+      {
+        "name": "STRING",
+        "type": "TITLE"
+      },
+      {
+        "name": "INT",
+        "type": "REVIEW"
+      }
+    ],
+    "name": "MEMES",
+    "field_terminator": "t",
+    "location": "C:/Users/Hamza/Desktop"
+  },
+  {
+    "members": [
+      {
+        "name": "STRING",
+        "type": "TITLE"
+      },
+      {
+        "name": "INT",
+        "type": "REVIEW"
+      }
+    ],
+    "name": "MEMES",
+    "field_terminator": "t",
+    "location": "C:/Users/Hamza/Desktop"
+  },
+  {
+    "members": [
+      {
+        "name": "STRING",
+        "type": "TITLE"
+      },
+      {
+        "name": "INT",
+        "type": "REVIEW"
+      }
+    ],
+    "name": "MEMES_",
+    "field_terminator": "t",
+    "location": "C:/Users/Hamza/Desktop"
+  }
+]

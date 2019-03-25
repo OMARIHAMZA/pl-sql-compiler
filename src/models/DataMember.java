@@ -13,6 +13,8 @@ public class DataMember {
         this.type = type;
     }
 
+
+
     public String getName() {
         return name;
     }

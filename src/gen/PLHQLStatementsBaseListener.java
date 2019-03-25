@@ -1,5 +1,5 @@
-// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7
-package gen;
+package gen;// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7.2
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -531,18 +531,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCreate_table_preoptions_item(PLHQLStatementsParser.Create_table_preoptions_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_table_preoptions_item(PLHQLStatementsParser.Create_table_preoptions_itemContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCreate_table_preoptions_td_item(PLHQLStatementsParser.Create_table_preoptions_td_itemContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -634,18 +622,6 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreate_table_hive_row_format(PLHQLStatementsParser.Create_table_hive_row_formatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCreate_table_hive_row_format_fields(PLHQLStatementsParser.Create_table_hive_row_format_fieldsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCreate_table_hive_row_format_fields(PLHQLStatementsParser.Create_table_hive_row_format_fieldsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

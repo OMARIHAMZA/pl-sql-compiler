@@ -5,7 +5,6 @@ import gen.PLHQLStatementsParser;
 import models.*;
 
 import java.util.ArrayDeque;
-import java.util.HashMap;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -86,11 +85,25 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx) {
         super.enterCreate_table_stmt(ctx);
-        DataType dataType = new DataType(ctx.table_name().getText());
+
+        String fieldTerminator = (ctx.create_table_preoptions()
+                .create_table_options_hive_item()
+                .create_table_hive_row_format()
+                .string()
+                .getText()
+                .replaceAll("'", ""));
+
+        String tableLocation = ctx.create_table_preoptions().string().getText().replaceAll("'", "");
+
+        DataType dataType = new DataType(ctx.table_name().getText().toUpperCase(), tableLocation, fieldTerminator);
+
         ctx.create_table_definition().create_table_columns().create_table_columns_item().forEach(column -> {
-            DataMember dataMember = new DataMember(column.column_name().getText(), column.dtype().getText());
-            dataType.getMembers().put(dataMember.getName(), dataMember);
+            DataMember dataMember = new DataMember(column.column_name().getText().toUpperCase(),
+                    column.dtype().getText().toUpperCase());
+
+            dataType.getMembers().put(dataMember.getName().toUpperCase(), dataMember);
         });
+
         TypeRepository.addDataType(dataType);
     }
 

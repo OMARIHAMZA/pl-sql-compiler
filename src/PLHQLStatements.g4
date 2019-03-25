@@ -173,7 +173,7 @@ declare_var_item :
 
 
 create_table_stmt :
-       T_CREATE T_TABLE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
+       T_CREATE T_TABLE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions create_table_definition
      ;
 
 error_create_stmt:
@@ -227,13 +227,9 @@ create_table_fk_action :
      ;
 
 create_table_preoptions :
-      create_table_preoptions_item+
+       create_table_options_hive_item T_LOCATION string
      ;
 
-create_table_preoptions_item :
-        T_COMMA create_table_preoptions_td_item
-      | create_table_options_hive_item
-     ;
 
 create_table_preoptions_td_item :
        T_NO? (T_LOG | T_FALLBACK)
@@ -283,16 +279,9 @@ create_table_options_hive_item :
      ;
 
 create_table_hive_row_format :
-       T_ROW T_FORMAT T_DELIMITED create_table_hive_row_format_fields*
-     ;
+       T_ROW T_FORMAT T_DELIMITED  T_FIELDS T_TERMINATED T_BY string
+       ;
 
-create_table_hive_row_format_fields :
-       T_FIELDS T_TERMINATED T_BY expr (T_ESCAPED T_BY expr)?
-     | T_COLLECTION T_ITEMS T_TERMINATED T_BY expr
-     | T_MAP T_KEYS T_TERMINATED T_BY expr
-     | T_LINES T_TERMINATED T_BY expr
-     | T_NULL T_DEFINED T_AS expr
-     ;
 
 create_table_options_mssql_item :
        T_ON ident
