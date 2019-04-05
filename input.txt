@@ -1,1 +1,1 @@
-CREATE TABLE EMPLOYEEZ ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION 'C:/Users/Asus/Desktop' (employee_id int, employee_name string, salary int, department_id int);
+CREATE TABLE MEMES ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION 'C:/Users/Asus/Desktop' (employee_id int, employee_name string, salary int, department_id int);

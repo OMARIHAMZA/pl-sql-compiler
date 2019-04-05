@@ -1,1 +1,48 @@
-[{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES","field_terminator":"t","location":"C:/Users/Hamza/Desktop"},{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES","field_terminator":"t","location":"C:/Users/Hamza/Desktop"},{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES_","field_terminator":"t","location":"C:/Users/Hamza/Desktop"},{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES_","field_terminator":"t","location":"C:/Users/Hamza/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"EMPLOYEE_NAME"},{"name":"INT","type":"DEPARTMENT_ID"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEES","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEES"},{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES_"},{"members":[{"name":"EMPLOYEE_ID","type":"INT"},{"name":"SALARY","type":"INT"},{"name":"DEPARTMENT_ID","type":"INT"},{"name":"EMPLOYEE_NAME","type":"STRING"}],"name":"EMPLOYEEZ","field_terminator":",","location":"C:/Users/Asus/Desktop"},{"members":[{"name":"STRING","type":"TITLE"},{"name":"INT","type":"REVIEW"}],"name":"MEMES"}]
+[
+  {
+    "members": [
+      {
+        "name": "EMPLOYEE_ID",
+        "type": "INT"
+      },
+      {
+        "name": "SALARY",
+        "type": "INT"
+      },
+      {
+        "name": "DEPARTMENT_ID",
+        "type": "INT"
+      },
+      {
+        "name": "EMPLOYEE_NAME",
+        "type": "STRING"
+      }
+    ],
+    "name": "EMPLOYEES",
+    "field_terminator": ",",
+    "location": "C:/Users/Asus/Desktop"
+  },
+  {
+    "members": [
+      {
+        "name": "EMPLOYEE_ID",
+        "type": "INT"
+      },
+      {
+        "name": "SALARY",
+        "type": "INT"
+      },
+      {
+        "name": "DEPARTMENT_ID",
+        "type": "INT"
+      },
+      {
+        "name": "EMPLOYEE_NAME",
+        "type": "STRING"
+      }
+    ],
+    "name": "MEMES",
+    "field_terminator": ",",
+    "location": "C:/Users/Asus/Desktop"
+  }
+]

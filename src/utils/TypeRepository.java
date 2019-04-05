@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -123,7 +124,9 @@ public class TypeRepository {
                 DataType type = new DataType(currentJSONObject.getString("name"), dataMembers);
                 typeHashMap.put(type.getName(), type);
             }
-        } catch (JSONException | FileNotFoundException e) {
+        } catch (NoSuchElementException e) {
+
+        } catch (FileNotFoundException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -140,6 +143,8 @@ public class TypeRepository {
         File file = new File(filePath);
         try {
             return new JSONArray(new Scanner(file).useDelimiter("\\Z").next());
+        } catch (NoSuchElementException e) {
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
