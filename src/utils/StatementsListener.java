@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class StatementsListener extends PLHQLStatementsBaseListener {
 
-    public Stack<Scope> scopes = new Stack<>(); //Scope stack
+    private Stack<Scope> scopes = new Stack<>(); //Scope stack
     private Queue<Variable> parameters = new ArrayDeque<>(); //Temporary queue of function parameters
 
     /**
@@ -98,13 +98,17 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         DataType dataType = new DataType(ctx.table_name().getText().toUpperCase(), tableLocation, fieldTerminator);
 
         ctx.create_table_definition().create_table_columns().create_table_columns_item().forEach(column -> {
-            DataMember dataMember = new DataMember(column.column_name().getText().toUpperCase(),
-                    column.dtype().getText().toUpperCase());
+            DataMember dataMember = new DataMember(column.dtype().getText().toUpperCase(),
+                    column.column_name().getText().toUpperCase());
 
             dataType.getMembers().put(dataMember.getName().toUpperCase(), dataMember);
         });
 
-        TypeRepository.addDataType(dataType);
+        try {
+            TypeRepository.addDataType(dataType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

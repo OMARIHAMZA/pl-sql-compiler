@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import utils.StatementsListener;
+import utils.TypeRepository;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        TypeRepository.init();
         PLHQLStatementsLexer lexer = new PLHQLStatementsLexer(CharStreams.fromFileName("input.txt"));
         CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
         PLHQLStatementsParser parser = new PLHQLStatementsParser(commonTokenStream);
@@ -21,7 +23,9 @@ public class Main {
         ParseTreeWalker walker = new ParseTreeWalker();
         StatementsListener listener = new StatementsListener();
         walker.walk(listener, tree);
-//        TypeRepository.createTable("EMPLOYEES");
+
+
+        //        TypeRepository.createTable("EMPLOYEES");
 
     }
 }

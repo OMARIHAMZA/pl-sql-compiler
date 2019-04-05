@@ -22,13 +22,24 @@ import java.util.Scanner;
 public class TypeRepository {
 
     public static HashMap<String, DataType> typeHashMap = new HashMap<>();
+    public static final String INPUT_FILE_PATH = "input.txt";
+    public static final String DATA_TYPES_FILE_PATH = "output.json";
+
+    public static void init() {
+        readDataFromFile(DATA_TYPES_FILE_PATH);
+    }
 
     /**
      * Add data type to known type systems
      *
      * @param dataType data type to be added
      */
-    public static void addDataType(DataType dataType) {
+    public static void addDataType(DataType dataType) throws Exception {
+        for (HashMap.Entry<String, DataType> entry : typeHashMap.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(dataType.getName())) {
+                throw new Exception("DATA TYPE ALREADY EXIST");
+            }
+        }
         typeHashMap.put(dataType.getName(), dataType);
         writeDataToFile("output.json");
     }
