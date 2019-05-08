@@ -7,8 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -187,6 +185,10 @@ public class TypeRepository {
         return result.toString();
     }
 
+    public static boolean dataTypeExists(String dataTypeName) {
+        return typeHashMap.containsKey(dataTypeName);
+    }
+
     /**
      * Check if passed type is a primitive
      *
@@ -208,7 +210,7 @@ public class TypeRepository {
         new File(path + "/" + name).mkdirs();
     }
 
-    public static void createRubyFile(){
+    public static void createRubyFile() {
         try {
             new File("Generated.rb").createNewFile();
         } catch (IOException e) {

@@ -1,4 +1,8 @@
-if then null; end if;
-for i in 0..10 LOOP END LOOP
-for i in 0..10 LOOP null;
-for i in 0..10 null; END LOOP
+int main(){
+ int a;
+ return a+1;
+}
+
+void b(){
+
+}

@@ -3,11 +3,9 @@ package utils;
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
-import org.stringtemplate.v4.ST;
+import org.antlr.v4.runtime.ParserRuleContext;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * A sub class of the statement Listener
@@ -66,6 +64,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 //Add function parameters to temporary queue
             });
         }
+        if (function.checkOccurrence(scopes.peek())) {
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Found multiple definitions of the function");
+            return;
+        }
         scopes.peek().addSymbol(function); //Add function to parent scope
     }
 
@@ -77,8 +79,14 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterGeneral_delcaration_c_stmt(PLHQLStatementsParser.General_delcaration_c_stmtContext ctx) {
         super.enterGeneral_delcaration_c_stmt(ctx);
+
         ctx.ident().forEach(identifier -> {
-                    scopes.peek().addSymbol(new Variable(identifier.getText(), ctx.dtype().getText()));
+                    Variable variable = new Variable(identifier.getText(), ctx.dtype().getText());
+                    if (variable.checkOccurrence(scopes.peek())) {
+                        SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Redeclaration of variable: " + variable.getName());
+                        return;
+                    }
+                    scopes.peek().addSymbol(variable);
                 }
         );
     }
@@ -122,17 +130,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         super.exitSelect_stmt(ctx);
     }
 
-
-    @Override
-    public void enterError_stmt(PLHQLStatementsParser.Error_stmtContext ctx) {
-        super.enterError_stmt(ctx);
-    }
-
     @Override
     public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.enterProgram(ctx);
         TypeRepository.createRubyFile();
         scopes.add(new Scope());
+
     }
 
     @Override
@@ -140,4 +143,29 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         super.exitProgram(ctx);
         scopes.pop();
     }
+
+    @Override
+    public void enterExpr_atom(PLHQLStatementsParser.Expr_atomContext ctx) {
+        super.enterExpr_atom(ctx);
+        if (ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText())){
+            System.err.println("COMING: " + ListenerUtils.fromSelectClause(ctx));
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined variable: " + ctx.getText());
+        }
+    }
+
+    @Override
+    public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
+        super.enterSubselect_stmt(ctx);
+        String dataTypeName = ctx.from_clause().from_table_clause().from_table_name_clause().table_name().getText();
+        if (!TypeRepository.dataTypeExists(dataTypeName)){
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined DataType: " + dataTypeName);
+        }
+    }
+
+    /*@Override
+    public void enterExpr(PLHQLStatementsParser.ExprContext context) {
+        super.enterExpr(context);
+        if (context.)
+        ListenerUtils.checkCurrentScopeSymbols(context, scopes.peek());
+    }*/
 }

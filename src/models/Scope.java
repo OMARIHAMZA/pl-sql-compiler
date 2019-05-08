@@ -11,7 +11,15 @@ public class Scope {
     }
 
     public void addSymbol(ScopeSymbol symbol) {
-        symbolTable.put(symbol.getName(), symbol);
+        if (symbol instanceof Function){
+            StringBuilder name = new StringBuilder(symbol.getName());
+            for (Variable variable: ((Function) symbol).getParameters()){
+                name.append(variable.getType());
+            }
+            symbolTable.put(name.toString(), symbol);
+        }else {
+            symbolTable.put(symbol.getName(), symbol);
+        }
     }
 
     public void copySymbols(HashMap<String, ScopeSymbol> symbolTable) {
@@ -20,5 +28,9 @@ public class Scope {
 
     public HashMap<String, ScopeSymbol> getSymbolTable() {
         return symbolTable;
+    }
+
+    public boolean containsSymbol(String symbolName){
+        return symbolTable.containsKey(symbolName);
     }
 }

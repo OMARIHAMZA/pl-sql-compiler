@@ -3,15 +3,21 @@ package utils;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 
-public class ThrowingErrorListener extends BaseErrorListener {
+public class SyntaxSemanticErrorListener extends BaseErrorListener {
 
-    public static final ThrowingErrorListener INSTANCE = new ThrowingErrorListener();
+    public static final SyntaxSemanticErrorListener INSTANCE = new SyntaxSemanticErrorListener();
 
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e)
             throws ParseCancellationException {
         underlineError(recognizer, (Token) offendingSymbol, line, charPositionInLine);
         System.err.println("line " + line + ":" + charPositionInLine + " " + msg);
+    }
+
+
+
+    void semanticError(int line, String error) {
+        System.err.println("Semantic Error (Line: " + line + ") Error: " + error);
     }
 
     private void underlineError(Recognizer recognizer,

@@ -17,4 +17,7 @@ public abstract class ScopeSymbol {
     public String getType() {
         return type;
     }
+
+    public abstract boolean checkOccurrence(Scope scope);
+
 }

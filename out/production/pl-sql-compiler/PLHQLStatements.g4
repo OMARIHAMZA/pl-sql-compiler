@@ -3,7 +3,7 @@
 grammar PLHQLStatements;
 import PLHQLStatementLexer;
 
-program : block EOF;
+program : c_function+ EOF;
 
 block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
@@ -75,9 +75,8 @@ stmt :
      | if_stmt
      | c_stmt
      | return_stmt
-     | select_stmt
      | null_stmt
-    // | expr_stmt
+     | expr
     | semicolon_stmt      // Placed here to allow null statements ;;...
      ;
 
