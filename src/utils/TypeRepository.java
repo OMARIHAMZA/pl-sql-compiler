@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -186,7 +187,19 @@ public class TypeRepository {
     }
 
     public static boolean dataTypeExists(String dataTypeName) {
-        return typeHashMap.containsKey(dataTypeName);
+        return typeHashMap.containsKey(dataTypeName.toUpperCase());
+    }
+
+    public static boolean dataMemberExists(String dataTypeName, String dataMemberName) {
+        try {
+            DataType dataType = typeHashMap.get(dataTypeName.toUpperCase());
+            for (HashMap.Entry<String, DataMember> entry : dataType.getMembers().entrySet()) {
+                if (entry.getKey().equalsIgnoreCase(dataMemberName)) return true;
+            }
+        } catch (NullPointerException e) {
+
+        }
+        return false;
     }
 
     /**

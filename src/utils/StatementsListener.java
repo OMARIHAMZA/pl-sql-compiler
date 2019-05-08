@@ -3,7 +3,6 @@ package utils;
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
-import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.util.*;
 
@@ -148,8 +147,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void enterExpr_atom(PLHQLStatementsParser.Expr_atomContext ctx) {
         super.enterExpr_atom(ctx);
         if (ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText())){
-            System.err.println("COMING: " + ListenerUtils.fromSelectClause(ctx));
-            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined variable: " + ctx.getText());
+            if (ListenerUtils.fromSelectClause(ctx) && !ListenerUtils.checkDataMemberExistence(ctx.ident().getText(), ctx)){
+                SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined variable: " + ctx.getText());
+            }
         }
     }
 
@@ -160,6 +160,16 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         if (!TypeRepository.dataTypeExists(dataTypeName)){
             SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined DataType: " + dataTypeName);
         }
+    }
+
+    @Override
+    public void enterFrom_table_name_clause(PLHQLStatementsParser.From_table_name_clauseContext ctx) {
+        super.enterFrom_table_name_clause(ctx);
+    }
+
+    @Override
+    public void enterSelect_list_item(PLHQLStatementsParser.Select_list_itemContext ctx) {
+        super.enterSelect_list_item(ctx);
     }
 
     /*@Override

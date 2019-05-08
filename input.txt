@@ -1,6 +1,5 @@
 int main(){
- int a;
- return a+1;
+ select salary+50 from (select salary from memes);
 }
 
 void b(){

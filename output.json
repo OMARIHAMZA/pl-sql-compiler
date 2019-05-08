@@ -29,10 +29,6 @@
         "type": "INT"
       },
       {
-        "name": "SALARY",
-        "type": "INT"
-      },
-      {
         "name": "DEPARTMENT_ID",
         "type": "INT"
       },
