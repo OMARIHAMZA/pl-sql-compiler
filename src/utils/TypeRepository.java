@@ -6,10 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -209,5 +206,13 @@ public class TypeRepository {
 
     public static void createDirectories(String path, String name) {
         new File(path + "/" + name).mkdirs();
+    }
+
+    public static void createRubyFile(){
+        try {
+            new File("Generated.rb").createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

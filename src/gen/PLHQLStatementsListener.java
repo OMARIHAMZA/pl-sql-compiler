@@ -1,4 +1,5 @@
-package gen;// Generated from C:/Users/HAMZA/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7.2
+// Generated from C:/Users/ASUS/Documents/GitHub/pl-sql-compiler/src\PLHQLStatements.g4 by ANTLR 4.7.2
+package gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

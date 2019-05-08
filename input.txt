@@ -1,1 +1,4 @@
-CREATE TABLE MEMES ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION 'C:/Users/Asus/Desktop' (employee_id int, employee_name string, salary int, department_id int);
+if then null; end if;
+for i in 0..10 LOOP END LOOP
+for i in 0..10 LOOP null;
+for i in 0..10 null; END LOOP

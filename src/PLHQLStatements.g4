@@ -26,7 +26,7 @@ begin_end_block :
      ;
 
 error_missing_end:
-    declare_block? T_BEGIN block
+    declare_block? T_BEGIN block {notifyErrorListeners("Expected 'END' at the end of the block");}
     ;
 
 
@@ -151,7 +151,7 @@ declare_stmt :          // Declaration statement
      ;
 
 error_delcare_stmt:
-    declare_stmt_item (T_COMMA declare_stmt_item)*
+    declare_stmt_item (T_COMMA declare_stmt_item)* {notifyErrorListeners("Expected 'DECLARE' keyword");}
     ;
 
 declare_block :         // Declaration block
@@ -183,7 +183,7 @@ error_create_stmt:
 ;
 
 error_create_table_stmt :
-       T_CREATE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition
+       T_CREATE (T_IF T_NOT T_EXISTS)? table_name create_table_preoptions? create_table_definition {notifyErrorListeners("Expected 'TABLE' keyword");}
      ;
 create_local_temp_table_stmt :
        T_CREATE (T_LOCAL T_TEMPORARY | (T_SET | T_MULTISET)? T_VOLATILE) T_TABLE ident create_table_preoptions? create_table_definition
@@ -414,19 +414,19 @@ if_plsql_stmt :
        T_IF bool_expr T_THEN block elseif_block* else_block? T_END T_IF
      ;
 error_if_plsql_stmt :
-       T_IF  T_THEN block elseif_block* else_block? T_END T_IF
+       T_IF  T_THEN block elseif_block* else_block? T_END T_IF {notifyErrorListeners("Missing if block");}
      ;
 if_tsql_stmt :
        T_IF bool_expr single_block_stmt (T_ELSE single_block_stmt)?
      ;
 error_if_tsql_stmt :
-       T_IF  single_block_stmt (T_ELSE single_block_stmt)?
+       T_IF  single_block_stmt (T_ELSE single_block_stmt)? {notifyErrorListeners("Expected boolean expression");}
      ;
 if_bteq_stmt :
        '.' T_IF bool_expr T_THEN single_block_stmt
      ;
 error_if_bteq_stmt :
-       '.' T_IF  T_THEN single_block_stmt
+       '.' T_IF  T_THEN single_block_stmt {notifyErrorListeners("Expected boolean expression");}
      ;
 elseif_block :
        (T_ELSIF | T_ELSEIF) bool_expr T_THEN block
@@ -440,7 +440,7 @@ create_index_stmt :     // CREATE INDEX statement
        T_CREATE T_UNIQUE? T_INDEX ident T_ON table_name T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
      ;
 error_create_index_stmt :     // CREATE INDEX statement
-       T_CREATE T_UNIQUE?  T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P
+       T_CREATE T_UNIQUE?  T_OPEN_P create_index_col (T_COMMA create_index_col)* T_CLOSE_P {notifyErrorListeners("Expected 'INDEX' keyword");}
      ;
 create_index_col :
        ident (T_ASC | T_DESC)?
@@ -476,9 +476,9 @@ dtype? ident T_EQUAL expr
 
 
 error_for_range_stmt :        // FOR (Integer range) statement
-       T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)?  block T_END T_LOOP
-       |T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP block
-       |T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP  T_END T_LOOP
+       T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)?  block T_END T_LOOP {notifyErrorListeners("Expected 'LOOP' keyword");}
+       |T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP block {notifyErrorListeners("Expected 'END LOOP' keywords");}
+       |T_FOR L_ID T_IN T_REVERSE? expr T_DOT2 expr ((T_BY | T_STEP) expr)? T_LOOP  T_END T_LOOP {notifyErrorListeners("Expected block clause");}
      ;
 
 
@@ -519,7 +519,7 @@ subselect_stmt :
 
 error_subselect :
        (T_SELECT | T_SEL) select_list into_clause? where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
-       | error_from_clause
+       | error_from_clause {notifyErrorListeners("Missing 'FROM' clause");}
 ;
 
 
@@ -615,7 +615,7 @@ where_clause :
      ;
 
 error_missing_bool_expr :
-       T_WHERE
+       T_WHERE {notifyErrorListeners("Expected boolean expression");}
      ;
 
 group_by_clause :
@@ -829,7 +829,7 @@ func_param :
      ;
 
 error_missing_right_p:
-    T_OPEN_P (~T_CLOSE_P)*
+    T_OPEN_P (~T_CLOSE_P)* {notifyErrorListeners("Missing right parentheses");}
 ;
 
 date_literal :                             // DATE 'YYYY-MM-DD' literal
@@ -859,8 +859,8 @@ string :                                   // String literal (single or double q
      ;
 
 error_string:
-    L_S_STRING_MISSING_RIGHT
-    |L_D_STRING_MISSING_RIGHT
+    L_S_STRING_MISSING_RIGHT {notifyErrorListeners("Expected right quote");}
+    |L_D_STRING_MISSING_RIGHT {notifyErrorListeners("Expected right quotes");}
 ;
 
 int_number :                               // Integer (positive or negative)
@@ -1210,5 +1210,5 @@ non_reserved_words :                      // Tokens that are not reserved words 
      ;
 
 error_invalid_token:
-    L_INVALID_TOKEN
+    L_INVALID_TOKEN {notifyErrorListeners("Unexpected Token");}
     ;

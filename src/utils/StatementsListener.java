@@ -3,6 +3,7 @@ package utils;
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
+import org.stringtemplate.v4.ST;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -112,8 +113,25 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     }
 
     @Override
+    public void enterSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
+        super.enterSelect_stmt(ctx);
+    }
+
+    @Override
+    public void exitSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
+        super.exitSelect_stmt(ctx);
+    }
+
+
+    @Override
+    public void enterError_stmt(PLHQLStatementsParser.Error_stmtContext ctx) {
+        super.enterError_stmt(ctx);
+    }
+
+    @Override
     public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.enterProgram(ctx);
+        TypeRepository.createRubyFile();
         scopes.add(new Scope());
     }
 
