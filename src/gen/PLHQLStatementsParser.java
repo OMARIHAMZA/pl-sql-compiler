@@ -392,7 +392,7 @@ public class PLHQLStatementsParser extends Parser {
 				setState(321); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BINARY_INTEGER) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PLS_INTEGER - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SIMPLE_INTEGER - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TINYINT - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOID - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (L_ID - 320)))) != 0) );
+			} while ( ((((_la - 22)) & ~0x3f) == 0 && ((1L << (_la - 22)) & ((1L << (T_BIGINT - 22)) | (1L << (T_BINARY_DOUBLE - 22)) | (1L << (T_BINARY_FLOAT - 22)) | (1L << (T_BINARY_INTEGER - 22)) | (1L << (T_BIT - 22)) | (1L << (T_CHAR - 22)) | (1L << (T_DATE - 22)) | (1L << (T_DATETIME - 22)) | (1L << (T_DEC - 22)) | (1L << (T_DECIMAL - 22)))) != 0) || ((((_la - 90)) & ~0x3f) == 0 && ((1L << (_la - 90)) & ((1L << (T_DOUBLE - 90)) | (1L << (T_FLOAT - 90)) | (1L << (T_INT - 90)) | (1L << (T_INT2 - 90)) | (1L << (T_INT4 - 90)) | (1L << (T_INT8 - 90)) | (1L << (T_INTEGER - 90)))) != 0) || ((((_la - 184)) & ~0x3f) == 0 && ((1L << (_la - 184)) & ((1L << (T_NCHAR - 184)) | (1L << (T_NVARCHAR - 184)) | (1L << (T_NUMERIC - 184)) | (1L << (T_NUMBER - 184)) | (1L << (T_PLS_INTEGER - 184)) | (1L << (T_REAL - 184)) | (1L << (T_RESULT_SET_LOCATOR - 184)))) != 0) || ((((_la - 261)) & ~0x3f) == 0 && ((1L << (_la - 261)) & ((1L << (T_SIMPLE_DOUBLE - 261)) | (1L << (T_SIMPLE_FLOAT - 261)) | (1L << (T_SIMPLE_INTEGER - 261)) | (1L << (T_SMALLDATETIME - 261)) | (1L << (T_SMALLINT - 261)) | (1L << (T_STRING - 261)) | (1L << (T_SYS_REFCURSOR - 261)) | (1L << (T_TIMESTAMP - 261)) | (1L << (T_TINYINT - 261)) | (1L << (T_VARCHAR - 261)) | (1L << (T_VARCHAR2 - 261)) | (1L << (T_VOID - 261)) | (1L << (T_XML - 261)))) != 0) || _la==L_ID );
 			setState(323);
 			match(EOF);
 			}
@@ -566,77 +566,87 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			setState(347);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case T_FROM:
+			case T_SEL:
+			case T_SELECT:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(337);
 				error_subselect();
 				}
 				break;
-			case 2:
+			case T_OPEN_P:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(338);
 				error_missing_right_p();
 				}
 				break;
-			case 3:
+			case T_BEGIN:
+			case T_DECLARE:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(339);
 				error_missing_end();
 				}
 				break;
-			case 4:
+			case L_S_STRING_MISSING_RIGHT:
+			case L_D_STRING_MISSING_RIGHT:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(340);
 				error_string();
 				}
 				break;
-			case 5:
+			case T_WHERE:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(341);
 				error_missing_bool_expr();
 				}
 				break;
-			case 6:
+			case T__3:
+			case T_IF:
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(342);
 				error_if_stmt();
 				}
 				break;
-			case 7:
+			case T_CREATE:
+			case T_PROC:
+			case T_PROCEDURE:
+			case T_REPLACE:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(343);
 				error_create_stmt();
 				}
 				break;
-			case 8:
+			case T_FOR:
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(344);
 				error_for_range_stmt();
 				}
 				break;
-			case 9:
+			case L_ID:
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(345);
 				error_delcare_stmt();
 				}
 				break;
-			case 10:
+			case L_INVALID_TOKEN:
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(346);
 				error_invalid_token();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -800,8 +810,8 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			setState(371);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case T_BEGIN:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(363);
@@ -812,7 +822,110 @@ public class PLHQLStatementsParser extends Parser {
 				block_end();
 				}
 				break;
-			case 2:
+			case T__0:
+			case T__1:
+			case T__3:
+			case T_AVG:
+			case T_BIGINT:
+			case T_BINARY_DOUBLE:
+			case T_BINARY_FLOAT:
+			case T_BINARY_INTEGER:
+			case T_BIT:
+			case T_BREAK:
+			case T_CASE:
+			case T_CAST:
+			case T_CHAR:
+			case T_COUNT:
+			case T_COUNT_BIG:
+			case T_CREATE:
+			case T_CURRENT:
+			case T_DATE:
+			case T_DATETIME:
+			case T_DEC:
+			case T_DECIMAL:
+			case T_DECLARE:
+			case T_DOUBLE:
+			case T_EXEC:
+			case T_EXECUTE:
+			case T_FALSE:
+			case T_FLOAT:
+			case T_FOR:
+			case T_IF:
+			case T_INT:
+			case T_INT2:
+			case T_INT4:
+			case T_INT8:
+			case T_INTEGER:
+			case T_INTERVAL:
+			case T_MAX:
+			case T_MIN:
+			case T_NCHAR:
+			case T_NVARCHAR:
+			case T_NULL:
+			case T_NUMERIC:
+			case T_NUMBER:
+			case T_PLS_INTEGER:
+			case T_REAL:
+			case T_RESULT_SET_LOCATOR:
+			case T_RETURN:
+			case T_TRIM:
+			case T_SEL:
+			case T_SELECT:
+			case T_SIMPLE_DOUBLE:
+			case T_SIMPLE_FLOAT:
+			case T_SIMPLE_INTEGER:
+			case T_SMALLDATETIME:
+			case T_SMALLINT:
+			case T_STRING:
+			case T_SUBSTRING:
+			case T_SUM:
+			case T_SYS_REFCURSOR:
+			case T_TIMESTAMP:
+			case T_TINYINT:
+			case T_TRUE:
+			case T_VAR:
+			case T_VARCHAR:
+			case T_VARCHAR2:
+			case T_VOID:
+			case T_WITH:
+			case T_XML:
+			case T_ACTIVITY_COUNT:
+			case T_CUME_DIST:
+			case T_CURRENT_DATE:
+			case T_CURRENT_TIMESTAMP:
+			case T_CURRENT_USER:
+			case T_DENSE_RANK:
+			case T_FIRST_VALUE:
+			case T_LAG:
+			case T_LAST_VALUE:
+			case T_LEAD:
+			case T_MAX_PART_STRING:
+			case T_MIN_PART_STRING:
+			case T_MAX_PART_INT:
+			case T_MIN_PART_INT:
+			case T_MAX_PART_DATE:
+			case T_MIN_PART_DATE:
+			case T_PART_COUNT:
+			case T_PART_LOC:
+			case T_RANK:
+			case T_ROW_NUMBER:
+			case T_STDEV:
+			case T_SYSDATE:
+			case T_VARIANCE:
+			case T_USER:
+			case T_ADD:
+			case T_DIV:
+			case T_MINUS_MINUS:
+			case T_OPEN_B:
+			case T_OPEN_P:
+			case T_PLUS_PLUS:
+			case T_SEMICOLON:
+			case T_SUB:
+			case L_ID:
+			case L_S_STRING:
+			case L_D_STRING:
+			case L_INT:
+			case L_DEC:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(367);
@@ -829,6 +942,8 @@ public class PLHQLStatementsParser extends Parser {
 				}
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1138,7 +1253,7 @@ public class PLHQLStatementsParser extends Parser {
 			setState(410);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BINARY_INTEGER) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NULL - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PLS_INTEGER - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SIMPLE_INTEGER - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TINYINT - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOID - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_MAX_PART_STRING - 320)) | (1L << (T_MIN_PART_STRING - 320)) | (1L << (T_MAX_PART_INT - 320)) | (1L << (T_MIN_PART_INT - 320)) | (1L << (T_MAX_PART_DATE - 320)) | (1L << (T_MIN_PART_DATE - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (T_ADD - 320)) | (1L << (T_DIV - 320)) | (1L << (T_MINUS_MINUS - 320)) | (1L << (T_OPEN_B - 320)) | (1L << (T_OPEN_P - 320)) | (1L << (T_PLUS_PLUS - 320)) | (1L << (T_SEMICOLON - 320)) | (1L << (T_SUB - 320)) | (1L << (L_ID - 320)) | (1L << (L_S_STRING - 320)) | (1L << (L_D_STRING - 320)) | (1L << (L_INT - 320)) | (1L << (L_DEC - 320)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T_AVG) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BINARY_INTEGER) | (1L << T_BIT) | (1L << T_BREAK) | (1L << T_CASE) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CURRENT))) != 0) || ((((_la - 67)) & ~0x3f) == 0 && ((1L << (_la - 67)) & ((1L << (T_DATE - 67)) | (1L << (T_DATETIME - 67)) | (1L << (T_DEC - 67)) | (1L << (T_DECIMAL - 67)) | (1L << (T_DECLARE - 67)) | (1L << (T_DOUBLE - 67)) | (1L << (T_EXEC - 67)) | (1L << (T_EXECUTE - 67)) | (1L << (T_FALSE - 67)) | (1L << (T_FLOAT - 67)) | (1L << (T_FOR - 67)))) != 0) || ((((_la - 133)) & ~0x3f) == 0 && ((1L << (_la - 133)) & ((1L << (T_IF - 133)) | (1L << (T_INT - 133)) | (1L << (T_INT2 - 133)) | (1L << (T_INT4 - 133)) | (1L << (T_INT8 - 133)) | (1L << (T_INTEGER - 133)) | (1L << (T_INTERVAL - 133)) | (1L << (T_MAX - 133)) | (1L << (T_MIN - 133)) | (1L << (T_NCHAR - 133)) | (1L << (T_NVARCHAR - 133)) | (1L << (T_NULL - 133)) | (1L << (T_NUMERIC - 133)) | (1L << (T_NUMBER - 133)))) != 0) || ((((_la - 213)) & ~0x3f) == 0 && ((1L << (_la - 213)) & ((1L << (T_PLS_INTEGER - 213)) | (1L << (T_REAL - 213)) | (1L << (T_RESULT_SET_LOCATOR - 213)) | (1L << (T_RETURN - 213)) | (1L << (T_TRIM - 213)) | (1L << (T_SEL - 213)) | (1L << (T_SELECT - 213)) | (1L << (T_SIMPLE_DOUBLE - 213)) | (1L << (T_SIMPLE_FLOAT - 213)) | (1L << (T_SIMPLE_INTEGER - 213)) | (1L << (T_SMALLDATETIME - 213)) | (1L << (T_SMALLINT - 213)) | (1L << (T_STRING - 213)))) != 0) || ((((_la - 278)) & ~0x3f) == 0 && ((1L << (_la - 278)) & ((1L << (T_SUBSTRING - 278)) | (1L << (T_SUM - 278)) | (1L << (T_SYS_REFCURSOR - 278)) | (1L << (T_TIMESTAMP - 278)) | (1L << (T_TINYINT - 278)) | (1L << (T_TRUE - 278)) | (1L << (T_VAR - 278)) | (1L << (T_VARCHAR - 278)) | (1L << (T_VARCHAR2 - 278)) | (1L << (T_VOID - 278)) | (1L << (T_WITH - 278)) | (1L << (T_XML - 278)) | (1L << (T_ACTIVITY_COUNT - 278)) | (1L << (T_CUME_DIST - 278)) | (1L << (T_CURRENT_DATE - 278)) | (1L << (T_CURRENT_TIMESTAMP - 278)) | (1L << (T_CURRENT_USER - 278)) | (1L << (T_DENSE_RANK - 278)) | (1L << (T_FIRST_VALUE - 278)) | (1L << (T_LAG - 278)) | (1L << (T_LAST_VALUE - 278)) | (1L << (T_LEAD - 278)) | (1L << (T_MAX_PART_STRING - 278)) | (1L << (T_MIN_PART_STRING - 278)) | (1L << (T_MAX_PART_INT - 278)) | (1L << (T_MIN_PART_INT - 278)) | (1L << (T_MAX_PART_DATE - 278)) | (1L << (T_MIN_PART_DATE - 278)) | (1L << (T_PART_COUNT - 278)) | (1L << (T_PART_LOC - 278)) | (1L << (T_RANK - 278)) | (1L << (T_ROW_NUMBER - 278)) | (1L << (T_STDEV - 278)) | (1L << (T_SYSDATE - 278)))) != 0) || ((((_la - 342)) & ~0x3f) == 0 && ((1L << (_la - 342)) & ((1L << (T_VARIANCE - 342)) | (1L << (T_USER - 342)) | (1L << (T_ADD - 342)) | (1L << (T_DIV - 342)) | (1L << (T_MINUS_MINUS - 342)) | (1L << (T_OPEN_B - 342)) | (1L << (T_OPEN_P - 342)) | (1L << (T_PLUS_PLUS - 342)) | (1L << (T_SEMICOLON - 342)) | (1L << (T_SUB - 342)) | (1L << (L_ID - 342)) | (1L << (L_S_STRING - 342)) | (1L << (L_D_STRING - 342)) | (1L << (L_INT - 342)) | (1L << (L_DEC - 342)))) != 0)) {
 				{
 				{
 				setState(407);
@@ -1664,324 +1779,6 @@ public class PLHQLStatementsParser extends Parser {
 			setState(460);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ACTION:
-			case T_ADD2:
-			case T_ALL:
-			case T_ALLOCATE:
-			case T_ALTER:
-			case T_AND:
-			case T_ANSI_NULLS:
-			case T_ANSI_PADDING:
-			case T_AS:
-			case T_ASC:
-			case T_ASSOCIATE:
-			case T_AT:
-			case T_AUTO_INCREMENT:
-			case T_AVG:
-			case T_BATCHSIZE:
-			case T_BEGIN:
-			case T_BETWEEN:
-			case T_BIGINT:
-			case T_BINARY_DOUBLE:
-			case T_BINARY_FLOAT:
-			case T_BIT:
-			case T_BODY:
-			case T_BREAK:
-			case T_BY:
-			case T_BYTE:
-			case T_CALL:
-			case T_CALLER:
-			case T_CASCADE:
-			case T_CASE:
-			case T_CASESPECIFIC:
-			case T_CAST:
-			case T_CHAR:
-			case T_CHARACTER:
-			case T_CHARSET:
-			case T_CLIENT:
-			case T_CLOSE:
-			case T_CLUSTERED:
-			case T_CMP:
-			case T_COLLECT:
-			case T_COLLECTION:
-			case T_COLUMN:
-			case T_COMMENT:
-			case T_CONSTANT:
-			case T_COMMIT:
-			case T_COMPRESS:
-			case T_CONCAT:
-			case T_CONDITION:
-			case T_CONSTRAINT:
-			case T_CONTINUE:
-			case T_COPY:
-			case T_COUNT:
-			case T_COUNT_BIG:
-			case T_CREATE:
-			case T_CREATION:
-			case T_CREATOR:
-			case T_CS:
-			case T_CURRENT:
-			case T_CURRENT_SCHEMA:
-			case T_CURSOR:
-			case T_DATABASE:
-			case T_DATA:
-			case T_DATE:
-			case T_DATETIME:
-			case T_DAY:
-			case T_DAYS:
-			case T_DEC:
-			case T_DECIMAL:
-			case T_DECLARE:
-			case T_DEFAULT:
-			case T_DEFERRED:
-			case T_DEFINED:
-			case T_DEFINER:
-			case T_DEFINITION:
-			case T_DELETE:
-			case T_DELIMITED:
-			case T_DELIMITER:
-			case T_DESC:
-			case T_DESCRIBE:
-			case T_DIAGNOSTICS:
-			case T_DIR:
-			case T_DIRECTORY:
-			case T_DISTINCT:
-			case T_DISTRIBUTE:
-			case T_DO:
-			case T_DOUBLE:
-			case T_DROP:
-			case T_DYNAMIC:
-			case T_ENABLE:
-			case T_ENGINE:
-			case T_ESCAPED:
-			case T_EXCEPT:
-			case T_EXEC:
-			case T_EXECUTE:
-			case T_EXCEPTION:
-			case T_EXCLUSIVE:
-			case T_EXISTS:
-			case T_EXIT:
-			case T_FALLBACK:
-			case T_FALSE:
-			case T_FETCH:
-			case T_FIELDS:
-			case T_FILE:
-			case T_FILES:
-			case T_FLOAT:
-			case T_FOR:
-			case T_FOREIGN:
-			case T_FORMAT:
-			case T_FOUND:
-			case T_FROM:
-			case T_FULL:
-			case T_FUNCTION:
-			case T_GET:
-			case T_GLOBAL:
-			case T_GO:
-			case T_GRANT:
-			case T_GROUP:
-			case T_HANDLER:
-			case T_HASH:
-			case T_HAVING:
-			case T_HDFS:
-			case T_HIVE:
-			case T_HOST:
-			case T_IDENTITY:
-			case T_IF:
-			case T_IGNORE:
-			case T_IMMEDIATE:
-			case T_IN:
-			case T_INCLUDE:
-			case T_INDEX:
-			case T_INITRANS:
-			case T_INNER:
-			case T_INOUT:
-			case T_INSERT:
-			case T_INT:
-			case T_INT2:
-			case T_INT4:
-			case T_INT8:
-			case T_INTEGER:
-			case T_INTERSECT:
-			case T_INTERVAL:
-			case T_INTO:
-			case T_INVOKER:
-			case T_IS:
-			case T_ISOPEN:
-			case T_ITEMS:
-			case T_JOIN:
-			case T_KEEP:
-			case T_KEY:
-			case T_KEYS:
-			case T_LANGUAGE:
-			case T_LEAVE:
-			case T_LEFT:
-			case T_LIKE:
-			case T_LIMIT:
-			case T_LINES:
-			case T_LOCAL:
-			case T_LOCATION:
-			case T_LOCATOR:
-			case T_LOCATORS:
-			case T_LOCKS:
-			case T_LOG:
-			case T_LOGGED:
-			case T_LOGGING:
-			case T_LOOP:
-			case T_MAP:
-			case T_MATCHED:
-			case T_MAX:
-			case T_MAXTRANS:
-			case T_MERGE:
-			case T_MESSAGE_TEXT:
-			case T_MICROSECOND:
-			case T_MICROSECONDS:
-			case T_MIN:
-			case T_MULTISET:
-			case T_NCHAR:
-			case T_NEW:
-			case T_NVARCHAR:
-			case T_NO:
-			case T_NOCOUNT:
-			case T_NOCOMPRESS:
-			case T_NOLOGGING:
-			case T_NONE:
-			case T_NOT:
-			case T_NOTFOUND:
-			case T_NUMERIC:
-			case T_NUMBER:
-			case T_OBJECT:
-			case T_OFF:
-			case T_ON:
-			case T_ONLY:
-			case T_OPEN:
-			case T_OR:
-			case T_ORDER:
-			case T_OUT:
-			case T_OUTER:
-			case T_OVER:
-			case T_OVERWRITE:
-			case T_OWNER:
-			case T_PACKAGE:
-			case T_PARTITION:
-			case T_PCTFREE:
-			case T_PCTUSED:
-			case T_PRECISION:
-			case T_PRESERVE:
-			case T_PRIMARY:
-			case T_PRINT:
-			case T_PROC:
-			case T_PROCEDURE:
-			case T_QUALIFY:
-			case T_QUERY_BAND:
-			case T_QUIT:
-			case T_QUOTED_IDENTIFIER:
-			case T_RAISE:
-			case T_REAL:
-			case T_REFERENCES:
-			case T_REGEXP:
-			case T_REPLACE:
-			case T_RESIGNAL:
-			case T_RESTRICT:
-			case T_RESULT:
-			case T_RESULT_SET_LOCATOR:
-			case T_RETURN:
-			case T_RETURNS:
-			case T_REVERSE:
-			case T_RIGHT:
-			case T_RLIKE:
-			case T_ROLE:
-			case T_ROLLBACK:
-			case T_ROW:
-			case T_ROWS:
-			case T_ROW_COUNT:
-			case T_RR:
-			case T_RS:
-			case T_PWD:
-			case T_TRIM:
-			case T_SCHEMA:
-			case T_SECOND:
-			case T_SECONDS:
-			case T_SECURITY:
-			case T_SEGMENT:
-			case T_SEL:
-			case T_SELECT:
-			case T_SET:
-			case T_SESSION:
-			case T_SESSIONS:
-			case T_SETS:
-			case T_SHARE:
-			case T_SIGNAL:
-			case T_SIMPLE_DOUBLE:
-			case T_SIMPLE_FLOAT:
-			case T_SMALLDATETIME:
-			case T_SMALLINT:
-			case T_SQL:
-			case T_SQLEXCEPTION:
-			case T_SQLINSERT:
-			case T_SQLSTATE:
-			case T_SQLWARNING:
-			case T_STATS:
-			case T_STATISTICS:
-			case T_STEP:
-			case T_STORAGE:
-			case T_STORED:
-			case T_STRING:
-			case T_SUBDIR:
-			case T_SUBSTRING:
-			case T_SUM:
-			case T_SUMMARY:
-			case T_SYS_REFCURSOR:
-			case T_TABLE:
-			case T_TABLESPACE:
-			case T_TEMPORARY:
-			case T_TERMINATED:
-			case T_TEXTIMAGE_ON:
-			case T_THEN:
-			case T_TIMESTAMP:
-			case T_TITLE:
-			case T_TO:
-			case T_TOP:
-			case T_TRANSACTION:
-			case T_TRUE:
-			case T_TRUNCATE:
-			case T_UNIQUE:
-			case T_UPDATE:
-			case T_UR:
-			case T_USE:
-			case T_USING:
-			case T_VALUE:
-			case T_VALUES:
-			case T_VAR:
-			case T_VARCHAR:
-			case T_VARCHAR2:
-			case T_VARYING:
-			case T_VOLATILE:
-			case T_WHILE:
-			case T_WITH:
-			case T_WITHOUT:
-			case T_WORK:
-			case T_XACT_ABORT:
-			case T_XML:
-			case T_YES:
-			case T_ACTIVITY_COUNT:
-			case T_CUME_DIST:
-			case T_CURRENT_DATE:
-			case T_CURRENT_TIMESTAMP:
-			case T_CURRENT_USER:
-			case T_DENSE_RANK:
-			case T_FIRST_VALUE:
-			case T_LAG:
-			case T_LAST_VALUE:
-			case T_LEAD:
-			case T_PART_COUNT:
-			case T_PART_LOC:
-			case T_RANK:
-			case T_ROW_NUMBER:
-			case T_STDEV:
-			case T_SYSDATE:
-			case T_VARIANCE:
-			case T_USER:
 			case T_MINUS_MINUS:
 			case T_PLUS_PLUS:
 			case L_ID:
@@ -2046,324 +1843,6 @@ public class PLHQLStatementsParser extends Parser {
 			setState(478);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ACTION:
-			case T_ADD2:
-			case T_ALL:
-			case T_ALLOCATE:
-			case T_ALTER:
-			case T_AND:
-			case T_ANSI_NULLS:
-			case T_ANSI_PADDING:
-			case T_AS:
-			case T_ASC:
-			case T_ASSOCIATE:
-			case T_AT:
-			case T_AUTO_INCREMENT:
-			case T_AVG:
-			case T_BATCHSIZE:
-			case T_BEGIN:
-			case T_BETWEEN:
-			case T_BIGINT:
-			case T_BINARY_DOUBLE:
-			case T_BINARY_FLOAT:
-			case T_BIT:
-			case T_BODY:
-			case T_BREAK:
-			case T_BY:
-			case T_BYTE:
-			case T_CALL:
-			case T_CALLER:
-			case T_CASCADE:
-			case T_CASE:
-			case T_CASESPECIFIC:
-			case T_CAST:
-			case T_CHAR:
-			case T_CHARACTER:
-			case T_CHARSET:
-			case T_CLIENT:
-			case T_CLOSE:
-			case T_CLUSTERED:
-			case T_CMP:
-			case T_COLLECT:
-			case T_COLLECTION:
-			case T_COLUMN:
-			case T_COMMENT:
-			case T_CONSTANT:
-			case T_COMMIT:
-			case T_COMPRESS:
-			case T_CONCAT:
-			case T_CONDITION:
-			case T_CONSTRAINT:
-			case T_CONTINUE:
-			case T_COPY:
-			case T_COUNT:
-			case T_COUNT_BIG:
-			case T_CREATE:
-			case T_CREATION:
-			case T_CREATOR:
-			case T_CS:
-			case T_CURRENT:
-			case T_CURRENT_SCHEMA:
-			case T_CURSOR:
-			case T_DATABASE:
-			case T_DATA:
-			case T_DATE:
-			case T_DATETIME:
-			case T_DAY:
-			case T_DAYS:
-			case T_DEC:
-			case T_DECIMAL:
-			case T_DECLARE:
-			case T_DEFAULT:
-			case T_DEFERRED:
-			case T_DEFINED:
-			case T_DEFINER:
-			case T_DEFINITION:
-			case T_DELETE:
-			case T_DELIMITED:
-			case T_DELIMITER:
-			case T_DESC:
-			case T_DESCRIBE:
-			case T_DIAGNOSTICS:
-			case T_DIR:
-			case T_DIRECTORY:
-			case T_DISTINCT:
-			case T_DISTRIBUTE:
-			case T_DO:
-			case T_DOUBLE:
-			case T_DROP:
-			case T_DYNAMIC:
-			case T_ENABLE:
-			case T_ENGINE:
-			case T_ESCAPED:
-			case T_EXCEPT:
-			case T_EXEC:
-			case T_EXECUTE:
-			case T_EXCEPTION:
-			case T_EXCLUSIVE:
-			case T_EXISTS:
-			case T_EXIT:
-			case T_FALLBACK:
-			case T_FALSE:
-			case T_FETCH:
-			case T_FIELDS:
-			case T_FILE:
-			case T_FILES:
-			case T_FLOAT:
-			case T_FOR:
-			case T_FOREIGN:
-			case T_FORMAT:
-			case T_FOUND:
-			case T_FROM:
-			case T_FULL:
-			case T_FUNCTION:
-			case T_GET:
-			case T_GLOBAL:
-			case T_GO:
-			case T_GRANT:
-			case T_GROUP:
-			case T_HANDLER:
-			case T_HASH:
-			case T_HAVING:
-			case T_HDFS:
-			case T_HIVE:
-			case T_HOST:
-			case T_IDENTITY:
-			case T_IF:
-			case T_IGNORE:
-			case T_IMMEDIATE:
-			case T_IN:
-			case T_INCLUDE:
-			case T_INDEX:
-			case T_INITRANS:
-			case T_INNER:
-			case T_INOUT:
-			case T_INSERT:
-			case T_INT:
-			case T_INT2:
-			case T_INT4:
-			case T_INT8:
-			case T_INTEGER:
-			case T_INTERSECT:
-			case T_INTERVAL:
-			case T_INTO:
-			case T_INVOKER:
-			case T_IS:
-			case T_ISOPEN:
-			case T_ITEMS:
-			case T_JOIN:
-			case T_KEEP:
-			case T_KEY:
-			case T_KEYS:
-			case T_LANGUAGE:
-			case T_LEAVE:
-			case T_LEFT:
-			case T_LIKE:
-			case T_LIMIT:
-			case T_LINES:
-			case T_LOCAL:
-			case T_LOCATION:
-			case T_LOCATOR:
-			case T_LOCATORS:
-			case T_LOCKS:
-			case T_LOG:
-			case T_LOGGED:
-			case T_LOGGING:
-			case T_LOOP:
-			case T_MAP:
-			case T_MATCHED:
-			case T_MAX:
-			case T_MAXTRANS:
-			case T_MERGE:
-			case T_MESSAGE_TEXT:
-			case T_MICROSECOND:
-			case T_MICROSECONDS:
-			case T_MIN:
-			case T_MULTISET:
-			case T_NCHAR:
-			case T_NEW:
-			case T_NVARCHAR:
-			case T_NO:
-			case T_NOCOUNT:
-			case T_NOCOMPRESS:
-			case T_NOLOGGING:
-			case T_NONE:
-			case T_NOT:
-			case T_NOTFOUND:
-			case T_NUMERIC:
-			case T_NUMBER:
-			case T_OBJECT:
-			case T_OFF:
-			case T_ON:
-			case T_ONLY:
-			case T_OPEN:
-			case T_OR:
-			case T_ORDER:
-			case T_OUT:
-			case T_OUTER:
-			case T_OVER:
-			case T_OVERWRITE:
-			case T_OWNER:
-			case T_PACKAGE:
-			case T_PARTITION:
-			case T_PCTFREE:
-			case T_PCTUSED:
-			case T_PRECISION:
-			case T_PRESERVE:
-			case T_PRIMARY:
-			case T_PRINT:
-			case T_PROC:
-			case T_PROCEDURE:
-			case T_QUALIFY:
-			case T_QUERY_BAND:
-			case T_QUIT:
-			case T_QUOTED_IDENTIFIER:
-			case T_RAISE:
-			case T_REAL:
-			case T_REFERENCES:
-			case T_REGEXP:
-			case T_REPLACE:
-			case T_RESIGNAL:
-			case T_RESTRICT:
-			case T_RESULT:
-			case T_RESULT_SET_LOCATOR:
-			case T_RETURN:
-			case T_RETURNS:
-			case T_REVERSE:
-			case T_RIGHT:
-			case T_RLIKE:
-			case T_ROLE:
-			case T_ROLLBACK:
-			case T_ROW:
-			case T_ROWS:
-			case T_ROW_COUNT:
-			case T_RR:
-			case T_RS:
-			case T_PWD:
-			case T_TRIM:
-			case T_SCHEMA:
-			case T_SECOND:
-			case T_SECONDS:
-			case T_SECURITY:
-			case T_SEGMENT:
-			case T_SEL:
-			case T_SELECT:
-			case T_SET:
-			case T_SESSION:
-			case T_SESSIONS:
-			case T_SETS:
-			case T_SHARE:
-			case T_SIGNAL:
-			case T_SIMPLE_DOUBLE:
-			case T_SIMPLE_FLOAT:
-			case T_SMALLDATETIME:
-			case T_SMALLINT:
-			case T_SQL:
-			case T_SQLEXCEPTION:
-			case T_SQLINSERT:
-			case T_SQLSTATE:
-			case T_SQLWARNING:
-			case T_STATS:
-			case T_STATISTICS:
-			case T_STEP:
-			case T_STORAGE:
-			case T_STORED:
-			case T_STRING:
-			case T_SUBDIR:
-			case T_SUBSTRING:
-			case T_SUM:
-			case T_SUMMARY:
-			case T_SYS_REFCURSOR:
-			case T_TABLE:
-			case T_TABLESPACE:
-			case T_TEMPORARY:
-			case T_TERMINATED:
-			case T_TEXTIMAGE_ON:
-			case T_THEN:
-			case T_TIMESTAMP:
-			case T_TITLE:
-			case T_TO:
-			case T_TOP:
-			case T_TRANSACTION:
-			case T_TRUE:
-			case T_TRUNCATE:
-			case T_UNIQUE:
-			case T_UPDATE:
-			case T_UR:
-			case T_USE:
-			case T_USING:
-			case T_VALUE:
-			case T_VALUES:
-			case T_VAR:
-			case T_VARCHAR:
-			case T_VARCHAR2:
-			case T_VARYING:
-			case T_VOLATILE:
-			case T_WHILE:
-			case T_WITH:
-			case T_WITHOUT:
-			case T_WORK:
-			case T_XACT_ABORT:
-			case T_XML:
-			case T_YES:
-			case T_ACTIVITY_COUNT:
-			case T_CUME_DIST:
-			case T_CURRENT_DATE:
-			case T_CURRENT_TIMESTAMP:
-			case T_CURRENT_USER:
-			case T_DENSE_RANK:
-			case T_FIRST_VALUE:
-			case T_LAG:
-			case T_LAST_VALUE:
-			case T_LEAD:
-			case T_PART_COUNT:
-			case T_PART_LOC:
-			case T_RANK:
-			case T_ROW_NUMBER:
-			case T_STDEV:
-			case T_SYSDATE:
-			case T_VARIANCE:
-			case T_USER:
 			case L_ID:
 				enterOuterAlt(_localctx, 1);
 				{
@@ -2518,324 +1997,6 @@ public class PLHQLStatementsParser extends Parser {
 			setState(492);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ACTION:
-			case T_ADD2:
-			case T_ALL:
-			case T_ALLOCATE:
-			case T_ALTER:
-			case T_AND:
-			case T_ANSI_NULLS:
-			case T_ANSI_PADDING:
-			case T_AS:
-			case T_ASC:
-			case T_ASSOCIATE:
-			case T_AT:
-			case T_AUTO_INCREMENT:
-			case T_AVG:
-			case T_BATCHSIZE:
-			case T_BEGIN:
-			case T_BETWEEN:
-			case T_BIGINT:
-			case T_BINARY_DOUBLE:
-			case T_BINARY_FLOAT:
-			case T_BIT:
-			case T_BODY:
-			case T_BREAK:
-			case T_BY:
-			case T_BYTE:
-			case T_CALL:
-			case T_CALLER:
-			case T_CASCADE:
-			case T_CASE:
-			case T_CASESPECIFIC:
-			case T_CAST:
-			case T_CHAR:
-			case T_CHARACTER:
-			case T_CHARSET:
-			case T_CLIENT:
-			case T_CLOSE:
-			case T_CLUSTERED:
-			case T_CMP:
-			case T_COLLECT:
-			case T_COLLECTION:
-			case T_COLUMN:
-			case T_COMMENT:
-			case T_CONSTANT:
-			case T_COMMIT:
-			case T_COMPRESS:
-			case T_CONCAT:
-			case T_CONDITION:
-			case T_CONSTRAINT:
-			case T_CONTINUE:
-			case T_COPY:
-			case T_COUNT:
-			case T_COUNT_BIG:
-			case T_CREATE:
-			case T_CREATION:
-			case T_CREATOR:
-			case T_CS:
-			case T_CURRENT:
-			case T_CURRENT_SCHEMA:
-			case T_CURSOR:
-			case T_DATABASE:
-			case T_DATA:
-			case T_DATE:
-			case T_DATETIME:
-			case T_DAY:
-			case T_DAYS:
-			case T_DEC:
-			case T_DECIMAL:
-			case T_DECLARE:
-			case T_DEFAULT:
-			case T_DEFERRED:
-			case T_DEFINED:
-			case T_DEFINER:
-			case T_DEFINITION:
-			case T_DELETE:
-			case T_DELIMITED:
-			case T_DELIMITER:
-			case T_DESC:
-			case T_DESCRIBE:
-			case T_DIAGNOSTICS:
-			case T_DIR:
-			case T_DIRECTORY:
-			case T_DISTINCT:
-			case T_DISTRIBUTE:
-			case T_DO:
-			case T_DOUBLE:
-			case T_DROP:
-			case T_DYNAMIC:
-			case T_ENABLE:
-			case T_ENGINE:
-			case T_ESCAPED:
-			case T_EXCEPT:
-			case T_EXEC:
-			case T_EXECUTE:
-			case T_EXCEPTION:
-			case T_EXCLUSIVE:
-			case T_EXISTS:
-			case T_EXIT:
-			case T_FALLBACK:
-			case T_FALSE:
-			case T_FETCH:
-			case T_FIELDS:
-			case T_FILE:
-			case T_FILES:
-			case T_FLOAT:
-			case T_FOR:
-			case T_FOREIGN:
-			case T_FORMAT:
-			case T_FOUND:
-			case T_FROM:
-			case T_FULL:
-			case T_FUNCTION:
-			case T_GET:
-			case T_GLOBAL:
-			case T_GO:
-			case T_GRANT:
-			case T_GROUP:
-			case T_HANDLER:
-			case T_HASH:
-			case T_HAVING:
-			case T_HDFS:
-			case T_HIVE:
-			case T_HOST:
-			case T_IDENTITY:
-			case T_IF:
-			case T_IGNORE:
-			case T_IMMEDIATE:
-			case T_IN:
-			case T_INCLUDE:
-			case T_INDEX:
-			case T_INITRANS:
-			case T_INNER:
-			case T_INOUT:
-			case T_INSERT:
-			case T_INT:
-			case T_INT2:
-			case T_INT4:
-			case T_INT8:
-			case T_INTEGER:
-			case T_INTERSECT:
-			case T_INTERVAL:
-			case T_INTO:
-			case T_INVOKER:
-			case T_IS:
-			case T_ISOPEN:
-			case T_ITEMS:
-			case T_JOIN:
-			case T_KEEP:
-			case T_KEY:
-			case T_KEYS:
-			case T_LANGUAGE:
-			case T_LEAVE:
-			case T_LEFT:
-			case T_LIKE:
-			case T_LIMIT:
-			case T_LINES:
-			case T_LOCAL:
-			case T_LOCATION:
-			case T_LOCATOR:
-			case T_LOCATORS:
-			case T_LOCKS:
-			case T_LOG:
-			case T_LOGGED:
-			case T_LOGGING:
-			case T_LOOP:
-			case T_MAP:
-			case T_MATCHED:
-			case T_MAX:
-			case T_MAXTRANS:
-			case T_MERGE:
-			case T_MESSAGE_TEXT:
-			case T_MICROSECOND:
-			case T_MICROSECONDS:
-			case T_MIN:
-			case T_MULTISET:
-			case T_NCHAR:
-			case T_NEW:
-			case T_NVARCHAR:
-			case T_NO:
-			case T_NOCOUNT:
-			case T_NOCOMPRESS:
-			case T_NOLOGGING:
-			case T_NONE:
-			case T_NOT:
-			case T_NOTFOUND:
-			case T_NUMERIC:
-			case T_NUMBER:
-			case T_OBJECT:
-			case T_OFF:
-			case T_ON:
-			case T_ONLY:
-			case T_OPEN:
-			case T_OR:
-			case T_ORDER:
-			case T_OUT:
-			case T_OUTER:
-			case T_OVER:
-			case T_OVERWRITE:
-			case T_OWNER:
-			case T_PACKAGE:
-			case T_PARTITION:
-			case T_PCTFREE:
-			case T_PCTUSED:
-			case T_PRECISION:
-			case T_PRESERVE:
-			case T_PRIMARY:
-			case T_PRINT:
-			case T_PROC:
-			case T_PROCEDURE:
-			case T_QUALIFY:
-			case T_QUERY_BAND:
-			case T_QUIT:
-			case T_QUOTED_IDENTIFIER:
-			case T_RAISE:
-			case T_REAL:
-			case T_REFERENCES:
-			case T_REGEXP:
-			case T_REPLACE:
-			case T_RESIGNAL:
-			case T_RESTRICT:
-			case T_RESULT:
-			case T_RESULT_SET_LOCATOR:
-			case T_RETURN:
-			case T_RETURNS:
-			case T_REVERSE:
-			case T_RIGHT:
-			case T_RLIKE:
-			case T_ROLE:
-			case T_ROLLBACK:
-			case T_ROW:
-			case T_ROWS:
-			case T_ROW_COUNT:
-			case T_RR:
-			case T_RS:
-			case T_PWD:
-			case T_TRIM:
-			case T_SCHEMA:
-			case T_SECOND:
-			case T_SECONDS:
-			case T_SECURITY:
-			case T_SEGMENT:
-			case T_SEL:
-			case T_SELECT:
-			case T_SET:
-			case T_SESSION:
-			case T_SESSIONS:
-			case T_SETS:
-			case T_SHARE:
-			case T_SIGNAL:
-			case T_SIMPLE_DOUBLE:
-			case T_SIMPLE_FLOAT:
-			case T_SMALLDATETIME:
-			case T_SMALLINT:
-			case T_SQL:
-			case T_SQLEXCEPTION:
-			case T_SQLINSERT:
-			case T_SQLSTATE:
-			case T_SQLWARNING:
-			case T_STATS:
-			case T_STATISTICS:
-			case T_STEP:
-			case T_STORAGE:
-			case T_STORED:
-			case T_STRING:
-			case T_SUBDIR:
-			case T_SUBSTRING:
-			case T_SUM:
-			case T_SUMMARY:
-			case T_SYS_REFCURSOR:
-			case T_TABLE:
-			case T_TABLESPACE:
-			case T_TEMPORARY:
-			case T_TERMINATED:
-			case T_TEXTIMAGE_ON:
-			case T_THEN:
-			case T_TIMESTAMP:
-			case T_TITLE:
-			case T_TO:
-			case T_TOP:
-			case T_TRANSACTION:
-			case T_TRUE:
-			case T_TRUNCATE:
-			case T_UNIQUE:
-			case T_UPDATE:
-			case T_UR:
-			case T_USE:
-			case T_USING:
-			case T_VALUE:
-			case T_VALUES:
-			case T_VAR:
-			case T_VARCHAR:
-			case T_VARCHAR2:
-			case T_VARYING:
-			case T_VOLATILE:
-			case T_WHILE:
-			case T_WITH:
-			case T_WITHOUT:
-			case T_WORK:
-			case T_XACT_ABORT:
-			case T_XML:
-			case T_YES:
-			case T_ACTIVITY_COUNT:
-			case T_CUME_DIST:
-			case T_CURRENT_DATE:
-			case T_CURRENT_TIMESTAMP:
-			case T_CURRENT_USER:
-			case T_DENSE_RANK:
-			case T_FIRST_VALUE:
-			case T_LAG:
-			case T_LAST_VALUE:
-			case T_LEAD:
-			case T_PART_COUNT:
-			case T_PART_LOC:
-			case T_RANK:
-			case T_ROW_NUMBER:
-			case T_STDEV:
-			case T_SYSDATE:
-			case T_VARIANCE:
-			case T_USER:
 			case L_ID:
 				enterOuterAlt(_localctx, 1);
 				{
@@ -3159,324 +2320,6 @@ public class PLHQLStatementsParser extends Parser {
 			setState(553);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T_ACTION:
-			case T_ADD2:
-			case T_ALL:
-			case T_ALLOCATE:
-			case T_ALTER:
-			case T_AND:
-			case T_ANSI_NULLS:
-			case T_ANSI_PADDING:
-			case T_AS:
-			case T_ASC:
-			case T_ASSOCIATE:
-			case T_AT:
-			case T_AUTO_INCREMENT:
-			case T_AVG:
-			case T_BATCHSIZE:
-			case T_BEGIN:
-			case T_BETWEEN:
-			case T_BIGINT:
-			case T_BINARY_DOUBLE:
-			case T_BINARY_FLOAT:
-			case T_BIT:
-			case T_BODY:
-			case T_BREAK:
-			case T_BY:
-			case T_BYTE:
-			case T_CALL:
-			case T_CALLER:
-			case T_CASCADE:
-			case T_CASE:
-			case T_CASESPECIFIC:
-			case T_CAST:
-			case T_CHAR:
-			case T_CHARACTER:
-			case T_CHARSET:
-			case T_CLIENT:
-			case T_CLOSE:
-			case T_CLUSTERED:
-			case T_CMP:
-			case T_COLLECT:
-			case T_COLLECTION:
-			case T_COLUMN:
-			case T_COMMENT:
-			case T_CONSTANT:
-			case T_COMMIT:
-			case T_COMPRESS:
-			case T_CONCAT:
-			case T_CONDITION:
-			case T_CONSTRAINT:
-			case T_CONTINUE:
-			case T_COPY:
-			case T_COUNT:
-			case T_COUNT_BIG:
-			case T_CREATE:
-			case T_CREATION:
-			case T_CREATOR:
-			case T_CS:
-			case T_CURRENT:
-			case T_CURRENT_SCHEMA:
-			case T_CURSOR:
-			case T_DATABASE:
-			case T_DATA:
-			case T_DATE:
-			case T_DATETIME:
-			case T_DAY:
-			case T_DAYS:
-			case T_DEC:
-			case T_DECIMAL:
-			case T_DECLARE:
-			case T_DEFAULT:
-			case T_DEFERRED:
-			case T_DEFINED:
-			case T_DEFINER:
-			case T_DEFINITION:
-			case T_DELETE:
-			case T_DELIMITED:
-			case T_DELIMITER:
-			case T_DESC:
-			case T_DESCRIBE:
-			case T_DIAGNOSTICS:
-			case T_DIR:
-			case T_DIRECTORY:
-			case T_DISTINCT:
-			case T_DISTRIBUTE:
-			case T_DO:
-			case T_DOUBLE:
-			case T_DROP:
-			case T_DYNAMIC:
-			case T_ENABLE:
-			case T_ENGINE:
-			case T_ESCAPED:
-			case T_EXCEPT:
-			case T_EXEC:
-			case T_EXECUTE:
-			case T_EXCEPTION:
-			case T_EXCLUSIVE:
-			case T_EXISTS:
-			case T_EXIT:
-			case T_FALLBACK:
-			case T_FALSE:
-			case T_FETCH:
-			case T_FIELDS:
-			case T_FILE:
-			case T_FILES:
-			case T_FLOAT:
-			case T_FOR:
-			case T_FOREIGN:
-			case T_FORMAT:
-			case T_FOUND:
-			case T_FROM:
-			case T_FULL:
-			case T_FUNCTION:
-			case T_GET:
-			case T_GLOBAL:
-			case T_GO:
-			case T_GRANT:
-			case T_GROUP:
-			case T_HANDLER:
-			case T_HASH:
-			case T_HAVING:
-			case T_HDFS:
-			case T_HIVE:
-			case T_HOST:
-			case T_IDENTITY:
-			case T_IF:
-			case T_IGNORE:
-			case T_IMMEDIATE:
-			case T_IN:
-			case T_INCLUDE:
-			case T_INDEX:
-			case T_INITRANS:
-			case T_INNER:
-			case T_INOUT:
-			case T_INSERT:
-			case T_INT:
-			case T_INT2:
-			case T_INT4:
-			case T_INT8:
-			case T_INTEGER:
-			case T_INTERSECT:
-			case T_INTERVAL:
-			case T_INTO:
-			case T_INVOKER:
-			case T_IS:
-			case T_ISOPEN:
-			case T_ITEMS:
-			case T_JOIN:
-			case T_KEEP:
-			case T_KEY:
-			case T_KEYS:
-			case T_LANGUAGE:
-			case T_LEAVE:
-			case T_LEFT:
-			case T_LIKE:
-			case T_LIMIT:
-			case T_LINES:
-			case T_LOCAL:
-			case T_LOCATION:
-			case T_LOCATOR:
-			case T_LOCATORS:
-			case T_LOCKS:
-			case T_LOG:
-			case T_LOGGED:
-			case T_LOGGING:
-			case T_LOOP:
-			case T_MAP:
-			case T_MATCHED:
-			case T_MAX:
-			case T_MAXTRANS:
-			case T_MERGE:
-			case T_MESSAGE_TEXT:
-			case T_MICROSECOND:
-			case T_MICROSECONDS:
-			case T_MIN:
-			case T_MULTISET:
-			case T_NCHAR:
-			case T_NEW:
-			case T_NVARCHAR:
-			case T_NO:
-			case T_NOCOUNT:
-			case T_NOCOMPRESS:
-			case T_NOLOGGING:
-			case T_NONE:
-			case T_NOT:
-			case T_NOTFOUND:
-			case T_NUMERIC:
-			case T_NUMBER:
-			case T_OBJECT:
-			case T_OFF:
-			case T_ON:
-			case T_ONLY:
-			case T_OPEN:
-			case T_OR:
-			case T_ORDER:
-			case T_OUT:
-			case T_OUTER:
-			case T_OVER:
-			case T_OVERWRITE:
-			case T_OWNER:
-			case T_PACKAGE:
-			case T_PARTITION:
-			case T_PCTFREE:
-			case T_PCTUSED:
-			case T_PRECISION:
-			case T_PRESERVE:
-			case T_PRIMARY:
-			case T_PRINT:
-			case T_PROC:
-			case T_PROCEDURE:
-			case T_QUALIFY:
-			case T_QUERY_BAND:
-			case T_QUIT:
-			case T_QUOTED_IDENTIFIER:
-			case T_RAISE:
-			case T_REAL:
-			case T_REFERENCES:
-			case T_REGEXP:
-			case T_REPLACE:
-			case T_RESIGNAL:
-			case T_RESTRICT:
-			case T_RESULT:
-			case T_RESULT_SET_LOCATOR:
-			case T_RETURN:
-			case T_RETURNS:
-			case T_REVERSE:
-			case T_RIGHT:
-			case T_RLIKE:
-			case T_ROLE:
-			case T_ROLLBACK:
-			case T_ROW:
-			case T_ROWS:
-			case T_ROW_COUNT:
-			case T_RR:
-			case T_RS:
-			case T_PWD:
-			case T_TRIM:
-			case T_SCHEMA:
-			case T_SECOND:
-			case T_SECONDS:
-			case T_SECURITY:
-			case T_SEGMENT:
-			case T_SEL:
-			case T_SELECT:
-			case T_SET:
-			case T_SESSION:
-			case T_SESSIONS:
-			case T_SETS:
-			case T_SHARE:
-			case T_SIGNAL:
-			case T_SIMPLE_DOUBLE:
-			case T_SIMPLE_FLOAT:
-			case T_SMALLDATETIME:
-			case T_SMALLINT:
-			case T_SQL:
-			case T_SQLEXCEPTION:
-			case T_SQLINSERT:
-			case T_SQLSTATE:
-			case T_SQLWARNING:
-			case T_STATS:
-			case T_STATISTICS:
-			case T_STEP:
-			case T_STORAGE:
-			case T_STORED:
-			case T_STRING:
-			case T_SUBDIR:
-			case T_SUBSTRING:
-			case T_SUM:
-			case T_SUMMARY:
-			case T_SYS_REFCURSOR:
-			case T_TABLE:
-			case T_TABLESPACE:
-			case T_TEMPORARY:
-			case T_TERMINATED:
-			case T_TEXTIMAGE_ON:
-			case T_THEN:
-			case T_TIMESTAMP:
-			case T_TITLE:
-			case T_TO:
-			case T_TOP:
-			case T_TRANSACTION:
-			case T_TRUE:
-			case T_TRUNCATE:
-			case T_UNIQUE:
-			case T_UPDATE:
-			case T_UR:
-			case T_USE:
-			case T_USING:
-			case T_VALUE:
-			case T_VALUES:
-			case T_VAR:
-			case T_VARCHAR:
-			case T_VARCHAR2:
-			case T_VARYING:
-			case T_VOLATILE:
-			case T_WHILE:
-			case T_WITH:
-			case T_WITHOUT:
-			case T_WORK:
-			case T_XACT_ABORT:
-			case T_XML:
-			case T_YES:
-			case T_ACTIVITY_COUNT:
-			case T_CUME_DIST:
-			case T_CURRENT_DATE:
-			case T_CURRENT_TIMESTAMP:
-			case T_CURRENT_USER:
-			case T_DENSE_RANK:
-			case T_FIRST_VALUE:
-			case T_LAG:
-			case T_LAST_VALUE:
-			case T_LEAD:
-			case T_PART_COUNT:
-			case T_PART_LOC:
-			case T_RANK:
-			case T_ROW_NUMBER:
-			case T_STDEV:
-			case T_SYSDATE:
-			case T_VARIANCE:
-			case T_USER:
 			case L_ID:
 				{
 				setState(541);
@@ -3805,8 +2648,8 @@ public class PLHQLStatementsParser extends Parser {
 	public final Declare_blockContext declare_block() throws RecognitionException {
 		Declare_blockContext _localctx = new Declare_blockContext(_ctx, getState());
 		enterRule(_localctx, 54, RULE_declare_block);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(591);
@@ -3817,21 +2660,19 @@ public class PLHQLStatementsParser extends Parser {
 			match(T_SEMICOLON);
 			setState(599);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,35,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(594);
-					declare_stmt_item();
-					setState(595);
-					match(T_SEMICOLON);
-					}
-					} 
+			_la = _input.LA(1);
+			while (_la==L_ID) {
+				{
+				{
+				setState(594);
+				declare_stmt_item();
+				setState(595);
+				match(T_SEMICOLON);
+				}
 				}
 				setState(601);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,35,_ctx);
+				_la = _input.LA(1);
 			}
 			}
 		}
@@ -4026,14 +2867,14 @@ public class PLHQLStatementsParser extends Parser {
 				}
 				setState(623);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_AS) {
 					{
 					setState(622);
 					match(T_AS);
 					}
-					break;
 				}
+
 				setState(625);
 				dtype();
 				setState(627);
@@ -4083,14 +2924,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_CONSTANT);
 				setState(641);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,42,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_AS) {
 					{
 					setState(640);
 					match(T_AS);
 					}
-					break;
 				}
+
 				setState(643);
 				dtype();
 				setState(645);
@@ -4152,6 +2993,7 @@ public class PLHQLStatementsParser extends Parser {
 	public final Create_table_stmtContext create_table_stmt() throws RecognitionException {
 		Create_table_stmtContext _localctx = new Create_table_stmtContext(_ctx, getState());
 		enterRule(_localctx, 62, RULE_create_table_stmt);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -4161,8 +3003,8 @@ public class PLHQLStatementsParser extends Parser {
 			match(T_TABLE);
 			setState(656);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,45,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_IF) {
 				{
 				setState(653);
 				match(T_IF);
@@ -4171,8 +3013,8 @@ public class PLHQLStatementsParser extends Parser {
 				setState(655);
 				match(T_EXISTS);
 				}
-				break;
 			}
+
 			setState(658);
 			table_name();
 			setState(659);
@@ -4296,8 +3138,8 @@ public class PLHQLStatementsParser extends Parser {
 			match(T_CREATE);
 			setState(671);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,47,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_IF) {
 				{
 				setState(668);
 				match(T_IF);
@@ -4306,8 +3148,8 @@ public class PLHQLStatementsParser extends Parser {
 				setState(670);
 				match(T_EXISTS);
 				}
-				break;
 			}
+
 			setState(673);
 			table_name();
 			setState(675);
@@ -4663,11 +3505,47 @@ public class PLHQLStatementsParser extends Parser {
 		enterRule(_localctx, 74, RULE_create_table_columns_item);
 		int _la;
 		try {
-			int _alt;
 			setState(746);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,61,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case T_BIGINT:
+			case T_BINARY_DOUBLE:
+			case T_BINARY_FLOAT:
+			case T_BINARY_INTEGER:
+			case T_BIT:
+			case T_CHAR:
+			case T_DATE:
+			case T_DATETIME:
+			case T_DEC:
+			case T_DECIMAL:
+			case T_DOUBLE:
+			case T_FLOAT:
+			case T_INT:
+			case T_INT2:
+			case T_INT4:
+			case T_INT8:
+			case T_INTEGER:
+			case T_NCHAR:
+			case T_NVARCHAR:
+			case T_NUMERIC:
+			case T_NUMBER:
+			case T_PLS_INTEGER:
+			case T_REAL:
+			case T_RESULT_SET_LOCATOR:
+			case T_SIMPLE_DOUBLE:
+			case T_SIMPLE_FLOAT:
+			case T_SIMPLE_INTEGER:
+			case T_SMALLDATETIME:
+			case T_SMALLINT:
+			case T_STRING:
+			case T_SYS_REFCURSOR:
+			case T_TIMESTAMP:
+			case T_TINYINT:
+			case T_VARCHAR:
+			case T_VARCHAR2:
+			case T_VOID:
+			case T_XML:
+			case L_ID:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(724);
@@ -4684,19 +3562,17 @@ public class PLHQLStatementsParser extends Parser {
 
 				setState(731);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,58,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(728);
-						dtype_attr();
-						}
-						} 
+				_la = _input.LA(1);
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_CASESPECIFIC) | (1L << T_CHARACTER) | (1L << T_CS))) != 0) || _la==T_NOT || _la==T_NULL) {
+					{
+					{
+					setState(728);
+					dtype_attr();
+					}
 					}
 					setState(733);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,58,_ctx);
+					_la = _input.LA(1);
 				}
 				setState(734);
 				column_name();
@@ -4716,7 +3592,9 @@ public class PLHQLStatementsParser extends Parser {
 				}
 				}
 				break;
-			case 2:
+			case T_CONSTRAINT:
+			case T_FOREIGN:
+			case T_PRIMARY:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(743);
@@ -4735,6 +3613,8 @@ public class PLHQLStatementsParser extends Parser {
 				create_table_column_cons();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -5722,324 +4602,6 @@ public class PLHQLStatementsParser extends Parser {
 					setState(889);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
-					case T_ACTION:
-					case T_ADD2:
-					case T_ALL:
-					case T_ALLOCATE:
-					case T_ALTER:
-					case T_AND:
-					case T_ANSI_NULLS:
-					case T_ANSI_PADDING:
-					case T_AS:
-					case T_ASC:
-					case T_ASSOCIATE:
-					case T_AT:
-					case T_AUTO_INCREMENT:
-					case T_AVG:
-					case T_BATCHSIZE:
-					case T_BEGIN:
-					case T_BETWEEN:
-					case T_BIGINT:
-					case T_BINARY_DOUBLE:
-					case T_BINARY_FLOAT:
-					case T_BIT:
-					case T_BODY:
-					case T_BREAK:
-					case T_BY:
-					case T_BYTE:
-					case T_CALL:
-					case T_CALLER:
-					case T_CASCADE:
-					case T_CASE:
-					case T_CASESPECIFIC:
-					case T_CAST:
-					case T_CHAR:
-					case T_CHARACTER:
-					case T_CHARSET:
-					case T_CLIENT:
-					case T_CLOSE:
-					case T_CLUSTERED:
-					case T_CMP:
-					case T_COLLECT:
-					case T_COLLECTION:
-					case T_COLUMN:
-					case T_COMMENT:
-					case T_CONSTANT:
-					case T_COMMIT:
-					case T_COMPRESS:
-					case T_CONCAT:
-					case T_CONDITION:
-					case T_CONSTRAINT:
-					case T_CONTINUE:
-					case T_COPY:
-					case T_COUNT:
-					case T_COUNT_BIG:
-					case T_CREATE:
-					case T_CREATION:
-					case T_CREATOR:
-					case T_CS:
-					case T_CURRENT:
-					case T_CURRENT_SCHEMA:
-					case T_CURSOR:
-					case T_DATABASE:
-					case T_DATA:
-					case T_DATE:
-					case T_DATETIME:
-					case T_DAY:
-					case T_DAYS:
-					case T_DEC:
-					case T_DECIMAL:
-					case T_DECLARE:
-					case T_DEFAULT:
-					case T_DEFERRED:
-					case T_DEFINED:
-					case T_DEFINER:
-					case T_DEFINITION:
-					case T_DELETE:
-					case T_DELIMITED:
-					case T_DELIMITER:
-					case T_DESC:
-					case T_DESCRIBE:
-					case T_DIAGNOSTICS:
-					case T_DIR:
-					case T_DIRECTORY:
-					case T_DISTINCT:
-					case T_DISTRIBUTE:
-					case T_DO:
-					case T_DOUBLE:
-					case T_DROP:
-					case T_DYNAMIC:
-					case T_ENABLE:
-					case T_ENGINE:
-					case T_ESCAPED:
-					case T_EXCEPT:
-					case T_EXEC:
-					case T_EXECUTE:
-					case T_EXCEPTION:
-					case T_EXCLUSIVE:
-					case T_EXISTS:
-					case T_EXIT:
-					case T_FALLBACK:
-					case T_FALSE:
-					case T_FETCH:
-					case T_FIELDS:
-					case T_FILE:
-					case T_FILES:
-					case T_FLOAT:
-					case T_FOR:
-					case T_FOREIGN:
-					case T_FORMAT:
-					case T_FOUND:
-					case T_FROM:
-					case T_FULL:
-					case T_FUNCTION:
-					case T_GET:
-					case T_GLOBAL:
-					case T_GO:
-					case T_GRANT:
-					case T_GROUP:
-					case T_HANDLER:
-					case T_HASH:
-					case T_HAVING:
-					case T_HDFS:
-					case T_HIVE:
-					case T_HOST:
-					case T_IDENTITY:
-					case T_IF:
-					case T_IGNORE:
-					case T_IMMEDIATE:
-					case T_IN:
-					case T_INCLUDE:
-					case T_INDEX:
-					case T_INITRANS:
-					case T_INNER:
-					case T_INOUT:
-					case T_INSERT:
-					case T_INT:
-					case T_INT2:
-					case T_INT4:
-					case T_INT8:
-					case T_INTEGER:
-					case T_INTERSECT:
-					case T_INTERVAL:
-					case T_INTO:
-					case T_INVOKER:
-					case T_IS:
-					case T_ISOPEN:
-					case T_ITEMS:
-					case T_JOIN:
-					case T_KEEP:
-					case T_KEY:
-					case T_KEYS:
-					case T_LANGUAGE:
-					case T_LEAVE:
-					case T_LEFT:
-					case T_LIKE:
-					case T_LIMIT:
-					case T_LINES:
-					case T_LOCAL:
-					case T_LOCATION:
-					case T_LOCATOR:
-					case T_LOCATORS:
-					case T_LOCKS:
-					case T_LOG:
-					case T_LOGGED:
-					case T_LOGGING:
-					case T_LOOP:
-					case T_MAP:
-					case T_MATCHED:
-					case T_MAX:
-					case T_MAXTRANS:
-					case T_MERGE:
-					case T_MESSAGE_TEXT:
-					case T_MICROSECOND:
-					case T_MICROSECONDS:
-					case T_MIN:
-					case T_MULTISET:
-					case T_NCHAR:
-					case T_NEW:
-					case T_NVARCHAR:
-					case T_NO:
-					case T_NOCOUNT:
-					case T_NOCOMPRESS:
-					case T_NOLOGGING:
-					case T_NONE:
-					case T_NOT:
-					case T_NOTFOUND:
-					case T_NUMERIC:
-					case T_NUMBER:
-					case T_OBJECT:
-					case T_OFF:
-					case T_ON:
-					case T_ONLY:
-					case T_OPEN:
-					case T_OR:
-					case T_ORDER:
-					case T_OUT:
-					case T_OUTER:
-					case T_OVER:
-					case T_OVERWRITE:
-					case T_OWNER:
-					case T_PACKAGE:
-					case T_PARTITION:
-					case T_PCTFREE:
-					case T_PCTUSED:
-					case T_PRECISION:
-					case T_PRESERVE:
-					case T_PRIMARY:
-					case T_PRINT:
-					case T_PROC:
-					case T_PROCEDURE:
-					case T_QUALIFY:
-					case T_QUERY_BAND:
-					case T_QUIT:
-					case T_QUOTED_IDENTIFIER:
-					case T_RAISE:
-					case T_REAL:
-					case T_REFERENCES:
-					case T_REGEXP:
-					case T_REPLACE:
-					case T_RESIGNAL:
-					case T_RESTRICT:
-					case T_RESULT:
-					case T_RESULT_SET_LOCATOR:
-					case T_RETURN:
-					case T_RETURNS:
-					case T_REVERSE:
-					case T_RIGHT:
-					case T_RLIKE:
-					case T_ROLE:
-					case T_ROLLBACK:
-					case T_ROW:
-					case T_ROWS:
-					case T_ROW_COUNT:
-					case T_RR:
-					case T_RS:
-					case T_PWD:
-					case T_TRIM:
-					case T_SCHEMA:
-					case T_SECOND:
-					case T_SECONDS:
-					case T_SECURITY:
-					case T_SEGMENT:
-					case T_SEL:
-					case T_SELECT:
-					case T_SET:
-					case T_SESSION:
-					case T_SESSIONS:
-					case T_SETS:
-					case T_SHARE:
-					case T_SIGNAL:
-					case T_SIMPLE_DOUBLE:
-					case T_SIMPLE_FLOAT:
-					case T_SMALLDATETIME:
-					case T_SMALLINT:
-					case T_SQL:
-					case T_SQLEXCEPTION:
-					case T_SQLINSERT:
-					case T_SQLSTATE:
-					case T_SQLWARNING:
-					case T_STATS:
-					case T_STATISTICS:
-					case T_STEP:
-					case T_STORAGE:
-					case T_STORED:
-					case T_STRING:
-					case T_SUBDIR:
-					case T_SUBSTRING:
-					case T_SUM:
-					case T_SUMMARY:
-					case T_SYS_REFCURSOR:
-					case T_TABLE:
-					case T_TABLESPACE:
-					case T_TEMPORARY:
-					case T_TERMINATED:
-					case T_TEXTIMAGE_ON:
-					case T_THEN:
-					case T_TIMESTAMP:
-					case T_TITLE:
-					case T_TO:
-					case T_TOP:
-					case T_TRANSACTION:
-					case T_TRUE:
-					case T_TRUNCATE:
-					case T_UNIQUE:
-					case T_UPDATE:
-					case T_UR:
-					case T_USE:
-					case T_USING:
-					case T_VALUE:
-					case T_VALUES:
-					case T_VAR:
-					case T_VARCHAR:
-					case T_VARCHAR2:
-					case T_VARYING:
-					case T_VOLATILE:
-					case T_WHILE:
-					case T_WITH:
-					case T_WITHOUT:
-					case T_WORK:
-					case T_XACT_ABORT:
-					case T_XML:
-					case T_YES:
-					case T_ACTIVITY_COUNT:
-					case T_CUME_DIST:
-					case T_CURRENT_DATE:
-					case T_CURRENT_TIMESTAMP:
-					case T_CURRENT_USER:
-					case T_DENSE_RANK:
-					case T_FIRST_VALUE:
-					case T_LAG:
-					case T_LAST_VALUE:
-					case T_LEAD:
-					case T_PART_COUNT:
-					case T_PART_LOC:
-					case T_RANK:
-					case T_ROW_NUMBER:
-					case T_STDEV:
-					case T_SYSDATE:
-					case T_VARIANCE:
-					case T_USER:
 					case L_ID:
 						{
 						setState(887);
@@ -6059,7 +4621,7 @@ public class PLHQLStatementsParser extends Parser {
 					setState(891); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (L_ID - 320)) | (1L << (L_INT - 320)))) != 0) );
+				} while ( _la==L_ID || _la==L_INT );
 				setState(893);
 				match(T_CLOSE_P);
 				}
@@ -6777,78 +5339,78 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			setState(1048);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,100,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case T_CHAR:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(1002);
 				match(T_CHAR);
 				}
 				break;
-			case 2:
+			case T_BIGINT:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(1003);
 				match(T_BIGINT);
 				}
 				break;
-			case 3:
+			case T_BINARY_DOUBLE:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(1004);
 				match(T_BINARY_DOUBLE);
 				}
 				break;
-			case 4:
+			case T_BINARY_FLOAT:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(1005);
 				match(T_BINARY_FLOAT);
 				}
 				break;
-			case 5:
+			case T_BINARY_INTEGER:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(1006);
 				match(T_BINARY_INTEGER);
 				}
 				break;
-			case 6:
+			case T_BIT:
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(1007);
 				match(T_BIT);
 				}
 				break;
-			case 7:
+			case T_DATE:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(1008);
 				match(T_DATE);
 				}
 				break;
-			case 8:
+			case T_DATETIME:
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(1009);
 				match(T_DATETIME);
 				}
 				break;
-			case 9:
+			case T_DEC:
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(1010);
 				match(T_DEC);
 				}
 				break;
-			case 10:
+			case T_DECIMAL:
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(1011);
 				match(T_DECIMAL);
 				}
 				break;
-			case 11:
+			case T_DOUBLE:
 				enterOuterAlt(_localctx, 11);
 				{
 				setState(1012);
@@ -6865,91 +5427,91 @@ public class PLHQLStatementsParser extends Parser {
 				}
 				}
 				break;
-			case 12:
+			case T_FLOAT:
 				enterOuterAlt(_localctx, 12);
 				{
 				setState(1016);
 				match(T_FLOAT);
 				}
 				break;
-			case 13:
+			case T_INT:
 				enterOuterAlt(_localctx, 13);
 				{
 				setState(1017);
 				match(T_INT);
 				}
 				break;
-			case 14:
+			case T_INT2:
 				enterOuterAlt(_localctx, 14);
 				{
 				setState(1018);
 				match(T_INT2);
 				}
 				break;
-			case 15:
+			case T_INT4:
 				enterOuterAlt(_localctx, 15);
 				{
 				setState(1019);
 				match(T_INT4);
 				}
 				break;
-			case 16:
+			case T_INT8:
 				enterOuterAlt(_localctx, 16);
 				{
 				setState(1020);
 				match(T_INT8);
 				}
 				break;
-			case 17:
+			case T_INTEGER:
 				enterOuterAlt(_localctx, 17);
 				{
 				setState(1021);
 				match(T_INTEGER);
 				}
 				break;
-			case 18:
+			case T_NCHAR:
 				enterOuterAlt(_localctx, 18);
 				{
 				setState(1022);
 				match(T_NCHAR);
 				}
 				break;
-			case 19:
+			case T_NVARCHAR:
 				enterOuterAlt(_localctx, 19);
 				{
 				setState(1023);
 				match(T_NVARCHAR);
 				}
 				break;
-			case 20:
+			case T_NUMBER:
 				enterOuterAlt(_localctx, 20);
 				{
 				setState(1024);
 				match(T_NUMBER);
 				}
 				break;
-			case 21:
+			case T_NUMERIC:
 				enterOuterAlt(_localctx, 21);
 				{
 				setState(1025);
 				match(T_NUMERIC);
 				}
 				break;
-			case 22:
+			case T_PLS_INTEGER:
 				enterOuterAlt(_localctx, 22);
 				{
 				setState(1026);
 				match(T_PLS_INTEGER);
 				}
 				break;
-			case 23:
+			case T_REAL:
 				enterOuterAlt(_localctx, 23);
 				{
 				setState(1027);
 				match(T_REAL);
 				}
 				break;
-			case 24:
+			case T_RESULT_SET_LOCATOR:
 				enterOuterAlt(_localctx, 24);
 				{
 				setState(1028);
@@ -6958,98 +5520,98 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_VARYING);
 				}
 				break;
-			case 25:
+			case T_SIMPLE_FLOAT:
 				enterOuterAlt(_localctx, 25);
 				{
 				setState(1030);
 				match(T_SIMPLE_FLOAT);
 				}
 				break;
-			case 26:
+			case T_SIMPLE_DOUBLE:
 				enterOuterAlt(_localctx, 26);
 				{
 				setState(1031);
 				match(T_SIMPLE_DOUBLE);
 				}
 				break;
-			case 27:
+			case T_SIMPLE_INTEGER:
 				enterOuterAlt(_localctx, 27);
 				{
 				setState(1032);
 				match(T_SIMPLE_INTEGER);
 				}
 				break;
-			case 28:
+			case T_SMALLINT:
 				enterOuterAlt(_localctx, 28);
 				{
 				setState(1033);
 				match(T_SMALLINT);
 				}
 				break;
-			case 29:
+			case T_SMALLDATETIME:
 				enterOuterAlt(_localctx, 29);
 				{
 				setState(1034);
 				match(T_SMALLDATETIME);
 				}
 				break;
-			case 30:
+			case T_STRING:
 				enterOuterAlt(_localctx, 30);
 				{
 				setState(1035);
 				match(T_STRING);
 				}
 				break;
-			case 31:
+			case T_SYS_REFCURSOR:
 				enterOuterAlt(_localctx, 31);
 				{
 				setState(1036);
 				match(T_SYS_REFCURSOR);
 				}
 				break;
-			case 32:
+			case T_TIMESTAMP:
 				enterOuterAlt(_localctx, 32);
 				{
 				setState(1037);
 				match(T_TIMESTAMP);
 				}
 				break;
-			case 33:
+			case T_TINYINT:
 				enterOuterAlt(_localctx, 33);
 				{
 				setState(1038);
 				match(T_TINYINT);
 				}
 				break;
-			case 34:
+			case T_VARCHAR:
 				enterOuterAlt(_localctx, 34);
 				{
 				setState(1039);
 				match(T_VARCHAR);
 				}
 				break;
-			case 35:
+			case T_VOID:
 				enterOuterAlt(_localctx, 35);
 				{
 				setState(1040);
 				match(T_VOID);
 				}
 				break;
-			case 36:
+			case T_VARCHAR2:
 				enterOuterAlt(_localctx, 36);
 				{
 				setState(1041);
 				match(T_VARCHAR2);
 				}
 				break;
-			case 37:
+			case T_XML:
 				enterOuterAlt(_localctx, 37);
 				{
 				setState(1042);
 				match(T_XML);
 				}
 				break;
-			case 38:
+			case L_ID:
 				enterOuterAlt(_localctx, 38);
 				{
 				setState(1043);
@@ -7078,6 +5640,8 @@ public class PLHQLStatementsParser extends Parser {
 				}
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -7423,8 +5987,8 @@ public class PLHQLStatementsParser extends Parser {
 			}
 			setState(1093);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,110,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_IF) {
 				{
 				setState(1090);
 				match(T_IF);
@@ -7433,8 +5997,8 @@ public class PLHQLStatementsParser extends Parser {
 				setState(1092);
 				match(T_EXISTS);
 				}
-				break;
 			}
+
 			setState(1095);
 			expr(0);
 			setState(1099);
@@ -7571,7 +6135,7 @@ public class PLHQLStatementsParser extends Parser {
 			setState(1112);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BINARY_INTEGER) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PLS_INTEGER - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SIMPLE_INTEGER - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TINYINT - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOID - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (L_ID - 320)))) != 0)) {
+			if (((((_la - 22)) & ~0x3f) == 0 && ((1L << (_la - 22)) & ((1L << (T_BIGINT - 22)) | (1L << (T_BINARY_DOUBLE - 22)) | (1L << (T_BINARY_FLOAT - 22)) | (1L << (T_BINARY_INTEGER - 22)) | (1L << (T_BIT - 22)) | (1L << (T_CHAR - 22)) | (1L << (T_DATE - 22)) | (1L << (T_DATETIME - 22)) | (1L << (T_DEC - 22)) | (1L << (T_DECIMAL - 22)))) != 0) || ((((_la - 90)) & ~0x3f) == 0 && ((1L << (_la - 90)) & ((1L << (T_DOUBLE - 90)) | (1L << (T_FLOAT - 90)) | (1L << (T_INT - 90)) | (1L << (T_INT2 - 90)) | (1L << (T_INT4 - 90)) | (1L << (T_INT8 - 90)) | (1L << (T_INTEGER - 90)))) != 0) || ((((_la - 184)) & ~0x3f) == 0 && ((1L << (_la - 184)) & ((1L << (T_NCHAR - 184)) | (1L << (T_NVARCHAR - 184)) | (1L << (T_NUMERIC - 184)) | (1L << (T_NUMBER - 184)) | (1L << (T_PLS_INTEGER - 184)) | (1L << (T_REAL - 184)) | (1L << (T_RESULT_SET_LOCATOR - 184)))) != 0) || ((((_la - 261)) & ~0x3f) == 0 && ((1L << (_la - 261)) & ((1L << (T_SIMPLE_DOUBLE - 261)) | (1L << (T_SIMPLE_FLOAT - 261)) | (1L << (T_SIMPLE_INTEGER - 261)) | (1L << (T_SMALLDATETIME - 261)) | (1L << (T_SMALLINT - 261)) | (1L << (T_STRING - 261)) | (1L << (T_SYS_REFCURSOR - 261)) | (1L << (T_TIMESTAMP - 261)) | (1L << (T_TINYINT - 261)) | (1L << (T_VARCHAR - 261)) | (1L << (T_VARCHAR2 - 261)) | (1L << (T_VOID - 261)) | (1L << (T_XML - 261)))) != 0) || _la==L_ID) {
 				{
 				setState(1111);
 				c_function_parameter_list();
@@ -7799,8 +6363,8 @@ public class PLHQLStatementsParser extends Parser {
 			}
 			setState(1141);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,118,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_AS || _la==T_IS) {
 				{
 				setState(1140);
 				_la = _input.LA(1);
@@ -7813,8 +6377,8 @@ public class PLHQLStatementsParser extends Parser {
 					consume();
 				}
 				}
-				break;
 			}
+
 			setState(1144);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,119,_ctx) ) {
@@ -8226,14 +6790,14 @@ public class PLHQLStatementsParser extends Parser {
 			}
 			setState(1222);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,133,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_IMMEDIATE) {
 				{
 				setState(1221);
 				match(T_IMMEDIATE);
 				}
-				break;
 			}
+
 			setState(1224);
 			expr(0);
 			setState(1230);
@@ -9330,14 +7894,14 @@ public class PLHQLStatementsParser extends Parser {
 			match(T_IN);
 			setState(1373);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,151,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_REVERSE) {
 				{
 				setState(1372);
 				match(T_REVERSE);
 				}
-				break;
 			}
+
 			setState(1375);
 			expr(0);
 			setState(1376);
@@ -9433,7 +7997,7 @@ public class PLHQLStatementsParser extends Parser {
 			setState(1390);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BINARY_INTEGER) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PLS_INTEGER - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SIMPLE_INTEGER - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TINYINT - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOID - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (L_ID - 320)))) != 0)) {
+			if (((((_la - 22)) & ~0x3f) == 0 && ((1L << (_la - 22)) & ((1L << (T_BIGINT - 22)) | (1L << (T_BINARY_DOUBLE - 22)) | (1L << (T_BINARY_FLOAT - 22)) | (1L << (T_BINARY_INTEGER - 22)) | (1L << (T_BIT - 22)) | (1L << (T_CHAR - 22)) | (1L << (T_DATE - 22)) | (1L << (T_DATETIME - 22)) | (1L << (T_DEC - 22)) | (1L << (T_DECIMAL - 22)))) != 0) || ((((_la - 90)) & ~0x3f) == 0 && ((1L << (_la - 90)) & ((1L << (T_DOUBLE - 90)) | (1L << (T_FLOAT - 90)) | (1L << (T_INT - 90)) | (1L << (T_INT2 - 90)) | (1L << (T_INT4 - 90)) | (1L << (T_INT8 - 90)) | (1L << (T_INTEGER - 90)))) != 0) || ((((_la - 184)) & ~0x3f) == 0 && ((1L << (_la - 184)) & ((1L << (T_NCHAR - 184)) | (1L << (T_NVARCHAR - 184)) | (1L << (T_NUMERIC - 184)) | (1L << (T_NUMBER - 184)) | (1L << (T_PLS_INTEGER - 184)) | (1L << (T_REAL - 184)) | (1L << (T_RESULT_SET_LOCATOR - 184)))) != 0) || ((((_la - 261)) & ~0x3f) == 0 && ((1L << (_la - 261)) & ((1L << (T_SIMPLE_DOUBLE - 261)) | (1L << (T_SIMPLE_FLOAT - 261)) | (1L << (T_SIMPLE_INTEGER - 261)) | (1L << (T_SMALLDATETIME - 261)) | (1L << (T_SMALLINT - 261)) | (1L << (T_STRING - 261)) | (1L << (T_SYS_REFCURSOR - 261)) | (1L << (T_TIMESTAMP - 261)) | (1L << (T_TINYINT - 261)) | (1L << (T_VARCHAR - 261)) | (1L << (T_VARCHAR2 - 261)) | (1L << (T_VOID - 261)) | (1L << (T_XML - 261)))) != 0) || _la==L_ID) {
 				{
 				setState(1389);
 				for_delcaration_c_stmt();
@@ -9445,7 +8009,7 @@ public class PLHQLStatementsParser extends Parser {
 			setState(1394);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NULL - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_MAX_PART_STRING - 320)) | (1L << (T_MIN_PART_STRING - 320)) | (1L << (T_MAX_PART_INT - 320)) | (1L << (T_MIN_PART_INT - 320)) | (1L << (T_MAX_PART_DATE - 320)) | (1L << (T_MIN_PART_DATE - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (T_ADD - 320)) | (1L << (T_OPEN_P - 320)) | (1L << (T_SUB - 320)) | (1L << (L_ID - 320)) | (1L << (L_S_STRING - 320)) | (1L << (L_D_STRING - 320)) | (1L << (L_INT - 320)) | (1L << (L_DEC - 320)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_AVG) | (1L << T_CASE) | (1L << T_CAST) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CURRENT))) != 0) || ((((_la - 67)) & ~0x3f) == 0 && ((1L << (_la - 67)) & ((1L << (T_DATE - 67)) | (1L << (T_EXISTS - 67)) | (1L << (T_FALSE - 67)))) != 0) || ((((_la - 149)) & ~0x3f) == 0 && ((1L << (_la - 149)) & ((1L << (T_INTERVAL - 149)) | (1L << (T_MAX - 149)) | (1L << (T_MIN - 149)) | (1L << (T_NOT - 149)) | (1L << (T_NULL - 149)))) != 0) || ((((_la - 247)) & ~0x3f) == 0 && ((1L << (_la - 247)) & ((1L << (T_TRIM - 247)) | (1L << (T_SEL - 247)) | (1L << (T_SELECT - 247)) | (1L << (T_SUBSTRING - 247)) | (1L << (T_SUM - 247)) | (1L << (T_TIMESTAMP - 247)) | (1L << (T_TRUE - 247)))) != 0) || ((((_la - 314)) & ~0x3f) == 0 && ((1L << (_la - 314)) & ((1L << (T_WITH - 314)) | (1L << (T_ACTIVITY_COUNT - 314)) | (1L << (T_CUME_DIST - 314)) | (1L << (T_CURRENT_DATE - 314)) | (1L << (T_CURRENT_TIMESTAMP - 314)) | (1L << (T_CURRENT_USER - 314)) | (1L << (T_DENSE_RANK - 314)) | (1L << (T_FIRST_VALUE - 314)) | (1L << (T_LAG - 314)) | (1L << (T_LAST_VALUE - 314)) | (1L << (T_LEAD - 314)) | (1L << (T_MAX_PART_STRING - 314)) | (1L << (T_MIN_PART_STRING - 314)) | (1L << (T_MAX_PART_INT - 314)) | (1L << (T_MIN_PART_INT - 314)) | (1L << (T_MAX_PART_DATE - 314)) | (1L << (T_MIN_PART_DATE - 314)) | (1L << (T_PART_COUNT - 314)) | (1L << (T_PART_LOC - 314)) | (1L << (T_RANK - 314)) | (1L << (T_ROW_NUMBER - 314)) | (1L << (T_STDEV - 314)) | (1L << (T_SYSDATE - 314)) | (1L << (T_VARIANCE - 314)) | (1L << (T_USER - 314)) | (1L << (T_ADD - 314)) | (1L << (T_OPEN_P - 314)) | (1L << (T_SUB - 314)) | (1L << (L_ID - 314)) | (1L << (L_S_STRING - 314)))) != 0) || ((((_la - 378)) & ~0x3f) == 0 && ((1L << (_la - 378)) & ((1L << (L_D_STRING - 378)) | (1L << (L_INT - 378)) | (1L << (L_DEC - 378)))) != 0)) {
 				{
 				setState(1393);
 				bool_expr(0);
@@ -9457,7 +8021,7 @@ public class PLHQLStatementsParser extends Parser {
 			setState(1398);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)) | (1L << (T_MINUS_MINUS - 320)) | (1L << (T_OPEN_P - 320)) | (1L << (T_PLUS_PLUS - 320)) | (1L << (L_ID - 320)))) != 0)) {
+			if (((((_la - 365)) & ~0x3f) == 0 && ((1L << (_la - 365)) & ((1L << (T_MINUS_MINUS - 365)) | (1L << (T_OPEN_P - 365)) | (1L << (T_PLUS_PLUS - 365)) | (1L << (L_ID - 365)))) != 0)) {
 				{
 				setState(1397);
 				assignment_c_stmt();
@@ -9530,19 +8094,58 @@ public class PLHQLStatementsParser extends Parser {
 			{
 			setState(1405);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,156,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case T_BIGINT:
+			case T_BINARY_DOUBLE:
+			case T_BINARY_FLOAT:
+			case T_BINARY_INTEGER:
+			case T_BIT:
+			case T_CHAR:
+			case T_DATE:
+			case T_DATETIME:
+			case T_DEC:
+			case T_DECIMAL:
+			case T_DOUBLE:
+			case T_FLOAT:
+			case T_INT:
+			case T_INT2:
+			case T_INT4:
+			case T_INT8:
+			case T_INTEGER:
+			case T_NCHAR:
+			case T_NVARCHAR:
+			case T_NUMERIC:
+			case T_NUMBER:
+			case T_PLS_INTEGER:
+			case T_REAL:
+			case T_RESULT_SET_LOCATOR:
+			case T_SIMPLE_DOUBLE:
+			case T_SIMPLE_FLOAT:
+			case T_SIMPLE_INTEGER:
+			case T_SMALLDATETIME:
+			case T_SMALLINT:
+			case T_STRING:
+			case T_SYS_REFCURSOR:
+			case T_TIMESTAMP:
+			case T_TINYINT:
+			case T_VARCHAR:
+			case T_VARCHAR2:
+			case T_VOID:
+			case T_XML:
+			case L_ID:
 				{
 				setState(1403);
 				dtype();
 				}
 				break;
-			case 2:
+			case T_VAR:
 				{
 				setState(1404);
 				match(T_VAR);
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 			setState(1407);
 			ident();
@@ -9716,14 +8319,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_IN);
 				setState(1436);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,161,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_REVERSE) {
 					{
 					setState(1435);
 					match(T_REVERSE);
 					}
-					break;
 				}
+
 				setState(1438);
 				expr(0);
 				setState(1439);
@@ -9732,8 +8335,8 @@ public class PLHQLStatementsParser extends Parser {
 				expr(0);
 				setState(1443);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,162,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_BY || _la==T_STEP) {
 					{
 					setState(1441);
 					_la = _input.LA(1);
@@ -9748,8 +8351,8 @@ public class PLHQLStatementsParser extends Parser {
 					setState(1442);
 					expr(0);
 					}
-					break;
 				}
+
 				setState(1445);
 				block();
 				setState(1446);
@@ -9770,14 +8373,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_IN);
 				setState(1454);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,163,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_REVERSE) {
 					{
 					setState(1453);
 					match(T_REVERSE);
 					}
-					break;
 				}
+
 				setState(1456);
 				expr(0);
 				setState(1457);
@@ -9822,14 +8425,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_IN);
 				setState(1471);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,165,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_REVERSE) {
 					{
 					setState(1470);
 					match(T_REVERSE);
 					}
-					break;
 				}
+
 				setState(1473);
 				expr(0);
 				setState(1474);
@@ -10668,30 +9271,31 @@ public class PLHQLStatementsParser extends Parser {
 	public final Select_listContext select_list() throws RecognitionException {
 		Select_listContext _localctx = new Select_listContext(_ctx, getState());
 		enterRule(_localctx, 190, RULE_select_list);
+		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(1594);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,189,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_ALL || _la==T_DISTINCT) {
 				{
 				setState(1593);
 				select_list_set();
 				}
-				break;
 			}
+
 			setState(1597);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,190,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_TOP) {
 				{
 				setState(1596);
 				select_list_limit();
 				}
-				break;
 			}
+
 			setState(1599);
 			select_list_item();
 			setState(1604);
@@ -10925,6 +9529,7 @@ public class PLHQLStatementsParser extends Parser {
 	public final Select_list_aliasContext select_list_alias() throws RecognitionException {
 		Select_list_aliasContext _localctx = new Select_list_aliasContext(_ctx, getState());
 		enterRule(_localctx, 198, RULE_select_list_alias);
+		int _la;
 		try {
 			setState(1633);
 			_errHandler.sync(this);
@@ -10936,14 +9541,14 @@ public class PLHQLStatementsParser extends Parser {
 				if (!(!_input.LT(1).getText().equalsIgnoreCase("INTO") && !_input.LT(1).getText().equalsIgnoreCase("FROM"))) throw new FailedPredicateException(this, "!_input.LT(1).getText().equalsIgnoreCase(\"INTO\") && !_input.LT(1).getText().equalsIgnoreCase(\"FROM\")");
 				setState(1626);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,195,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_AS) {
 					{
 					setState(1625);
 					match(T_AS);
 					}
-					break;
 				}
+
 				setState(1628);
 				ident();
 				}
@@ -11094,7 +9699,8 @@ public class PLHQLStatementsParser extends Parser {
 	}
 
 	public static class From_clauseContext extends ParserRuleContext {
-		public java.util.Stack<String> tables = new java.util.Stack<>();;
+		public java.util.Stack<String> tables = new java.util.Stack<>();
+		public String joinType;
 		public TerminalNode T_FROM() { return getToken(PLHQLStatementsParser.T_FROM, 0); }
 		public From_table_clauseContext from_table_clause() {
 			return getRuleContext(From_table_clauseContext.class,0);
@@ -11249,28 +9855,30 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			setState(1668);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,201,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case L_ID:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(1665);
 				from_table_name_clause();
 				}
 				break;
-			case 2:
+			case T_OPEN_P:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(1666);
 				from_subselect_clause();
 				}
 				break;
-			case 3:
+			case T_TABLE:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(1667);
 				from_table_values_clause();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -11399,6 +10007,7 @@ public class PLHQLStatementsParser extends Parser {
 	}
 
 	public static class From_join_clauseContext extends ParserRuleContext {
+		public From_join_type_clauseContext from_join_type_clause;
 		public Bool_exprContext bool_expr;
 		public TerminalNode T_COMMA() { return getToken(PLHQLStatementsParser.T_COMMA, 0); }
 		public From_table_clauseContext from_table_clause() {
@@ -11449,7 +10058,7 @@ public class PLHQLStatementsParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(1684);
-				from_join_type_clause();
+				((From_join_clauseContext)_localctx).from_join_type_clause = from_join_type_clause();
 				setState(1685);
 				from_table_clause();
 				setState(1686);
@@ -11458,6 +10067,7 @@ public class PLHQLStatementsParser extends Parser {
 				((From_join_clauseContext)_localctx).bool_expr = bool_expr(0);
 
 				       ((From_clauseContext)getInvokingContext(102)).tables.push((((From_join_clauseContext)_localctx).bool_expr!=null?_input.getText(((From_join_clauseContext)_localctx).bool_expr.start,((From_join_clauseContext)_localctx).bool_expr.stop):null));
+				       ((From_clauseContext)getInvokingContext(102)).joinType = (((From_join_clauseContext)_localctx).from_join_type_clause!=null?_input.getText(((From_join_clauseContext)_localctx).from_join_type_clause.start,((From_join_clauseContext)_localctx).from_join_type_clause.stop):null);
 				     
 				}
 				break;
@@ -11784,14 +10394,14 @@ public class PLHQLStatementsParser extends Parser {
 			        !_input.LT(1).getText().equalsIgnoreCase("WITH"))) throw new FailedPredicateException(this, "!_input.LT(1).getText().equalsIgnoreCase(\"EXEC\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"EXECUTE\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"INNER\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"LEFT\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"GROUP\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"ORDER\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"LIMIT\") &&\r\n        !_input.LT(1).getText().equalsIgnoreCase(\"WITH\")");
 			setState(1734);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,212,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T_AS) {
 				{
 				setState(1733);
 				match(T_AS);
 				}
-				break;
 			}
+
 			setState(1736);
 			ident();
 			setState(1747);
@@ -14018,14 +12628,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2021);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,245,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2020);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2023);
 				expr(0);
 				setState(2024);
@@ -14052,307 +12662,28 @@ public class PLHQLStatementsParser extends Parser {
 				setState(2035);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T_ACTION:
-				case T_ADD2:
 				case T_ALL:
-				case T_ALLOCATE:
-				case T_ALTER:
-				case T_AND:
-				case T_ANSI_NULLS:
-				case T_ANSI_PADDING:
-				case T_AS:
-				case T_ASC:
-				case T_ASSOCIATE:
-				case T_AT:
-				case T_AUTO_INCREMENT:
 				case T_AVG:
-				case T_BATCHSIZE:
-				case T_BEGIN:
-				case T_BETWEEN:
-				case T_BIGINT:
-				case T_BINARY_DOUBLE:
-				case T_BINARY_FLOAT:
-				case T_BIT:
-				case T_BODY:
-				case T_BREAK:
-				case T_BY:
-				case T_BYTE:
-				case T_CALL:
-				case T_CALLER:
-				case T_CASCADE:
 				case T_CASE:
-				case T_CASESPECIFIC:
 				case T_CAST:
-				case T_CHAR:
-				case T_CHARACTER:
-				case T_CHARSET:
-				case T_CLIENT:
-				case T_CLOSE:
-				case T_CLUSTERED:
-				case T_CMP:
-				case T_COLLECT:
-				case T_COLLECTION:
-				case T_COLUMN:
-				case T_COMMENT:
-				case T_CONSTANT:
-				case T_COMMIT:
-				case T_COMPRESS:
-				case T_CONCAT:
-				case T_CONDITION:
-				case T_CONSTRAINT:
-				case T_CONTINUE:
-				case T_COPY:
 				case T_COUNT:
 				case T_COUNT_BIG:
-				case T_CREATE:
-				case T_CREATION:
-				case T_CREATOR:
-				case T_CS:
 				case T_CURRENT:
-				case T_CURRENT_SCHEMA:
-				case T_CURSOR:
-				case T_DATABASE:
-				case T_DATA:
 				case T_DATE:
-				case T_DATETIME:
-				case T_DAY:
-				case T_DAYS:
-				case T_DEC:
-				case T_DECIMAL:
-				case T_DECLARE:
-				case T_DEFAULT:
-				case T_DEFERRED:
-				case T_DEFINED:
-				case T_DEFINER:
-				case T_DEFINITION:
-				case T_DELETE:
-				case T_DELIMITED:
-				case T_DELIMITER:
-				case T_DESC:
-				case T_DESCRIBE:
-				case T_DIAGNOSTICS:
-				case T_DIR:
-				case T_DIRECTORY:
 				case T_DISTINCT:
-				case T_DISTRIBUTE:
-				case T_DO:
-				case T_DOUBLE:
-				case T_DROP:
-				case T_DYNAMIC:
-				case T_ENABLE:
-				case T_ENGINE:
-				case T_ESCAPED:
-				case T_EXCEPT:
-				case T_EXEC:
-				case T_EXECUTE:
-				case T_EXCEPTION:
-				case T_EXCLUSIVE:
-				case T_EXISTS:
-				case T_EXIT:
-				case T_FALLBACK:
 				case T_FALSE:
-				case T_FETCH:
-				case T_FIELDS:
-				case T_FILE:
-				case T_FILES:
-				case T_FLOAT:
-				case T_FOR:
-				case T_FOREIGN:
-				case T_FORMAT:
-				case T_FOUND:
-				case T_FROM:
-				case T_FULL:
-				case T_FUNCTION:
-				case T_GET:
-				case T_GLOBAL:
-				case T_GO:
-				case T_GRANT:
-				case T_GROUP:
-				case T_HANDLER:
-				case T_HASH:
-				case T_HAVING:
-				case T_HDFS:
-				case T_HIVE:
-				case T_HOST:
-				case T_IDENTITY:
-				case T_IF:
-				case T_IGNORE:
-				case T_IMMEDIATE:
-				case T_IN:
-				case T_INCLUDE:
-				case T_INDEX:
-				case T_INITRANS:
-				case T_INNER:
-				case T_INOUT:
-				case T_INSERT:
-				case T_INT:
-				case T_INT2:
-				case T_INT4:
-				case T_INT8:
-				case T_INTEGER:
-				case T_INTERSECT:
 				case T_INTERVAL:
-				case T_INTO:
-				case T_INVOKER:
-				case T_IS:
-				case T_ISOPEN:
-				case T_ITEMS:
-				case T_JOIN:
-				case T_KEEP:
-				case T_KEY:
-				case T_KEYS:
-				case T_LANGUAGE:
-				case T_LEAVE:
-				case T_LEFT:
-				case T_LIKE:
-				case T_LIMIT:
-				case T_LINES:
-				case T_LOCAL:
-				case T_LOCATION:
-				case T_LOCATOR:
-				case T_LOCATORS:
-				case T_LOCKS:
-				case T_LOG:
-				case T_LOGGED:
-				case T_LOGGING:
-				case T_LOOP:
-				case T_MAP:
-				case T_MATCHED:
 				case T_MAX:
-				case T_MAXTRANS:
-				case T_MERGE:
-				case T_MESSAGE_TEXT:
-				case T_MICROSECOND:
-				case T_MICROSECONDS:
 				case T_MIN:
-				case T_MULTISET:
-				case T_NCHAR:
-				case T_NEW:
-				case T_NVARCHAR:
-				case T_NO:
-				case T_NOCOUNT:
-				case T_NOCOMPRESS:
-				case T_NOLOGGING:
-				case T_NONE:
-				case T_NOT:
-				case T_NOTFOUND:
 				case T_NULL:
-				case T_NUMERIC:
-				case T_NUMBER:
-				case T_OBJECT:
-				case T_OFF:
-				case T_ON:
-				case T_ONLY:
-				case T_OPEN:
-				case T_OR:
-				case T_ORDER:
-				case T_OUT:
-				case T_OUTER:
-				case T_OVER:
-				case T_OVERWRITE:
-				case T_OWNER:
-				case T_PACKAGE:
-				case T_PARTITION:
-				case T_PCTFREE:
-				case T_PCTUSED:
-				case T_PRECISION:
-				case T_PRESERVE:
-				case T_PRIMARY:
-				case T_PRINT:
-				case T_PROC:
-				case T_PROCEDURE:
-				case T_QUALIFY:
-				case T_QUERY_BAND:
-				case T_QUIT:
-				case T_QUOTED_IDENTIFIER:
-				case T_RAISE:
-				case T_REAL:
-				case T_REFERENCES:
-				case T_REGEXP:
-				case T_REPLACE:
-				case T_RESIGNAL:
-				case T_RESTRICT:
-				case T_RESULT:
-				case T_RESULT_SET_LOCATOR:
-				case T_RETURN:
-				case T_RETURNS:
-				case T_REVERSE:
-				case T_RIGHT:
-				case T_RLIKE:
-				case T_ROLE:
-				case T_ROLLBACK:
-				case T_ROW:
-				case T_ROWS:
-				case T_ROW_COUNT:
-				case T_RR:
-				case T_RS:
-				case T_PWD:
 				case T_TRIM:
-				case T_SCHEMA:
-				case T_SECOND:
-				case T_SECONDS:
-				case T_SECURITY:
-				case T_SEGMENT:
 				case T_SEL:
 				case T_SELECT:
-				case T_SET:
-				case T_SESSION:
-				case T_SESSIONS:
-				case T_SETS:
-				case T_SHARE:
-				case T_SIGNAL:
-				case T_SIMPLE_DOUBLE:
-				case T_SIMPLE_FLOAT:
-				case T_SMALLDATETIME:
-				case T_SMALLINT:
-				case T_SQL:
-				case T_SQLEXCEPTION:
-				case T_SQLINSERT:
-				case T_SQLSTATE:
-				case T_SQLWARNING:
-				case T_STATS:
-				case T_STATISTICS:
-				case T_STEP:
-				case T_STORAGE:
-				case T_STORED:
-				case T_STRING:
-				case T_SUBDIR:
 				case T_SUBSTRING:
 				case T_SUM:
-				case T_SUMMARY:
-				case T_SYS_REFCURSOR:
-				case T_TABLE:
-				case T_TABLESPACE:
-				case T_TEMPORARY:
-				case T_TERMINATED:
-				case T_TEXTIMAGE_ON:
-				case T_THEN:
 				case T_TIMESTAMP:
-				case T_TITLE:
-				case T_TO:
-				case T_TOP:
-				case T_TRANSACTION:
 				case T_TRUE:
-				case T_TRUNCATE:
-				case T_UNIQUE:
-				case T_UPDATE:
-				case T_UR:
-				case T_USE:
-				case T_USING:
-				case T_VALUE:
-				case T_VALUES:
-				case T_VAR:
-				case T_VARCHAR:
-				case T_VARCHAR2:
-				case T_VARYING:
-				case T_VOLATILE:
-				case T_WHILE:
 				case T_WITH:
-				case T_WITHOUT:
-				case T_WORK:
-				case T_XACT_ABORT:
-				case T_XML:
-				case T_YES:
 				case T_ACTIVITY_COUNT:
 				case T_CUME_DIST:
 				case T_CURRENT_DATE:
@@ -14389,14 +12720,14 @@ public class PLHQLStatementsParser extends Parser {
 					{
 					setState(2031);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,247,_ctx) ) {
-					case 1:
+					_la = _input.LA(1);
+					if (_la==T_ALL || _la==T_DISTINCT) {
 						{
 						setState(2030);
 						expr_func_all_distinct();
 						}
-						break;
 					}
+
 					setState(2033);
 					expr(0);
 					}
@@ -14435,307 +12766,28 @@ public class PLHQLStatementsParser extends Parser {
 				setState(2048);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T_ACTION:
-				case T_ADD2:
 				case T_ALL:
-				case T_ALLOCATE:
-				case T_ALTER:
-				case T_AND:
-				case T_ANSI_NULLS:
-				case T_ANSI_PADDING:
-				case T_AS:
-				case T_ASC:
-				case T_ASSOCIATE:
-				case T_AT:
-				case T_AUTO_INCREMENT:
 				case T_AVG:
-				case T_BATCHSIZE:
-				case T_BEGIN:
-				case T_BETWEEN:
-				case T_BIGINT:
-				case T_BINARY_DOUBLE:
-				case T_BINARY_FLOAT:
-				case T_BIT:
-				case T_BODY:
-				case T_BREAK:
-				case T_BY:
-				case T_BYTE:
-				case T_CALL:
-				case T_CALLER:
-				case T_CASCADE:
 				case T_CASE:
-				case T_CASESPECIFIC:
 				case T_CAST:
-				case T_CHAR:
-				case T_CHARACTER:
-				case T_CHARSET:
-				case T_CLIENT:
-				case T_CLOSE:
-				case T_CLUSTERED:
-				case T_CMP:
-				case T_COLLECT:
-				case T_COLLECTION:
-				case T_COLUMN:
-				case T_COMMENT:
-				case T_CONSTANT:
-				case T_COMMIT:
-				case T_COMPRESS:
-				case T_CONCAT:
-				case T_CONDITION:
-				case T_CONSTRAINT:
-				case T_CONTINUE:
-				case T_COPY:
 				case T_COUNT:
 				case T_COUNT_BIG:
-				case T_CREATE:
-				case T_CREATION:
-				case T_CREATOR:
-				case T_CS:
 				case T_CURRENT:
-				case T_CURRENT_SCHEMA:
-				case T_CURSOR:
-				case T_DATABASE:
-				case T_DATA:
 				case T_DATE:
-				case T_DATETIME:
-				case T_DAY:
-				case T_DAYS:
-				case T_DEC:
-				case T_DECIMAL:
-				case T_DECLARE:
-				case T_DEFAULT:
-				case T_DEFERRED:
-				case T_DEFINED:
-				case T_DEFINER:
-				case T_DEFINITION:
-				case T_DELETE:
-				case T_DELIMITED:
-				case T_DELIMITER:
-				case T_DESC:
-				case T_DESCRIBE:
-				case T_DIAGNOSTICS:
-				case T_DIR:
-				case T_DIRECTORY:
 				case T_DISTINCT:
-				case T_DISTRIBUTE:
-				case T_DO:
-				case T_DOUBLE:
-				case T_DROP:
-				case T_DYNAMIC:
-				case T_ENABLE:
-				case T_ENGINE:
-				case T_ESCAPED:
-				case T_EXCEPT:
-				case T_EXEC:
-				case T_EXECUTE:
-				case T_EXCEPTION:
-				case T_EXCLUSIVE:
-				case T_EXISTS:
-				case T_EXIT:
-				case T_FALLBACK:
 				case T_FALSE:
-				case T_FETCH:
-				case T_FIELDS:
-				case T_FILE:
-				case T_FILES:
-				case T_FLOAT:
-				case T_FOR:
-				case T_FOREIGN:
-				case T_FORMAT:
-				case T_FOUND:
-				case T_FROM:
-				case T_FULL:
-				case T_FUNCTION:
-				case T_GET:
-				case T_GLOBAL:
-				case T_GO:
-				case T_GRANT:
-				case T_GROUP:
-				case T_HANDLER:
-				case T_HASH:
-				case T_HAVING:
-				case T_HDFS:
-				case T_HIVE:
-				case T_HOST:
-				case T_IDENTITY:
-				case T_IF:
-				case T_IGNORE:
-				case T_IMMEDIATE:
-				case T_IN:
-				case T_INCLUDE:
-				case T_INDEX:
-				case T_INITRANS:
-				case T_INNER:
-				case T_INOUT:
-				case T_INSERT:
-				case T_INT:
-				case T_INT2:
-				case T_INT4:
-				case T_INT8:
-				case T_INTEGER:
-				case T_INTERSECT:
 				case T_INTERVAL:
-				case T_INTO:
-				case T_INVOKER:
-				case T_IS:
-				case T_ISOPEN:
-				case T_ITEMS:
-				case T_JOIN:
-				case T_KEEP:
-				case T_KEY:
-				case T_KEYS:
-				case T_LANGUAGE:
-				case T_LEAVE:
-				case T_LEFT:
-				case T_LIKE:
-				case T_LIMIT:
-				case T_LINES:
-				case T_LOCAL:
-				case T_LOCATION:
-				case T_LOCATOR:
-				case T_LOCATORS:
-				case T_LOCKS:
-				case T_LOG:
-				case T_LOGGED:
-				case T_LOGGING:
-				case T_LOOP:
-				case T_MAP:
-				case T_MATCHED:
 				case T_MAX:
-				case T_MAXTRANS:
-				case T_MERGE:
-				case T_MESSAGE_TEXT:
-				case T_MICROSECOND:
-				case T_MICROSECONDS:
 				case T_MIN:
-				case T_MULTISET:
-				case T_NCHAR:
-				case T_NEW:
-				case T_NVARCHAR:
-				case T_NO:
-				case T_NOCOUNT:
-				case T_NOCOMPRESS:
-				case T_NOLOGGING:
-				case T_NONE:
-				case T_NOT:
-				case T_NOTFOUND:
 				case T_NULL:
-				case T_NUMERIC:
-				case T_NUMBER:
-				case T_OBJECT:
-				case T_OFF:
-				case T_ON:
-				case T_ONLY:
-				case T_OPEN:
-				case T_OR:
-				case T_ORDER:
-				case T_OUT:
-				case T_OUTER:
-				case T_OVER:
-				case T_OVERWRITE:
-				case T_OWNER:
-				case T_PACKAGE:
-				case T_PARTITION:
-				case T_PCTFREE:
-				case T_PCTUSED:
-				case T_PRECISION:
-				case T_PRESERVE:
-				case T_PRIMARY:
-				case T_PRINT:
-				case T_PROC:
-				case T_PROCEDURE:
-				case T_QUALIFY:
-				case T_QUERY_BAND:
-				case T_QUIT:
-				case T_QUOTED_IDENTIFIER:
-				case T_RAISE:
-				case T_REAL:
-				case T_REFERENCES:
-				case T_REGEXP:
-				case T_REPLACE:
-				case T_RESIGNAL:
-				case T_RESTRICT:
-				case T_RESULT:
-				case T_RESULT_SET_LOCATOR:
-				case T_RETURN:
-				case T_RETURNS:
-				case T_REVERSE:
-				case T_RIGHT:
-				case T_RLIKE:
-				case T_ROLE:
-				case T_ROLLBACK:
-				case T_ROW:
-				case T_ROWS:
-				case T_ROW_COUNT:
-				case T_RR:
-				case T_RS:
-				case T_PWD:
 				case T_TRIM:
-				case T_SCHEMA:
-				case T_SECOND:
-				case T_SECONDS:
-				case T_SECURITY:
-				case T_SEGMENT:
 				case T_SEL:
 				case T_SELECT:
-				case T_SET:
-				case T_SESSION:
-				case T_SESSIONS:
-				case T_SETS:
-				case T_SHARE:
-				case T_SIGNAL:
-				case T_SIMPLE_DOUBLE:
-				case T_SIMPLE_FLOAT:
-				case T_SMALLDATETIME:
-				case T_SMALLINT:
-				case T_SQL:
-				case T_SQLEXCEPTION:
-				case T_SQLINSERT:
-				case T_SQLSTATE:
-				case T_SQLWARNING:
-				case T_STATS:
-				case T_STATISTICS:
-				case T_STEP:
-				case T_STORAGE:
-				case T_STORED:
-				case T_STRING:
-				case T_SUBDIR:
 				case T_SUBSTRING:
 				case T_SUM:
-				case T_SUMMARY:
-				case T_SYS_REFCURSOR:
-				case T_TABLE:
-				case T_TABLESPACE:
-				case T_TEMPORARY:
-				case T_TERMINATED:
-				case T_TEXTIMAGE_ON:
-				case T_THEN:
 				case T_TIMESTAMP:
-				case T_TITLE:
-				case T_TO:
-				case T_TOP:
-				case T_TRANSACTION:
 				case T_TRUE:
-				case T_TRUNCATE:
-				case T_UNIQUE:
-				case T_UPDATE:
-				case T_UR:
-				case T_USE:
-				case T_USING:
-				case T_VALUE:
-				case T_VALUES:
-				case T_VAR:
-				case T_VARCHAR:
-				case T_VARCHAR2:
-				case T_VARYING:
-				case T_VOLATILE:
-				case T_WHILE:
 				case T_WITH:
-				case T_WITHOUT:
-				case T_WORK:
-				case T_XACT_ABORT:
-				case T_XML:
-				case T_YES:
 				case T_ACTIVITY_COUNT:
 				case T_CUME_DIST:
 				case T_CURRENT_DATE:
@@ -14772,14 +12824,14 @@ public class PLHQLStatementsParser extends Parser {
 					{
 					setState(2044);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,250,_ctx) ) {
-					case 1:
+					_la = _input.LA(1);
+					if (_la==T_ALL || _la==T_DISTINCT) {
 						{
 						setState(2043);
 						expr_func_all_distinct();
 						}
-						break;
 					}
+
 					setState(2046);
 					expr(0);
 					}
@@ -14951,14 +13003,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2105);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,257,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2104);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2107);
 				expr(0);
 				setState(2108);
@@ -14984,14 +13036,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2115);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,259,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2114);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2117);
 				expr(0);
 				setState(2118);
@@ -15043,14 +13095,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2133);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,261,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2132);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2135);
 				expr(0);
 				setState(2136);
@@ -15076,14 +13128,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2143);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,263,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2142);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2145);
 				expr(0);
 				setState(2146);
@@ -15109,14 +13161,14 @@ public class PLHQLStatementsParser extends Parser {
 				match(T_OPEN_P);
 				setState(2153);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,265,_ctx) ) {
-				case 1:
+				_la = _input.LA(1);
+				if (_la==T_ALL || _la==T_DISTINCT) {
 					{
 					setState(2152);
 					expr_func_all_distinct();
 					}
-					break;
 				}
+
 				setState(2155);
 				expr(0);
 				setState(2156);
@@ -15449,307 +13501,26 @@ public class PLHQLStatementsParser extends Parser {
 				setState(2199);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T_ACTION:
-				case T_ADD2:
-				case T_ALL:
-				case T_ALLOCATE:
-				case T_ALTER:
-				case T_AND:
-				case T_ANSI_NULLS:
-				case T_ANSI_PADDING:
-				case T_AS:
-				case T_ASC:
-				case T_ASSOCIATE:
-				case T_AT:
-				case T_AUTO_INCREMENT:
 				case T_AVG:
-				case T_BATCHSIZE:
-				case T_BEGIN:
-				case T_BETWEEN:
-				case T_BIGINT:
-				case T_BINARY_DOUBLE:
-				case T_BINARY_FLOAT:
-				case T_BIT:
-				case T_BODY:
-				case T_BREAK:
-				case T_BY:
-				case T_BYTE:
-				case T_CALL:
-				case T_CALLER:
-				case T_CASCADE:
 				case T_CASE:
-				case T_CASESPECIFIC:
 				case T_CAST:
-				case T_CHAR:
-				case T_CHARACTER:
-				case T_CHARSET:
-				case T_CLIENT:
-				case T_CLOSE:
-				case T_CLUSTERED:
-				case T_CMP:
-				case T_COLLECT:
-				case T_COLLECTION:
-				case T_COLUMN:
-				case T_COMMENT:
-				case T_CONSTANT:
-				case T_COMMIT:
-				case T_COMPRESS:
-				case T_CONCAT:
-				case T_CONDITION:
-				case T_CONSTRAINT:
-				case T_CONTINUE:
-				case T_COPY:
 				case T_COUNT:
 				case T_COUNT_BIG:
-				case T_CREATE:
-				case T_CREATION:
-				case T_CREATOR:
-				case T_CS:
 				case T_CURRENT:
-				case T_CURRENT_SCHEMA:
-				case T_CURSOR:
-				case T_DATABASE:
-				case T_DATA:
 				case T_DATE:
-				case T_DATETIME:
-				case T_DAY:
-				case T_DAYS:
-				case T_DEC:
-				case T_DECIMAL:
-				case T_DECLARE:
-				case T_DEFAULT:
-				case T_DEFERRED:
-				case T_DEFINED:
-				case T_DEFINER:
-				case T_DEFINITION:
-				case T_DELETE:
-				case T_DELIMITED:
-				case T_DELIMITER:
-				case T_DESC:
-				case T_DESCRIBE:
-				case T_DIAGNOSTICS:
-				case T_DIR:
-				case T_DIRECTORY:
-				case T_DISTINCT:
-				case T_DISTRIBUTE:
-				case T_DO:
-				case T_DOUBLE:
-				case T_DROP:
-				case T_DYNAMIC:
-				case T_ENABLE:
-				case T_ENGINE:
-				case T_ESCAPED:
-				case T_EXCEPT:
-				case T_EXEC:
-				case T_EXECUTE:
-				case T_EXCEPTION:
-				case T_EXCLUSIVE:
-				case T_EXISTS:
-				case T_EXIT:
-				case T_FALLBACK:
 				case T_FALSE:
-				case T_FETCH:
-				case T_FIELDS:
-				case T_FILE:
-				case T_FILES:
-				case T_FLOAT:
-				case T_FOR:
-				case T_FOREIGN:
-				case T_FORMAT:
-				case T_FOUND:
-				case T_FROM:
-				case T_FULL:
-				case T_FUNCTION:
-				case T_GET:
-				case T_GLOBAL:
-				case T_GO:
-				case T_GRANT:
-				case T_GROUP:
-				case T_HANDLER:
-				case T_HASH:
-				case T_HAVING:
-				case T_HDFS:
-				case T_HIVE:
-				case T_HOST:
-				case T_IDENTITY:
-				case T_IF:
-				case T_IGNORE:
-				case T_IMMEDIATE:
-				case T_IN:
-				case T_INCLUDE:
-				case T_INDEX:
-				case T_INITRANS:
-				case T_INNER:
-				case T_INOUT:
-				case T_INSERT:
-				case T_INT:
-				case T_INT2:
-				case T_INT4:
-				case T_INT8:
-				case T_INTEGER:
-				case T_INTERSECT:
 				case T_INTERVAL:
-				case T_INTO:
-				case T_INVOKER:
-				case T_IS:
-				case T_ISOPEN:
-				case T_ITEMS:
-				case T_JOIN:
-				case T_KEEP:
-				case T_KEY:
-				case T_KEYS:
-				case T_LANGUAGE:
-				case T_LEAVE:
-				case T_LEFT:
-				case T_LIKE:
-				case T_LIMIT:
-				case T_LINES:
-				case T_LOCAL:
-				case T_LOCATION:
-				case T_LOCATOR:
-				case T_LOCATORS:
-				case T_LOCKS:
-				case T_LOG:
-				case T_LOGGED:
-				case T_LOGGING:
-				case T_LOOP:
-				case T_MAP:
-				case T_MATCHED:
 				case T_MAX:
-				case T_MAXTRANS:
-				case T_MERGE:
-				case T_MESSAGE_TEXT:
-				case T_MICROSECOND:
-				case T_MICROSECONDS:
 				case T_MIN:
-				case T_MULTISET:
-				case T_NCHAR:
-				case T_NEW:
-				case T_NVARCHAR:
-				case T_NO:
-				case T_NOCOUNT:
-				case T_NOCOMPRESS:
-				case T_NOLOGGING:
-				case T_NONE:
-				case T_NOT:
-				case T_NOTFOUND:
 				case T_NULL:
-				case T_NUMERIC:
-				case T_NUMBER:
-				case T_OBJECT:
-				case T_OFF:
-				case T_ON:
-				case T_ONLY:
-				case T_OPEN:
-				case T_OR:
-				case T_ORDER:
-				case T_OUT:
-				case T_OUTER:
-				case T_OVER:
-				case T_OVERWRITE:
-				case T_OWNER:
-				case T_PACKAGE:
-				case T_PARTITION:
-				case T_PCTFREE:
-				case T_PCTUSED:
-				case T_PRECISION:
-				case T_PRESERVE:
-				case T_PRIMARY:
-				case T_PRINT:
-				case T_PROC:
-				case T_PROCEDURE:
-				case T_QUALIFY:
-				case T_QUERY_BAND:
-				case T_QUIT:
-				case T_QUOTED_IDENTIFIER:
-				case T_RAISE:
-				case T_REAL:
-				case T_REFERENCES:
-				case T_REGEXP:
-				case T_REPLACE:
-				case T_RESIGNAL:
-				case T_RESTRICT:
-				case T_RESULT:
-				case T_RESULT_SET_LOCATOR:
-				case T_RETURN:
-				case T_RETURNS:
-				case T_REVERSE:
-				case T_RIGHT:
-				case T_RLIKE:
-				case T_ROLE:
-				case T_ROLLBACK:
-				case T_ROW:
-				case T_ROWS:
-				case T_ROW_COUNT:
-				case T_RR:
-				case T_RS:
-				case T_PWD:
 				case T_TRIM:
-				case T_SCHEMA:
-				case T_SECOND:
-				case T_SECONDS:
-				case T_SECURITY:
-				case T_SEGMENT:
 				case T_SEL:
 				case T_SELECT:
-				case T_SET:
-				case T_SESSION:
-				case T_SESSIONS:
-				case T_SETS:
-				case T_SHARE:
-				case T_SIGNAL:
-				case T_SIMPLE_DOUBLE:
-				case T_SIMPLE_FLOAT:
-				case T_SMALLDATETIME:
-				case T_SMALLINT:
-				case T_SQL:
-				case T_SQLEXCEPTION:
-				case T_SQLINSERT:
-				case T_SQLSTATE:
-				case T_SQLWARNING:
-				case T_STATS:
-				case T_STATISTICS:
-				case T_STEP:
-				case T_STORAGE:
-				case T_STORED:
-				case T_STRING:
-				case T_SUBDIR:
 				case T_SUBSTRING:
 				case T_SUM:
-				case T_SUMMARY:
-				case T_SYS_REFCURSOR:
-				case T_TABLE:
-				case T_TABLESPACE:
-				case T_TEMPORARY:
-				case T_TERMINATED:
-				case T_TEXTIMAGE_ON:
-				case T_THEN:
 				case T_TIMESTAMP:
-				case T_TITLE:
-				case T_TO:
-				case T_TOP:
-				case T_TRANSACTION:
 				case T_TRUE:
-				case T_TRUNCATE:
-				case T_UNIQUE:
-				case T_UPDATE:
-				case T_UR:
-				case T_USE:
-				case T_USING:
-				case T_VALUE:
-				case T_VALUES:
-				case T_VAR:
-				case T_VARCHAR:
-				case T_VARCHAR2:
-				case T_VARYING:
-				case T_VOLATILE:
-				case T_WHILE:
 				case T_WITH:
-				case T_WITHOUT:
-				case T_WORK:
-				case T_XACT_ABORT:
-				case T_XML:
-				case T_YES:
 				case T_ACTIVITY_COUNT:
 				case T_CUME_DIST:
 				case T_CURRENT_DATE:
@@ -16694,12 +14465,6 @@ public class PLHQLStatementsParser extends Parser {
 		public TerminalNode L_ID(int i) {
 			return getToken(PLHQLStatementsParser.L_ID, i);
 		}
-		public List<Non_reserved_wordsContext> non_reserved_words() {
-			return getRuleContexts(Non_reserved_wordsContext.class);
-		}
-		public Non_reserved_wordsContext non_reserved_words(int i) {
-			return getRuleContext(Non_reserved_wordsContext.class,i);
-		}
 		public IdentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -16721,691 +14486,29 @@ public class PLHQLStatementsParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2430);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case L_ID:
-				{
-				setState(2428);
-				match(L_ID);
-				}
-				break;
-			case T_ACTION:
-			case T_ADD2:
-			case T_ALL:
-			case T_ALLOCATE:
-			case T_ALTER:
-			case T_AND:
-			case T_ANSI_NULLS:
-			case T_ANSI_PADDING:
-			case T_AS:
-			case T_ASC:
-			case T_ASSOCIATE:
-			case T_AT:
-			case T_AUTO_INCREMENT:
-			case T_AVG:
-			case T_BATCHSIZE:
-			case T_BEGIN:
-			case T_BETWEEN:
-			case T_BIGINT:
-			case T_BINARY_DOUBLE:
-			case T_BINARY_FLOAT:
-			case T_BIT:
-			case T_BODY:
-			case T_BREAK:
-			case T_BY:
-			case T_BYTE:
-			case T_CALL:
-			case T_CALLER:
-			case T_CASCADE:
-			case T_CASE:
-			case T_CASESPECIFIC:
-			case T_CAST:
-			case T_CHAR:
-			case T_CHARACTER:
-			case T_CHARSET:
-			case T_CLIENT:
-			case T_CLOSE:
-			case T_CLUSTERED:
-			case T_CMP:
-			case T_COLLECT:
-			case T_COLLECTION:
-			case T_COLUMN:
-			case T_COMMENT:
-			case T_CONSTANT:
-			case T_COMMIT:
-			case T_COMPRESS:
-			case T_CONCAT:
-			case T_CONDITION:
-			case T_CONSTRAINT:
-			case T_CONTINUE:
-			case T_COPY:
-			case T_COUNT:
-			case T_COUNT_BIG:
-			case T_CREATE:
-			case T_CREATION:
-			case T_CREATOR:
-			case T_CS:
-			case T_CURRENT:
-			case T_CURRENT_SCHEMA:
-			case T_CURSOR:
-			case T_DATABASE:
-			case T_DATA:
-			case T_DATE:
-			case T_DATETIME:
-			case T_DAY:
-			case T_DAYS:
-			case T_DEC:
-			case T_DECIMAL:
-			case T_DECLARE:
-			case T_DEFAULT:
-			case T_DEFERRED:
-			case T_DEFINED:
-			case T_DEFINER:
-			case T_DEFINITION:
-			case T_DELETE:
-			case T_DELIMITED:
-			case T_DELIMITER:
-			case T_DESC:
-			case T_DESCRIBE:
-			case T_DIAGNOSTICS:
-			case T_DIR:
-			case T_DIRECTORY:
-			case T_DISTINCT:
-			case T_DISTRIBUTE:
-			case T_DO:
-			case T_DOUBLE:
-			case T_DROP:
-			case T_DYNAMIC:
-			case T_ENABLE:
-			case T_ENGINE:
-			case T_ESCAPED:
-			case T_EXCEPT:
-			case T_EXEC:
-			case T_EXECUTE:
-			case T_EXCEPTION:
-			case T_EXCLUSIVE:
-			case T_EXISTS:
-			case T_EXIT:
-			case T_FALLBACK:
-			case T_FALSE:
-			case T_FETCH:
-			case T_FIELDS:
-			case T_FILE:
-			case T_FILES:
-			case T_FLOAT:
-			case T_FOR:
-			case T_FOREIGN:
-			case T_FORMAT:
-			case T_FOUND:
-			case T_FROM:
-			case T_FULL:
-			case T_FUNCTION:
-			case T_GET:
-			case T_GLOBAL:
-			case T_GO:
-			case T_GRANT:
-			case T_GROUP:
-			case T_HANDLER:
-			case T_HASH:
-			case T_HAVING:
-			case T_HDFS:
-			case T_HIVE:
-			case T_HOST:
-			case T_IDENTITY:
-			case T_IF:
-			case T_IGNORE:
-			case T_IMMEDIATE:
-			case T_IN:
-			case T_INCLUDE:
-			case T_INDEX:
-			case T_INITRANS:
-			case T_INNER:
-			case T_INOUT:
-			case T_INSERT:
-			case T_INT:
-			case T_INT2:
-			case T_INT4:
-			case T_INT8:
-			case T_INTEGER:
-			case T_INTERSECT:
-			case T_INTERVAL:
-			case T_INTO:
-			case T_INVOKER:
-			case T_IS:
-			case T_ISOPEN:
-			case T_ITEMS:
-			case T_JOIN:
-			case T_KEEP:
-			case T_KEY:
-			case T_KEYS:
-			case T_LANGUAGE:
-			case T_LEAVE:
-			case T_LEFT:
-			case T_LIKE:
-			case T_LIMIT:
-			case T_LINES:
-			case T_LOCAL:
-			case T_LOCATION:
-			case T_LOCATOR:
-			case T_LOCATORS:
-			case T_LOCKS:
-			case T_LOG:
-			case T_LOGGED:
-			case T_LOGGING:
-			case T_LOOP:
-			case T_MAP:
-			case T_MATCHED:
-			case T_MAX:
-			case T_MAXTRANS:
-			case T_MERGE:
-			case T_MESSAGE_TEXT:
-			case T_MICROSECOND:
-			case T_MICROSECONDS:
-			case T_MIN:
-			case T_MULTISET:
-			case T_NCHAR:
-			case T_NEW:
-			case T_NVARCHAR:
-			case T_NO:
-			case T_NOCOUNT:
-			case T_NOCOMPRESS:
-			case T_NOLOGGING:
-			case T_NONE:
-			case T_NOT:
-			case T_NOTFOUND:
-			case T_NUMERIC:
-			case T_NUMBER:
-			case T_OBJECT:
-			case T_OFF:
-			case T_ON:
-			case T_ONLY:
-			case T_OPEN:
-			case T_OR:
-			case T_ORDER:
-			case T_OUT:
-			case T_OUTER:
-			case T_OVER:
-			case T_OVERWRITE:
-			case T_OWNER:
-			case T_PACKAGE:
-			case T_PARTITION:
-			case T_PCTFREE:
-			case T_PCTUSED:
-			case T_PRECISION:
-			case T_PRESERVE:
-			case T_PRIMARY:
-			case T_PRINT:
-			case T_PROC:
-			case T_PROCEDURE:
-			case T_QUALIFY:
-			case T_QUERY_BAND:
-			case T_QUIT:
-			case T_QUOTED_IDENTIFIER:
-			case T_RAISE:
-			case T_REAL:
-			case T_REFERENCES:
-			case T_REGEXP:
-			case T_REPLACE:
-			case T_RESIGNAL:
-			case T_RESTRICT:
-			case T_RESULT:
-			case T_RESULT_SET_LOCATOR:
-			case T_RETURN:
-			case T_RETURNS:
-			case T_REVERSE:
-			case T_RIGHT:
-			case T_RLIKE:
-			case T_ROLE:
-			case T_ROLLBACK:
-			case T_ROW:
-			case T_ROWS:
-			case T_ROW_COUNT:
-			case T_RR:
-			case T_RS:
-			case T_PWD:
-			case T_TRIM:
-			case T_SCHEMA:
-			case T_SECOND:
-			case T_SECONDS:
-			case T_SECURITY:
-			case T_SEGMENT:
-			case T_SEL:
-			case T_SELECT:
-			case T_SET:
-			case T_SESSION:
-			case T_SESSIONS:
-			case T_SETS:
-			case T_SHARE:
-			case T_SIGNAL:
-			case T_SIMPLE_DOUBLE:
-			case T_SIMPLE_FLOAT:
-			case T_SMALLDATETIME:
-			case T_SMALLINT:
-			case T_SQL:
-			case T_SQLEXCEPTION:
-			case T_SQLINSERT:
-			case T_SQLSTATE:
-			case T_SQLWARNING:
-			case T_STATS:
-			case T_STATISTICS:
-			case T_STEP:
-			case T_STORAGE:
-			case T_STORED:
-			case T_STRING:
-			case T_SUBDIR:
-			case T_SUBSTRING:
-			case T_SUM:
-			case T_SUMMARY:
-			case T_SYS_REFCURSOR:
-			case T_TABLE:
-			case T_TABLESPACE:
-			case T_TEMPORARY:
-			case T_TERMINATED:
-			case T_TEXTIMAGE_ON:
-			case T_THEN:
-			case T_TIMESTAMP:
-			case T_TITLE:
-			case T_TO:
-			case T_TOP:
-			case T_TRANSACTION:
-			case T_TRUE:
-			case T_TRUNCATE:
-			case T_UNIQUE:
-			case T_UPDATE:
-			case T_UR:
-			case T_USE:
-			case T_USING:
-			case T_VALUE:
-			case T_VALUES:
-			case T_VAR:
-			case T_VARCHAR:
-			case T_VARCHAR2:
-			case T_VARYING:
-			case T_VOLATILE:
-			case T_WHILE:
-			case T_WITH:
-			case T_WITHOUT:
-			case T_WORK:
-			case T_XACT_ABORT:
-			case T_XML:
-			case T_YES:
-			case T_ACTIVITY_COUNT:
-			case T_CUME_DIST:
-			case T_CURRENT_DATE:
-			case T_CURRENT_TIMESTAMP:
-			case T_CURRENT_USER:
-			case T_DENSE_RANK:
-			case T_FIRST_VALUE:
-			case T_LAG:
-			case T_LAST_VALUE:
-			case T_LEAD:
-			case T_PART_COUNT:
-			case T_PART_LOC:
-			case T_RANK:
-			case T_ROW_NUMBER:
-			case T_STDEV:
-			case T_SYSDATE:
-			case T_VARIANCE:
-			case T_USER:
-				{
-				setState(2429);
-				non_reserved_words();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			{
+			setState(2428);
+			match(L_ID);
 			}
-			setState(2439);
+			setState(2433);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,299,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,297,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(2432);
+					setState(2429);
 					match(T__3);
-					setState(2435);
-					_errHandler.sync(this);
-					switch (_input.LA(1)) {
-					case L_ID:
-						{
-						setState(2433);
-						match(L_ID);
-						}
-						break;
-					case T_ACTION:
-					case T_ADD2:
-					case T_ALL:
-					case T_ALLOCATE:
-					case T_ALTER:
-					case T_AND:
-					case T_ANSI_NULLS:
-					case T_ANSI_PADDING:
-					case T_AS:
-					case T_ASC:
-					case T_ASSOCIATE:
-					case T_AT:
-					case T_AUTO_INCREMENT:
-					case T_AVG:
-					case T_BATCHSIZE:
-					case T_BEGIN:
-					case T_BETWEEN:
-					case T_BIGINT:
-					case T_BINARY_DOUBLE:
-					case T_BINARY_FLOAT:
-					case T_BIT:
-					case T_BODY:
-					case T_BREAK:
-					case T_BY:
-					case T_BYTE:
-					case T_CALL:
-					case T_CALLER:
-					case T_CASCADE:
-					case T_CASE:
-					case T_CASESPECIFIC:
-					case T_CAST:
-					case T_CHAR:
-					case T_CHARACTER:
-					case T_CHARSET:
-					case T_CLIENT:
-					case T_CLOSE:
-					case T_CLUSTERED:
-					case T_CMP:
-					case T_COLLECT:
-					case T_COLLECTION:
-					case T_COLUMN:
-					case T_COMMENT:
-					case T_CONSTANT:
-					case T_COMMIT:
-					case T_COMPRESS:
-					case T_CONCAT:
-					case T_CONDITION:
-					case T_CONSTRAINT:
-					case T_CONTINUE:
-					case T_COPY:
-					case T_COUNT:
-					case T_COUNT_BIG:
-					case T_CREATE:
-					case T_CREATION:
-					case T_CREATOR:
-					case T_CS:
-					case T_CURRENT:
-					case T_CURRENT_SCHEMA:
-					case T_CURSOR:
-					case T_DATABASE:
-					case T_DATA:
-					case T_DATE:
-					case T_DATETIME:
-					case T_DAY:
-					case T_DAYS:
-					case T_DEC:
-					case T_DECIMAL:
-					case T_DECLARE:
-					case T_DEFAULT:
-					case T_DEFERRED:
-					case T_DEFINED:
-					case T_DEFINER:
-					case T_DEFINITION:
-					case T_DELETE:
-					case T_DELIMITED:
-					case T_DELIMITER:
-					case T_DESC:
-					case T_DESCRIBE:
-					case T_DIAGNOSTICS:
-					case T_DIR:
-					case T_DIRECTORY:
-					case T_DISTINCT:
-					case T_DISTRIBUTE:
-					case T_DO:
-					case T_DOUBLE:
-					case T_DROP:
-					case T_DYNAMIC:
-					case T_ENABLE:
-					case T_ENGINE:
-					case T_ESCAPED:
-					case T_EXCEPT:
-					case T_EXEC:
-					case T_EXECUTE:
-					case T_EXCEPTION:
-					case T_EXCLUSIVE:
-					case T_EXISTS:
-					case T_EXIT:
-					case T_FALLBACK:
-					case T_FALSE:
-					case T_FETCH:
-					case T_FIELDS:
-					case T_FILE:
-					case T_FILES:
-					case T_FLOAT:
-					case T_FOR:
-					case T_FOREIGN:
-					case T_FORMAT:
-					case T_FOUND:
-					case T_FROM:
-					case T_FULL:
-					case T_FUNCTION:
-					case T_GET:
-					case T_GLOBAL:
-					case T_GO:
-					case T_GRANT:
-					case T_GROUP:
-					case T_HANDLER:
-					case T_HASH:
-					case T_HAVING:
-					case T_HDFS:
-					case T_HIVE:
-					case T_HOST:
-					case T_IDENTITY:
-					case T_IF:
-					case T_IGNORE:
-					case T_IMMEDIATE:
-					case T_IN:
-					case T_INCLUDE:
-					case T_INDEX:
-					case T_INITRANS:
-					case T_INNER:
-					case T_INOUT:
-					case T_INSERT:
-					case T_INT:
-					case T_INT2:
-					case T_INT4:
-					case T_INT8:
-					case T_INTEGER:
-					case T_INTERSECT:
-					case T_INTERVAL:
-					case T_INTO:
-					case T_INVOKER:
-					case T_IS:
-					case T_ISOPEN:
-					case T_ITEMS:
-					case T_JOIN:
-					case T_KEEP:
-					case T_KEY:
-					case T_KEYS:
-					case T_LANGUAGE:
-					case T_LEAVE:
-					case T_LEFT:
-					case T_LIKE:
-					case T_LIMIT:
-					case T_LINES:
-					case T_LOCAL:
-					case T_LOCATION:
-					case T_LOCATOR:
-					case T_LOCATORS:
-					case T_LOCKS:
-					case T_LOG:
-					case T_LOGGED:
-					case T_LOGGING:
-					case T_LOOP:
-					case T_MAP:
-					case T_MATCHED:
-					case T_MAX:
-					case T_MAXTRANS:
-					case T_MERGE:
-					case T_MESSAGE_TEXT:
-					case T_MICROSECOND:
-					case T_MICROSECONDS:
-					case T_MIN:
-					case T_MULTISET:
-					case T_NCHAR:
-					case T_NEW:
-					case T_NVARCHAR:
-					case T_NO:
-					case T_NOCOUNT:
-					case T_NOCOMPRESS:
-					case T_NOLOGGING:
-					case T_NONE:
-					case T_NOT:
-					case T_NOTFOUND:
-					case T_NUMERIC:
-					case T_NUMBER:
-					case T_OBJECT:
-					case T_OFF:
-					case T_ON:
-					case T_ONLY:
-					case T_OPEN:
-					case T_OR:
-					case T_ORDER:
-					case T_OUT:
-					case T_OUTER:
-					case T_OVER:
-					case T_OVERWRITE:
-					case T_OWNER:
-					case T_PACKAGE:
-					case T_PARTITION:
-					case T_PCTFREE:
-					case T_PCTUSED:
-					case T_PRECISION:
-					case T_PRESERVE:
-					case T_PRIMARY:
-					case T_PRINT:
-					case T_PROC:
-					case T_PROCEDURE:
-					case T_QUALIFY:
-					case T_QUERY_BAND:
-					case T_QUIT:
-					case T_QUOTED_IDENTIFIER:
-					case T_RAISE:
-					case T_REAL:
-					case T_REFERENCES:
-					case T_REGEXP:
-					case T_REPLACE:
-					case T_RESIGNAL:
-					case T_RESTRICT:
-					case T_RESULT:
-					case T_RESULT_SET_LOCATOR:
-					case T_RETURN:
-					case T_RETURNS:
-					case T_REVERSE:
-					case T_RIGHT:
-					case T_RLIKE:
-					case T_ROLE:
-					case T_ROLLBACK:
-					case T_ROW:
-					case T_ROWS:
-					case T_ROW_COUNT:
-					case T_RR:
-					case T_RS:
-					case T_PWD:
-					case T_TRIM:
-					case T_SCHEMA:
-					case T_SECOND:
-					case T_SECONDS:
-					case T_SECURITY:
-					case T_SEGMENT:
-					case T_SEL:
-					case T_SELECT:
-					case T_SET:
-					case T_SESSION:
-					case T_SESSIONS:
-					case T_SETS:
-					case T_SHARE:
-					case T_SIGNAL:
-					case T_SIMPLE_DOUBLE:
-					case T_SIMPLE_FLOAT:
-					case T_SMALLDATETIME:
-					case T_SMALLINT:
-					case T_SQL:
-					case T_SQLEXCEPTION:
-					case T_SQLINSERT:
-					case T_SQLSTATE:
-					case T_SQLWARNING:
-					case T_STATS:
-					case T_STATISTICS:
-					case T_STEP:
-					case T_STORAGE:
-					case T_STORED:
-					case T_STRING:
-					case T_SUBDIR:
-					case T_SUBSTRING:
-					case T_SUM:
-					case T_SUMMARY:
-					case T_SYS_REFCURSOR:
-					case T_TABLE:
-					case T_TABLESPACE:
-					case T_TEMPORARY:
-					case T_TERMINATED:
-					case T_TEXTIMAGE_ON:
-					case T_THEN:
-					case T_TIMESTAMP:
-					case T_TITLE:
-					case T_TO:
-					case T_TOP:
-					case T_TRANSACTION:
-					case T_TRUE:
-					case T_TRUNCATE:
-					case T_UNIQUE:
-					case T_UPDATE:
-					case T_UR:
-					case T_USE:
-					case T_USING:
-					case T_VALUE:
-					case T_VALUES:
-					case T_VAR:
-					case T_VARCHAR:
-					case T_VARCHAR2:
-					case T_VARYING:
-					case T_VOLATILE:
-					case T_WHILE:
-					case T_WITH:
-					case T_WITHOUT:
-					case T_WORK:
-					case T_XACT_ABORT:
-					case T_XML:
-					case T_YES:
-					case T_ACTIVITY_COUNT:
-					case T_CUME_DIST:
-					case T_CURRENT_DATE:
-					case T_CURRENT_TIMESTAMP:
-					case T_CURRENT_USER:
-					case T_DENSE_RANK:
-					case T_FIRST_VALUE:
-					case T_LAG:
-					case T_LAST_VALUE:
-					case T_LEAD:
-					case T_PART_COUNT:
-					case T_PART_LOC:
-					case T_RANK:
-					case T_ROW_NUMBER:
-					case T_STDEV:
-					case T_SYSDATE:
-					case T_VARIANCE:
-					case T_USER:
-						{
-						setState(2434);
-						non_reserved_words();
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
+					{
+					setState(2430);
+					match(L_ID);
 					}
 					}
 					} 
 				}
-				setState(2441);
+				setState(2435);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,299,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,297,_ctx);
 			}
 			}
 		}
@@ -17460,14 +14563,14 @@ public class PLHQLStatementsParser extends Parser {
 		StringContext _localctx = new StringContext(_ctx, getState());
 		enterRule(_localctx, 302, RULE_string);
 		try {
-			setState(2444);
+			setState(2438);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case L_S_STRING:
 				_localctx = new Single_quotedStringContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(2442);
+				setState(2436);
 				match(L_S_STRING);
 				}
 				break;
@@ -17475,7 +14578,7 @@ public class PLHQLStatementsParser extends Parser {
 				_localctx = new Double_quotedStringContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(2443);
+				setState(2437);
 				match(L_D_STRING);
 				}
 				break;
@@ -17515,13 +14618,13 @@ public class PLHQLStatementsParser extends Parser {
 		Error_stringContext _localctx = new Error_stringContext(_ctx, getState());
 		enterRule(_localctx, 304, RULE_error_string);
 		try {
-			setState(2450);
+			setState(2444);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case L_S_STRING_MISSING_RIGHT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(2446);
+				setState(2440);
 				match(L_S_STRING_MISSING_RIGHT);
 				notifyErrorListeners("Expected right quote");
 				}
@@ -17529,7 +14632,7 @@ public class PLHQLStatementsParser extends Parser {
 			case L_D_STRING_MISSING_RIGHT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(2448);
+				setState(2442);
 				match(L_D_STRING_MISSING_RIGHT);
 				notifyErrorListeners("Expected right quotes");
 				}
@@ -17574,12 +14677,12 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2453);
+			setState(2447);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T_ADD || _la==T_SUB) {
 				{
-				setState(2452);
+				setState(2446);
 				_la = _input.LA(1);
 				if ( !(_la==T_ADD || _la==T_SUB) ) {
 				_errHandler.recoverInline(this);
@@ -17592,7 +14695,7 @@ public class PLHQLStatementsParser extends Parser {
 				}
 			}
 
-			setState(2455);
+			setState(2449);
 			match(L_INT);
 			}
 		}
@@ -17632,12 +14735,12 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2458);
+			setState(2452);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T_ADD || _la==T_SUB) {
 				{
-				setState(2457);
+				setState(2451);
 				_la = _input.LA(1);
 				if ( !(_la==T_ADD || _la==T_SUB) ) {
 				_errHandler.recoverInline(this);
@@ -17650,7 +14753,7 @@ public class PLHQLStatementsParser extends Parser {
 				}
 			}
 
-			setState(2460);
+			setState(2454);
 			match(L_DEC);
 			}
 		}
@@ -17689,7 +14792,7 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2462);
+			setState(2456);
 			_la = _input.LA(1);
 			if ( !(_la==T_FALSE || _la==T_TRUE) ) {
 			_errHandler.recoverInline(this);
@@ -17734,7 +14837,7 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2464);
+			setState(2458);
 			match(T_NULL);
 			}
 		}
@@ -18089,7 +15192,7 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2466);
+			setState(2460);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_ACTION) | (1L << T_ADD2) | (1L << T_ALL) | (1L << T_ALLOCATE) | (1L << T_ALTER) | (1L << T_AND) | (1L << T_ANSI_NULLS) | (1L << T_ANSI_PADDING) | (1L << T_AS) | (1L << T_ASC) | (1L << T_ASSOCIATE) | (1L << T_AT) | (1L << T_AUTO_INCREMENT) | (1L << T_AVG) | (1L << T_BATCHSIZE) | (1L << T_BEGIN) | (1L << T_BETWEEN) | (1L << T_BIGINT) | (1L << T_BINARY_DOUBLE) | (1L << T_BINARY_FLOAT) | (1L << T_BIT) | (1L << T_BODY) | (1L << T_BREAK) | (1L << T_BY) | (1L << T_BYTE) | (1L << T_CALL) | (1L << T_CALLER) | (1L << T_CASCADE) | (1L << T_CASE) | (1L << T_CASESPECIFIC) | (1L << T_CAST) | (1L << T_CHAR) | (1L << T_CHARACTER) | (1L << T_CHARSET) | (1L << T_CLIENT) | (1L << T_CLOSE) | (1L << T_CLUSTERED) | (1L << T_CMP) | (1L << T_COLLECT) | (1L << T_COLLECTION) | (1L << T_COLUMN) | (1L << T_COMMENT) | (1L << T_CONSTANT) | (1L << T_COMMIT) | (1L << T_COMPRESS) | (1L << T_CONCAT) | (1L << T_CONDITION) | (1L << T_CONSTRAINT) | (1L << T_CONTINUE) | (1L << T_COPY) | (1L << T_COUNT) | (1L << T_COUNT_BIG) | (1L << T_CREATE) | (1L << T_CREATION) | (1L << T_CREATOR) | (1L << T_CS) | (1L << T_CURRENT) | (1L << T_CURRENT_SCHEMA))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T_CURSOR - 64)) | (1L << (T_DATABASE - 64)) | (1L << (T_DATA - 64)) | (1L << (T_DATE - 64)) | (1L << (T_DATETIME - 64)) | (1L << (T_DAY - 64)) | (1L << (T_DAYS - 64)) | (1L << (T_DEC - 64)) | (1L << (T_DECIMAL - 64)) | (1L << (T_DECLARE - 64)) | (1L << (T_DEFAULT - 64)) | (1L << (T_DEFERRED - 64)) | (1L << (T_DEFINED - 64)) | (1L << (T_DEFINER - 64)) | (1L << (T_DEFINITION - 64)) | (1L << (T_DELETE - 64)) | (1L << (T_DELIMITED - 64)) | (1L << (T_DELIMITER - 64)) | (1L << (T_DESC - 64)) | (1L << (T_DESCRIBE - 64)) | (1L << (T_DIAGNOSTICS - 64)) | (1L << (T_DIR - 64)) | (1L << (T_DIRECTORY - 64)) | (1L << (T_DISTINCT - 64)) | (1L << (T_DISTRIBUTE - 64)) | (1L << (T_DO - 64)) | (1L << (T_DOUBLE - 64)) | (1L << (T_DROP - 64)) | (1L << (T_DYNAMIC - 64)) | (1L << (T_ENABLE - 64)) | (1L << (T_ENGINE - 64)) | (1L << (T_ESCAPED - 64)) | (1L << (T_EXCEPT - 64)) | (1L << (T_EXEC - 64)) | (1L << (T_EXECUTE - 64)) | (1L << (T_EXCEPTION - 64)) | (1L << (T_EXCLUSIVE - 64)) | (1L << (T_EXISTS - 64)) | (1L << (T_EXIT - 64)) | (1L << (T_FALLBACK - 64)) | (1L << (T_FALSE - 64)) | (1L << (T_FETCH - 64)) | (1L << (T_FIELDS - 64)) | (1L << (T_FILE - 64)) | (1L << (T_FILES - 64)) | (1L << (T_FLOAT - 64)) | (1L << (T_FOR - 64)) | (1L << (T_FOREIGN - 64)) | (1L << (T_FORMAT - 64)) | (1L << (T_FOUND - 64)) | (1L << (T_FROM - 64)) | (1L << (T_FULL - 64)) | (1L << (T_FUNCTION - 64)) | (1L << (T_GET - 64)) | (1L << (T_GLOBAL - 64)) | (1L << (T_GO - 64)) | (1L << (T_GRANT - 64)) | (1L << (T_GROUP - 64)) | (1L << (T_HANDLER - 64)) | (1L << (T_HASH - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (T_HAVING - 128)) | (1L << (T_HDFS - 128)) | (1L << (T_HIVE - 128)) | (1L << (T_HOST - 128)) | (1L << (T_IDENTITY - 128)) | (1L << (T_IF - 128)) | (1L << (T_IGNORE - 128)) | (1L << (T_IMMEDIATE - 128)) | (1L << (T_IN - 128)) | (1L << (T_INCLUDE - 128)) | (1L << (T_INDEX - 128)) | (1L << (T_INITRANS - 128)) | (1L << (T_INNER - 128)) | (1L << (T_INOUT - 128)) | (1L << (T_INSERT - 128)) | (1L << (T_INT - 128)) | (1L << (T_INT2 - 128)) | (1L << (T_INT4 - 128)) | (1L << (T_INT8 - 128)) | (1L << (T_INTEGER - 128)) | (1L << (T_INTERSECT - 128)) | (1L << (T_INTERVAL - 128)) | (1L << (T_INTO - 128)) | (1L << (T_INVOKER - 128)) | (1L << (T_IS - 128)) | (1L << (T_ISOPEN - 128)) | (1L << (T_ITEMS - 128)) | (1L << (T_JOIN - 128)) | (1L << (T_KEEP - 128)) | (1L << (T_KEY - 128)) | (1L << (T_KEYS - 128)) | (1L << (T_LANGUAGE - 128)) | (1L << (T_LEAVE - 128)) | (1L << (T_LEFT - 128)) | (1L << (T_LIKE - 128)) | (1L << (T_LIMIT - 128)) | (1L << (T_LINES - 128)) | (1L << (T_LOCAL - 128)) | (1L << (T_LOCATION - 128)) | (1L << (T_LOCATOR - 128)) | (1L << (T_LOCATORS - 128)) | (1L << (T_LOCKS - 128)) | (1L << (T_LOG - 128)) | (1L << (T_LOGGED - 128)) | (1L << (T_LOGGING - 128)) | (1L << (T_LOOP - 128)) | (1L << (T_MAP - 128)) | (1L << (T_MATCHED - 128)) | (1L << (T_MAX - 128)) | (1L << (T_MAXTRANS - 128)) | (1L << (T_MERGE - 128)) | (1L << (T_MESSAGE_TEXT - 128)) | (1L << (T_MICROSECOND - 128)) | (1L << (T_MICROSECONDS - 128)) | (1L << (T_MIN - 128)) | (1L << (T_MULTISET - 128)) | (1L << (T_NCHAR - 128)) | (1L << (T_NEW - 128)) | (1L << (T_NVARCHAR - 128)) | (1L << (T_NO - 128)) | (1L << (T_NOCOUNT - 128)) | (1L << (T_NOCOMPRESS - 128)) | (1L << (T_NOLOGGING - 128)) | (1L << (T_NONE - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (T_NOT - 192)) | (1L << (T_NOTFOUND - 192)) | (1L << (T_NUMERIC - 192)) | (1L << (T_NUMBER - 192)) | (1L << (T_OBJECT - 192)) | (1L << (T_OFF - 192)) | (1L << (T_ON - 192)) | (1L << (T_ONLY - 192)) | (1L << (T_OPEN - 192)) | (1L << (T_OR - 192)) | (1L << (T_ORDER - 192)) | (1L << (T_OUT - 192)) | (1L << (T_OUTER - 192)) | (1L << (T_OVER - 192)) | (1L << (T_OVERWRITE - 192)) | (1L << (T_OWNER - 192)) | (1L << (T_PACKAGE - 192)) | (1L << (T_PARTITION - 192)) | (1L << (T_PCTFREE - 192)) | (1L << (T_PCTUSED - 192)) | (1L << (T_PRECISION - 192)) | (1L << (T_PRESERVE - 192)) | (1L << (T_PRIMARY - 192)) | (1L << (T_PRINT - 192)) | (1L << (T_PROC - 192)) | (1L << (T_PROCEDURE - 192)) | (1L << (T_QUALIFY - 192)) | (1L << (T_QUERY_BAND - 192)) | (1L << (T_QUIT - 192)) | (1L << (T_QUOTED_IDENTIFIER - 192)) | (1L << (T_RAISE - 192)) | (1L << (T_REAL - 192)) | (1L << (T_REFERENCES - 192)) | (1L << (T_REGEXP - 192)) | (1L << (T_REPLACE - 192)) | (1L << (T_RESIGNAL - 192)) | (1L << (T_RESTRICT - 192)) | (1L << (T_RESULT - 192)) | (1L << (T_RESULT_SET_LOCATOR - 192)) | (1L << (T_RETURN - 192)) | (1L << (T_RETURNS - 192)) | (1L << (T_REVERSE - 192)) | (1L << (T_RIGHT - 192)) | (1L << (T_RLIKE - 192)) | (1L << (T_ROLE - 192)) | (1L << (T_ROLLBACK - 192)) | (1L << (T_ROW - 192)) | (1L << (T_ROWS - 192)) | (1L << (T_ROW_COUNT - 192)) | (1L << (T_RR - 192)) | (1L << (T_RS - 192)) | (1L << (T_PWD - 192)) | (1L << (T_TRIM - 192)) | (1L << (T_SCHEMA - 192)) | (1L << (T_SECOND - 192)) | (1L << (T_SECONDS - 192)) | (1L << (T_SECURITY - 192)) | (1L << (T_SEGMENT - 192)) | (1L << (T_SEL - 192)) | (1L << (T_SELECT - 192)) | (1L << (T_SET - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (T_SESSION - 256)) | (1L << (T_SESSIONS - 256)) | (1L << (T_SETS - 256)) | (1L << (T_SHARE - 256)) | (1L << (T_SIGNAL - 256)) | (1L << (T_SIMPLE_DOUBLE - 256)) | (1L << (T_SIMPLE_FLOAT - 256)) | (1L << (T_SMALLDATETIME - 256)) | (1L << (T_SMALLINT - 256)) | (1L << (T_SQL - 256)) | (1L << (T_SQLEXCEPTION - 256)) | (1L << (T_SQLINSERT - 256)) | (1L << (T_SQLSTATE - 256)) | (1L << (T_SQLWARNING - 256)) | (1L << (T_STATS - 256)) | (1L << (T_STATISTICS - 256)) | (1L << (T_STEP - 256)) | (1L << (T_STORAGE - 256)) | (1L << (T_STORED - 256)) | (1L << (T_STRING - 256)) | (1L << (T_SUBDIR - 256)) | (1L << (T_SUBSTRING - 256)) | (1L << (T_SUM - 256)) | (1L << (T_SUMMARY - 256)) | (1L << (T_SYS_REFCURSOR - 256)) | (1L << (T_TABLE - 256)) | (1L << (T_TABLESPACE - 256)) | (1L << (T_TEMPORARY - 256)) | (1L << (T_TERMINATED - 256)) | (1L << (T_TEXTIMAGE_ON - 256)) | (1L << (T_THEN - 256)) | (1L << (T_TIMESTAMP - 256)) | (1L << (T_TITLE - 256)) | (1L << (T_TO - 256)) | (1L << (T_TOP - 256)) | (1L << (T_TRANSACTION - 256)) | (1L << (T_TRUE - 256)) | (1L << (T_TRUNCATE - 256)) | (1L << (T_UNIQUE - 256)) | (1L << (T_UPDATE - 256)) | (1L << (T_UR - 256)) | (1L << (T_USE - 256)) | (1L << (T_USING - 256)) | (1L << (T_VALUE - 256)) | (1L << (T_VALUES - 256)) | (1L << (T_VAR - 256)) | (1L << (T_VARCHAR - 256)) | (1L << (T_VARCHAR2 - 256)) | (1L << (T_VARYING - 256)) | (1L << (T_VOLATILE - 256)) | (1L << (T_WHILE - 256)) | (1L << (T_WITH - 256)) | (1L << (T_WITHOUT - 256)) | (1L << (T_WORK - 256)) | (1L << (T_XACT_ABORT - 256)) | (1L << (T_XML - 256)) | (1L << (T_YES - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (T_ACTIVITY_COUNT - 320)) | (1L << (T_CUME_DIST - 320)) | (1L << (T_CURRENT_DATE - 320)) | (1L << (T_CURRENT_TIMESTAMP - 320)) | (1L << (T_CURRENT_USER - 320)) | (1L << (T_DENSE_RANK - 320)) | (1L << (T_FIRST_VALUE - 320)) | (1L << (T_LAG - 320)) | (1L << (T_LAST_VALUE - 320)) | (1L << (T_LEAD - 320)) | (1L << (T_PART_COUNT - 320)) | (1L << (T_PART_LOC - 320)) | (1L << (T_RANK - 320)) | (1L << (T_ROW_NUMBER - 320)) | (1L << (T_STDEV - 320)) | (1L << (T_SYSDATE - 320)) | (1L << (T_VARIANCE - 320)) | (1L << (T_USER - 320)))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -18134,7 +15237,7 @@ public class PLHQLStatementsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(2468);
+			setState(2462);
 			match(L_INVALID_TOKEN);
 			notifyErrorListeners("Unexpected Token");
 			}
@@ -18241,7 +15344,7 @@ public class PLHQLStatementsParser extends Parser {
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0185\u09aa\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0185\u09a4\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -18437,228 +15540,227 @@ public class PLHQLStatementsParser extends Parser {
 		"\5\u0093\u0968\n\u0093\5\u0093\u096a\n\u0093\3\u0093\3\u0093\3\u0094\3"+
 		"\u0094\7\u0094\u0970\n\u0094\f\u0094\16\u0094\u0973\13\u0094\3\u0094\3"+
 		"\u0094\3\u0095\3\u0095\3\u0095\3\u0096\3\u0096\3\u0096\3\u0097\3\u0097"+
-		"\3\u0098\3\u0098\5\u0098\u0981\n\u0098\3\u0098\3\u0098\3\u0098\5\u0098"+
-		"\u0986\n\u0098\7\u0098\u0988\n\u0098\f\u0098\16\u0098\u098b\13\u0098\3"+
-		"\u0099\3\u0099\5\u0099\u098f\n\u0099\3\u009a\3\u009a\3\u009a\3\u009a\5"+
-		"\u009a\u0995\n\u009a\3\u009b\5\u009b\u0998\n\u009b\3\u009b\3\u009b\3\u009c"+
-		"\5\u009c\u099d\n\u009c\3\u009c\3\u009c\3\u009d\3\u009d\3\u009e\3\u009e"+
-		"\3\u009f\3\u009f\3\u00a0\3\u00a0\3\u00a0\3\u00a0\2\4\u00f0\u0104\u00a1"+
-		"\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFH"+
-		"JLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088\u008a\u008c"+
-		"\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c\u009e\u00a0\u00a2\u00a4"+
-		"\u00a6\u00a8\u00aa\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8\u00ba\u00bc"+
-		"\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0\u00d2\u00d4"+
-		"\u00d6\u00d8\u00da\u00dc\u00de\u00e0\u00e2\u00e4\u00e6\u00e8\u00ea\u00ec"+
-		"\u00ee\u00f0\u00f2\u00f4\u00f6\u00f8\u00fa\u00fc\u00fe\u0100\u0102\u0104"+
-		"\u0106\u0108\u010a\u010c\u010e\u0110\u0112\u0114\u0116\u0118\u011a\u011c"+
-		"\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130\u0132\u0134"+
-		"\u0136\u0138\u013a\u013c\u013e\2$\5\2\3\4\u015f\u015f\u0177\u0177\4\2"+
-		"\u016f\u016f\u0173\u0173\4\2\u00b9\u00b9\u0101\u0101\4\2\20\20TT\4\2Q"+
-		"Q\u012d\u012d\4\2mm\u00ac\u00ac\4\2QQ\u00d9\u00d9\4\2MM\u0089\u0089\5"+
-		"\2\u008d\u008d\u00b3\u00b3\u00d5\u00d6\4\2\u00ae\u00ae\u00c0\u00c0\4\2"+
-		"\u00bd\u00bd\u0141\u0141\4\2\u00f4\u00f4\u012a\u012a\4\2\u00b2\u00b2\u017e"+
-		"\u017e\4\2  \'\'\4\2%%??\4\2CC\u00fa\u00fa\3\2\u00dc\u00dd\4\2\17\17\u009a"+
-		"\u009a\3\2gh\3\2`a\4\2\37\37\u0113\u0113\3\2\u00ff\u0100\4\2\t\tYY\5\2"+
-		"yy\u00a3\u00a3\u00ee\u00ee\5\2nn\u00c4\u00c4\u0128\u0128\4\2\f\f\u015b"+
-		"\u015b\4\2\u00cc\u00cc\u015e\u015e\5\2\u00a4\u00a4\u00e5\u00e5\u00ef\u00ef"+
-		"\5\2GH\u00b6\u00b7\u00fb\u00fc\3\2\u0175\u0175\3\2\u0161\u0166\4\2\u015a"+
-		"\u015a\u0178\u0178\4\2nn\u0128\u0128\17\2\7\32\34^bbd\u00c3\u00c5\u00d6"+
-		"\u00d8\u00f3\u00f5\u0108\u010a\u0122\u0124\u0129\u012c\u0136\u0138\u0138"+
-		"\u013b\u014b\u0152\u0159\2\u0ae9\2\u0141\3\2\2\2\4\u014f\3\2\2\2\6\u015d"+
-		"\3\2\2\2\b\u0160\3\2\2\2\n\u0167\3\2\2\2\f\u0175\3\2\2\2\16\u0177\3\2"+
-		"\2\2\20\u0183\3\2\2\2\22\u0196\3\2\2\2\24\u0198\3\2\2\2\26\u01b1\3\2\2"+
-		"\2\30\u01b3\3\2\2\2\32\u01b5\3\2\2\2\34\u01b7\3\2\2\2\36\u01bf\3\2\2\2"+
-		" \u01ca\3\2\2\2\"\u01ce\3\2\2\2$\u01e0\3\2\2\2&\u01e7\3\2\2\2(\u01ee\3"+
-		"\2\2\2*\u01f0\3\2\2\2,\u0209\3\2\2\2.\u022b\3\2\2\2\60\u0235\3\2\2\2\62"+
-		"\u0237\3\2\2\2\64\u023e\3\2\2\2\66\u0247\3\2\2\28\u0251\3\2\2\2:\u025c"+
-		"\3\2\2\2<\u0266\3\2\2\2>\u028b\3\2\2\2@\u028d\3\2\2\2B\u029b\3\2\2\2D"+
-		"\u029d\3\2\2\2F\u02aa\3\2\2\2H\u02c9\3\2\2\2J\u02ce\3\2\2\2L\u02ec\3\2"+
-		"\2\2N\u02ee\3\2\2\2P\u0310\3\2\2\2R\u0348\3\2\2\2T\u034a\3\2\2\2V\u0356"+
-		"\3\2\2\2X\u035b\3\2\2\2Z\u0360\3\2\2\2\\\u036e\3\2\2\2^\u0382\3\2\2\2"+
-		"`\u03a5\3\2\2\2b\u03b9\3\2\2\2d\u03bf\3\2\2\2f\u03c1\3\2\2\2h\u03cd\3"+
-		"\2\2\2j\u03ea\3\2\2\2l\u041a\3\2\2\2n\u041c\3\2\2\2p\u0432\3\2\2\2r\u0440"+
-		"\3\2\2\2t\u0442\3\2\2\2v\u0454\3\2\2\2x\u0456\3\2\2\2z\u045f\3\2\2\2|"+
-		"\u0467\3\2\2\2~\u0470\3\2\2\2\u0080\u0498\3\2\2\2\u0082\u04c4\3\2\2\2"+
-		"\u0084\u04c6\3\2\2\2\u0086\u04e0\3\2\2\2\u0088\u04e2\3\2\2\2\u008a\u04eb"+
-		"\3\2\2\2\u008c\u04ed\3\2\2\2\u008e\u04fd\3\2\2\2\u0090\u050d\3\2\2\2\u0092"+
-		"\u0514\3\2\2\2\u0094\u051c\3\2\2\2\u0096\u0522\3\2\2\2\u0098\u0528\3\2"+
-		"\2\2\u009a\u052d\3\2\2\2\u009c\u0530\3\2\2\2\u009e\u0543\3\2\2\2\u00a0"+
-		"\u0553\3\2\2\2\u00a2\u0557\3\2\2\2\u00a4\u055b\3\2\2\2\u00a6\u056d\3\2"+
-		"\2\2\u00a8\u057f\3\2\2\2\u00aa\u0594\3\2\2\2\u00ac\u05cf\3\2\2\2\u00ae"+
-		"\u05d2\3\2\2\2\u00b0\u05d6\3\2\2\2\u00b2\u05df\3\2\2\2\u00b4\u05e8\3\2"+
-		"\2\2\u00b6\u05f3\3\2\2\2\u00b8\u0601\3\2\2\2\u00ba\u060f\3\2\2\2\u00bc"+
-		"\u0611\3\2\2\2\u00be\u0639\3\2\2\2\u00c0\u063c\3\2\2\2\u00c2\u0649\3\2"+
-		"\2\2\u00c4\u064b\3\2\2\2\u00c6\u0658\3\2\2\2\u00c8\u0663\3\2\2\2\u00ca"+
-		"\u0667\3\2\2\2\u00cc\u066b\3\2\2\2\u00ce\u0674\3\2\2\2\u00d0\u067c\3\2"+
-		"\2\2\u00d2\u0686\3\2\2\2\u00d4\u0688\3\2\2\2\u00d6\u068e\3\2\2\2\u00d8"+
-		"\u069c\3\2\2\2\u00da\u06a7\3\2\2\2\u00dc\u06a9\3\2\2\2\u00de\u06c4\3\2"+
-		"\2\2\u00e0\u06c6\3\2\2\2\u00e2\u06d7\3\2\2\2\u00e4\u06d9\3\2\2\2\u00e6"+
-		"\u06dc\3\2\2\2\u00e8\u06df\3\2\2\2\u00ea\u06e9\3\2\2\2\u00ec\u06ec\3\2"+
-		"\2\2\u00ee\u06ef\3\2\2\2\u00f0\u0708\3\2\2\2\u00f2\u0716\3\2\2\2\u00f4"+
-		"\u072f\3\2\2\2\u00f6\u0731\3\2\2\2\u00f8\u0744\3\2\2\2\u00fa\u0756\3\2"+
-		"\2\2\u00fc\u075c\3\2\2\2\u00fe\u075e\3\2\2\2\u0100\u0760\3\2\2\2\u0102"+
-		"\u076d\3\2\2\2\u0104\u0780\3\2\2\2\u0106\u07a2\3\2\2\2\u0108\u07a4\3\2"+
-		"\2\2\u010a\u07a8\3\2\2\2\u010c\u07aa\3\2\2\2\u010e\u07bd\3\2\2\2\u0110"+
-		"\u07c1\3\2\2\2\u0112\u07c3\3\2\2\2\u0114\u07d4\3\2\2\2\u0116\u0872\3\2"+
-		"\2\2\u0118\u0874\3\2\2\2\u011a\u0876\3\2\2\2\u011c\u0880\3\2\2\2\u011e"+
-		"\u0952\3\2\2\2\u0120\u0954\3\2\2\2\u0122\u095b\3\2\2\2\u0124\u0963\3\2"+
-		"\2\2\u0126\u096d\3\2\2\2\u0128\u0976\3\2\2\2\u012a\u0979\3\2\2\2\u012c"+
-		"\u097c\3\2\2\2\u012e\u0980\3\2\2\2\u0130\u098e\3\2\2\2\u0132\u0994\3\2"+
-		"\2\2\u0134\u0997\3\2\2\2\u0136\u099c\3\2\2\2\u0138\u09a0\3\2\2\2\u013a"+
-		"\u09a2\3\2\2\2\u013c\u09a4\3\2\2\2\u013e\u09a6\3\2\2\2\u0140\u0142\5x"+
-		"=\2\u0141\u0140\3\2\2\2\u0142\u0143\3\2\2\2\u0143\u0141\3\2\2\2\u0143"+
-		"\u0144\3\2\2\2\u0144\u0145\3\2\2\2\u0145\u0146\7\2\2\3\u0146\3\3\2\2\2"+
-		"\u0147\u014b\5\b\5\2\u0148\u014b\5\26\f\2\u0149\u014b\5\6\4\2\u014a\u0147"+
-		"\3\2\2\2\u014a\u0148\3\2\2\2\u014a\u0149\3\2\2\2\u014b\u014d\3\2\2\2\u014c"+
-		"\u014e\7}\2\2\u014d\u014c\3\2\2\2\u014d\u014e\3\2\2\2\u014e\u0150\3\2"+
-		"\2\2\u014f\u014a\3\2\2\2\u0150\u0151\3\2\2\2\u0151\u014f\3\2\2\2\u0151"+
-		"\u0152\3\2\2\2\u0152\5\3\2\2\2\u0153\u015e\5\u00be`\2\u0154\u015e\5\u0126"+
-		"\u0094\2\u0155\u015e\5\n\6\2\u0156\u015e\5\u0132\u009a\2\u0157\u015e\5"+
-		"\u00e6t\2\u0158\u015e\5\u008aF\2\u0159\u015e\5B\"\2\u015a\u015e\5\u00ac"+
-		"W\2\u015b\u015e\5\66\34\2\u015c\u015e\5\u013e\u00a0\2\u015d\u0153\3\2"+
-		"\2\2\u015d\u0154\3\2\2\2\u015d\u0155\3\2\2\2\u015d\u0156\3\2\2\2\u015d"+
-		"\u0157\3\2\2\2\u015d\u0158\3\2\2\2\u015d\u0159\3\2\2\2\u015d\u015a\3\2"+
-		"\2\2\u015d\u015b\3\2\2\2\u015d\u015c\3\2\2\2\u015e\7\3\2\2\2\u015f\u0161"+
-		"\58\35\2\u0160\u015f\3\2\2\2\u0160\u0161\3\2\2\2\u0161\u0162\3\2\2\2\u0162"+
-		"\u0163\7\26\2\2\u0163\u0164\5\4\3\2\u0164\u0165\5\16\b\2\u0165\t\3\2\2"+
-		"\2\u0166\u0168\58\35\2\u0167\u0166\3\2\2\2\u0167\u0168\3\2\2\2\u0168\u0169"+
-		"\3\2\2\2\u0169\u016a\7\26\2\2\u016a\u016b\5\4\3\2\u016b\u016c\b\6\1\2"+
-		"\u016c\13\3\2\2\2\u016d\u016e\7\26\2\2\u016e\u016f\5\4\3\2\u016f\u0170"+
-		"\5\16\b\2\u0170\u0176\3\2\2\2\u0171\u0173\5\26\f\2\u0172\u0174\7\u0177"+
-		"\2\2\u0173\u0172\3\2\2\2\u0173\u0174\3\2\2\2\u0174\u0176\3\2\2\2\u0175"+
-		"\u016d\3\2\2\2\u0175\u0171\3\2\2\2\u0176\r\3\2\2\2\u0177\u0178\6\b\2\2"+
-		"\u0178\u0179\7c\2\2\u0179\17\3\2\2\2\u017a\u0184\5\b\5\2\u017b\u017d\5"+
-		"\26\f\2\u017c\u017b\3\2\2\2\u017d\u017e\3\2\2\2\u017e\u017c\3\2\2\2\u017e"+
-		"\u017f\3\2\2\2\u017f\u0181\3\2\2\2\u0180\u0182\7}\2\2\u0181\u0180\3\2"+
-		"\2\2\u0181\u0182\3\2\2\2\u0182\u0184\3\2\2\2\u0183\u017a\3\2\2\2\u0183"+
-		"\u017c\3\2\2\2\u0184\21\3\2\2\2\u0185\u0186\5\36\20\2\u0186\u0187\7\u0177"+
-		"\2\2\u0187\u0197\3\2\2\2\u0188\u0189\5\60\31\2\u0189\u018a\7\u0177\2\2"+
-		"\u018a\u0197\3\2\2\2\u018b\u0197\5\u0088E\2\u018c\u0197\5\u00a6T\2\u018d"+
-		"\u0197\5x=\2\u018e\u018f\5\u00a2R\2\u018f\u0190\7\u0177\2\2\u0190\u0197"+
-		"\3\2\2\2\u0191\u0197\5\24\13\2\u0192\u0197\5\u00a8U\2\u0193\u0194\5\62"+
-		"\32\2\u0194\u0195\7\u0177\2\2\u0195\u0197\3\2\2\2\u0196\u0185\3\2\2\2"+
-		"\u0196\u0188\3\2\2\2\u0196\u018b\3\2\2\2\u0196\u018c\3\2\2\2\u0196\u018d"+
-		"\3\2\2\2\u0196\u018e\3\2\2\2\u0196\u0191\3\2\2\2\u0196\u0192\3\2\2\2\u0196"+
-		"\u0193\3\2\2\2\u0197\23\3\2\2\2\u0198\u019c\7\u0170\2\2\u0199\u019b\5"+
-		"\26\f\2\u019a\u0199\3\2\2\2\u019b\u019e\3\2\2\2\u019c\u019a\3\2\2\2\u019c"+
-		"\u019d\3\2\2\2\u019d\u019f\3\2\2\2\u019e\u019c\3\2\2\2\u019f\u01a0\7\u0174"+
-		"\2\2\u01a0\25\3\2\2\2\u01a1\u01b2\5\34\17\2\u01a2\u01b2\5\60\31\2\u01a3"+
-		"\u01b2\5\62\32\2\u01a4\u01b2\5t;\2\u01a5\u01b2\5\u009cO\2\u01a6\u01b2"+
-		"\5F$\2\u01a7\u01b2\5@!\2\u01a8\u01b2\5\64\33\2\u01a9\u01b2\5\u0084C\2"+
-		"\u01aa\u01b2\5\u00a4S\2\u01ab\u01b2\5\u0086D\2\u01ac\u01b2\5\22\n\2\u01ad"+
-		"\u01b2\5\u00a2R\2\u01ae\u01b2\5\32\16\2\u01af\u01b2\5\u0104\u0083\2\u01b0"+
-		"\u01b2\5\30\r\2\u01b1\u01a1\3\2\2\2\u01b1\u01a2\3\2\2\2\u01b1\u01a3\3"+
-		"\2\2\2\u01b1\u01a4\3\2\2\2\u01b1\u01a5\3\2\2\2\u01b1\u01a6\3\2\2\2\u01b1"+
-		"\u01a7\3\2\2\2\u01b1\u01a8\3\2\2\2\u01b1\u01a9\3\2\2\2\u01b1\u01aa\3\2"+
-		"\2\2\u01b1\u01ab\3\2\2\2\u01b1\u01ac\3\2\2\2\u01b1\u01ad\3\2\2\2\u01b1"+
-		"\u01ae\3\2\2\2\u01b1\u01af\3\2\2\2\u01b1\u01b0\3\2\2\2\u01b2\27\3\2\2"+
-		"\2\u01b3\u01b4\t\2\2\2\u01b4\31\3\2\2\2\u01b5\u01b6\7\u00c4\2\2\u01b6"+
-		"\33\3\2\2\2\u01b7\u01bc\5 \21\2\u01b8\u01b9\7\u015d\2\2\u01b9\u01bb\5"+
-		" \21\2\u01ba\u01b8\3\2\2\2\u01bb\u01be\3\2\2\2\u01bc\u01ba\3\2\2\2\u01bc"+
-		"\u01bd\3\2\2\2\u01bd\35\3\2\2\2\u01be\u01bc\3\2\2\2\u01bf\u01c4\5\"\22"+
-		"\2\u01c0\u01c1\7\u015d\2\2\u01c1\u01c3\5\"\22\2\u01c2\u01c0\3\2\2\2\u01c3"+
-		"\u01c6\3\2\2\2\u01c4\u01c2\3\2\2\2\u01c4\u01c5\3\2\2\2\u01c5\37\3\2\2"+
-		"\2\u01c6\u01c4\3\2\2\2\u01c7\u01cb\5$\23\2\u01c8\u01cb\5*\26\2\u01c9\u01cb"+
-		"\5.\30\2\u01ca\u01c7\3\2\2\2\u01ca\u01c8\3\2\2\2\u01ca\u01c9\3\2\2\2\u01cb"+
-		"!\3\2\2\2\u01cc\u01cf\5&\24\2\u01cd\u01cf\5,\27\2\u01ce\u01cc\3\2\2\2"+
-		"\u01ce\u01cd\3\2\2\2\u01cf#\3\2\2\2\u01d0\u01d2\5\u012e\u0098\2\u01d1"+
-		"\u01d3\7\u015c\2\2\u01d2\u01d1\3\2\2\2\u01d2\u01d3\3\2\2\2\u01d3\u01d4"+
-		"\3\2\2\2\u01d4\u01d5\7\u0166\2\2\u01d5\u01d6\5\u0104\u0083\2\u01d6\u01e1"+
-		"\3\2\2\2\u01d7\u01d8\7\u0171\2\2\u01d8\u01d9\5\u012e\u0098\2\u01d9\u01db"+
-		"\7\u0175\2\2\u01da\u01dc\7\u015c\2\2\u01db\u01da\3\2\2\2\u01db\u01dc\3"+
-		"\2\2\2\u01dc\u01dd\3\2\2\2\u01dd\u01de\7\u0166\2\2\u01de\u01df\5\u0104"+
-		"\u0083\2\u01df\u01e1\3\2\2\2\u01e0\u01d0\3\2\2\2\u01e0\u01d7\3\2\2\2\u01e1"+
-		"%\3\2\2\2\u01e2\u01e3\5\u012e\u0098\2\u01e3\u01e4\5\u012c\u0097\2\u01e4"+
-		"\u01e5\5\u0104\u0083\2\u01e5\u01e8\3\2\2\2\u01e6\u01e8\5(\25\2\u01e7\u01e2"+
-		"\3\2\2\2\u01e7\u01e6\3\2\2\2\u01e8\'\3\2\2\2\u01e9\u01ea\5\u012e\u0098"+
-		"\2\u01ea\u01eb\t\3\2\2\u01eb\u01ef\3\2\2\2\u01ec\u01ed\t\3\2\2\u01ed\u01ef"+
-		"\5\u012e\u0098\2\u01ee\u01e9\3\2\2\2\u01ee\u01ec\3\2\2\2\u01ef)\3\2\2"+
-		"\2\u01f0\u01f1\7\u0171\2\2\u01f1\u01f6\5\u012e\u0098\2\u01f2\u01f3\7\u015d"+
-		"\2\2\u01f3\u01f5\5\u012e\u0098\2\u01f4\u01f2\3\2\2\2\u01f5\u01f8\3\2\2"+
-		"\2\u01f6\u01f4\3\2\2\2\u01f6\u01f7\3\2\2\2\u01f7\u01f9\3\2\2\2\u01f8\u01f6"+
-		"\3\2\2\2\u01f9\u01fb\7\u0175\2\2\u01fa\u01fc\7\u015c\2\2\u01fb\u01fa\3"+
-		"\2\2\2\u01fb\u01fc\3\2\2\2\u01fc\u01fd\3\2\2\2\u01fd\u01fe\5\u012c\u0097"+
-		"\2\u01fe\u01ff\7\u0171\2\2\u01ff\u0204\5\u0104\u0083\2\u0200\u0201\7\u015d"+
-		"\2\2\u0201\u0203\5\u0104\u0083\2\u0202\u0200\3\2\2\2\u0203\u0206\3\2\2"+
-		"\2\u0204\u0202\3\2\2\2\u0204\u0205\3\2\2\2\u0205\u0207\3\2\2\2\u0206\u0204"+
-		"\3\2\2\2\u0207\u0208\7\u0175\2\2\u0208+\3\2\2\2\u0209\u020a\7\u0171\2"+
-		"\2\u020a\u020f\5\u012e\u0098\2\u020b\u020c\7\u015d\2\2\u020c\u020e\5\u012e"+
-		"\u0098\2\u020d\u020b\3\2\2\2\u020e\u0211\3\2\2\2\u020f\u020d\3\2\2\2\u020f"+
-		"\u0210\3\2\2\2\u0210\u0212\3\2\2\2\u0211\u020f\3\2\2\2\u0212\u0213\7\u0175"+
-		"\2\2\u0213\u0214\7\u0166\2\2\u0214\u0215\7\u0171\2\2\u0215\u021a\5\u0104"+
-		"\u0083\2\u0216\u0217\7\u015d\2\2\u0217\u0219\5\u0104\u0083\2\u0218\u0216"+
-		"\3\2\2\2\u0219\u021c\3\2\2\2\u021a\u0218\3\2\2\2\u021a\u021b\3\2\2\2\u021b"+
-		"\u021d\3\2\2\2\u021c\u021a\3\2\2\2\u021d\u021e\7\u0175\2\2\u021e-\3\2"+
-		"\2\2\u021f\u022c\5\u012e\u0098\2\u0220\u0221\7\u0171\2\2\u0221\u0226\5"+
-		"\u012e\u0098\2\u0222\u0223\7\u015d\2\2\u0223\u0225\5\u012e\u0098\2\u0224"+
-		"\u0222\3\2\2\2\u0225\u0228\3\2\2\2\u0226\u0224\3\2\2\2\u0226\u0227\3\2"+
-		"\2\2\u0227\u0229\3\2\2\2\u0228\u0226\3\2\2\2\u0229\u022a\7\u0175\2\2\u022a"+
-		"\u022c\3\2\2\2\u022b\u021f\3\2\2\2\u022b\u0220\3\2\2\2\u022c\u022e\3\2"+
-		"\2\2\u022d\u022f\7\u015c\2\2\u022e\u022d\3\2\2\2\u022e\u022f\3\2\2\2\u022f"+
-		"\u0230\3\2\2\2\u0230\u0231\7\u0166\2\2\u0231\u0232\7\u0171\2\2\u0232\u0233"+
-		"\5\u00aeX\2\u0233\u0234\7\u0175\2\2\u0234/\3\2\2\2\u0235\u0236\7\36\2"+
-		"\2\u0236\61\3\2\2\2\u0237\u0238\5\u012e\u0098\2\u0238\u023a\7\u0171\2"+
-		"\2\u0239\u023b\5\u0122\u0092\2\u023a\u0239\3\2\2\2\u023a\u023b\3\2\2\2"+
-		"\u023b\u023c\3\2\2\2\u023c\u023d\7\u0175\2\2\u023d\63\3\2\2\2\u023e\u023f"+
-		"\7K\2\2\u023f\u0244\5<\37\2\u0240\u0241\7\u015d\2\2\u0241\u0243\5<\37"+
-		"\2\u0242\u0240\3\2\2\2\u0243\u0246\3\2\2\2\u0244\u0242\3\2\2\2\u0244\u0245"+
-		"\3\2\2\2\u0245\65\3\2\2\2\u0246\u0244\3\2\2\2\u0247\u024c\5<\37\2\u0248"+
-		"\u0249\7\u015d\2\2\u0249\u024b\5<\37\2\u024a\u0248\3\2\2\2\u024b\u024e"+
-		"\3\2\2\2\u024c\u024a\3\2\2\2\u024c\u024d\3\2\2\2\u024d\u024f\3\2\2\2\u024e"+
-		"\u024c\3\2\2\2\u024f\u0250\b\34\1\2\u0250\67\3\2\2\2\u0251\u0252\7K\2"+
-		"\2\u0252\u0253\5<\37\2\u0253\u0259\7\u0177\2\2\u0254\u0255\5<\37\2\u0255"+
-		"\u0256\7\u0177\2\2\u0256\u0258\3\2\2\2\u0257\u0254\3\2\2\2\u0258\u025b"+
-		"\3\2\2\2\u0259\u0257\3\2\2\2\u0259\u025a\3\2\2\2\u025a9\3\2\2\2\u025b"+
-		"\u0259\3\2\2\2\u025c\u025d\5<\37\2\u025d\u0263\7\u0177\2\2\u025e\u025f"+
-		"\5<\37\2\u025f\u0260\7\u0177\2\2\u0260\u0262\3\2\2\2\u0261\u025e\3\2\2"+
-		"\2\u0262\u0265\3\2\2\2\u0263\u0261\3\2\2\2\u0263\u0264\3\2\2\2\u0264;"+
-		"\3\2\2\2\u0265\u0263\3\2\2\2\u0266\u0267\5> \2\u0267=\3\2\2\2\u0268\u026d"+
-		"\5\u012e\u0098\2\u0269\u026a\7\u015d\2\2\u026a\u026c\5\u012e\u0098\2\u026b"+
-		"\u0269\3\2\2\2\u026c\u026f\3\2\2\2\u026d\u026b\3\2\2\2\u026d\u026e\3\2"+
-		"\2\2\u026e\u0271\3\2\2\2\u026f\u026d\3\2\2\2\u0270\u0272\7\17\2\2\u0271"+
-		"\u0270\3\2\2\2\u0271\u0272\3\2\2\2\u0272\u0273\3\2\2\2\u0273\u0275\5l"+
-		"\67\2\u0274\u0276\5n8\2\u0275\u0274\3\2\2\2\u0275\u0276\3\2\2\2\u0276"+
-		"\u027a\3\2\2\2\u0277\u0279\5p9\2\u0278\u0277\3\2\2\2\u0279\u027c\3\2\2"+
-		"\2\u027a\u0278\3\2\2\2\u027a\u027b\3\2\2\2\u027b\u027e\3\2\2\2\u027c\u027a"+
-		"\3\2\2\2\u027d\u027f\5r:\2\u027e\u027d\3\2\2\2\u027e\u027f\3\2\2\2\u027f"+
-		"\u028c\3\2\2\2\u0280\u0281\5\u012e\u0098\2\u0281\u0283\7\62\2\2\u0282"+
-		"\u0284\7\17\2\2\u0283\u0282\3\2\2\2\u0283\u0284\3\2\2\2\u0284\u0285\3"+
-		"\2\2\2\u0285\u0287\5l\67\2\u0286\u0288\5n8\2\u0287\u0286\3\2\2\2\u0287"+
-		"\u0288\3\2\2\2\u0288\u0289\3\2\2\2\u0289\u028a\5r:\2\u028a\u028c\3\2\2"+
-		"\2\u028b\u0268\3\2\2\2\u028b\u0280\3\2\2\2\u028c?\3\2\2\2\u028d\u028e"+
-		"\7<\2\2\u028e\u0292\7\u011c\2\2\u028f\u0290\7\u0087\2\2\u0290\u0291\7"+
-		"\u00c2\2\2\u0291\u0293\7k\2\2\u0292\u028f\3\2\2\2\u0292\u0293\3\2\2\2"+
-		"\u0293\u0294\3\2\2\2\u0294\u0295\5\u00e2r\2\u0295\u0296\5V,\2\u0296\u0297"+
-		"\5H%\2\u0297A\3\2\2\2\u0298\u029c\5D#\2\u0299\u029c\5\u009eP\2\u029a\u029c"+
-		"\5~@\2\u029b\u0298\3\2\2\2\u029b\u0299\3\2\2\2\u029b\u029a\3\2\2\2\u029c"+
-		"C\3\2\2\2\u029d\u02a1\7<\2\2\u029e\u029f\7\u0087\2\2\u029f\u02a0\7\u00c2"+
-		"\2\2\u02a0\u02a2\7k\2\2\u02a1\u029e\3\2\2\2\u02a1\u02a2\3\2\2\2\u02a2"+
-		"\u02a3\3\2\2\2\u02a3\u02a5\5\u00e2r\2\u02a4\u02a6\5V,\2\u02a5\u02a4\3"+
-		"\2\2\2\u02a5\u02a6\3\2\2\2\u02a6\u02a7\3\2\2\2\u02a7\u02a8\5H%\2\u02a8"+
-		"\u02a9\b#\1\2\u02a9E\3\2\2\2\u02aa\u02b1\7<\2\2\u02ab\u02ac\7\u00a7\2"+
-		"\2\u02ac\u02b2\7\u011e\2\2\u02ad\u02af\t\4\2\2\u02ae\u02ad\3\2\2\2\u02ae"+
-		"\u02af\3\2\2\2\u02af\u02b0\3\2\2\2\u02b0\u02b2\7\u0138\2\2\u02b1\u02ab"+
-		"\3\2\2\2\u02b1\u02ae\3\2\2\2\u02b2\u02b3\3\2\2\2\u02b3\u02b4\7\u011c\2"+
-		"\2\u02b4\u02b6\5\u012e\u0098\2\u02b5\u02b7\5V,\2\u02b6\u02b5\3\2\2\2\u02b6"+
-		"\u02b7\3\2\2\2\u02b7\u02b8\3\2\2\2\u02b8\u02b9\5H%\2\u02b9G\3\2\2\2\u02ba"+
-		"\u02bc\7\17\2\2\u02bb\u02ba\3\2\2\2\u02bb\u02bc\3\2\2\2\u02bc\u02bd\3"+
-		"\2\2\2\u02bd\u02be\7\u0171\2\2\u02be\u02bf\5\u00aeX\2\u02bf\u02c0\7\u0175"+
-		"\2\2\u02c0\u02ca\3\2\2\2\u02c1\u02c3\7\17\2\2\u02c2\u02c1\3\2\2\2\u02c2"+
-		"\u02c3\3\2\2\2\u02c3\u02c4\3\2\2\2\u02c4\u02ca\5\u00aeX\2\u02c5\u02c6"+
-		"\7\u0171\2\2\u02c6\u02c7\5J&\2\u02c7\u02c8\7\u0175\2\2\u02c8\u02ca\3\2"+
-		"\2\2\u02c9\u02bb\3\2\2\2\u02c9\u02c2\3\2\2\2\u02c9\u02c5\3\2\2\2\u02ca"+
-		"\u02cc\3\2\2\2\u02cb\u02cd\5Z.\2\u02cc\u02cb\3\2\2\2\u02cc\u02cd\3\2\2"+
-		"\2\u02cdI\3\2\2\2\u02ce\u02d3\5L\'\2\u02cf\u02d0\7\u015d\2\2\u02d0\u02d2"+
-		"\5L\'\2\u02d1\u02cf\3\2\2\2\u02d2\u02d5\3\2\2\2\u02d3\u02d1\3\2\2\2\u02d3"+
-		"\u02d4\3\2\2\2\u02d4K\3\2\2\2\u02d5\u02d3\3\2\2\2\u02d6\u02d8\5l\67\2"+
-		"\u02d7\u02d9\5n8\2\u02d8\u02d7\3\2\2\2\u02d8\u02d9\3\2\2\2\u02d9\u02dd"+
-		"\3\2\2\2\u02da\u02dc\5p9\2\u02db\u02da\3\2\2\2\u02dc\u02df\3\2\2\2\u02dd"+
-		"\u02db\3\2\2\2\u02dd\u02de\3\2\2\2\u02de\u02e0\3\2\2\2\u02df\u02dd\3\2"+
-		"\2\2\u02e0\u02e4\5N(\2\u02e1\u02e3\5P)\2\u02e2\u02e1\3\2\2\2\u02e3\u02e6"+
-		"\3\2\2\2\u02e4\u02e2\3\2\2\2\u02e4\u02e5\3\2\2\2\u02e5\u02ed\3\2\2\2\u02e6"+
-		"\u02e4\3\2\2\2\u02e7\u02e8\7\67\2\2\u02e8\u02ea\5\u012e\u0098\2\u02e9"+
-		"\u02e7\3\2\2\2\u02e9\u02ea\3\2\2\2\u02ea\u02eb\3\2\2\2\u02eb\u02ed\5R"+
-		"*\2\u02ec\u02d6\3\2\2\2\u02ec\u02e9\3\2\2\2\u02edM\3\2\2\2\u02ee\u02ef"+
+		"\3\u0098\3\u0098\3\u0098\7\u0098\u0982\n\u0098\f\u0098\16\u0098\u0985"+
+		"\13\u0098\3\u0099\3\u0099\5\u0099\u0989\n\u0099\3\u009a\3\u009a\3\u009a"+
+		"\3\u009a\5\u009a\u098f\n\u009a\3\u009b\5\u009b\u0992\n\u009b\3\u009b\3"+
+		"\u009b\3\u009c\5\u009c\u0997\n\u009c\3\u009c\3\u009c\3\u009d\3\u009d\3"+
+		"\u009e\3\u009e\3\u009f\3\u009f\3\u00a0\3\u00a0\3\u00a0\3\u00a0\2\4\u00f0"+
+		"\u0104\u00a1\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64"+
+		"\668:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088"+
+		"\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c\u009e\u00a0"+
+		"\u00a2\u00a4\u00a6\u00a8\u00aa\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8"+
+		"\u00ba\u00bc\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0"+
+		"\u00d2\u00d4\u00d6\u00d8\u00da\u00dc\u00de\u00e0\u00e2\u00e4\u00e6\u00e8"+
+		"\u00ea\u00ec\u00ee\u00f0\u00f2\u00f4\u00f6\u00f8\u00fa\u00fc\u00fe\u0100"+
+		"\u0102\u0104\u0106\u0108\u010a\u010c\u010e\u0110\u0112\u0114\u0116\u0118"+
+		"\u011a\u011c\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130"+
+		"\u0132\u0134\u0136\u0138\u013a\u013c\u013e\2$\5\2\3\4\u015f\u015f\u0177"+
+		"\u0177\4\2\u016f\u016f\u0173\u0173\4\2\u00b9\u00b9\u0101\u0101\4\2\20"+
+		"\20TT\4\2QQ\u012d\u012d\4\2mm\u00ac\u00ac\4\2QQ\u00d9\u00d9\4\2MM\u0089"+
+		"\u0089\5\2\u008d\u008d\u00b3\u00b3\u00d5\u00d6\4\2\u00ae\u00ae\u00c0\u00c0"+
+		"\4\2\u00bd\u00bd\u0141\u0141\4\2\u00f4\u00f4\u012a\u012a\4\2\u00b2\u00b2"+
+		"\u017e\u017e\4\2  \'\'\4\2%%??\4\2CC\u00fa\u00fa\3\2\u00dc\u00dd\4\2\17"+
+		"\17\u009a\u009a\3\2gh\3\2`a\4\2\37\37\u0113\u0113\3\2\u00ff\u0100\4\2"+
+		"\t\tYY\5\2yy\u00a3\u00a3\u00ee\u00ee\5\2nn\u00c4\u00c4\u0128\u0128\4\2"+
+		"\f\f\u015b\u015b\4\2\u00cc\u00cc\u015e\u015e\5\2\u00a4\u00a4\u00e5\u00e5"+
+		"\u00ef\u00ef\5\2GH\u00b6\u00b7\u00fb\u00fc\3\2\u0175\u0175\3\2\u0161\u0166"+
+		"\4\2\u015a\u015a\u0178\u0178\4\2nn\u0128\u0128\17\2\7\32\34^bbd\u00c3"+
+		"\u00c5\u00d6\u00d8\u00f3\u00f5\u0108\u010a\u0122\u0124\u0129\u012c\u0136"+
+		"\u0138\u0138\u013b\u014b\u0152\u0159\2\u0ae1\2\u0141\3\2\2\2\4\u014f\3"+
+		"\2\2\2\6\u015d\3\2\2\2\b\u0160\3\2\2\2\n\u0167\3\2\2\2\f\u0175\3\2\2\2"+
+		"\16\u0177\3\2\2\2\20\u0183\3\2\2\2\22\u0196\3\2\2\2\24\u0198\3\2\2\2\26"+
+		"\u01b1\3\2\2\2\30\u01b3\3\2\2\2\32\u01b5\3\2\2\2\34\u01b7\3\2\2\2\36\u01bf"+
+		"\3\2\2\2 \u01ca\3\2\2\2\"\u01ce\3\2\2\2$\u01e0\3\2\2\2&\u01e7\3\2\2\2"+
+		"(\u01ee\3\2\2\2*\u01f0\3\2\2\2,\u0209\3\2\2\2.\u022b\3\2\2\2\60\u0235"+
+		"\3\2\2\2\62\u0237\3\2\2\2\64\u023e\3\2\2\2\66\u0247\3\2\2\28\u0251\3\2"+
+		"\2\2:\u025c\3\2\2\2<\u0266\3\2\2\2>\u028b\3\2\2\2@\u028d\3\2\2\2B\u029b"+
+		"\3\2\2\2D\u029d\3\2\2\2F\u02aa\3\2\2\2H\u02c9\3\2\2\2J\u02ce\3\2\2\2L"+
+		"\u02ec\3\2\2\2N\u02ee\3\2\2\2P\u0310\3\2\2\2R\u0348\3\2\2\2T\u034a\3\2"+
+		"\2\2V\u0356\3\2\2\2X\u035b\3\2\2\2Z\u0360\3\2\2\2\\\u036e\3\2\2\2^\u0382"+
+		"\3\2\2\2`\u03a5\3\2\2\2b\u03b9\3\2\2\2d\u03bf\3\2\2\2f\u03c1\3\2\2\2h"+
+		"\u03cd\3\2\2\2j\u03ea\3\2\2\2l\u041a\3\2\2\2n\u041c\3\2\2\2p\u0432\3\2"+
+		"\2\2r\u0440\3\2\2\2t\u0442\3\2\2\2v\u0454\3\2\2\2x\u0456\3\2\2\2z\u045f"+
+		"\3\2\2\2|\u0467\3\2\2\2~\u0470\3\2\2\2\u0080\u0498\3\2\2\2\u0082\u04c4"+
+		"\3\2\2\2\u0084\u04c6\3\2\2\2\u0086\u04e0\3\2\2\2\u0088\u04e2\3\2\2\2\u008a"+
+		"\u04eb\3\2\2\2\u008c\u04ed\3\2\2\2\u008e\u04fd\3\2\2\2\u0090\u050d\3\2"+
+		"\2\2\u0092\u0514\3\2\2\2\u0094\u051c\3\2\2\2\u0096\u0522\3\2\2\2\u0098"+
+		"\u0528\3\2\2\2\u009a\u052d\3\2\2\2\u009c\u0530\3\2\2\2\u009e\u0543\3\2"+
+		"\2\2\u00a0\u0553\3\2\2\2\u00a2\u0557\3\2\2\2\u00a4\u055b\3\2\2\2\u00a6"+
+		"\u056d\3\2\2\2\u00a8\u057f\3\2\2\2\u00aa\u0594\3\2\2\2\u00ac\u05cf\3\2"+
+		"\2\2\u00ae\u05d2\3\2\2\2\u00b0\u05d6\3\2\2\2\u00b2\u05df\3\2\2\2\u00b4"+
+		"\u05e8\3\2\2\2\u00b6\u05f3\3\2\2\2\u00b8\u0601\3\2\2\2\u00ba\u060f\3\2"+
+		"\2\2\u00bc\u0611\3\2\2\2\u00be\u0639\3\2\2\2\u00c0\u063c\3\2\2\2\u00c2"+
+		"\u0649\3\2\2\2\u00c4\u064b\3\2\2\2\u00c6\u0658\3\2\2\2\u00c8\u0663\3\2"+
+		"\2\2\u00ca\u0667\3\2\2\2\u00cc\u066b\3\2\2\2\u00ce\u0674\3\2\2\2\u00d0"+
+		"\u067c\3\2\2\2\u00d2\u0686\3\2\2\2\u00d4\u0688\3\2\2\2\u00d6\u068e\3\2"+
+		"\2\2\u00d8\u069c\3\2\2\2\u00da\u06a7\3\2\2\2\u00dc\u06a9\3\2\2\2\u00de"+
+		"\u06c4\3\2\2\2\u00e0\u06c6\3\2\2\2\u00e2\u06d7\3\2\2\2\u00e4\u06d9\3\2"+
+		"\2\2\u00e6\u06dc\3\2\2\2\u00e8\u06df\3\2\2\2\u00ea\u06e9\3\2\2\2\u00ec"+
+		"\u06ec\3\2\2\2\u00ee\u06ef\3\2\2\2\u00f0\u0708\3\2\2\2\u00f2\u0716\3\2"+
+		"\2\2\u00f4\u072f\3\2\2\2\u00f6\u0731\3\2\2\2\u00f8\u0744\3\2\2\2\u00fa"+
+		"\u0756\3\2\2\2\u00fc\u075c\3\2\2\2\u00fe\u075e\3\2\2\2\u0100\u0760\3\2"+
+		"\2\2\u0102\u076d\3\2\2\2\u0104\u0780\3\2\2\2\u0106\u07a2\3\2\2\2\u0108"+
+		"\u07a4\3\2\2\2\u010a\u07a8\3\2\2\2\u010c\u07aa\3\2\2\2\u010e\u07bd\3\2"+
+		"\2\2\u0110\u07c1\3\2\2\2\u0112\u07c3\3\2\2\2\u0114\u07d4\3\2\2\2\u0116"+
+		"\u0872\3\2\2\2\u0118\u0874\3\2\2\2\u011a\u0876\3\2\2\2\u011c\u0880\3\2"+
+		"\2\2\u011e\u0952\3\2\2\2\u0120\u0954\3\2\2\2\u0122\u095b\3\2\2\2\u0124"+
+		"\u0963\3\2\2\2\u0126\u096d\3\2\2\2\u0128\u0976\3\2\2\2\u012a\u0979\3\2"+
+		"\2\2\u012c\u097c\3\2\2\2\u012e\u097e\3\2\2\2\u0130\u0988\3\2\2\2\u0132"+
+		"\u098e\3\2\2\2\u0134\u0991\3\2\2\2\u0136\u0996\3\2\2\2\u0138\u099a\3\2"+
+		"\2\2\u013a\u099c\3\2\2\2\u013c\u099e\3\2\2\2\u013e\u09a0\3\2\2\2\u0140"+
+		"\u0142\5x=\2\u0141\u0140\3\2\2\2\u0142\u0143\3\2\2\2\u0143\u0141\3\2\2"+
+		"\2\u0143\u0144\3\2\2\2\u0144\u0145\3\2\2\2\u0145\u0146\7\2\2\3\u0146\3"+
+		"\3\2\2\2\u0147\u014b\5\b\5\2\u0148\u014b\5\26\f\2\u0149\u014b\5\6\4\2"+
+		"\u014a\u0147\3\2\2\2\u014a\u0148\3\2\2\2\u014a\u0149\3\2\2\2\u014b\u014d"+
+		"\3\2\2\2\u014c\u014e\7}\2\2\u014d\u014c\3\2\2\2\u014d\u014e\3\2\2\2\u014e"+
+		"\u0150\3\2\2\2\u014f\u014a\3\2\2\2\u0150\u0151\3\2\2\2\u0151\u014f\3\2"+
+		"\2\2\u0151\u0152\3\2\2\2\u0152\5\3\2\2\2\u0153\u015e\5\u00be`\2\u0154"+
+		"\u015e\5\u0126\u0094\2\u0155\u015e\5\n\6\2\u0156\u015e\5\u0132\u009a\2"+
+		"\u0157\u015e\5\u00e6t\2\u0158\u015e\5\u008aF\2\u0159\u015e\5B\"\2\u015a"+
+		"\u015e\5\u00acW\2\u015b\u015e\5\66\34\2\u015c\u015e\5\u013e\u00a0\2\u015d"+
+		"\u0153\3\2\2\2\u015d\u0154\3\2\2\2\u015d\u0155\3\2\2\2\u015d\u0156\3\2"+
+		"\2\2\u015d\u0157\3\2\2\2\u015d\u0158\3\2\2\2\u015d\u0159\3\2\2\2\u015d"+
+		"\u015a\3\2\2\2\u015d\u015b\3\2\2\2\u015d\u015c\3\2\2\2\u015e\7\3\2\2\2"+
+		"\u015f\u0161\58\35\2\u0160\u015f\3\2\2\2\u0160\u0161\3\2\2\2\u0161\u0162"+
+		"\3\2\2\2\u0162\u0163\7\26\2\2\u0163\u0164\5\4\3\2\u0164\u0165\5\16\b\2"+
+		"\u0165\t\3\2\2\2\u0166\u0168\58\35\2\u0167\u0166\3\2\2\2\u0167\u0168\3"+
+		"\2\2\2\u0168\u0169\3\2\2\2\u0169\u016a\7\26\2\2\u016a\u016b\5\4\3\2\u016b"+
+		"\u016c\b\6\1\2\u016c\13\3\2\2\2\u016d\u016e\7\26\2\2\u016e\u016f\5\4\3"+
+		"\2\u016f\u0170\5\16\b\2\u0170\u0176\3\2\2\2\u0171\u0173\5\26\f\2\u0172"+
+		"\u0174\7\u0177\2\2\u0173\u0172\3\2\2\2\u0173\u0174\3\2\2\2\u0174\u0176"+
+		"\3\2\2\2\u0175\u016d\3\2\2\2\u0175\u0171\3\2\2\2\u0176\r\3\2\2\2\u0177"+
+		"\u0178\6\b\2\2\u0178\u0179\7c\2\2\u0179\17\3\2\2\2\u017a\u0184\5\b\5\2"+
+		"\u017b\u017d\5\26\f\2\u017c\u017b\3\2\2\2\u017d\u017e\3\2\2\2\u017e\u017c"+
+		"\3\2\2\2\u017e\u017f\3\2\2\2\u017f\u0181\3\2\2\2\u0180\u0182\7}\2\2\u0181"+
+		"\u0180\3\2\2\2\u0181\u0182\3\2\2\2\u0182\u0184\3\2\2\2\u0183\u017a\3\2"+
+		"\2\2\u0183\u017c\3\2\2\2\u0184\21\3\2\2\2\u0185\u0186\5\36\20\2\u0186"+
+		"\u0187\7\u0177\2\2\u0187\u0197\3\2\2\2\u0188\u0189\5\60\31\2\u0189\u018a"+
+		"\7\u0177\2\2\u018a\u0197\3\2\2\2\u018b\u0197\5\u0088E\2\u018c\u0197\5"+
+		"\u00a6T\2\u018d\u0197\5x=\2\u018e\u018f\5\u00a2R\2\u018f\u0190\7\u0177"+
+		"\2\2\u0190\u0197\3\2\2\2\u0191\u0197\5\24\13\2\u0192\u0197\5\u00a8U\2"+
+		"\u0193\u0194\5\62\32\2\u0194\u0195\7\u0177\2\2\u0195\u0197\3\2\2\2\u0196"+
+		"\u0185\3\2\2\2\u0196\u0188\3\2\2\2\u0196\u018b\3\2\2\2\u0196\u018c\3\2"+
+		"\2\2\u0196\u018d\3\2\2\2\u0196\u018e\3\2\2\2\u0196\u0191\3\2\2\2\u0196"+
+		"\u0192\3\2\2\2\u0196\u0193\3\2\2\2\u0197\23\3\2\2\2\u0198\u019c\7\u0170"+
+		"\2\2\u0199\u019b\5\26\f\2\u019a\u0199\3\2\2\2\u019b\u019e\3\2\2\2\u019c"+
+		"\u019a\3\2\2\2\u019c\u019d\3\2\2\2\u019d\u019f\3\2\2\2\u019e\u019c\3\2"+
+		"\2\2\u019f\u01a0\7\u0174\2\2\u01a0\25\3\2\2\2\u01a1\u01b2\5\34\17\2\u01a2"+
+		"\u01b2\5\60\31\2\u01a3\u01b2\5\62\32\2\u01a4\u01b2\5t;\2\u01a5\u01b2\5"+
+		"\u009cO\2\u01a6\u01b2\5F$\2\u01a7\u01b2\5@!\2\u01a8\u01b2\5\64\33\2\u01a9"+
+		"\u01b2\5\u0084C\2\u01aa\u01b2\5\u00a4S\2\u01ab\u01b2\5\u0086D\2\u01ac"+
+		"\u01b2\5\22\n\2\u01ad\u01b2\5\u00a2R\2\u01ae\u01b2\5\32\16\2\u01af\u01b2"+
+		"\5\u0104\u0083\2\u01b0\u01b2\5\30\r\2\u01b1\u01a1\3\2\2\2\u01b1\u01a2"+
+		"\3\2\2\2\u01b1\u01a3\3\2\2\2\u01b1\u01a4\3\2\2\2\u01b1\u01a5\3\2\2\2\u01b1"+
+		"\u01a6\3\2\2\2\u01b1\u01a7\3\2\2\2\u01b1\u01a8\3\2\2\2\u01b1\u01a9\3\2"+
+		"\2\2\u01b1\u01aa\3\2\2\2\u01b1\u01ab\3\2\2\2\u01b1\u01ac\3\2\2\2\u01b1"+
+		"\u01ad\3\2\2\2\u01b1\u01ae\3\2\2\2\u01b1\u01af\3\2\2\2\u01b1\u01b0\3\2"+
+		"\2\2\u01b2\27\3\2\2\2\u01b3\u01b4\t\2\2\2\u01b4\31\3\2\2\2\u01b5\u01b6"+
+		"\7\u00c4\2\2\u01b6\33\3\2\2\2\u01b7\u01bc\5 \21\2\u01b8\u01b9\7\u015d"+
+		"\2\2\u01b9\u01bb\5 \21\2\u01ba\u01b8\3\2\2\2\u01bb\u01be\3\2\2\2\u01bc"+
+		"\u01ba\3\2\2\2\u01bc\u01bd\3\2\2\2\u01bd\35\3\2\2\2\u01be\u01bc\3\2\2"+
+		"\2\u01bf\u01c4\5\"\22\2\u01c0\u01c1\7\u015d\2\2\u01c1\u01c3\5\"\22\2\u01c2"+
+		"\u01c0\3\2\2\2\u01c3\u01c6\3\2\2\2\u01c4\u01c2\3\2\2\2\u01c4\u01c5\3\2"+
+		"\2\2\u01c5\37\3\2\2\2\u01c6\u01c4\3\2\2\2\u01c7\u01cb\5$\23\2\u01c8\u01cb"+
+		"\5*\26\2\u01c9\u01cb\5.\30\2\u01ca\u01c7\3\2\2\2\u01ca\u01c8\3\2\2\2\u01ca"+
+		"\u01c9\3\2\2\2\u01cb!\3\2\2\2\u01cc\u01cf\5&\24\2\u01cd\u01cf\5,\27\2"+
+		"\u01ce\u01cc\3\2\2\2\u01ce\u01cd\3\2\2\2\u01cf#\3\2\2\2\u01d0\u01d2\5"+
+		"\u012e\u0098\2\u01d1\u01d3\7\u015c\2\2\u01d2\u01d1\3\2\2\2\u01d2\u01d3"+
+		"\3\2\2\2\u01d3\u01d4\3\2\2\2\u01d4\u01d5\7\u0166\2\2\u01d5\u01d6\5\u0104"+
+		"\u0083\2\u01d6\u01e1\3\2\2\2\u01d7\u01d8\7\u0171\2\2\u01d8\u01d9\5\u012e"+
+		"\u0098\2\u01d9\u01db\7\u0175\2\2\u01da\u01dc\7\u015c\2\2\u01db\u01da\3"+
+		"\2\2\2\u01db\u01dc\3\2\2\2\u01dc\u01dd\3\2\2\2\u01dd\u01de\7\u0166\2\2"+
+		"\u01de\u01df\5\u0104\u0083\2\u01df\u01e1\3\2\2\2\u01e0\u01d0\3\2\2\2\u01e0"+
+		"\u01d7\3\2\2\2\u01e1%\3\2\2\2\u01e2\u01e3\5\u012e\u0098\2\u01e3\u01e4"+
+		"\5\u012c\u0097\2\u01e4\u01e5\5\u0104\u0083\2\u01e5\u01e8\3\2\2\2\u01e6"+
+		"\u01e8\5(\25\2\u01e7\u01e2\3\2\2\2\u01e7\u01e6\3\2\2\2\u01e8\'\3\2\2\2"+
+		"\u01e9\u01ea\5\u012e\u0098\2\u01ea\u01eb\t\3\2\2\u01eb\u01ef\3\2\2\2\u01ec"+
+		"\u01ed\t\3\2\2\u01ed\u01ef\5\u012e\u0098\2\u01ee\u01e9\3\2\2\2\u01ee\u01ec"+
+		"\3\2\2\2\u01ef)\3\2\2\2\u01f0\u01f1\7\u0171\2\2\u01f1\u01f6\5\u012e\u0098"+
+		"\2\u01f2\u01f3\7\u015d\2\2\u01f3\u01f5\5\u012e\u0098\2\u01f4\u01f2\3\2"+
+		"\2\2\u01f5\u01f8\3\2\2\2\u01f6\u01f4\3\2\2\2\u01f6\u01f7\3\2\2\2\u01f7"+
+		"\u01f9\3\2\2\2\u01f8\u01f6\3\2\2\2\u01f9\u01fb\7\u0175\2\2\u01fa\u01fc"+
+		"\7\u015c\2\2\u01fb\u01fa\3\2\2\2\u01fb\u01fc\3\2\2\2\u01fc\u01fd\3\2\2"+
+		"\2\u01fd\u01fe\5\u012c\u0097\2\u01fe\u01ff\7\u0171\2\2\u01ff\u0204\5\u0104"+
+		"\u0083\2\u0200\u0201\7\u015d\2\2\u0201\u0203\5\u0104\u0083\2\u0202\u0200"+
+		"\3\2\2\2\u0203\u0206\3\2\2\2\u0204\u0202\3\2\2\2\u0204\u0205\3\2\2\2\u0205"+
+		"\u0207\3\2\2\2\u0206\u0204\3\2\2\2\u0207\u0208\7\u0175\2\2\u0208+\3\2"+
+		"\2\2\u0209\u020a\7\u0171\2\2\u020a\u020f\5\u012e\u0098\2\u020b\u020c\7"+
+		"\u015d\2\2\u020c\u020e\5\u012e\u0098\2\u020d\u020b\3\2\2\2\u020e\u0211"+
+		"\3\2\2\2\u020f\u020d\3\2\2\2\u020f\u0210\3\2\2\2\u0210\u0212\3\2\2\2\u0211"+
+		"\u020f\3\2\2\2\u0212\u0213\7\u0175\2\2\u0213\u0214\7\u0166\2\2\u0214\u0215"+
+		"\7\u0171\2\2\u0215\u021a\5\u0104\u0083\2\u0216\u0217\7\u015d\2\2\u0217"+
+		"\u0219\5\u0104\u0083\2\u0218\u0216\3\2\2\2\u0219\u021c\3\2\2\2\u021a\u0218"+
+		"\3\2\2\2\u021a\u021b\3\2\2\2\u021b\u021d\3\2\2\2\u021c\u021a\3\2\2\2\u021d"+
+		"\u021e\7\u0175\2\2\u021e-\3\2\2\2\u021f\u022c\5\u012e\u0098\2\u0220\u0221"+
+		"\7\u0171\2\2\u0221\u0226\5\u012e\u0098\2\u0222\u0223\7\u015d\2\2\u0223"+
+		"\u0225\5\u012e\u0098\2\u0224\u0222\3\2\2\2\u0225\u0228\3\2\2\2\u0226\u0224"+
+		"\3\2\2\2\u0226\u0227\3\2\2\2\u0227\u0229\3\2\2\2\u0228\u0226\3\2\2\2\u0229"+
+		"\u022a\7\u0175\2\2\u022a\u022c\3\2\2\2\u022b\u021f\3\2\2\2\u022b\u0220"+
+		"\3\2\2\2\u022c\u022e\3\2\2\2\u022d\u022f\7\u015c\2\2\u022e\u022d\3\2\2"+
+		"\2\u022e\u022f\3\2\2\2\u022f\u0230\3\2\2\2\u0230\u0231\7\u0166\2\2\u0231"+
+		"\u0232\7\u0171\2\2\u0232\u0233\5\u00aeX\2\u0233\u0234\7\u0175\2\2\u0234"+
+		"/\3\2\2\2\u0235\u0236\7\36\2\2\u0236\61\3\2\2\2\u0237\u0238\5\u012e\u0098"+
+		"\2\u0238\u023a\7\u0171\2\2\u0239\u023b\5\u0122\u0092\2\u023a\u0239\3\2"+
+		"\2\2\u023a\u023b\3\2\2\2\u023b\u023c\3\2\2\2\u023c\u023d\7\u0175\2\2\u023d"+
+		"\63\3\2\2\2\u023e\u023f\7K\2\2\u023f\u0244\5<\37\2\u0240\u0241\7\u015d"+
+		"\2\2\u0241\u0243\5<\37\2\u0242\u0240\3\2\2\2\u0243\u0246\3\2\2\2\u0244"+
+		"\u0242\3\2\2\2\u0244\u0245\3\2\2\2\u0245\65\3\2\2\2\u0246\u0244\3\2\2"+
+		"\2\u0247\u024c\5<\37\2\u0248\u0249\7\u015d\2\2\u0249\u024b\5<\37\2\u024a"+
+		"\u0248\3\2\2\2\u024b\u024e\3\2\2\2\u024c\u024a\3\2\2\2\u024c\u024d\3\2"+
+		"\2\2\u024d\u024f\3\2\2\2\u024e\u024c\3\2\2\2\u024f\u0250\b\34\1\2\u0250"+
+		"\67\3\2\2\2\u0251\u0252\7K\2\2\u0252\u0253\5<\37\2\u0253\u0259\7\u0177"+
+		"\2\2\u0254\u0255\5<\37\2\u0255\u0256\7\u0177\2\2\u0256\u0258\3\2\2\2\u0257"+
+		"\u0254\3\2\2\2\u0258\u025b\3\2\2\2\u0259\u0257\3\2\2\2\u0259\u025a\3\2"+
+		"\2\2\u025a9\3\2\2\2\u025b\u0259\3\2\2\2\u025c\u025d\5<\37\2\u025d\u0263"+
+		"\7\u0177\2\2\u025e\u025f\5<\37\2\u025f\u0260\7\u0177\2\2\u0260\u0262\3"+
+		"\2\2\2\u0261\u025e\3\2\2\2\u0262\u0265\3\2\2\2\u0263\u0261\3\2\2\2\u0263"+
+		"\u0264\3\2\2\2\u0264;\3\2\2\2\u0265\u0263\3\2\2\2\u0266\u0267\5> \2\u0267"+
+		"=\3\2\2\2\u0268\u026d\5\u012e\u0098\2\u0269\u026a\7\u015d\2\2\u026a\u026c"+
+		"\5\u012e\u0098\2\u026b\u0269\3\2\2\2\u026c\u026f\3\2\2\2\u026d\u026b\3"+
+		"\2\2\2\u026d\u026e\3\2\2\2\u026e\u0271\3\2\2\2\u026f\u026d\3\2\2\2\u0270"+
+		"\u0272\7\17\2\2\u0271\u0270\3\2\2\2\u0271\u0272\3\2\2\2\u0272\u0273\3"+
+		"\2\2\2\u0273\u0275\5l\67\2\u0274\u0276\5n8\2\u0275\u0274\3\2\2\2\u0275"+
+		"\u0276\3\2\2\2\u0276\u027a\3\2\2\2\u0277\u0279\5p9\2\u0278\u0277\3\2\2"+
+		"\2\u0279\u027c\3\2\2\2\u027a\u0278\3\2\2\2\u027a\u027b\3\2\2\2\u027b\u027e"+
+		"\3\2\2\2\u027c\u027a\3\2\2\2\u027d\u027f\5r:\2\u027e\u027d\3\2\2\2\u027e"+
+		"\u027f\3\2\2\2\u027f\u028c\3\2\2\2\u0280\u0281\5\u012e\u0098\2\u0281\u0283"+
+		"\7\62\2\2\u0282\u0284\7\17\2\2\u0283\u0282\3\2\2\2\u0283\u0284\3\2\2\2"+
+		"\u0284\u0285\3\2\2\2\u0285\u0287\5l\67\2\u0286\u0288\5n8\2\u0287\u0286"+
+		"\3\2\2\2\u0287\u0288\3\2\2\2\u0288\u0289\3\2\2\2\u0289\u028a\5r:\2\u028a"+
+		"\u028c\3\2\2\2\u028b\u0268\3\2\2\2\u028b\u0280\3\2\2\2\u028c?\3\2\2\2"+
+		"\u028d\u028e\7<\2\2\u028e\u0292\7\u011c\2\2\u028f\u0290\7\u0087\2\2\u0290"+
+		"\u0291\7\u00c2\2\2\u0291\u0293\7k\2\2\u0292\u028f\3\2\2\2\u0292\u0293"+
+		"\3\2\2\2\u0293\u0294\3\2\2\2\u0294\u0295\5\u00e2r\2\u0295\u0296\5V,\2"+
+		"\u0296\u0297\5H%\2\u0297A\3\2\2\2\u0298\u029c\5D#\2\u0299\u029c\5\u009e"+
+		"P\2\u029a\u029c\5~@\2\u029b\u0298\3\2\2\2\u029b\u0299\3\2\2\2\u029b\u029a"+
+		"\3\2\2\2\u029cC\3\2\2\2\u029d\u02a1\7<\2\2\u029e\u029f\7\u0087\2\2\u029f"+
+		"\u02a0\7\u00c2\2\2\u02a0\u02a2\7k\2\2\u02a1\u029e\3\2\2\2\u02a1\u02a2"+
+		"\3\2\2\2\u02a2\u02a3\3\2\2\2\u02a3\u02a5\5\u00e2r\2\u02a4\u02a6\5V,\2"+
+		"\u02a5\u02a4\3\2\2\2\u02a5\u02a6\3\2\2\2\u02a6\u02a7\3\2\2\2\u02a7\u02a8"+
+		"\5H%\2\u02a8\u02a9\b#\1\2\u02a9E\3\2\2\2\u02aa\u02b1\7<\2\2\u02ab\u02ac"+
+		"\7\u00a7\2\2\u02ac\u02b2\7\u011e\2\2\u02ad\u02af\t\4\2\2\u02ae\u02ad\3"+
+		"\2\2\2\u02ae\u02af\3\2\2\2\u02af\u02b0\3\2\2\2\u02b0\u02b2\7\u0138\2\2"+
+		"\u02b1\u02ab\3\2\2\2\u02b1\u02ae\3\2\2\2\u02b2\u02b3\3\2\2\2\u02b3\u02b4"+
+		"\7\u011c\2\2\u02b4\u02b6\5\u012e\u0098\2\u02b5\u02b7\5V,\2\u02b6\u02b5"+
+		"\3\2\2\2\u02b6\u02b7\3\2\2\2\u02b7\u02b8\3\2\2\2\u02b8\u02b9\5H%\2\u02b9"+
+		"G\3\2\2\2\u02ba\u02bc\7\17\2\2\u02bb\u02ba\3\2\2\2\u02bb\u02bc\3\2\2\2"+
+		"\u02bc\u02bd\3\2\2\2\u02bd\u02be\7\u0171\2\2\u02be\u02bf\5\u00aeX\2\u02bf"+
+		"\u02c0\7\u0175\2\2\u02c0\u02ca\3\2\2\2\u02c1\u02c3\7\17\2\2\u02c2\u02c1"+
+		"\3\2\2\2\u02c2\u02c3\3\2\2\2\u02c3\u02c4\3\2\2\2\u02c4\u02ca\5\u00aeX"+
+		"\2\u02c5\u02c6\7\u0171\2\2\u02c6\u02c7\5J&\2\u02c7\u02c8\7\u0175\2\2\u02c8"+
+		"\u02ca\3\2\2\2\u02c9\u02bb\3\2\2\2\u02c9\u02c2\3\2\2\2\u02c9\u02c5\3\2"+
+		"\2\2\u02ca\u02cc\3\2\2\2\u02cb\u02cd\5Z.\2\u02cc\u02cb\3\2\2\2\u02cc\u02cd"+
+		"\3\2\2\2\u02cdI\3\2\2\2\u02ce\u02d3\5L\'\2\u02cf\u02d0\7\u015d\2\2\u02d0"+
+		"\u02d2\5L\'\2\u02d1\u02cf\3\2\2\2\u02d2\u02d5\3\2\2\2\u02d3\u02d1\3\2"+
+		"\2\2\u02d3\u02d4\3\2\2\2\u02d4K\3\2\2\2\u02d5\u02d3\3\2\2\2\u02d6\u02d8"+
+		"\5l\67\2\u02d7\u02d9\5n8\2\u02d8\u02d7\3\2\2\2\u02d8\u02d9\3\2\2\2\u02d9"+
+		"\u02dd\3\2\2\2\u02da\u02dc\5p9\2\u02db\u02da\3\2\2\2\u02dc\u02df\3\2\2"+
+		"\2\u02dd\u02db\3\2\2\2\u02dd\u02de\3\2\2\2\u02de\u02e0\3\2\2\2\u02df\u02dd"+
+		"\3\2\2\2\u02e0\u02e4\5N(\2\u02e1\u02e3\5P)\2\u02e2\u02e1\3\2\2\2\u02e3"+
+		"\u02e6\3\2\2\2\u02e4\u02e2\3\2\2\2\u02e4\u02e5\3\2\2\2\u02e5\u02ed\3\2"+
+		"\2\2\u02e6\u02e4\3\2\2\2\u02e7\u02e8\7\67\2\2\u02e8\u02ea\5\u012e\u0098"+
+		"\2\u02e9\u02e7\3\2\2\2\u02e9\u02ea\3\2\2\2\u02ea\u02eb\3\2\2\2\u02eb\u02ed"+
+		"\5R*\2\u02ec\u02d6\3\2\2\2\u02ec\u02e9\3\2\2\2\u02edM\3\2\2\2\u02ee\u02ef"+
 		"\5\u012e\u0098\2\u02efO\3\2\2\2\u02f0\u0311\5r:\2\u02f1\u02f3\7\u00c2"+
 		"\2\2\u02f2\u02f1\3\2\2\2\u02f2\u02f3\3\2\2\2\u02f3\u02f4\3\2\2\2\u02f4"+
 		"\u0311\7\u00c4\2\2\u02f5\u02f6\7\u00da\2\2\u02f6\u0311\7\u009f\2\2\u02f7"+
@@ -19271,65 +16373,63 @@ public class PLHQLStatementsParser extends Parser {
 		"\3\2\2\2\u0952\u0895\3\2\2\2\u0952\u089c\3\2\2\2\u0952\u089d\3\2\2\2\u0952"+
 		"\u08a2\3\2\2\2\u0952\u08aa\3\2\2\2\u0952\u08ab\3\2\2\2\u0952\u08ad\3\2"+
 		"\2\2\u0952\u08c0\3\2\2\2\u0952\u08d3\3\2\2\2\u0952\u08e6\3\2\2\2\u0952"+
-		"\u08f9\3\2\2\2\u0952\u090c\3\2";
+		"\u08f9\3\2\2\2\u0952\u090c\3\2\2\2\u0952\u091f\3\2\2\2\u0952\u092e\3\2"+
+		"\2\2";
 	private static final String _serializedATNSegment1 =
-		"\2\2\u0952\u091f\3\2\2\2\u0952\u092e\3\2\2\2\u0952\u0940\3\2\2\2\u0952"+
-		"\u0945\3\2\2\2\u0952\u0950\3\2\2\2\u0952\u0951\3\2\2\2\u0953\u011f\3\2"+
-		"\2\2\u0954\u0955\5\u012e\u0098\2\u0955\u0957\7\u0171\2\2\u0956\u0958\5"+
-		"\u0122\u0092\2\u0957\u0956\3\2\2\2\u0957\u0958\3\2\2\2\u0958\u0959\3\2"+
-		"\2\2\u0959\u095a\7\u0175\2\2\u095a\u0121\3\2\2\2\u095b\u0960\5\u0124\u0093"+
-		"\2\u095c\u095d\7\u015d\2\2\u095d\u095f\5\u0124\u0093\2\u095e\u095c\3\2"+
-		"\2\2\u095f\u0962\3\2\2\2\u0960\u095e\3\2\2\2\u0960\u0961\3\2\2\2\u0961"+
-		"\u0123\3\2\2\2\u0962\u0960\3\2\2\2\u0963\u0969\6\u0093\r\2\u0964\u0965"+
-		"\5\u012e\u0098\2\u0965\u0967\7\u0166\2\2\u0966\u0968\7\u016a\2\2\u0967"+
-		"\u0966\3\2\2\2\u0967\u0968\3\2\2\2\u0968\u096a\3\2\2\2\u0969\u0964\3\2"+
-		"\2\2\u0969\u096a\3\2\2\2\u096a\u096b\3\2\2\2\u096b\u096c\5\u0104\u0083"+
-		"\2\u096c\u0125\3\2\2\2\u096d\u0971\7\u0171\2\2\u096e\u0970\n\37\2\2\u096f"+
-		"\u096e\3\2\2\2\u0970\u0973\3\2\2\2\u0971\u096f\3\2\2\2\u0971\u0972\3\2"+
-		"\2\2\u0972\u0974\3\2\2\2\u0973\u0971\3\2\2\2\u0974\u0975\b\u0094\1\2\u0975"+
-		"\u0127\3\2\2\2\u0976\u0977\7E\2\2\u0977\u0978\5\u0130\u0099\2\u0978\u0129"+
-		"\3\2\2\2\u0979\u097a\7\u0122\2\2\u097a\u097b\5\u0130\u0099\2\u097b\u012b"+
-		"\3\2\2\2\u097c\u097d\t \2\2\u097d\u012d\3\2\2\2\u097e\u0981\7\u0179\2"+
-		"\2\u097f\u0981\5\u013c\u009f\2\u0980\u097e\3\2\2\2\u0980\u097f\3\2\2\2"+
-		"\u0981\u0989\3\2\2\2\u0982\u0985\7\6\2\2\u0983\u0986\7\u0179\2\2\u0984"+
-		"\u0986\5\u013c\u009f\2\u0985\u0983\3\2\2\2\u0985\u0984\3\2\2\2\u0986\u0988"+
-		"\3\2\2\2\u0987\u0982\3\2\2\2\u0988\u098b\3\2\2\2\u0989\u0987\3\2\2\2\u0989"+
-		"\u098a\3\2\2\2\u098a\u012f\3\2\2\2\u098b\u0989\3\2\2\2\u098c\u098f\7\u017a"+
-		"\2\2\u098d\u098f\7\u017c\2\2\u098e\u098c\3\2\2\2\u098e\u098d\3\2\2\2\u098f"+
-		"\u0131\3\2\2\2\u0990\u0991\7\u017b\2\2\u0991\u0995\b\u009a\1\2\u0992\u0993"+
-		"\7\u017d\2\2\u0993\u0995\b\u009a\1\2\u0994\u0990\3\2\2\2\u0994\u0992\3"+
-		"\2\2\2\u0995\u0133\3\2\2\2\u0996\u0998\t!\2\2\u0997\u0996\3\2\2\2\u0997"+
-		"\u0998\3\2\2\2\u0998\u0999\3\2\2\2\u0999\u099a\7\u017e\2\2\u099a\u0135"+
-		"\3\2\2\2\u099b\u099d\t!\2\2\u099c\u099b\3\2\2\2\u099c\u099d\3\2\2\2\u099d"+
-		"\u099e\3\2\2\2\u099e\u099f\7\u017f\2\2\u099f\u0137\3\2\2\2\u09a0\u09a1"+
-		"\t\"\2\2\u09a1\u0139\3\2\2\2\u09a2\u09a3\7\u00c4\2\2\u09a3\u013b\3\2\2"+
-		"\2\u09a4\u09a5\t#\2\2\u09a5\u013d\3\2\2\2\u09a6\u09a7\7\u0185\2\2\u09a7"+
-		"\u09a8\b\u00a0\1\2\u09a8\u013f\3\2\2\2\u0132\u0143\u014a\u014d\u0151\u015d"+
-		"\u0160\u0167\u0173\u0175\u017e\u0181\u0183\u0196\u019c\u01b1\u01bc\u01c4"+
-		"\u01ca\u01ce\u01d2\u01db\u01e0\u01e7\u01ee\u01f6\u01fb\u0204\u020f\u021a"+
-		"\u0226\u022b\u022e\u023a\u0244\u024c\u0259\u0263\u026d\u0271\u0275\u027a"+
-		"\u027e\u0283\u0287\u028b\u0292\u029b\u02a1\u02a5\u02ae\u02b1\u02b6\u02bb"+
-		"\u02c2\u02c9\u02cc\u02d3\u02d8\u02dd\u02e4\u02e9\u02ec\u02f2\u0300\u030a"+
-		"\u0310\u0315\u031a\u031f\u0323\u0328\u0332\u033e\u0345\u0348\u0354\u035b"+
-		"\u0362\u036e\u037b\u037d\u0382\u0385\u0394\u039a\u03a5\u03a8\u03b2\u03b9"+
-		"\u03bf\u03cd\u03d1\u03d6\u03da\u03df\u03e2\u03e7\u03ea\u03f8\u0418\u041a"+
-		"\u041f\u0423\u0428\u042f\u0432\u0435\u043a\u043e\u0440\u0447\u044d\u0454"+
-		"\u045a\u0464\u046d\u0470\u0474\u0477\u047a\u0480\u048a\u0495\u0498\u049f"+
-		"\u04a4\u04a9\u04ad\u04b5\u04b9\u04be\u04c2\u04c4\u04c8\u04d0\u04d8\u04db"+
-		"\u04e0\u04eb\u04f4\u04f8\u0503\u0507\u0512\u0518\u0532\u053e\u0545\u054d"+
-		"\u0555\u0559\u055f\u0566\u0570\u0574\u0578\u057f\u0584\u058a\u058e\u0594"+
-		"\u059e\u05a5\u05b0\u05b7\u05c1\u05c8\u05cf\u05d2\u05dc\u05e1\u05ee\u05f9"+
-		"\u0601\u0605\u0609\u060d\u060f\u0614\u0618\u061b\u061f\u0622\u0627\u062a"+
-		"\u062d\u0631\u0634\u0639\u063c\u063f\u0646\u0651\u0655\u0658\u065c\u0663"+
-		"\u0667\u0671\u0679\u0680\u0686\u068a\u0692\u069c\u069f\u06a4\u06a7\u06b1"+
-		"\u06b6\u06bf\u06c4\u06c8\u06d1\u06d5\u06e6\u06f3\u06f8\u06fc\u0701\u0708"+
-		"\u0710\u0716\u071b\u0726\u072f\u0733\u073c\u0740\u074a\u074f\u075c\u076a"+
-		"\u076d\u0780\u0795\u0797\u07a2\u07b1\u07bd\u07c1\u07cc\u07d0\u07dc\u07e0"+
-		"\u07e7\u07ec\u07f1\u07f5\u07f9\u07fe\u0802\u0806\u081d\u081f\u0831\u0833"+
-		"\u083b\u0840\u0845\u084a\u0857\u085c\u0861\u0866\u086b\u0870\u0872\u0879"+
-		"\u087c\u0887\u0891\u0899\u08a2\u08a8\u08b9\u08bc\u08cc\u08cf\u08df\u08e2"+
-		"\u08f2\u08f5\u0905\u0908\u0918\u091b\u0929\u0938\u093c\u094c\u0952\u0957"+
-		"\u0960\u0967\u0969\u0971\u0980\u0985\u0989\u098e\u0994\u0997\u099c";
+		"\u0952\u0940\3\2\2\2\u0952\u0945\3\2\2\2\u0952\u0950\3\2\2\2\u0952\u0951"+
+		"\3\2\2\2\u0953\u011f\3\2\2\2\u0954\u0955\5\u012e\u0098\2\u0955\u0957\7"+
+		"\u0171\2\2\u0956\u0958\5\u0122\u0092\2\u0957\u0956\3\2\2\2\u0957\u0958"+
+		"\3\2\2\2\u0958\u0959\3\2\2\2\u0959\u095a\7\u0175\2\2\u095a\u0121\3\2\2"+
+		"\2\u095b\u0960\5\u0124\u0093\2\u095c\u095d\7\u015d\2\2\u095d\u095f\5\u0124"+
+		"\u0093\2\u095e\u095c\3\2\2\2\u095f\u0962\3\2\2\2\u0960\u095e\3\2\2\2\u0960"+
+		"\u0961\3\2\2\2\u0961\u0123\3\2\2\2\u0962\u0960\3\2\2\2\u0963\u0969\6\u0093"+
+		"\r\2\u0964\u0965\5\u012e\u0098\2\u0965\u0967\7\u0166\2\2\u0966\u0968\7"+
+		"\u016a\2\2\u0967\u0966\3\2\2\2\u0967\u0968\3\2\2\2\u0968\u096a\3\2\2\2"+
+		"\u0969\u0964\3\2\2\2\u0969\u096a\3\2\2\2\u096a\u096b\3\2\2\2\u096b\u096c"+
+		"\5\u0104\u0083\2\u096c\u0125\3\2\2\2\u096d\u0971\7\u0171\2\2\u096e\u0970"+
+		"\n\37\2\2\u096f\u096e\3\2\2\2\u0970\u0973\3\2\2\2\u0971\u096f\3\2\2\2"+
+		"\u0971\u0972\3\2\2\2\u0972\u0974\3\2\2\2\u0973\u0971\3\2\2\2\u0974\u0975"+
+		"\b\u0094\1\2\u0975\u0127\3\2\2\2\u0976\u0977\7E\2\2\u0977\u0978\5\u0130"+
+		"\u0099\2\u0978\u0129\3\2\2\2\u0979\u097a\7\u0122\2\2\u097a\u097b\5\u0130"+
+		"\u0099\2\u097b\u012b\3\2\2\2\u097c\u097d\t \2\2\u097d\u012d\3\2\2\2\u097e"+
+		"\u0983\7\u0179\2\2\u097f\u0980\7\6\2\2\u0980\u0982\7\u0179\2\2\u0981\u097f"+
+		"\3\2\2\2\u0982\u0985\3\2\2\2\u0983\u0981\3\2\2\2\u0983\u0984\3\2\2\2\u0984"+
+		"\u012f\3\2\2\2\u0985\u0983\3\2\2\2\u0986\u0989\7\u017a\2\2\u0987\u0989"+
+		"\7\u017c\2\2\u0988\u0986\3\2\2\2\u0988\u0987\3\2\2\2\u0989\u0131\3\2\2"+
+		"\2\u098a\u098b\7\u017b\2\2\u098b\u098f\b\u009a\1\2\u098c\u098d\7\u017d"+
+		"\2\2\u098d\u098f\b\u009a\1\2\u098e\u098a\3\2\2\2\u098e\u098c\3\2\2\2\u098f"+
+		"\u0133\3\2\2\2\u0990\u0992\t!\2\2\u0991\u0990\3\2\2\2\u0991\u0992\3\2"+
+		"\2\2\u0992\u0993\3\2\2\2\u0993\u0994\7\u017e\2\2\u0994\u0135\3\2\2\2\u0995"+
+		"\u0997\t!\2\2\u0996\u0995\3\2\2\2\u0996\u0997\3\2\2\2\u0997\u0998\3\2"+
+		"\2\2\u0998\u0999\7\u017f\2\2\u0999\u0137\3\2\2\2\u099a\u099b\t\"\2\2\u099b"+
+		"\u0139\3\2\2\2\u099c\u099d\7\u00c4\2\2\u099d\u013b\3\2\2\2\u099e\u099f"+
+		"\t#\2\2\u099f\u013d\3\2\2\2\u09a0\u09a1\7\u0185\2\2\u09a1\u09a2\b\u00a0"+
+		"\1\2\u09a2\u013f\3\2\2\2\u0130\u0143\u014a\u014d\u0151\u015d\u0160\u0167"+
+		"\u0173\u0175\u017e\u0181\u0183\u0196\u019c\u01b1\u01bc\u01c4\u01ca\u01ce"+
+		"\u01d2\u01db\u01e0\u01e7\u01ee\u01f6\u01fb\u0204\u020f\u021a\u0226\u022b"+
+		"\u022e\u023a\u0244\u024c\u0259\u0263\u026d\u0271\u0275\u027a\u027e\u0283"+
+		"\u0287\u028b\u0292\u029b\u02a1\u02a5\u02ae\u02b1\u02b6\u02bb\u02c2\u02c9"+
+		"\u02cc\u02d3\u02d8\u02dd\u02e4\u02e9\u02ec\u02f2\u0300\u030a\u0310\u0315"+
+		"\u031a\u031f\u0323\u0328\u0332\u033e\u0345\u0348\u0354\u035b\u0362\u036e"+
+		"\u037b\u037d\u0382\u0385\u0394\u039a\u03a5\u03a8\u03b2\u03b9\u03bf\u03cd"+
+		"\u03d1\u03d6\u03da\u03df\u03e2\u03e7\u03ea\u03f8\u0418\u041a\u041f\u0423"+
+		"\u0428\u042f\u0432\u0435\u043a\u043e\u0440\u0447\u044d\u0454\u045a\u0464"+
+		"\u046d\u0470\u0474\u0477\u047a\u0480\u048a\u0495\u0498\u049f\u04a4\u04a9"+
+		"\u04ad\u04b5\u04b9\u04be\u04c2\u04c4\u04c8\u04d0\u04d8\u04db\u04e0\u04eb"+
+		"\u04f4\u04f8\u0503\u0507\u0512\u0518\u0532\u053e\u0545\u054d\u0555\u0559"+
+		"\u055f\u0566\u0570\u0574\u0578\u057f\u0584\u058a\u058e\u0594\u059e\u05a5"+
+		"\u05b0\u05b7\u05c1\u05c8\u05cf\u05d2\u05dc\u05e1\u05ee\u05f9\u0601\u0605"+
+		"\u0609\u060d\u060f\u0614\u0618\u061b\u061f\u0622\u0627\u062a\u062d\u0631"+
+		"\u0634\u0639\u063c\u063f\u0646\u0651\u0655\u0658\u065c\u0663\u0667\u0671"+
+		"\u0679\u0680\u0686\u068a\u0692\u069c\u069f\u06a4\u06a7\u06b1\u06b6\u06bf"+
+		"\u06c4\u06c8\u06d1\u06d5\u06e6\u06f3\u06f8\u06fc\u0701\u0708\u0710\u0716"+
+		"\u071b\u0726\u072f\u0733\u073c\u0740\u074a\u074f\u075c\u076a\u076d\u0780"+
+		"\u0795\u0797\u07a2\u07b1\u07bd\u07c1\u07cc\u07d0\u07dc\u07e0\u07e7\u07ec"+
+		"\u07f1\u07f5\u07f9\u07fe\u0802\u0806\u081d\u081f\u0831\u0833\u083b\u0840"+
+		"\u0845\u084a\u0857\u085c\u0861\u0866\u086b\u0870\u0872\u0879\u087c\u0887"+
+		"\u0891\u0899\u08a2\u08a8\u08b9\u08bc\u08cc\u08cf\u08df\u08e2\u08f2\u08f5"+
+		"\u0905\u0908\u0918\u091b\u0929\u0938\u093c\u094c\u0952\u0957\u0960\u0967"+
+		"\u0969\u0971\u0983\u0988\u098e\u0991\u0996";
 	public static final String _serializedATN = Utils.join(
 		new String[] {
 			_serializedATNSegment0,

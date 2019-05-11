@@ -8,6 +8,7 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
+import java.lang.reflect.Type;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Stack;
@@ -197,47 +198,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         while (!ctx.tables.empty()) {
             String currentItem = ctx.tables.pop();
             if (BooleanExpressionMatcher.matches(currentItem)) {
-                String firstTable, secondTable;
-                secondTable = ctx.tables.pop();
-                firstTable = ctx.tables.pop();
-                final String regex = "\\w+\\.\\w+";
-                final Pattern pattern = Pattern.compile(regex);
-                final Matcher matcher = pattern.matcher(currentItem);
-                while (matcher.find()) {
-                    String group = matcher.group();
-                    String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
-                    int tempCounter = tableName.equalsIgnoreCase(secondTable) ? counter : counter + 1;
-                    //Column Index
-                    ST indexST = new ST("<table_name>_<counter>_<column_name>_index=  ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
-                    indexST.add("table_name", tableName);
-                    indexST.add("counter", tempCounter);
-                    indexST.add("column_name", columnName);
-                    columnsIndices.append(indexST.render());
-                    columnsIndices.append("\n");
-
-                    //Term Value
-                    String type = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
-                    ST termValueST = new ST("<table_name>_<counter>_line.split(\",\")[<table_name>_<counter>_<column_name>_index].strip<conversion>");
-                    termValueST.add("table_name", tableName);
-                    termValueST.add("counter", tempCounter);
-                    termValueST.add("column_name", columnName);
-                    if (type.equalsIgnoreCase("INT")){
-                        termValueST.add("conversion", ".to_i");
-                    }else if (type.equalsIgnoreCase("FLOAT")){
-                        termValueST.add("conversion", ".to_f");
-                    }else{
-                        termValueST.add("conversion", "");
-                    }
-                    termValueST.add("record", "RRR");
-                    currentItem = currentItem.replaceFirst(group, termValueST.render());
-                }
-
-                ctx.tables.push(firstTable);
-                ctx.tables.push(secondTable);
-
-                code.append("\nnext unless ").append(currentItem);
-                code.append("\nrecords << ").append(firstTable.toLowerCase()).append("_").append(counter + 1).append("_line.chomp + \",\" + ").append(secondTable.toLowerCase()).append("_").append(counter).append("_line.chomp");
-
+                processJoinCondition(ctx, currentItem, counter, columnsIndices, code);
             } else {
                 ST currentTableST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
                 currentTableST.add("table_name", currentItem.toLowerCase());
@@ -253,6 +214,58 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         result.append(code);
         result.append("\nputs records");
         System.out.println(result);
+    }
+
+    private void processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, StringBuilder code){
+        String firstTable, secondTable;
+        secondTable = ctx.tables.pop();
+        firstTable = ctx.tables.pop();
+        final String regex = "\\w+\\.\\w+";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(currentItem);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+            int tempCounter = tableName.equalsIgnoreCase(secondTable) ? counter : counter + 1;
+            //Column Index
+            ST indexST = new ST("<table_name>_<counter>_<column_name>_index=  ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+            indexST.add("table_name", tableName);
+            indexST.add("counter", tempCounter);
+            indexST.add("column_name", columnName);
+            columnsIndices.append(indexST.render());
+            columnsIndices.append("\n");
+
+            //Term Value
+            String type = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+            ST termValueST = new ST("<table_name>_<counter>_line.split(\",\")[<table_name>_<counter>_<column_name>_index].strip<conversion>");
+            termValueST.add("table_name", tableName);
+            termValueST.add("counter", tempCounter);
+            termValueST.add("column_name", columnName);
+            if (type.equalsIgnoreCase("INT")){
+                termValueST.add("conversion", ".to_i");
+            }else if (type.equalsIgnoreCase("FLOAT")){
+                termValueST.add("conversion", ".to_f");
+            }else{
+                termValueST.add("conversion", "");
+            }
+            currentItem = currentItem.replaceFirst(group, termValueST.render());
+        }
+
+        ctx.tables.push(firstTable);
+        ctx.tables.push(secondTable);
+
+        ST joinTypeST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_TYPE_TEMPLATE_NAME);
+        joinTypeST.add("join_condition", currentItem);
+        joinTypeST.add("join_type", ctx.joinType);
+        joinTypeST.add("first_table_name", firstTable.toLowerCase());
+        joinTypeST.add("second_table_name", secondTable.toLowerCase());
+        joinTypeST.add("first_counter", counter + 1);
+        joinTypeST.add("second_counter", counter);
+        joinTypeST.add("first_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
+        joinTypeST.add("second_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
+
+        code.append(joinTypeST.render());
+        code.append("\nrecords << ").append(firstTable.toLowerCase()).append("_").append(counter + 1).append("_line.chomp + \",\" + ").append(secondTable.toLowerCase()).append("_").append(counter).append("_line.chomp");
     }
 
 }

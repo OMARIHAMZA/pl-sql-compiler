@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class ListenerUtils {
 
     private static final String TEMPLATES_FILE_PATH = "res/Templates.stg";
-    public static final String JOIN_LOOP_TEMPLATE_NAME = "joinLoopTemplate";
+    static final String JOIN_LOOP_TEMPLATE_NAME = "joinLoopTemplate";
+    static final String JOIN_TYPE_TEMPLATE_NAME = "joinTypesTemplate";
 
     public static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
@@ -86,7 +87,6 @@ public class ListenerUtils {
             e.printStackTrace();
         }
     }
-
 
 
 }

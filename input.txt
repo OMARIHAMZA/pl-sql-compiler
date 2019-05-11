@@ -1,5 +1,5 @@
 int main(){
- select salary, dank FROM EMPLOYEES JOIN MEMES ON (EMPLOYEES.department_id == MEMES.department_id);
+ select salary, dank FROM EMPLOYEES LEFT OUTER JOIN MEMES ON (EMPLOYEES.department_id == MEMES.department_id);
 }
 
 void b(){

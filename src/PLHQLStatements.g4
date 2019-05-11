@@ -553,7 +553,9 @@ into_clause :
        T_INTO ident (T_COMMA ident)*
      ;
 
-from_clause locals[java.util.Stack<String> tables = new java.util.Stack<>();]:
+from_clause locals[
+java.util.Stack<String> tables = new java.util.Stack<>(), String joinType
+]:
        T_FROM from_table_clause (from_join_clause)*
      ;
 
@@ -581,6 +583,7 @@ from_join_clause :
       T_COMMA from_table_clause
      | from_join_type_clause from_table_clause T_ON bool_expr {
        $from_clause::tables.push($bool_expr.text);
+       $from_clause::joinType=$from_join_type_clause.text;
      }
      ;
 
@@ -854,7 +857,7 @@ assignment_operator:
 ;
 
 ident :
-       (L_ID | non_reserved_words)  ('.' (L_ID | non_reserved_words))*
+       (L_ID)  ('.' (L_ID))*
      ;
 
 string :                                   // String literal (single or double quoted)
