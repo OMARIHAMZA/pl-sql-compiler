@@ -2,6 +2,7 @@
 // HPL/SQL Procedural SQL Extension Grammar
 grammar PLHQLStatements;
 import PLHQLStatementLexer;
+@header{import java.util.*;}
 
 program : c_function+ EOF;
 
@@ -552,7 +553,7 @@ into_clause :
        T_INTO ident (T_COMMA ident)*
      ;
 
-from_clause :
+from_clause locals[java.util.Stack<String> tables = new java.util.Stack<>();]:
        T_FROM from_table_clause (from_join_clause)*
      ;
 
@@ -567,7 +568,9 @@ from_table_clause :
      ;
 
 from_table_name_clause :
-       table_name from_alias_clause?
+       table_name from_alias_clause? {
+       $from_clause::tables.push($table_name.text);
+       }
      ;
 
 from_subselect_clause :
@@ -575,8 +578,10 @@ from_subselect_clause :
      ;
 
 from_join_clause :
-       T_COMMA from_table_clause
-     | from_join_type_clause from_table_clause T_ON bool_expr
+      T_COMMA from_table_clause
+     | from_join_type_clause from_table_clause T_ON bool_expr {
+       $from_clause::tables.push($bool_expr.text);
+     }
      ;
 
 from_join_type_clause :
@@ -694,6 +699,7 @@ bool_expr_binary_operator :
 
 expr :
        expr interval_item
+     | select_stmt
      | expr T_MUL expr
      | expr T_DIV expr
      | expr T_ADD expr
@@ -708,7 +714,6 @@ expr :
      | expr_spec_func
      | expr_func
      | expr_atom
-     | select_stmt
      ;
 
 

@@ -4,10 +4,9 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import utils.ListenerUtils;
-import utils.StatementsListener;
-import utils.SyntaxSemanticErrorListener;
 import utils.TypeRepository;
+import utils.listeners.StatementsListener;
+import utils.listeners.SyntaxSemanticErrorListener;
 
 import java.io.IOException;
 
@@ -27,6 +26,6 @@ public class Main {
         ParseTreeWalker walker = new ParseTreeWalker();
         StatementsListener listener = new StatementsListener();
         walker.walk(listener, tree);
-        //        TypeRepository.createTable("EMPLOYEES");
     }
+
 }

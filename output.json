@@ -20,21 +20,17 @@
     ],
     "name": "EMPLOYEES",
     "field_terminator": ",",
-    "location": "C:/Users/Asus/Desktop"
+    "location": "C:/Users/Asus/Desktop/NEW"
   },
   {
     "members": [
-      {
-        "name": "EMPLOYEE_ID",
-        "type": "INT"
-      },
       {
         "name": "DEPARTMENT_ID",
         "type": "INT"
       },
       {
-        "name": "EMPLOYEE_NAME",
-        "type": "STRING"
+        "name": "DANK",
+        "type": "BOOL"
       }
     ],
     "name": "MEMES",

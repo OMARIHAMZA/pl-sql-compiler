@@ -1,4 +1,4 @@
-package utils;
+package utils.listeners;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
@@ -13,8 +13,6 @@ public class SyntaxSemanticErrorListener extends BaseErrorListener {
         underlineError(recognizer, (Token) offendingSymbol, line, charPositionInLine);
         System.err.println("line " + line + ":" + charPositionInLine + " " + msg);
     }
-
-
 
     void semanticError(int line, String error) {
         System.err.println("Semantic Error (Line: " + line + ") Error: " + error);
