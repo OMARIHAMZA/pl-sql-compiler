@@ -20,7 +20,7 @@
     ],
     "name": "EMPLOYEES",
     "field_terminator": ",",
-    "location": "C:/Users/Asus/Desktop/NEW"
+    "location": "C:/Users/Asus/Desktop/EMPLOYEES"
   },
   {
     "members": [
@@ -29,12 +29,35 @@
         "type": "INT"
       },
       {
-        "name": "DANK",
-        "type": "BOOL"
+        "name": "BRANCH_ID",
+        "type": "INT"
+      },
+      {
+        "name": "DEPARTMENT_NAME",
+        "type": "STRING"
       }
     ],
-    "name": "MEMES",
+    "name": "DEPARTMENTS",
     "field_terminator": ",",
-    "location": "C:/Users/Asus/Desktop"
+    "location": "C:/Users/Asus/Desktop/DEPARTMENTS"
+  },
+  {
+    "members": [
+      {
+        "name": "BRANCH_ID",
+        "type": "INT"
+      },
+      {
+        "name": "BRANCH_LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "BRANCH_PHONE",
+        "type": "STRING"
+      }
+    ],
+    "name": "BRANCHES",
+    "field_terminator": ",",
+    "location": "C:/Users/Asus/Desktop/BRANCHES"
   }
 ]

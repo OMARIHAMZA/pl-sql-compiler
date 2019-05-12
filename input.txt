@@ -1,7 +1,6 @@
 int main(){
- select salary, dank FROM EMPLOYEES LEFT OUTER JOIN MEMES ON (EMPLOYEES.department_id == MEMES.department_id);
+SELECT * FROM EMPLOYEES WHERE EMPLOYEES.EMPLOYEE_NAME == "HAMZA";
 }
 
 void b(){
-
 }

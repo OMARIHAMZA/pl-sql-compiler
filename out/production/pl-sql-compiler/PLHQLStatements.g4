@@ -513,7 +513,7 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt :
+subselect_stmt locals[String whereCondition = ""] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -618,7 +618,9 @@ table_name :
      ;
 
 where_clause :
-       T_WHERE bool_expr
+       T_WHERE bool_expr {
+       $subselect_stmt::whereCondition=$bool_expr.text;
+       }
      ;
 
 error_missing_bool_expr :

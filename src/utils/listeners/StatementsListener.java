@@ -8,7 +8,9 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
-import java.lang.reflect.Type;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Stack;
@@ -193,7 +195,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
         super.exitFrom_clause(ctx);
         StringBuilder code = new StringBuilder();
-        int counter = 0;
+        int counter = 0, previousColumnsCount = 0;
         StringBuilder columnsIndices = new StringBuilder();
         while (!ctx.tables.empty()) {
             String currentItem = ctx.tables.pop();
@@ -204,22 +206,50 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 currentTableST.add("table_name", currentItem.toLowerCase());
                 currentTableST.add("loop_code", code.toString());
                 currentTableST.add("counter", counter++);
+
+                if (counter == 1 && ctx.tables.isEmpty()) {
+                }
+
+                if (ctx.tables.isEmpty()) {
+                    ST leftRightJoinST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
+                    leftRightJoinST.add("left_table_name", currentItem.toLowerCase());
+                    leftRightJoinST.add("left_counter", counter - 1);
+                    leftRightJoinST.add("right_columns_count", previousColumnsCount);
+                    currentTableST.add("left_join", leftRightJoinST.render());
+                }
                 code = new StringBuilder(currentTableST.render());
+                previousColumnsCount = TypeRepository.typeHashMap.get(currentItem).getMembers().size();
             }
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("records = []\n");
+        result.append("join_type = \"").append(ctx.joinType).append("\"");
+        result.append("\nrecords = []\n");
         result.append(columnsIndices);
         result.append(code);
         result.append("\nputs records");
         System.out.println(result);
+
+        StringSelection stringSelection = new StringSelection(result.toString());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
     }
 
-    private void processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, StringBuilder code){
-        String firstTable, secondTable;
+    private void processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, StringBuilder code) {
+        String firstTable, secondTable, tempBooleanExpression = null;
         secondTable = ctx.tables.pop();
         firstTable = ctx.tables.pop();
+        if (BooleanExpressionMatcher.matches(firstTable)) {
+            tempBooleanExpression = firstTable;
+            firstTable = ctx.tables.pop();
+        }
+
+        if (ctx.joinType.toUpperCase().startsWith("RIGHT")) {
+            String temp = firstTable;
+            firstTable = secondTable;
+            secondTable = temp;
+        }
+
         final String regex = "\\w+\\.\\w+";
         final Pattern pattern = Pattern.compile(regex);
         final Matcher matcher = pattern.matcher(currentItem);
@@ -241,22 +271,22 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             termValueST.add("table_name", tableName);
             termValueST.add("counter", tempCounter);
             termValueST.add("column_name", columnName);
-            if (type.equalsIgnoreCase("INT")){
+            if (type.equalsIgnoreCase("INT")) {
                 termValueST.add("conversion", ".to_i");
-            }else if (type.equalsIgnoreCase("FLOAT")){
+            } else if (type.equalsIgnoreCase("FLOAT")) {
                 termValueST.add("conversion", ".to_f");
-            }else{
+            } else {
                 termValueST.add("conversion", "");
             }
             currentItem = currentItem.replaceFirst(group, termValueST.render());
         }
 
         ctx.tables.push(firstTable);
-        ctx.tables.push(secondTable);
+        ctx.tables.push(tempBooleanExpression == null ? secondTable : tempBooleanExpression);
+
 
         ST joinTypeST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_TYPE_TEMPLATE_NAME);
         joinTypeST.add("join_condition", currentItem);
-        joinTypeST.add("join_type", ctx.joinType);
         joinTypeST.add("first_table_name", firstTable.toLowerCase());
         joinTypeST.add("second_table_name", secondTable.toLowerCase());
         joinTypeST.add("first_counter", counter + 1);
@@ -265,7 +295,14 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         joinTypeST.add("second_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
 
         code.append(joinTypeST.render());
-        code.append("\nrecords << ").append(firstTable.toLowerCase()).append("_").append(counter + 1).append("_line.chomp + \",\" + ").append(secondTable.toLowerCase()).append("_").append(counter).append("_line.chomp");
+
     }
 
+    private void processSingleTable(String tableName, String whereCondition, int counter, StringBuilder columnsIndices, StringBuilder code) {
+        ST joinTypeST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.WHERE_CONDITION_TEMPLATE_NAME);
+        joinTypeST.add("table_name", tableName.toLowerCase());
+        joinTypeST.add("counter", counter);
+        joinTypeST.add("where_condition", whereCondition);
+        code.append(joinTypeST.render());
+    }
 }
