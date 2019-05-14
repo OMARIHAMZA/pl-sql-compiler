@@ -513,7 +513,7 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt locals[String whereCondition = ""] :
+subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList()] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -537,7 +537,9 @@ select_list_limit :
      ;
 
 select_list_item :
-       ((ident T_EQUAL)? expr select_list_alias? | select_list_asterisk)
+       ((ident T_EQUAL)? expr select_list_alias? | select_list_asterisk){
+       $subselect_stmt::selectionColumns.add($text);
+       }
      ;
 
 select_list_alias :
@@ -683,13 +685,11 @@ bool_expr_logical_operator :
      ;
 
 bool_and :
-     T_AND
-     | T_AND_AND
+     T_AND_AND
      ;
 
 bool_or:
-     T_OR
-     | T_PIPE
+     T_PIPE
      ;
 
 bool_expr_binary_operator :

@@ -64,3 +64,9 @@ leftRightJoinTemplate(left_table_name, left_counter, right_columns_count) ::= <<
     records \<\< (("," * <right_columns_count>) + <left_table_name>_<left_counter>_line.chomp) if !<left_table_name>_<left_counter>_joined_flag and join_type.start_with?("RIGHT")
 >>
 
+selectionColumnTemplate(table_name, column_name, table_offset = "0") ::= <<
+
+selection_columns \<\< <table_offset> + ExecutionPlanUtilities::get_column_index("<table_name>", "<column_name>")
+
+>>
+

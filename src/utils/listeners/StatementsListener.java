@@ -8,10 +8,7 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
-import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -220,11 +217,11 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         StringBuilder result = new StringBuilder();
         result.append("join_type = \"").append(ctx.joinType).append("\"");
+        result.append("\nselection_columns = []\n");
         result.append("\nrecords = []\n");
         result.append(columnsIndices);
         result.append(code);
         String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
-        int previousTableOffset = 0;
         if (!whereCondition.isEmpty() && !tablesOffset.isEmpty()) {
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
@@ -236,16 +233,32 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 ST columnIndexST = new ST("<table_name>_<column_name>_index = ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
                 columnIndexST.add("table_name", tableName.toLowerCase());
                 columnIndexST.add("column_name", columnName.toLowerCase());
-                whereCondition = whereCondition.replaceFirst(group, "record.split(\",\")[" + previousTableOffset + " + " + tableName + "_" + columnName + "_index]" + getConversion(columnType));
+                whereCondition = whereCondition.replaceFirst(group, "record.split(\",\")[" + tablesOffset.get(tableName.toUpperCase()) + " + " + tableName + "_" + columnName + "_index]" + ListenerUtils.getConversion(columnType));
                 result.append("\n").append(columnIndexST.render()).append("\n");
-                previousTableOffset = tablesOffset.get(tableName.toUpperCase());
             }
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
+        result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
+        result.append("\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         result.append("\nputs records");
         String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);
+    }
 
+    private String getSelectionColumns(ArrayList<String> selectionColumns, HashMap<String, Integer> tablesOffset){
+        StringBuilder result = new StringBuilder();
+        result.append("\n\n");
+        for (String column : selectionColumns){
+            if (!column.contains(".")) return "";
+            String[] splittedColumn = column.split("\\.");
+            String tableName = splittedColumn[0], columnName = splittedColumn[1];
+            ST selectionColumnTemplateST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SELECTION_COLUMN_TEMPLATE);
+            selectionColumnTemplateST.add("table_name", tableName.toLowerCase());
+            selectionColumnTemplateST.add("column_name", columnName.toLowerCase());
+            selectionColumnTemplateST.add("table_offset", tablesOffset.containsKey(tableName.toUpperCase()) ? tablesOffset.get(tableName.toUpperCase()) : "0");
+            result.append(selectionColumnTemplateST.render());
+        }
+        return result.toString();
     }
 
     private String processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, String joinsCode) {
@@ -284,7 +297,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             termValueST.add("table_name", tableName);
             termValueST.add("counter", tempCounter);
             termValueST.add("column_name", columnName);
-            currentItem = getConversion(currentItem, group, type, termValueST);
+            currentItem = ListenerUtils.getConversion(currentItem, group, type, termValueST);
         }
 
         ctx.tables.push(firstTable);
@@ -300,14 +313,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         return multipleJoinsTemplate.render();
     }
 
-    private void processSingleTable(String tableName, String whereCondition, StringBuilder columnIndex, StringBuilder code) {
-        ST singleTableSelectionST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SINGLE_TABLE_SELECTION_TEMPLATE_NAME);
-        singleTableSelectionST.add("table_name", tableName.toLowerCase());
-        if (!whereCondition.isEmpty()) {
-            singleTableSelectionST.add("where_condition", mapSingleTableWhereCondition(whereCondition, columnIndex));
-        }
-        code.append(singleTableSelectionST.render());
-    }
 
     private String mapSingleTableWhereCondition(String whereCondition, StringBuilder columnIndex) {
         final String regex = "\\w+\\.\\w+";
@@ -330,31 +335,19 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             termValueST = new ST("<table_name>_line.split(\",\")[<table_name>_<column_name>_index].strip<conversion>");
             termValueST.add("table_name", tableName.toLowerCase());
             termValueST.add("column_name", columnName.toLowerCase());
-            whereCondition = getConversion(whereCondition, group, type, termValueST);
+            whereCondition = ListenerUtils.getConversion(whereCondition, group, type, termValueST);
         }
         return whereCondition;
     }
 
-    private String getConversion(String type) {
-        if (type.equalsIgnoreCase("INT")) {
-            return ".to_i";
-        } else if (type.equalsIgnoreCase("FLOAT")) {
-            return ".to_f";
-        } else {
-            return "";
-        }
-    }
 
-    private String getConversion(String whereCondition, String group, String type, ST termValueST) {
-        if (type.equalsIgnoreCase("INT")) {
-            termValueST.add("conversion", ".to_i");
-        } else if (type.equalsIgnoreCase("FLOAT")) {
-            termValueST.add("conversion", ".to_f");
-        } else {
-            termValueST.add("conversion", "");
+    private void processSingleTable(String tableName, String whereCondition, StringBuilder columnIndex, StringBuilder code) {
+        ST singleTableSelectionST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SINGLE_TABLE_SELECTION_TEMPLATE_NAME);
+        singleTableSelectionST.add("table_name", tableName.toLowerCase());
+        if (!whereCondition.isEmpty()) {
+            singleTableSelectionST.add("where_condition", mapSingleTableWhereCondition(whereCondition, columnIndex));
         }
-        whereCondition = whereCondition.replaceFirst(group, termValueST.render());
-        return whereCondition;
+        code.append(singleTableSelectionST.render());
     }
 
 

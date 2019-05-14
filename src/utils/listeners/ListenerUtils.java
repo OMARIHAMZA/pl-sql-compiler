@@ -20,10 +20,10 @@ public class ListenerUtils {
 
     private static final String TEMPLATES_FILE_PATH = "res/Templates.stg";
     static final String JOIN_LOOP_TEMPLATE_NAME = "joinLoopTemplate";
-    static final String JOIN_TYPE_TEMPLATE_NAME = "joinTypesTemplate";
     static final String LEFT_RIGHT_JOIN_TEMPLATE_NAME = "leftRightJoinTemplate";
     static final String SINGLE_TABLE_SELECTION_TEMPLATE_NAME = "singleTableSelection";
     static final String MULTIPLE_JOINS_TEMPLATE_NAME = "multipleJoinsTemplate";
+    static final String SELECTION_COLUMN_TEMPLATE = "selectionColumnTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 
@@ -89,6 +89,28 @@ public class ListenerUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static String getConversion(String type) {
+        if (type.equalsIgnoreCase("INT")) {
+            return ".to_i";
+        } else if (type.equalsIgnoreCase("FLOAT")) {
+            return ".to_f";
+        } else {
+            return "";
+        }
+    }
+
+    static String getConversion(String whereCondition, String group, String type, ST termValueST) {
+        if (type.equalsIgnoreCase("INT")) {
+            termValueST.add("conversion", ".to_i");
+        } else if (type.equalsIgnoreCase("FLOAT")) {
+            termValueST.add("conversion", ".to_f");
+        } else {
+            termValueST.add("conversion", "");
+        }
+        whereCondition = whereCondition.replaceFirst(group, termValueST.render());
+        return whereCondition;
     }
 
     static int getOverallSize(Stack<String> tables) {
