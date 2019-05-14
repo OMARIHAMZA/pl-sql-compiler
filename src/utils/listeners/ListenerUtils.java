@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.function.Consumer;
 
 public class ListenerUtils {
 
@@ -24,6 +23,8 @@ public class ListenerUtils {
     static final String SINGLE_TABLE_SELECTION_TEMPLATE_NAME = "singleTableSelection";
     static final String MULTIPLE_JOINS_TEMPLATE_NAME = "multipleJoinsTemplate";
     static final String SELECTION_COLUMN_TEMPLATE = "selectionColumnTemplate";
+    static final String ORDERING_COLUMNS_TEMPLATE_NAME = "orderingColumnTemplate";
+    static final String ORDER_BY_STATEMENT_TEMPLATE = "orderByStatementTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 

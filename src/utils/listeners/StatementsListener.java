@@ -8,6 +8,7 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -161,7 +162,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     }
 
 
-
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
@@ -192,7 +192,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     joinsCode = processJoinCondition(ctx, currentItem, counter, columnsIndices, joinsCode);
                 } else {
                     if (previousTable != null) {
-                        tablesOffset.put(currentItem.toUpperCase(),tablesOffset.get(previousTable) - TypeRepository.getColumnsCount(currentItem));
+                        tablesOffset.put(currentItem.toUpperCase(), tablesOffset.get(previousTable) - TypeRepository.getColumnsCount(currentItem));
                     } else {
                         tablesOffset.put(currentItem.toUpperCase(), overAllLength - TypeRepository.typeHashMap.get(currentItem).getMembers().size());
                     }
@@ -217,6 +217,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         StringBuilder result = new StringBuilder();
         result.append("join_type = \"").append(ctx.joinType).append("\"");
+        result.append("\nordering_columns = []\n");
         result.append("\nselection_columns = []\n");
         result.append("\nrecords = []\n");
         result.append(columnsIndices);
@@ -239,16 +240,19 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
         result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
+        result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
+        result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
         result.append("\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         result.append("\nputs records");
         String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);
     }
 
-    private String getSelectionColumns(ArrayList<String> selectionColumns, HashMap<String, Integer> tablesOffset){
+    @SuppressWarnings("ALL")
+    private String getSelectionColumns(ArrayList<String> selectionColumns, HashMap<String, Integer> tablesOffset) {
         StringBuilder result = new StringBuilder();
         result.append("\n\n");
-        for (String column : selectionColumns){
+        for (String column : selectionColumns) {
             if (!column.contains(".")) return "";
             String[] splittedColumn = column.split("\\.");
             String tableName = splittedColumn[0], columnName = splittedColumn[1];
@@ -257,6 +261,41 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             selectionColumnTemplateST.add("column_name", columnName.toLowerCase());
             selectionColumnTemplateST.add("table_offset", tablesOffset.containsKey(tableName.toUpperCase()) ? tablesOffset.get(tableName.toUpperCase()) : "0");
             result.append(selectionColumnTemplateST.render());
+        }
+        return result.toString();
+    }
+
+    @SuppressWarnings("ALL")
+    private String getOrderColumns(HashMap<String, String> orderColumnsMap, HashMap<String, Integer> tablesOffset) {
+        StringBuilder result = new StringBuilder();
+        for (HashMap.Entry<String, String> entry : orderColumnsMap.entrySet()) {
+            String[] splitResult = entry.getKey().split("\\.");
+            String tableName = splitResult[0], columnName = splitResult[1];
+            String orderType = entry.getValue().equalsIgnoreCase("") ? "ASC" : entry.getValue();
+            ST selectionColumnTemplateST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.ORDERING_COLUMNS_TEMPLATE_NAME);
+            selectionColumnTemplateST.add("table_name", tableName.toLowerCase());
+            selectionColumnTemplateST.add("column_name", columnName.toLowerCase());
+            selectionColumnTemplateST.add("table_offset", tablesOffset.containsKey(tableName.toUpperCase()) ? tablesOffset.get(tableName.toUpperCase()) : "0");
+            selectionColumnTemplateST.add("order_type", orderType);
+            result.append(selectionColumnTemplateST.render());
+        }
+        return result.toString();
+    }
+
+    @SuppressWarnings("ALL")
+    private String getOrderStatement(HashMap<String, String> orderColumnsMap, HashMap<String, Integer> tablesOffset) {
+        StringBuilder result = new StringBuilder();
+        for (HashMap.Entry<String, String> entry : orderColumnsMap.entrySet()) {
+            String[] splitResult = entry.getKey().split("\\.");
+            String tableName = splitResult[0], columnName = splitResult[1];
+            String orderType = entry.getValue().equalsIgnoreCase("") ? "ASC" : entry.getValue();
+            ST orderExpressionST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.ORDER_BY_STATEMENT_TEMPLATE);
+            orderExpressionST.add("table_name", tableName.toLowerCase());
+            orderExpressionST.add("table_offset", tablesOffset.isEmpty() ? "0" : tablesOffset.get(tableName.toUpperCase()));
+            orderExpressionST.add("column_name", columnName.toLowerCase());
+            orderExpressionST.add("conversion", ListenerUtils.getConversion(TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType()));
+            orderExpressionST.add("sortType", orderType.equals("ASC") ? "1," : "-1,");
+            result.append(orderExpressionST.render());
         }
         return result.toString();
     }

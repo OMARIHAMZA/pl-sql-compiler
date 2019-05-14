@@ -643,12 +643,12 @@ qualify_clause :
      ;
 
 order_by_clause :
-       T_ORDER T_BY expr sort_type?  { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); }
-       (T_COMMA expr sort_type? { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); })*
+       T_ORDER T_BY expr sort_type  { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); }
+       (T_COMMA expr sort_type { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); })*
      ;
 
 sort_type :
-       (T_ASC | T_DESC)
+       (T_ASC | T_DESC | )
     ;
 
 

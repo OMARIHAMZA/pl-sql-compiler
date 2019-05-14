@@ -70,3 +70,15 @@ selection_columns \<\< <table_offset> + ExecutionPlanUtilities::get_column_index
 
 >>
 
+orderingColumnTemplate(table_name, column_name, table_offset = "0", order_type) ::=<<
+
+ordering_columns[<table_offset> + ExecutionPlanUtilities::get_column_index("<table_name>", "<column_name>")] = "<order_type>"
+
+>>
+
+orderByStatementTemplate(table_offset, table_name, column_name, conversion, sortType = "1") ::=<<
+
+    record.split(",")[<table_offset> + ExecutionPlanUtilities::get_column_index("<table_name>", "<column_name>")]<conversion> * <sortType>
+
+>>
+
