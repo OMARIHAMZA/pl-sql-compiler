@@ -202,6 +202,10 @@ public class TypeRepository {
         return false;
     }
 
+    public static int getColumnsCount(String dataTypeName){
+        return typeHashMap.get(dataTypeName.toUpperCase()).getMembers().size();
+    }
+
     /**
      * Check if passed type is a primitive
      *

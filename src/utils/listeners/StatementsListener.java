@@ -8,10 +8,10 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,6 +163,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         }
     }
 
+
+
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
@@ -175,6 +177,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
         super.exitFrom_clause(ctx);
+        int overAllLength = ListenerUtils.getOverallSize(ctx.tables);
         StringBuilder code = new StringBuilder();
         String joinsCode = "";
         int counter = 0, previousColumnsCount = 0;
@@ -192,16 +195,16 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     joinsCode = processJoinCondition(ctx, currentItem, counter, columnsIndices, joinsCode);
                 } else {
                     if (previousTable != null) {
-                        tablesOffset.put(currentItem.toUpperCase(), tablesOffset.get(previousTable) + TypeRepository.typeHashMap.get(previousTable).getMembers().size());
+                        tablesOffset.put(currentItem.toUpperCase(),tablesOffset.get(previousTable) - TypeRepository.getColumnsCount(currentItem));
                     } else {
-                        tablesOffset.put(currentItem.toUpperCase(), 0);
+                        tablesOffset.put(currentItem.toUpperCase(), overAllLength - TypeRepository.typeHashMap.get(currentItem).getMembers().size());
                     }
                     previousTable = currentItem;
                     ST currentTableST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
                     currentTableST.add("table_name", currentItem.toLowerCase());
                     currentTableST.add("loop_code", counter == 0 ? "<most_inner>" : code.toString());
                     currentTableST.add("counter", counter++);
-                    currentTableST.add("left_record", counter == ctx.tablesCount ? "\"\"" : (" \",\" + record_" + (counter)));
+                    currentTableST.add("left_record", counter == ctx.tablesCount ? "\"\"" : ("record_" + (counter) + " + \",\""));
                     if (ctx.tables.isEmpty()) {
                         ST leftRightJoinST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
                         leftRightJoinST.add("left_table_name", currentItem.toLowerCase());
@@ -222,7 +225,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         result.append(code);
         String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
         int previousTableOffset = 0;
-        if (!whereCondition.isEmpty()) {
+        if (!whereCondition.isEmpty() && !tablesOffset.isEmpty()) {
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
             final Matcher matcher = pattern.matcher(whereCondition);
@@ -239,9 +242,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             }
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
-        System.err.println(tablesOffset.toString());
         result.append("\nputs records");
-        System.out.println(result.toString().replaceAll("<most_inner>", joinsCode));
+        String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
+        System.out.println(finalCode);
 
     }
 

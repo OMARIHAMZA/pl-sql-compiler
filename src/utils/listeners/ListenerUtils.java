@@ -7,11 +7,14 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
+import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.function.Consumer;
 
 public class ListenerUtils {
 
@@ -86,6 +89,17 @@ public class ListenerUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static int getOverallSize(Stack<String> tables) {
+        int count = 0;
+        Object[] tablesArray = tables.toArray();
+        for (Object currentString : tablesArray) {
+            if (!BooleanExpressionMatcher.matches(String.valueOf(currentString))) {
+                count += TypeRepository.getColumnsCount(String.valueOf(currentString));
+            }
+        }
+        return count;
     }
 
 }

@@ -8,7 +8,7 @@ joinLoopTemplate(table_name, loop_code, counter, left_record, where_condition, t
 until <table_name>_<counter>_file_index == <table_name>_<counter>_csv_files.length
 
   <table_name>_<counter>_line, <table_name>_<counter>_file_index, <table_name>_<counter>_pos = ExecutionPlanUtilities.read_record(<table_name>_<counter>_table_location, <table_name>_<counter>_csv_files, <table_name>_<counter>_file_index, <table_name>_<counter>_pos)
-  record_<counter> = <table_name>_<counter>_line.chomp + <left_record>
+  record_<counter> = <left_record> + <table_name>_<counter>_line.chomp
 
     <table_name>_<counter>_joined_flag = false
     <loop_code>
