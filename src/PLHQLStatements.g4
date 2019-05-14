@@ -513,7 +513,7 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList()] :
+subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>()] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -643,8 +643,13 @@ qualify_clause :
      ;
 
 order_by_clause :
-       T_ORDER T_BY expr (T_ASC | T_DESC)? (T_COMMA expr (T_ASC | T_DESC)?)*
+       T_ORDER T_BY expr sort_type?  { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); }
+       (T_COMMA expr sort_type? { $subselect_stmt::orderingColumnsMap.put($expr.text,$sort_type.text); })*
      ;
+
+sort_type :
+       (T_ASC | T_DESC)
+    ;
 
 
 bool_expr :                               // Boolean condition

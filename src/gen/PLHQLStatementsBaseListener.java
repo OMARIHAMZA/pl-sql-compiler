@@ -1445,6 +1445,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSort_type(PLHQLStatementsParser.Sort_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSort_type(PLHQLStatementsParser.Sort_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBool_expr(PLHQLStatementsParser.Bool_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}

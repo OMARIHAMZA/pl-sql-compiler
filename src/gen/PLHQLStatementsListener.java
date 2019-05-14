@@ -1199,6 +1199,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitOrder_by_clause(PLHQLStatementsParser.Order_by_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#sort_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterSort_type(PLHQLStatementsParser.Sort_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#sort_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitSort_type(PLHQLStatementsParser.Sort_typeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_expr}.
 	 * @param ctx the parse tree
 	 */
