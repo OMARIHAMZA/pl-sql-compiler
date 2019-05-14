@@ -11,9 +11,7 @@ import utils.files.RubyFile;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -175,50 +173,45 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     }
 
     @Override
-    public void enterSelect_list_item(PLHQLStatementsParser.Select_list_itemContext ctx) {
-        super.enterSelect_list_item(ctx);
-    }
-
-
-    @Override
-    public void enterFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
-        super.enterFrom_clause(ctx);
-    }
-
-    @Override
-    public void enterFrom_table_name_clause(PLHQLStatementsParser.From_table_name_clauseContext ctx) {
-        super.exitFrom_table_name_clause(ctx);
-//        rubyFile.println("tables << " + "\"" + ctx.table_name().getText().toUpperCase() + "\"");
-    }
-
-    @Override
     public void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
         super.exitFrom_clause(ctx);
         StringBuilder code = new StringBuilder();
+        String joinsCode = "";
         int counter = 0, previousColumnsCount = 0;
         StringBuilder columnsIndices = new StringBuilder();
-        while (!ctx.tables.empty()) {
-            String currentItem = ctx.tables.pop();
-            if (BooleanExpressionMatcher.matches(currentItem)) {
-                processJoinCondition(ctx, currentItem, counter, columnsIndices, code);
-            } else {
-                ST currentTableST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
-                currentTableST.add("table_name", currentItem.toLowerCase());
-                currentTableST.add("loop_code", code.toString());
-                currentTableST.add("counter", counter++);
-
-                if (counter == 1 && ctx.tables.isEmpty()) {
+        HashMap<String, Integer> tablesOffset = new HashMap<>();
+        //Single Table Selection
+        if (ctx.tables.size() == 1) {
+            processSingleTable(ctx.tables.pop(), ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition, columnsIndices, code);
+        } else {
+            String previousTable = null;
+            //Multiple Tables
+            while (!ctx.tables.empty()) {
+                String currentItem = ctx.tables.pop();
+                if (BooleanExpressionMatcher.matches(currentItem)) {
+                    joinsCode = processJoinCondition(ctx, currentItem, counter, columnsIndices, joinsCode);
+                } else {
+                    if (previousTable != null) {
+                        tablesOffset.put(currentItem.toUpperCase(), tablesOffset.get(previousTable) + TypeRepository.typeHashMap.get(previousTable).getMembers().size());
+                    } else {
+                        tablesOffset.put(currentItem.toUpperCase(), 0);
+                    }
+                    previousTable = currentItem;
+                    ST currentTableST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
+                    currentTableST.add("table_name", currentItem.toLowerCase());
+                    currentTableST.add("loop_code", counter == 0 ? "<most_inner>" : code.toString());
+                    currentTableST.add("counter", counter++);
+                    currentTableST.add("left_record", counter == ctx.tablesCount ? "\"\"" : (" \",\" + record_" + (counter)));
+                    if (ctx.tables.isEmpty()) {
+                        ST leftRightJoinST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
+                        leftRightJoinST.add("left_table_name", currentItem.toLowerCase());
+                        leftRightJoinST.add("left_counter", counter - 1);
+                        leftRightJoinST.add("right_columns_count", previousColumnsCount);
+                        currentTableST.add("left_join", leftRightJoinST.render());
+                    }
+                    code = new StringBuilder(currentTableST.render());
+                    previousColumnsCount = TypeRepository.typeHashMap.get(currentItem).getMembers().size();
                 }
-
-                if (ctx.tables.isEmpty()) {
-                    ST leftRightJoinST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
-                    leftRightJoinST.add("left_table_name", currentItem.toLowerCase());
-                    leftRightJoinST.add("left_counter", counter - 1);
-                    leftRightJoinST.add("right_columns_count", previousColumnsCount);
-                    currentTableST.add("left_join", leftRightJoinST.render());
-                }
-                code = new StringBuilder(currentTableST.render());
-                previousColumnsCount = TypeRepository.typeHashMap.get(currentItem).getMembers().size();
             }
         }
 
@@ -227,15 +220,32 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         result.append("\nrecords = []\n");
         result.append(columnsIndices);
         result.append(code);
+        String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
+        int previousTableOffset = 0;
+        if (!whereCondition.isEmpty()) {
+            final String regex = "\\w+\\.\\w+";
+            final Pattern pattern = Pattern.compile(regex);
+            final Matcher matcher = pattern.matcher(whereCondition);
+            while (matcher.find()) {
+                String group = matcher.group();
+                String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+                String columnType = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+                ST columnIndexST = new ST("<table_name>_<column_name>_index = ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+                columnIndexST.add("table_name", tableName.toLowerCase());
+                columnIndexST.add("column_name", columnName.toLowerCase());
+                whereCondition = whereCondition.replaceFirst(group, "record.split(\",\")[" + previousTableOffset + " + " + tableName + "_" + columnName + "_index]" + getConversion(columnType));
+                result.append("\n").append(columnIndexST.render()).append("\n");
+                previousTableOffset = tablesOffset.get(tableName.toUpperCase());
+            }
+            result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
+        }
+        System.err.println(tablesOffset.toString());
         result.append("\nputs records");
-        System.out.println(result);
+        System.out.println(result.toString().replaceAll("<most_inner>", joinsCode));
 
-        StringSelection stringSelection = new StringSelection(result.toString());
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(stringSelection, null);
     }
 
-    private void processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, StringBuilder code) {
+    private String processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, String joinsCode) {
         String firstTable, secondTable, tempBooleanExpression = null;
         secondTable = ctx.tables.pop();
         firstTable = ctx.tables.pop();
@@ -271,38 +281,78 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             termValueST.add("table_name", tableName);
             termValueST.add("counter", tempCounter);
             termValueST.add("column_name", columnName);
-            if (type.equalsIgnoreCase("INT")) {
-                termValueST.add("conversion", ".to_i");
-            } else if (type.equalsIgnoreCase("FLOAT")) {
-                termValueST.add("conversion", ".to_f");
-            } else {
-                termValueST.add("conversion", "");
-            }
-            currentItem = currentItem.replaceFirst(group, termValueST.render());
+            currentItem = getConversion(currentItem, group, type, termValueST);
         }
 
         ctx.tables.push(firstTable);
-        ctx.tables.push(tempBooleanExpression == null ? secondTable : tempBooleanExpression);
+        if (tempBooleanExpression != null)
+            ctx.tables.push(tempBooleanExpression);
+        ctx.tables.push(secondTable);
 
-
-        ST joinTypeST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_TYPE_TEMPLATE_NAME);
-        joinTypeST.add("join_condition", currentItem);
-        joinTypeST.add("first_table_name", firstTable.toLowerCase());
-        joinTypeST.add("second_table_name", secondTable.toLowerCase());
-        joinTypeST.add("first_counter", counter + 1);
-        joinTypeST.add("second_counter", counter);
-        joinTypeST.add("first_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
-        joinTypeST.add("second_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
-
-        code.append(joinTypeST.render());
-
+        ST multipleJoinsTemplate = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.MULTIPLE_JOINS_TEMPLATE_NAME);
+        multipleJoinsTemplate.add("table_name", secondTable.toLowerCase());
+        multipleJoinsTemplate.add("table_counter", counter);
+        multipleJoinsTemplate.add("join_condition", currentItem);
+        multipleJoinsTemplate.add("inner_code", counter == 0 ? "records <<  record_0" : joinsCode);
+        return multipleJoinsTemplate.render();
     }
 
-    private void processSingleTable(String tableName, String whereCondition, int counter, StringBuilder columnsIndices, StringBuilder code) {
-        ST joinTypeST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.WHERE_CONDITION_TEMPLATE_NAME);
-        joinTypeST.add("table_name", tableName.toLowerCase());
-        joinTypeST.add("counter", counter);
-        joinTypeST.add("where_condition", whereCondition);
-        code.append(joinTypeST.render());
+    private void processSingleTable(String tableName, String whereCondition, StringBuilder columnIndex, StringBuilder code) {
+        ST singleTableSelectionST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SINGLE_TABLE_SELECTION_TEMPLATE_NAME);
+        singleTableSelectionST.add("table_name", tableName.toLowerCase());
+        if (!whereCondition.isEmpty()) {
+            singleTableSelectionST.add("where_condition", mapSingleTableWhereCondition(whereCondition, columnIndex));
+        }
+        code.append(singleTableSelectionST.render());
     }
+
+    private String mapSingleTableWhereCondition(String whereCondition, StringBuilder columnIndex) {
+        final String regex = "\\w+\\.\\w+";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(whereCondition);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+            //Column Index
+            ST indexST;
+            indexST = new ST("<table_name>_<column_name>_index=  ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+            indexST.add("table_name", tableName.toLowerCase());
+            indexST.add("column_name", columnName.toLowerCase());
+            columnIndex.append(indexST.render());
+            columnIndex.append("\n");
+
+            //Term Value
+            String type = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+            ST termValueST;
+            termValueST = new ST("<table_name>_line.split(\",\")[<table_name>_<column_name>_index].strip<conversion>");
+            termValueST.add("table_name", tableName.toLowerCase());
+            termValueST.add("column_name", columnName.toLowerCase());
+            whereCondition = getConversion(whereCondition, group, type, termValueST);
+        }
+        return whereCondition;
+    }
+
+    private String getConversion(String type) {
+        if (type.equalsIgnoreCase("INT")) {
+            return ".to_i";
+        } else if (type.equalsIgnoreCase("FLOAT")) {
+            return ".to_f";
+        } else {
+            return "";
+        }
+    }
+
+    private String getConversion(String whereCondition, String group, String type, ST termValueST) {
+        if (type.equalsIgnoreCase("INT")) {
+            termValueST.add("conversion", ".to_i");
+        } else if (type.equalsIgnoreCase("FLOAT")) {
+            termValueST.add("conversion", ".to_f");
+        } else {
+            termValueST.add("conversion", "");
+        }
+        whereCondition = whereCondition.replaceFirst(group, termValueST.render());
+        return whereCondition;
+    }
+
+
 }

@@ -1,0 +1,66 @@
+joinLoopTemplate(table_name, loop_code, counter, left_record, where_condition, tables_count, left_join = "") ::= <<
+
+<table_name>_<counter>_table_location = ExecutionPlanUtilities.get_table_location("<table_name>")
+<table_name>_<counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<table_name>_<counter>_table_location)
+<table_name>_<counter>_file_index = 0
+<table_name>_<counter>_pos = 0
+
+until <table_name>_<counter>_file_index == <table_name>_<counter>_csv_files.length
+
+  <table_name>_<counter>_line, <table_name>_<counter>_file_index, <table_name>_<counter>_pos = ExecutionPlanUtilities.read_record(<table_name>_<counter>_table_location, <table_name>_<counter>_csv_files, <table_name>_<counter>_file_index, <table_name>_<counter>_pos)
+  record_<counter> = <table_name>_<counter>_line.chomp + <left_record>
+
+    <table_name>_<counter>_joined_flag = false
+    <loop_code>
+
+  <left_join>
+
+end
+
+>>
+
+multipleJoinsTemplate(join_condition, table_name, table_counter, inner_code = "") ::= <<
+
+    if <join_condition>
+
+        <table_name>_<table_counter>_joined_flag = true
+
+        <inner_code>
+
+    end
+>>
+
+joinTypesTemplate(join_condition, join_type, first_table_name, second_table_name, first_counter, second_counter, first_length, second_length) ::= <<
+
+    if <join_condition>
+
+    records \<\< <first_table_name>_<first_counter>_line.chomp + "," + <second_table_name>_<second_counter>_line.chomp
+    <first_table_name>_<first_counter>_joined_flag = true
+
+    end
+
+>>
+
+singleTableSelection(table_name, where_condition = "true") ::= <<
+    <table_name>_table_location = ExecutionPlanUtilities.get_table_location("<table_name>")
+    <table_name>_csv_files = ExecutionPlanUtilities.get_csv_files(<table_name>_table_location)
+    <table_name>_file_index = 0
+    <table_name>_pos = 0
+
+    until <table_name>_file_index == <table_name>_csv_files.length
+
+      <table_name>_line, <table_name>_file_index, <table_name>_pos = ExecutionPlanUtilities.read_record(<table_name>_table_location, <table_name>_csv_files, <table_name>_file_index, <table_name>_pos)
+
+      records \<\< <table_name>_line.chomp if <where_condition>
+
+    end
+
+>>
+
+leftRightJoinTemplate(left_table_name, left_counter, right_columns_count) ::= <<
+
+    records \<\< <left_table_name>_<left_counter>_line.chomp + ("," * <right_columns_count>) if !<left_table_name>_<left_counter>_joined_flag and join_type.start_with?("LEFT")
+
+    records \<\< (("," * <right_columns_count>) + <left_table_name>_<left_counter>_line.chomp) if !<left_table_name>_<left_counter>_joined_flag and join_type.start_with?("RIGHT")
+>>
+

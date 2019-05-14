@@ -554,7 +554,7 @@ into_clause :
      ;
 
 from_clause locals[
-java.util.Stack<String> tables = new java.util.Stack<>(), String joinType
+java.util.Stack<String> tables = new java.util.Stack<>(), String joinType, int tablesCount = 0
 ]:
        T_FROM from_table_clause (from_join_clause)*
      ;
@@ -572,6 +572,7 @@ from_table_clause :
 from_table_name_clause :
        table_name from_alias_clause? {
        $from_clause::tables.push($table_name.text);
+       $from_clause::tablesCount+=1;
        }
      ;
 

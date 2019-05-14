@@ -9702,6 +9702,7 @@ public class PLHQLStatementsParser extends Parser {
 	public static class From_clauseContext extends ParserRuleContext {
 		public java.util.Stack<String> tables = new java.util.Stack<>();
 		public String joinType;
+		public int tablesCount = 0;
 		public TerminalNode T_FROM() { return getToken(PLHQLStatementsParser.T_FROM, 0); }
 		public From_table_clauseContext from_table_clause() {
 			return getRuleContext(From_table_clauseContext.class,0);
@@ -9935,6 +9936,7 @@ public class PLHQLStatementsParser extends Parser {
 			}
 
 			       ((From_clauseContext)getInvokingContext(102)).tables.push((((From_table_name_clauseContext)_localctx).table_name!=null?_input.getText(((From_table_name_clauseContext)_localctx).table_name.start,((From_table_name_clauseContext)_localctx).table_name.stop):null));
+			       ((From_clauseContext)getInvokingContext(102)).tablesCount+=1;
 			       
 			}
 		}
