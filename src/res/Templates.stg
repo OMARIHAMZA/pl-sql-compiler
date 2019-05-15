@@ -70,7 +70,7 @@ selection_columns \<\< <table_offset> + ExecutionPlanUtilities::get_column_index
 
 >>
 
-orderingColumnTemplate(table_name, column_name, table_offset = "0", order_type) ::=<<
+orderingColumnTemplate(table_name, column_name, order_type, table_offset = "0") ::=<<
 
 ordering_columns[<table_offset> + ExecutionPlanUtilities::get_column_index("<table_name>", "<column_name>")] = "<order_type>"
 

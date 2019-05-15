@@ -218,6 +218,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         StringBuilder result = new StringBuilder();
         result.append("join_type = \"").append(ctx.joinType).append("\"");
+        result.append("\ngrouping_columns = []\n");
         result.append("\nordering_columns = []\n");
         result.append("\nselection_columns = []\n");
         result.append("\nrecords = []\n");
@@ -241,6 +242,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
         result.append("\n").append(getAggregateFunctionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).aggregateFunctionColumns));
+        result.append(getGroupingColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).groupByColumns));
         result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
         result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
         result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
@@ -310,6 +312,15 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             result.append("{:function=>:").append(pair.a.toUpperCase()).append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append("},");
         }
         return "aggregation_columns = [" + result.toString() + "]";
+    }
+
+    private String getGroupingColumns(ArrayList<String> groupingColumns) {
+        StringBuilder result = new StringBuilder();
+        for (String s : groupingColumns) {
+            String[] splitResult = s.split("\\.");
+            result.append("\ngrouping_columns << ").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()));
+        }
+        return "\n" + result.toString() + "\n";
     }
 
     private String processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, String joinsCode) {
@@ -390,7 +401,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         }
         return whereCondition;
     }
-
 
     private void processSingleTable(String tableName, String whereCondition, StringBuilder columnIndex, StringBuilder code) {
         ST singleTableSelectionST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SINGLE_TABLE_SELECTION_TEMPLATE_NAME);

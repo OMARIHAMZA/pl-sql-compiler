@@ -516,7 +516,15 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>(), boolean isDistinct = false, ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList()] :
+subselect_stmt locals[
+    String whereCondition = "",
+    ArrayList<String> selectionColumns = new ArrayList(),
+    HashMap<String, String> orderingColumnsMap = new HashMap<>(),
+    boolean isDistinct = false,
+    ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList(),
+    ArrayList<String> groupByColumns = new ArrayList<>()
+
+    ] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -634,7 +642,7 @@ error_missing_bool_expr :
      ;
 
 group_by_clause :
-       T_GROUP T_BY expr (T_COMMA expr)*
+       T_GROUP T_BY expr { $subselect_stmt::groupByColumns.add($expr.text); } (T_COMMA expr { $subselect_stmt::groupByColumns.add($expr.text); })*
      ;
 
 having_clause :
