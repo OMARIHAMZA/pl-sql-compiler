@@ -3,6 +3,7 @@ package utils.listeners;
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
+import org.antlr.v4.runtime.misc.Pair;
 import org.stringtemplate.v4.ST;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
@@ -239,6 +240,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             }
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
+        result.append("\n").append(getAggregateFunctionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).aggregateFunctionColumns));
         result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
         result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
         result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
@@ -263,7 +265,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             selectionColumnTemplateST.add("table_offset", tablesOffset.containsKey(tableName.toUpperCase()) ? tablesOffset.get(tableName.toUpperCase()) : "0");
             result.append(selectionColumnTemplateST.render());
         }
-        return result.toString();
+        return "\n\nif aggregation_columns.empty?" + result.toString() + "\nend";
     }
 
     @SuppressWarnings("ALL")
@@ -299,6 +301,15 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             result.append(orderExpressionST.render());
         }
         return result.toString();
+    }
+
+    private String getAggregateFunctionColumns(ArrayList<Pair<String, String>> aggregateFunctionColumns) {
+        StringBuilder result = new StringBuilder();
+        for (Pair<String, String> pair : aggregateFunctionColumns) {
+            String[] splitResult = pair.b.split("\\.");
+            result.append("{:function=>:").append(pair.a.toUpperCase()).append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append("},");
+        }
+        return "aggregation_columns = [" + result.toString() + "]";
     }
 
     private String processJoinCondition(PLHQLStatementsParser.From_clauseContext ctx, String currentItem, int counter, StringBuilder columnsIndices, String joinsCode) {
@@ -388,6 +399,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             singleTableSelectionST.add("where_condition", mapSingleTableWhereCondition(whereCondition, columnIndex));
         }
         code.append(singleTableSelectionST.render());
+    }
+
+    private String getColumnIndex(String tableName, String columnName) {
+        ST indexST = new ST("ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+        indexST.add("table_name", tableName);
+        indexST.add("column_name", columnName);
+        return indexST.render();
     }
 
 

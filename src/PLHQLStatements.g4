@@ -2,7 +2,10 @@
 // HPL/SQL Procedural SQL Extension Grammar
 grammar PLHQLStatements;
 import PLHQLStatementLexer;
-@header{import java.util.*;}
+@header{
+import java.util.*;
+import org.antlr.v4.runtime.misc.Pair;
+}
 
 program : c_function+ EOF;
 
@@ -513,7 +516,7 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>(), boolean isDistinct = false] :
+subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>(), boolean isDistinct = false, ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList()] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -779,22 +782,23 @@ expr_case_searched :
 
 
 expr_agg_window_func :
-       T_AVG T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_COUNT T_OPEN_P ((expr_func_all_distinct? expr) | '*') T_CLOSE_P expr_func_over_clause?
-     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct? expr) | '*') T_CLOSE_P expr_func_over_clause?
+       T_AVG T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr.text)); }  T_CLOSE_P expr_func_over_clause?
+     | T_COUNT T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
+     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_DENSE_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_FIRST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LAG T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
      | T_LAST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LEAD T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
-     | T_MAX T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_MIN T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
+     | T_MAX T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_MIN T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr.text)); } T_CLOSE_P expr_func_over_clause?
      | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_STDEV T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_SUM T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
-     | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr T_CLOSE_P expr_func_over_clause?
+     | T_STDEV T_OPEN_P expr_func_all_distinct? expr{ $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_SUM T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+
      ;
 
 expr_func_all_distinct :
