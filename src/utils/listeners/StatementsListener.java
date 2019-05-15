@@ -243,6 +243,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
         result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
         result.append("\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
+        result.append("\nrecords.uniq! if ").append(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
         result.append("\nputs records");
         String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);

@@ -513,7 +513,7 @@ fullselect_set_clause :
      | T_INTERSECT T_ALL?
      ;
 
-subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>()] :
+subselect_stmt locals[String whereCondition = "", ArrayList<String> selectionColumns = new ArrayList(), HashMap<String, String> orderingColumnsMap = new HashMap<>(), boolean isDistinct = false] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
 
@@ -529,7 +529,7 @@ select_list :
 
 select_list_set :
        T_ALL
-     | T_DISTINCT
+     | T_DISTINCT {$subselect_stmt::isDistinct=true;}
      ;
 
 select_list_limit :
