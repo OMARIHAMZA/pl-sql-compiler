@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static utils.listeners.ListenerUtils.runRubyProgram;
+
 /**
  * A sub class of the statement Listener
  */
@@ -150,16 +152,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         if (!initializedVariables) {
             initializedVariables = true;
             generatedCode.append("\ngrouping_columns = []\n");
-            generatedCode.append("\nordering_columns = []\n");
-            generatedCode.append("\nselection_columns = []\n");
-            generatedCode.append("\nrecords = []\n");
+            generatedCode.append("ordering_columns = []\n");
+            generatedCode.append("selection_columns = []\n");
+            generatedCode.append("records = []\n\n");
         }
     }
 
-    @Override
-    public void exitSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
-        super.exitSelect_stmt(ctx);
-    }
 
     /**
      * Initialize ruby file to generate code to
@@ -178,6 +176,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void exitProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.exitProgram(ctx);
         scopes.pop();
+        ST mainClassTemplate = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.RUBY_MAIN_CLASS_TEMPLATE);
+        mainClassTemplate.add("code", generatedCode);
+        rubyFile.print(mainClassTemplate.render());
+        runRubyProgram();
     }
 
     /**
@@ -214,6 +216,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         super.enterSubselect_stmt(ctx);
 
         if (ListenerUtils.isSubselectStatement(ctx.parent)) {
+            /**
+             * Add temp data type
+             *
+             * tableName = the alias of the subselect statement
+             * members[] = select list
+             *
+             */
             System.out.println("SUBSELECT STMT");
         }
 
@@ -229,7 +238,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
 
         super.exitFrom_clause(ctx);
-
 
         int overAllLength = ListenerUtils.getOverallSize(ctx.tables); //Number of tables in from clause
 
@@ -327,10 +335,17 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         generatedCode.append("join_type = \"").append(ctx.joinType).append("\"\n");
         generatedCode.append(columnsIndices);
         generatedCode.append(code);
+        generatedCode = new StringBuilder(generatedCode.toString().replaceAll("<most_inner>", joinsCode));
+        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).tablesOffset.putAll(tablesOffset);
+    }
 
-        String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
+    @Override
+    public void exitSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
+        super.exitSubselect_stmt(ctx);
 
+        HashMap<String, Integer> tablesOffset = ctx.tablesOffset;//Offset to add to the indices
 
+        String whereCondition = (ctx).whereCondition;
         if (!whereCondition.isEmpty() && !tablesOffset.isEmpty()) {
             //If there is a where condition generate appropriate code
 
@@ -350,40 +365,38 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             }
 
 
-            generatedCode.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
             //Apply where condition
+            generatedCode.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
 
         generatedCode.append("\n").append(
                 getAggregateFunctionColumns(
-                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
-                                .aggregateFunctionColumns));
+                        ctx.aggregateFunctionColumns));
 
         //Generate code for getting columns used in aggregation functions
 
         generatedCode.append(
                 getGroupingColumns(
-                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
-                                .groupByColumns,
-                        tablesOffset));
+                        ctx.groupByColumns,
+                        ctx.tablesOffset));
         //Generate code for getting group by columns
 
         generatedCode.append(
                 getSelectionColumns(
-                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns,
-                        tablesOffset));
+                        ctx.selectionColumns,
+                        ctx.tablesOffset));
         //Generate code for getting columns to select
 
         generatedCode.append(
                 getOrderColumns(
-                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
+                        ctx.orderingColumnsMap,
                         tablesOffset));
         //Generate code for getting columns to order by
 
         generatedCode.append(
                 "\nrecords.sort_by!{|record| [")
                 .append(
-                        getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
+                        getOrderStatement(ctx.orderingColumnsMap,
                                 tablesOffset)).
                 append(" ]}");
         //Generate code to order generatedCode set
@@ -394,7 +407,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         generatedCode.append("\nrecords.uniq! if ")
                 .append(
-                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
+                        ctx.isDistinct);
         //Generate code for selecting distinct values
 
         generatedCode.append("\n")
@@ -403,11 +416,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         .getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
 
         generatedCode.append("\nputs records");
-
-        String finalCode = generatedCode.toString().replaceAll("<most_inner>", joinsCode);
-        System.out.println(finalCode);
     }
-
 
     /**
      * Code for select clause (projection)

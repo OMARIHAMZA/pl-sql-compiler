@@ -9,7 +9,7 @@ public class RubyFile {
     private File file;
 
     private RubyFile() {
-        file = new File("Generated.rb");
+        file = new File("C:/Users/ASUS/Documents/Github/pl-sql-compiler/ruby/GeneratedMain.rb");
         if (file.exists()) {
             //noinspection all
             file.delete();
@@ -27,7 +27,7 @@ public class RubyFile {
         return rubyFile;
     }
 
-    void println(String data) {
+    public void println(String data) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
             writer.println(data);
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public class RubyFile {
         }
     }
 
-    void print(String data){
+    public void print(String data){
         try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
             writer.print(data);
         } catch (IOException e) {

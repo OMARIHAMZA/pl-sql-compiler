@@ -522,8 +522,8 @@ subselect_stmt locals[
     HashMap<String, String> orderingColumnsMap = new HashMap<>(),
     boolean isDistinct = false,
     ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList(),
-    ArrayList<String> groupByColumns = new ArrayList<>()
-
+    ArrayList<String> groupByColumns = new ArrayList<>(),
+    HashMap<String, Integer> tablesOffset = new HashMap<>();
     ] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
@@ -590,7 +590,7 @@ from_table_name_clause :
      ;
 
 from_subselect_clause :
-       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause?
+       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause
      ;
 
 from_join_clause :

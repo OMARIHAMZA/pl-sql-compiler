@@ -10,9 +10,12 @@ import org.stringtemplate.v4.STGroupFile;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class ListenerUtils {
@@ -26,6 +29,7 @@ public class ListenerUtils {
     static final String ORDERING_COLUMNS_TEMPLATE_NAME = "orderingColumnTemplate";
     static final String ORDER_BY_STATEMENT_TEMPLATE = "orderByStatementTemplate";
     static final String MAP_REDUCE_TEMPLATE_NAME = "mapReduceTemplate";
+    static final String RUBY_MAIN_CLASS_TEMPLATE = "rubyMainClassTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 
@@ -135,13 +139,26 @@ public class ListenerUtils {
         return false;
     }
 
-    static void checkSemanticError(PLHQLStatementsParser.From_clauseContext ctx, String dataTypeName){
+    static void checkSemanticError(PLHQLStatementsParser.From_clauseContext ctx, String dataTypeName) {
         if (!TypeRepository.dataTypeExists(dataTypeName)) {
-
             SyntaxSemanticErrorListener.INSTANCE.semanticError(
                     ctx.start.getLine(),
                     "Usage of undefined DataType: " + dataTypeName); //Log semantic error
         }
     }
 
+    static void runRubyProgram() {
+        try {
+            Process process = Runtime.getRuntime().exec("ruby C:/Users/ASUS/Documents/Github/pl-sql-compiler/ruby/GeneratedMain.rb");
+            process.waitFor();
+            BufferedReader processIn = new BufferedReader(
+                    new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = processIn.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

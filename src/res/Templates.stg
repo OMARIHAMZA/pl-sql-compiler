@@ -84,11 +84,38 @@ orderByStatementTemplate(table_offset, table_name, column_name, conversion, sort
 
 mapReduceTemplate() ::=<<
 
+  unless aggregation_columns.empty?
+
   mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
 
   shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
 
   MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+
+  end
+
+>>
+
+rubyMainClassTemplate(code) ::=<<
+gem 'parallel'
+require 'parallel'
+require 'json'
+require 'time'
+require 'thwait'
+require 'fileutils'
+require_relative 'map_reduce'
+require_relative 'enumerable'
+require_relative 'execution_plan_utilities'
+
+start = Time.now
+
+begin
+
+<code>
+
+end
+
+puts Time.now - start
 
 >>
 
