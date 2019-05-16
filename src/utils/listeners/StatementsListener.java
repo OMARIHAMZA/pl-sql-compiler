@@ -20,7 +20,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
     private Stack<Scope> scopes = new Stack<>(); //Scope stack
     private Queue<Variable> parameters = new ArrayDeque<>(); //Temporary queue of function parameters
+    StringBuilder generatedCode = new StringBuilder();
     private RubyFile rubyFile;
+    private boolean initializedVariables = false; //To avoid duplicated initialization of variables
 
     /**
      * Actions to be done when reaching a c block
@@ -145,12 +147,18 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
         super.enterSelect_stmt(ctx);
+        if (!initializedVariables) {
+            initializedVariables = true;
+            generatedCode.append("\ngrouping_columns = []\n");
+            generatedCode.append("\nordering_columns = []\n");
+            generatedCode.append("\nselection_columns = []\n");
+            generatedCode.append("\nrecords = []\n");
+        }
     }
 
     @Override
     public void exitSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
         super.exitSelect_stmt(ctx);
-
     }
 
     /**
@@ -205,19 +213,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
 
-        String dataTypeName = ctx
-                .from_clause()
-                .from_table_clause()
-                .from_table_name_clause()
-                .table_name()
-                .getText(); // Get table name from where clause
-
-        if (!TypeRepository.dataTypeExists(dataTypeName)) {
-
-            SyntaxSemanticErrorListener.INSTANCE.semanticError(
-                    ctx.start.getLine(),
-                    "Usage of undefined DataType: " + dataTypeName); //Log semantic error
+        if (ListenerUtils.isSubselectStatement(ctx.parent)) {
+            System.out.println("SUBSELECT STMT");
         }
+
     }
 
     /**
@@ -263,7 +262,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             //Multiple Tables
             while (!ctx.tables.empty()) {
                 String currentItem = ctx.tables.pop();
-
+                ListenerUtils.checkSemanticError(ctx, currentItem);
                 if (BooleanExpressionMatcher.matches(currentItem)) {
                     //This is a join condition for example "on (table1.id==table2.fk)"
 
@@ -325,14 +324,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        result.append("join_type = \"").append(ctx.joinType).append("\"");
-        result.append("\ngrouping_columns = []\n");
-        result.append("\nordering_columns = []\n");
-        result.append("\nselection_columns = []\n");
-        result.append("\nrecords = []\n");
-        result.append(columnsIndices);
-        result.append(code);
+        generatedCode.append("join_type = \"").append(ctx.joinType).append("\"\n");
+        generatedCode.append(columnsIndices);
+        generatedCode.append(code);
 
         String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
 
@@ -352,65 +346,65 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 columnIndexST.add("table_name", tableName.toLowerCase());
                 columnIndexST.add("column_name", columnName.toLowerCase());
                 whereCondition = whereCondition.replaceFirst(group, "record.split(\",\")[" + tablesOffset.get(tableName.toUpperCase()) + " + " + tableName + "_" + columnName + "_index]" + ListenerUtils.getConversion(columnType));
-                result.append("\n").append(columnIndexST.render()).append("\n");
+                generatedCode.append("\n").append(columnIndexST.render()).append("\n");
             }
 
 
-            result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
+            generatedCode.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
             //Apply where condition
         }
 
-        result.append("\n").append(
+        generatedCode.append("\n").append(
                 getAggregateFunctionColumns(
                         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
                                 .aggregateFunctionColumns));
 
         //Generate code for getting columns used in aggregation functions
 
-        result.append(
+        generatedCode.append(
                 getGroupingColumns(
                         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
                                 .groupByColumns,
                         tablesOffset));
         //Generate code for getting group by columns
 
-        result.append(
+        generatedCode.append(
                 getSelectionColumns(
                         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns,
                         tablesOffset));
         //Generate code for getting columns to select
 
-        result.append(
+        generatedCode.append(
                 getOrderColumns(
                         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
                         tablesOffset));
         //Generate code for getting columns to order by
 
-        result.append(
+        generatedCode.append(
                 "\nrecords.sort_by!{|record| [")
                 .append(
                         getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
                                 tablesOffset)).
                 append(" ]}");
-        //Generate code to order result set
+        //Generate code to order generatedCode set
 
-        result.append(
+        generatedCode.append(
                 "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         //Generate code for select clause (projection)
 
-        result.append("\nrecords.uniq! if ")
+        generatedCode.append("\nrecords.uniq! if ")
                 .append(
                         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
         //Generate code for selecting distinct values
 
-        result.append("\n")
+        generatedCode.append("\n")
                 .append(ListenerUtils
                         .ST_GROUP_FILE
                         .getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
 
-        result.append("\nputs records");
+        generatedCode.append("\nputs records");
 
-        String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
+        String finalCode = generatedCode.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);
     }
 
@@ -431,6 +425,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         for (String column : selectionColumns) {
 
+            // TODO: 5/16/2019 When selecting from single table, the user does not need to specify table name before column name
             if (!column.contains(".")) return "";
 
             String[] splittedColumn = column.split("\\.");

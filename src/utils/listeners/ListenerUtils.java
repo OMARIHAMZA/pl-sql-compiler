@@ -126,4 +126,22 @@ public class ListenerUtils {
         return count;
     }
 
+    static boolean isSubselectStatement(ParseTree currentParent) {
+        while (currentParent != null) {
+            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_subselect_stmt)
+                return true;
+            currentParent = currentParent.getParent();
+        }
+        return false;
+    }
+
+    static void checkSemanticError(PLHQLStatementsParser.From_clauseContext ctx, String dataTypeName){
+        if (!TypeRepository.dataTypeExists(dataTypeName)) {
+
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(
+                    ctx.start.getLine(),
+                    "Usage of undefined DataType: " + dataTypeName); //Log semantic error
+        }
+    }
+
 }
