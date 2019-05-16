@@ -242,12 +242,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
         result.append("\n").append(getAggregateFunctionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).aggregateFunctionColumns));
-        result.append(getGroupingColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).groupByColumns));
+        result.append(getGroupingColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).groupByColumns, tablesOffset));
         result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
         result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
         result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
         result.append("\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         result.append("\nrecords.uniq! if ").append(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
+        result.append("\n").append(ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
         result.append("\nputs records");
         String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);
@@ -308,17 +309,30 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     private String getAggregateFunctionColumns(ArrayList<Pair<String, String>> aggregateFunctionColumns) {
         StringBuilder result = new StringBuilder();
         for (Pair<String, String> pair : aggregateFunctionColumns) {
-            String[] splitResult = pair.b.split("\\.");
-            result.append("{:function=>:").append(pair.a.toUpperCase()).append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append("},");
+            if (pair.b.equalsIgnoreCase("*")) {
+                result.append("{:function=>:").append(pair.a.toUpperCase())
+                        .append(",:index=>").append("-1")
+                        .append("},");
+            }else{
+                //DISTINCT:TABLE_NAME.COLUMN_NAME
+                String[] splitted = pair.b.split(":");
+                //TABLE_NAME.COLUMN_NAME
+                String[] splitResult = splitted[1].split("\\.");
+                result.append("{:function=>:").append(pair.a.toUpperCase())
+                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                        .append("},");
+            }
         }
         return "aggregation_columns = [" + result.toString() + "]";
     }
 
-    private String getGroupingColumns(ArrayList<String> groupingColumns) {
+    private String getGroupingColumns(ArrayList<String> groupingColumns, HashMap<String, Integer> tablesOffset) {
         StringBuilder result = new StringBuilder();
         for (String s : groupingColumns) {
             String[] splitResult = s.split("\\.");
-            result.append("\ngrouping_columns << ").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()));
+            result.append("\ngrouping_columns << ").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append(" + ").append(tablesOffset.get(splitResult[0].toUpperCase()) == null ? "0" : tablesOffset.get(splitResult[0].toUpperCase()));
         }
         return "\n" + result.toString() + "\n";
     }

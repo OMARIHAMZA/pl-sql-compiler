@@ -790,28 +790,29 @@ expr_case_searched :
 
 
 expr_agg_window_func :
-       T_AVG T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr.text)); }  T_CLOSE_P expr_func_over_clause?
-     | T_COUNT T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
-     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
+       T_AVG T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text)); }  T_CLOSE_P expr_func_over_clause?
+     | T_COUNT T_OPEN_P ((expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text)); }) | '*' { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", "*")); }) T_CLOSE_P expr_func_over_clause?
+     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_DENSE_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_FIRST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LAG T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
      | T_LAST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LEAD T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
-     | T_MAX T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_MIN T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_MAX T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_MIN T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr.text)); } T_CLOSE_P expr_func_over_clause?
      | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_STDEV T_OPEN_P expr_func_all_distinct? expr{ $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_SUM T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_STDEV T_OPEN_P expr_func_all_distinct expr{ $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_SUM T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text)); } T_CLOSE_P expr_func_over_clause?
 
      ;
 
 expr_func_all_distinct :
        T_ALL
      | T_DISTINCT
+     |
      ;
 
 expr_func_over_clause :

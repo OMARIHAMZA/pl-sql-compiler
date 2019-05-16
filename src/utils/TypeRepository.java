@@ -206,6 +206,10 @@ public class TypeRepository {
         return typeHashMap.get(dataTypeName.toUpperCase()).getMembers().size();
     }
 
+    public static String getMemberType(String tableName, String memberName){
+        return typeHashMap.get(tableName.toUpperCase()).getMembers().get(memberName.toUpperCase()).getType();
+    }
+
     /**
      * Check if passed type is a primitive
      *

@@ -25,6 +25,7 @@ public class ListenerUtils {
     static final String SELECTION_COLUMN_TEMPLATE = "selectionColumnTemplate";
     static final String ORDERING_COLUMNS_TEMPLATE_NAME = "orderingColumnTemplate";
     static final String ORDER_BY_STATEMENT_TEMPLATE = "orderByStatementTemplate";
+    static final String MAP_REDUCE_TEMPLATE_NAME = "mapReduceTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 

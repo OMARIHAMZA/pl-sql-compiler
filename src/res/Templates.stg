@@ -82,3 +82,13 @@ orderByStatementTemplate(table_offset, table_name, column_name, conversion, sort
 
 >>
 
+mapReduceTemplate() ::=<<
+
+  mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
+
+  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+
+  MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+
+>>
+
