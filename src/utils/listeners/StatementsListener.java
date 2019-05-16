@@ -9,7 +9,6 @@ import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,6 +98,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         );
     }
 
+    /**
+     * Add the table definition to type repository
+     * Every table has columns with data types and a field terminator
+     *
+     * @param ctx Current context
+     */
+
     @Override
     public void enterCreate_table_stmt(PLHQLStatementsParser.Create_table_stmtContext ctx) {
         super.enterCreate_table_stmt(ctx);
@@ -108,18 +114,26 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 .create_table_hive_row_format()
                 .string()
                 .getText()
-                .replaceAll("'", ""));
+                .replaceAll("'", "")); //Get field terminator
 
-        String tableLocation = ctx.create_table_preoptions().string().getText().replaceAll("'", "");
+        String tableLocation = ctx.create_table_preoptions()
+                .string()
+                .getText()
+                .replaceAll("'", ""); //get directory of table
 
-        DataType dataType = new DataType(ctx.table_name().getText().toUpperCase(), tableLocation, fieldTerminator);
+        DataType dataType = new DataType(
+                ctx.table_name().getText().toUpperCase(),
+                tableLocation,
+                fieldTerminator);//Define the new table name with a few options
 
-        ctx.create_table_definition().create_table_columns().create_table_columns_item().forEach(column -> {
-            DataMember dataMember = new DataMember(column.dtype().getText().toUpperCase(),
-                    column.column_name().getText().toUpperCase());
+        ctx.create_table_definition().create_table_columns().create_table_columns_item()
+                .forEach(column -> {
+                    DataMember dataMember = new DataMember(
+                            column.dtype().getText().toUpperCase(),
+                            column.column_name().getText().toUpperCase());//Add each column to the table definition
 
-            dataType.getMembers().put(dataMember.getName().toUpperCase(), dataMember);
-        });
+                    dataType.getMembers().put(dataMember.getName().toUpperCase(), dataMember);
+                });
 
         try {
             TypeRepository.addDataType(dataType);
@@ -139,6 +153,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
     }
 
+    /**
+     * Initialize ruby file to generate code to
+     * and add a global scope to the scope stack
+     *
+     * @param ctx Current context
+     */
     @Override
     public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.enterProgram(ctx);
@@ -152,59 +172,148 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         scopes.pop();
     }
 
+    /**
+     * Check if a variable is defined in the current scope if it is used in an expression
+     *
+     * @param ctx Current context
+     */
+
     @Override
     public void enterExpr_atom(PLHQLStatementsParser.Expr_atomContext ctx) {
         super.enterExpr_atom(ctx);
-        if (ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText())) {
-            if (ListenerUtils.fromSelectClause(ctx) && !ListenerUtils.checkDataMemberExistence(ctx.ident().getText(), ctx)) {
-                SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined variable: " + ctx.getText());
+
+        if (ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()))
+        //If variable is not defined in the current scope
+        {
+            if (ListenerUtils.fromSelectClause(ctx)
+                    && !ListenerUtils.checkDataMemberExistence(ctx.ident().getText(), ctx)) {
+
+                SyntaxSemanticErrorListener.INSTANCE.semanticError(
+                        ctx.start.getLine(),
+                        "Usage of undefined variable: " + ctx.getText()); //log a semantic error
             }
         }
     }
 
+    /**
+     * Check if current table in the select is defined in the type repository
+     *
+     * @param ctx Current context
+     */
 
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
-        String dataTypeName = ctx.from_clause().from_table_clause().from_table_name_clause().table_name().getText();
+
+        String dataTypeName = ctx
+                .from_clause()
+                .from_table_clause()
+                .from_table_name_clause()
+                .table_name()
+                .getText(); // Get table name from where clause
+
         if (!TypeRepository.dataTypeExists(dataTypeName)) {
-            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Usage of undefined DataType: " + dataTypeName);
+
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(
+                    ctx.start.getLine(),
+                    "Usage of undefined DataType: " + dataTypeName); //Log semantic error
         }
     }
 
+    /**
+     * Main code for generating code for select statments
+     *
+     * @param ctx Current context
+     */
+
     @Override
     public void exitFrom_clause(PLHQLStatementsParser.From_clauseContext ctx) {
+
         super.exitFrom_clause(ctx);
-        int overAllLength = ListenerUtils.getOverallSize(ctx.tables);
-        StringBuilder code = new StringBuilder();
+
+
+        int overAllLength = ListenerUtils.getOverallSize(ctx.tables); //Number of tables in from clause
+
+        StringBuilder code = new StringBuilder(); //Code inside the nested loop of join
+
         String joinsCode = "";
-        int counter = 0, previousColumnsCount = 0;
-        StringBuilder columnsIndices = new StringBuilder();
-        HashMap<String, Integer> tablesOffset = new HashMap<>();
+
+        int counter = 0 // counter for each table in the join nested loops
+                , previousColumnsCount = 0; //Number of columns in the previous table of the join
+
+        StringBuilder columnsIndices =
+                new StringBuilder(); //Print indices of the columns needed to pass it to the code generator
+
+        HashMap<String, Integer> tablesOffset = new HashMap<>();//Offset to add to the indices
+
+
         //Single Table Selection
         if (ctx.tables.size() == 1) {
-            processSingleTable(ctx.tables.pop(), ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition, columnsIndices, code);
+
+            processSingleTable(
+                    ctx.tables.pop(),
+                    ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition,
+                    columnsIndices,
+                    code); //Generate code for a single table
+
         } else {
+            // Joins
             String previousTable = null;
+
             //Multiple Tables
             while (!ctx.tables.empty()) {
                 String currentItem = ctx.tables.pop();
+
                 if (BooleanExpressionMatcher.matches(currentItem)) {
-                    joinsCode = processJoinCondition(ctx, currentItem, counter, columnsIndices, joinsCode);
-                } else {
+                    //This is a join condition for example "on (table1.id==table2.fk)"
+
+                    joinsCode = processJoinCondition(
+                            ctx,
+                            currentItem,
+                            counter,
+                            columnsIndices,
+                            joinsCode);//Generate code for a join condition
+
+
+                } else { //Calculate tables offset
                     if (previousTable != null) {
-                        tablesOffset.put(currentItem.toUpperCase(), tablesOffset.get(previousTable) - TypeRepository.getColumnsCount(currentItem));
+                        //Not the first table to be added
+                        tablesOffset.put(
+                                currentItem.toUpperCase(),
+
+                                tablesOffset.get(previousTable) -
+                                        TypeRepository.getColumnsCount(currentItem));
                     } else {
-                        tablesOffset.put(currentItem.toUpperCase(), overAllLength - TypeRepository.typeHashMap.get(currentItem).getMembers().size());
+                        //First table
+                        tablesOffset.put(
+                                currentItem.toUpperCase(),
+
+                                overAllLength -
+                                        TypeRepository.typeHashMap
+                                                .get(currentItem).
+                                                getMembers().size());
                     }
                     previousTable = currentItem;
-                    ST currentTableST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
+
+                    ST currentTableST = ListenerUtils
+                            .ST_GROUP_FILE
+                            .getInstanceOf(
+                                    ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
+                    //Get an instance of the nested loop join string template
+
                     currentTableST.add("table_name", currentItem.toLowerCase());
                     currentTableST.add("loop_code", counter == 0 ? "<most_inner>" : code.toString());
                     currentTableST.add("counter", counter++);
                     currentTableST.add("left_record", counter == ctx.tablesCount ? "\"\"" : ("record_" + (counter) + " + \",\""));
+
+
                     if (ctx.tables.isEmpty()) {
-                        ST leftRightJoinST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
+                        //Process outer joins
+                        ST leftRightJoinST = ListenerUtils
+                                .ST_GROUP_FILE
+                                .getInstanceOf(ListenerUtils.LEFT_RIGHT_JOIN_TEMPLATE_NAME);
+                        //Get an instance of the outer join string template
+
                         leftRightJoinST.add("left_table_name", currentItem.toLowerCase());
                         leftRightJoinST.add("left_counter", counter - 1);
                         leftRightJoinST.add("right_columns_count", previousColumnsCount);
@@ -224,11 +333,17 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         result.append("\nrecords = []\n");
         result.append(columnsIndices);
         result.append(code);
+
         String whereCondition = ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).whereCondition;
+
+
         if (!whereCondition.isEmpty() && !tablesOffset.isEmpty()) {
+            //If there is a where condition generate appropriate code
+
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
             final Matcher matcher = pattern.matcher(whereCondition);
+
             while (matcher.find()) {
                 String group = matcher.group();
                 String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
@@ -239,35 +354,103 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 whereCondition = whereCondition.replaceFirst(group, "record.split(\",\")[" + tablesOffset.get(tableName.toUpperCase()) + " + " + tableName + "_" + columnName + "_index]" + ListenerUtils.getConversion(columnType));
                 result.append("\n").append(columnIndexST.render()).append("\n");
             }
+
+
             result.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
+            //Apply where condition
         }
-        result.append("\n").append(getAggregateFunctionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).aggregateFunctionColumns));
-        result.append(getGroupingColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).groupByColumns, tablesOffset));
-        result.append(getSelectionColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns, tablesOffset));
-        result.append(getOrderColumns(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset));
-        result.append("\nrecords.sort_by!{|record| [").append(getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap, tablesOffset)).append(" ]}");
-        result.append("\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
-        result.append("\nrecords.uniq! if ").append(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
-        result.append("\n").append(ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
+
+        result.append("\n").append(
+                getAggregateFunctionColumns(
+                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
+                                .aggregateFunctionColumns));
+
+        //Generate code for getting columns used in aggregation functions
+
+        result.append(
+                getGroupingColumns(
+                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)
+                                .groupByColumns,
+                        tablesOffset));
+        //Generate code for getting group by columns
+
+        result.append(
+                getSelectionColumns(
+                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).selectionColumns,
+                        tablesOffset));
+        //Generate code for getting columns to select
+
+        result.append(
+                getOrderColumns(
+                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
+                        tablesOffset));
+        //Generate code for getting columns to order by
+
+        result.append(
+                "\nrecords.sort_by!{|record| [")
+                .append(
+                        getOrderStatement(((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).orderingColumnsMap,
+                                tablesOffset)).
+                append(" ]}");
+        //Generate code to order result set
+
+        result.append(
+                "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
+        //Generate code for select clause (projection)
+
+        result.append("\nrecords.uniq! if ")
+                .append(
+                        ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).isDistinct);
+        //Generate code for selecting distinct values
+
+        result.append("\n")
+                .append(ListenerUtils
+                        .ST_GROUP_FILE
+                        .getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
+
         result.append("\nputs records");
+
         String finalCode = result.toString().replaceAll("<most_inner>", joinsCode);
         System.out.println(finalCode);
     }
 
+
+    /**
+     * Code for select clause (projection)
+     *
+     * @param selectionColumns Columns used in select calues
+     * @param tablesOffset     Offsets for tables after joins
+     * @return Code generated to added to the genarated file (select/projection)
+     */
     @SuppressWarnings("ALL")
-    private String getSelectionColumns(ArrayList<String> selectionColumns, HashMap<String, Integer> tablesOffset) {
+    private String getSelectionColumns(ArrayList<String> selectionColumns,
+                                       HashMap<String, Integer> tablesOffset) {
+
         StringBuilder result = new StringBuilder();
         result.append("\n\n");
+
         for (String column : selectionColumns) {
+
             if (!column.contains(".")) return "";
+
             String[] splittedColumn = column.split("\\.");
             String tableName = splittedColumn[0], columnName = splittedColumn[1];
-            ST selectionColumnTemplateST = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.SELECTION_COLUMN_TEMPLATE);
+
+            ST selectionColumnTemplateST =
+                    ListenerUtils
+                            .ST_GROUP_FILE
+                            .getInstanceOf(ListenerUtils.SELECTION_COLUMN_TEMPLATE);
+
             selectionColumnTemplateST.add("table_name", tableName.toLowerCase());
             selectionColumnTemplateST.add("column_name", columnName.toLowerCase());
-            selectionColumnTemplateST.add("table_offset", tablesOffset.containsKey(tableName.toUpperCase()) ? tablesOffset.get(tableName.toUpperCase()) : "0");
+            selectionColumnTemplateST.add("table_offset",
+                    tablesOffset.containsKey(tableName.toUpperCase()) ?
+                            tablesOffset.get(tableName.toUpperCase()) :
+                            "0");
+
             result.append(selectionColumnTemplateST.render());
         }
+
         return "\n\nif aggregation_columns.empty?" + result.toString() + "\nend";
     }
 
@@ -313,7 +496,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 result.append("{:function=>:").append(pair.a.toUpperCase())
                         .append(",:index=>").append("-1")
                         .append("},");
-            }else{
+            } else {
                 //DISTINCT:TABLE_NAME.COLUMN_NAME
                 String[] splitted = pair.b.split(":");
                 //TABLE_NAME.COLUMN_NAME
