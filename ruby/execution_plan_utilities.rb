@@ -51,4 +51,42 @@ module ExecutionPlanUtilities
     end
   end
 
+  def self.get_table_members(table_name)
+    json_array = JSON.parse File.read(MapReduce::DATA_TYPES_FILE_PATH)
+
+    json_array.map do |entry|
+      if entry["name"].casecmp?(table_name)
+        return entry["members"]
+      end
+    end
+
+    []
+  end
+
+  def self.process_subselect_statement(records, table_alias, members)
+
+    # Write the result to a temp csv file
+    File.open(table_alias + ".csv", "w") do |file|
+      file.puts records
+    end
+
+    # Add the table to the temp repository
+    types = JSON.load(File.open("temp.json", "r"))
+
+    datatype = {
+
+        :table_name => table_alias,
+        :members => members,
+        :fields_terminator => ","
+
+    }
+
+    types << datatype
+
+    File.open("temp.json", "w") do |file|
+      file.puts types.to_json
+    end
+
+  end
+
 end

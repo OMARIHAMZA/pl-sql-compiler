@@ -4,16 +4,20 @@ import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
 import org.antlr.v4.runtime.misc.Pair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.stringtemplate.v4.ST;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
 
+import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static utils.listeners.ListenerUtils.runRubyProgram;
+import static utils.listeners.ListenerUtils.*;
 
 /**
  * A sub class of the statement Listener
@@ -214,18 +218,30 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
-
-        if (ListenerUtils.isSubselectStatement(ctx.parent)) {
-            /**
-             * Add temp data type
-             *
-             * tableName = the alias of the subselect statement
-             * members[] = select list
-             *
-             */
-            System.out.println("SUBSELECT STMT");
+        if (isSubselectStatement(ctx.parent)) {
+            ArrayList<String> selectionColumns = ctx.selectionColumns;
+            LinkedHashMap<String, DataMember> members = new LinkedHashMap<>();
+            if (selectionColumns.contains("*")) {
+                for (String table : ctx.from_clause().tables) {
+                    if (!BooleanExpressionMatcher.matches(table)) {
+                        members.putAll(TypeRepository.typeHashMap.get(table.toUpperCase()).getMembers());
+                    }
+                }
+            } else {
+                for (String selectionColumn : ctx.selectionColumns) {
+                    String[] splitResult = selectionColumn.split("\\.");
+                    members.put(splitResult[1].toUpperCase(), new DataMember(splitResult[1].toUpperCase(), TypeRepository.getMemberType(splitResult[0].toUpperCase(), splitResult[1].toUpperCase())));
+                }
+            }
+            DataType dataType = new DataType(ListenerUtils.getSubselectStmtAlias(ctx), members);
+            new File("C:/Users/ASUS/Documents/GitHub/map-reduce-module/" + getSubselectStmtAlias(ctx)).mkdirs();
+            dataType.setTableLocation("C:/Users/ASUS/Documents/GitHub/map-reduce-module/" + getSubselectStmtAlias(ctx));
+            try {
+                TypeRepository.addDataType(dataType);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     /**
@@ -239,7 +255,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         super.exitFrom_clause(ctx);
 
-        int overAllLength = ListenerUtils.getOverallSize(ctx.tables); //Number of tables in from clause
+        int overAllLength = ListenerUtils.getOverallSize(ctx.tables, ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent)); //Number of tables in from clause
 
         StringBuilder code = new StringBuilder(); //Code inside the nested loop of join
 
@@ -285,16 +301,16 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 } else { //Calculate tables offset
                     if (previousTable != null) {
                         //Not the first table to be added
-                        tablesOffset.put(
-                                currentItem.toUpperCase(),
-
-                                tablesOffset.get(previousTable) -
-                                        TypeRepository.getColumnsCount(currentItem));
+                        if (TypeRepository.typeHashMap.containsKey(currentItem.toUpperCase())) {
+                            tablesOffset.put(
+                                    currentItem.toUpperCase(),
+                                    tablesOffset.get(previousTable) -
+                                            TypeRepository.getColumnsCount(currentItem));
+                        }
                     } else {
                         //First table
                         tablesOffset.put(
                                 currentItem.toUpperCase(),
-
                                 overAllLength -
                                         TypeRepository.typeHashMap
                                                 .get(currentItem).
@@ -306,12 +322,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                             .ST_GROUP_FILE
                             .getInstanceOf(
                                     ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
+                    System.err.println(counter);
                     //Get an instance of the nested loop join string template
-
                     currentTableST.add("table_name", currentItem.toLowerCase());
                     currentTableST.add("loop_code", counter == 0 ? "<most_inner>" : code.toString());
+                    currentTableST.add("left_record", counter == ctx.tablesCount - 1 ? "\"\"" : ("record_" + (counter + 1) + " + \",\""));
                     currentTableST.add("counter", counter++);
-                    currentTableST.add("left_record", counter == ctx.tablesCount ? "\"\"" : ("record_" + (counter) + " + \",\""));
 
 
                     if (ctx.tables.isEmpty()) {
@@ -415,7 +431,51 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         .ST_GROUP_FILE
                         .getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
 
-        generatedCode.append("\nputs records");
+
+        System.err.println();
+        if (ListenerUtils.isSubselectStatement(ctx.parent)) {
+            ST subselectionST = new ST("\nExecutionPlanUtilities.process_subselect_statement(records, \"<table_alias>\", <selection_columns>)");
+            subselectionST.add("table_alias", getSubselectStmtAlias(ctx));
+            subselectionST.add("selection_columns", getColumnsJSONArray(ctx.selectionColumns, ctx.tables));
+            generatedCode.append(subselectionST.render());
+            generatedCode.append("\nrecords = []\n");
+        } else {
+            generatedCode.append("\nputs records");
+        }
+
+    }
+
+    private String getColumnsJSONArray(ArrayList<String> selectionColumns, ArrayList<String> tables) {
+        JSONArray resultArray = new JSONArray();
+        for (String column : selectionColumns) {
+            if (column.equalsIgnoreCase("*")) {
+                for (String table : tables) {
+                    if (!BooleanExpressionMatcher.matches(table)) {
+                        LinkedHashMap<String, DataMember> members = new LinkedHashMap<>(TypeRepository.typeHashMap.get(table.toUpperCase()).getMembers());
+                        members.forEach((s, dataMember) -> {
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put(s, dataMember.getType());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            resultArray.put(jsonObject);
+                        });
+                    }
+                }
+                return resultArray.toString();
+            }
+            String[] splitResult = column.split("\\.");
+            String tableName = splitResult[0], columnName = splitResult[1];
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put(columnName.toUpperCase(), TypeRepository.getMemberType(tableName.toUpperCase(), columnName.toUpperCase()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            resultArray.put(jsonObject);
+        }
+        return resultArray.toString();
     }
 
     /**

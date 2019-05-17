@@ -41,6 +41,11 @@ public class TypeRepository {
         writeDataToFile("output.json");
     }
 
+    public static void deleteDataType(String dataTypeName){
+        typeHashMap.remove(dataTypeName);
+        writeDataToFile("output.json");
+    }
+
     /**
      * find a return a certain type's member
      *

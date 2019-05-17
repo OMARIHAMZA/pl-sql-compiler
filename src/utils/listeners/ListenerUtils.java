@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
 public class ListenerUtils {
@@ -119,12 +118,13 @@ public class ListenerUtils {
         return whereCondition;
     }
 
-    static int getOverallSize(Stack<String> tables) {
+    static int getOverallSize(Stack<String> tables, PLHQLStatementsParser.Subselect_stmtContext ctx) {
         int count = 0;
         Object[] tablesArray = tables.toArray();
         for (Object currentString : tablesArray) {
             if (!BooleanExpressionMatcher.matches(String.valueOf(currentString))) {
                 count += TypeRepository.getColumnsCount(String.valueOf(currentString));
+
             }
         }
         return count;
@@ -137,6 +137,15 @@ public class ListenerUtils {
             currentParent = currentParent.getParent();
         }
         return false;
+    }
+
+    static String getSubselectStmtAlias(ParseTree currentParent){
+        while (currentParent != null) {
+            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_from_subselect_clause)
+                return ((PLHQLStatementsParser.From_subselect_clauseContext) currentParent).from_alias_clause().getText();
+            currentParent = currentParent.getParent();
+        }
+        return "";
     }
 
     static void checkSemanticError(PLHQLStatementsParser.From_clauseContext ctx, String dataTypeName) {

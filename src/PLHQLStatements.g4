@@ -523,6 +523,7 @@ subselect_stmt locals[
     boolean isDistinct = false,
     ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList(),
     ArrayList<String> groupByColumns = new ArrayList<>(),
+    ArrayList<String> tables = new ArrayList<>(),
     HashMap<String, Integer> tablesOffset = new HashMap<>();
     ] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
@@ -586,11 +587,15 @@ from_table_name_clause :
        table_name from_alias_clause? {
        $from_clause::tables.push($table_name.text);
        $from_clause::tablesCount+=1;
+       $subselect_stmt::tables.add($table_name.text);
        }
      ;
 
 from_subselect_clause :
-       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause
+       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause {
+       $from_clause::tables.push($from_alias_clause.text);
+       $from_clause::tablesCount+=1;
+       }
      ;
 
 from_join_clause :
