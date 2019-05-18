@@ -26,7 +26,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
     private Stack<Scope> scopes = new Stack<>(); //Scope stack
     private Queue<Variable> parameters = new ArrayDeque<>(); //Temporary queue of function parameters
-    StringBuilder generatedCode = new StringBuilder();
+    private StringBuilder generatedCode = new StringBuilder();
     private RubyFile rubyFile;
     private boolean initializedVariables = false; //To avoid duplicated initialization of variables
 
@@ -172,6 +172,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.enterProgram(ctx);
+        TypeRepository.deleteTempDataTypes();
         rubyFile = RubyFile.getInstance();
         scopes.add(new Scope());
     }
@@ -234,8 +235,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 }
             }
             DataType dataType = new DataType(ListenerUtils.getSubselectStmtAlias(ctx), members);
-            new File("C:/Users/ASUS/Documents/GitHub/map-reduce-module/" + getSubselectStmtAlias(ctx)).mkdirs();
-            dataType.setTableLocation("C:/Users/ASUS/Documents/GitHub/map-reduce-module/" + getSubselectStmtAlias(ctx));
+            dataType.setTemp(true);
+            new File("C:/Users/ASUS/Documents/GitHub/pl-sql-compiler/ruby/" + getSubselectStmtAlias(ctx)).mkdirs();
+            dataType.setTableLocation("C:/Users/ASUS/Documents/GitHub/pl-sql-compiler/ruby/" + getSubselectStmtAlias(ctx));
             try {
                 TypeRepository.addDataType(dataType);
             } catch (Exception e) {
@@ -322,7 +324,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                             .ST_GROUP_FILE
                             .getInstanceOf(
                                     ListenerUtils.JOIN_LOOP_TEMPLATE_NAME);
-                    System.err.println(counter);
                     //Get an instance of the nested loop join string template
                     currentTableST.add("table_name", currentItem.toLowerCase());
                     currentTableST.add("loop_code", counter == 0 ? "<most_inner>" : code.toString());
@@ -432,7 +433,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         .getInstanceOf(ListenerUtils.MAP_REDUCE_TEMPLATE_NAME).render());
 
 
-        System.err.println();
         if (ListenerUtils.isSubselectStatement(ctx.parent)) {
             ST subselectionST = new ST("\nExecutionPlanUtilities.process_subselect_statement(records, \"<table_alias>\", <selection_columns>)");
             subselectionST.add("table_alias", getSubselectStmtAlias(ctx));

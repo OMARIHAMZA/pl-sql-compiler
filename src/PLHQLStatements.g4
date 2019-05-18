@@ -485,7 +485,7 @@ error_for_range_stmt :        // FOR (Integer range) statement
      ;
 
 
-select_stmt :            // SELECT statement
+select_stmt locals[ArrayList<String> tempTables = new ArrayList<>()]:            // SELECT statement
        cte_select_stmt? fullselect_stmt
      ;
 
@@ -595,6 +595,7 @@ from_subselect_clause :
        T_OPEN_P select_stmt T_CLOSE_P from_alias_clause {
        $from_clause::tables.push($from_alias_clause.text);
        $from_clause::tablesCount+=1;
+       $select_stmt::tempTables.add($from_alias_clause.text);
        }
      ;
 

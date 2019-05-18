@@ -8486,6 +8486,7 @@ public class PLHQLStatementsParser extends Parser {
 	}
 
 	public static class Select_stmtContext extends ParserRuleContext {
+		public ArrayList<String> tempTables = new ArrayList<>();
 		public Fullselect_stmtContext fullselect_stmt() {
 			return getRuleContext(Fullselect_stmtContext.class,0);
 		}
@@ -10014,6 +10015,7 @@ public class PLHQLStatementsParser extends Parser {
 
 			       ((From_clauseContext)getInvokingContext(102)).tables.push((((From_subselect_clauseContext)_localctx).from_alias_clause!=null?_input.getText(((From_subselect_clauseContext)_localctx).from_alias_clause.start,((From_subselect_clauseContext)_localctx).from_alias_clause.stop):null));
 			       ((From_clauseContext)getInvokingContext(102)).tablesCount+=1;
+			       ((Select_stmtContext)getInvokingContext(86)).tempTables.add((((From_subselect_clauseContext)_localctx).from_alias_clause!=null?_input.getText(((From_subselect_clauseContext)_localctx).from_alias_clause.start,((From_subselect_clauseContext)_localctx).from_alias_clause.stop):null));
 			       
 			}
 		}

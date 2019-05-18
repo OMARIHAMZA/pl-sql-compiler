@@ -6,11 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
-import java.io.*;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.*;
 
 /**
  * A class to store type systems
@@ -41,7 +41,17 @@ public class TypeRepository {
         writeDataToFile("output.json");
     }
 
-    public static void deleteDataType(String dataTypeName){
+    public static void deleteTempDataTypes() {
+        Iterator it = typeHashMap.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry<String, DataType> pair = (HashMap.Entry<String, DataType>) it.next();
+            if (pair.getValue().isTemp())
+                it.remove();
+        }
+        writeDataToFile("output.json");
+    }
+
+    public static void deleteDataType(String dataTypeName) {
         typeHashMap.remove(dataTypeName);
         writeDataToFile("output.json");
     }
@@ -71,7 +81,7 @@ public class TypeRepository {
      * @param filePath where the data json array to be written
      */
     public static void writeDataToFile(String filePath) {
-        JSONArray jsonArray = parseOutputFile(filePath);
+        JSONArray jsonArray = new JSONArray();
         for (HashMap.Entry<String, DataType> entry : typeHashMap.entrySet()) {
             //name:string, members:array
             //member:object -> name:string, type:string
@@ -86,6 +96,7 @@ public class TypeRepository {
                 }
                 jsonObject.put("name", entry.getKey());
                 jsonObject.put("location", entry.getValue().getTableLocation());
+                jsonObject.put("is_temp", entry.getValue().isTemp());
                 jsonObject.put("field_terminator", entry.getValue().getFieldTerminator());
                 jsonObject.put("members", membersJSONArray);
                 jsonArray.put(jsonObject);
@@ -123,6 +134,8 @@ public class TypeRepository {
                                     currentMember.getString("type")));
                 }
                 DataType type = new DataType(currentJSONObject.getString("name"), dataMembers);
+                type.setTableLocation(currentJSONObject.getString("location"));
+                type.setTemp(currentJSONObject.getBoolean("is_temp"));
                 typeHashMap.put(type.getName(), type);
             }
         } catch (NoSuchElementException e) {
@@ -207,11 +220,11 @@ public class TypeRepository {
         return false;
     }
 
-    public static int getColumnsCount(String dataTypeName){
+    public static int getColumnsCount(String dataTypeName) {
         return typeHashMap.get(dataTypeName.toUpperCase()).getMembers().size();
     }
 
-    public static String getMemberType(String tableName, String memberName){
+    public static String getMemberType(String tableName, String memberName) {
         return typeHashMap.get(tableName.toUpperCase()).getMembers().get(memberName.toUpperCase()).getType();
     }
 

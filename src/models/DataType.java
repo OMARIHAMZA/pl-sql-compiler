@@ -11,6 +11,7 @@ public class DataType {
 
     private final String name;
     private final HashMap<String, DataMember> members;
+    private boolean isTemp = false;
     private String tableLocation, fieldTerminator;
 
     public DataType(String name) {
@@ -53,6 +54,14 @@ public class DataType {
 
     public void setFieldTerminator(String fieldTerminator) {
         this.fieldTerminator = fieldTerminator;
+    }
+
+    public boolean isTemp() {
+        return isTemp;
+    }
+
+    public void setTemp(boolean temp) {
+        isTemp = temp;
     }
 
     @Override
