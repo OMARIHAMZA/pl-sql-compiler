@@ -86,8 +86,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             return;
         }
         scopes.peek().addSymbol(function); //Add function to parent scope
-
-        System.err.println(ctx.functionVariables.toString());
     }
 
     /**

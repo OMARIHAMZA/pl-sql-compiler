@@ -249,6 +249,7 @@ public class ListenerUtils {
             else if (result instanceof Float) return "float";
             else if (result instanceof String) return "string";
             else if (result instanceof Boolean) return "bool";
+            else if (BooleanExpressionMatcher.matches(expression)) return "bool";
             else return "invalid expression";
         } catch (ScriptException e) {
             e.printStackTrace();
