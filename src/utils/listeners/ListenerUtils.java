@@ -139,7 +139,7 @@ public class ListenerUtils {
         return false;
     }
 
-    static String getSubselectStmtAlias(ParseTree currentParent){
+    static String getSubselectStmtAlias(ParseTree currentParent) {
         while (currentParent != null) {
             if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_from_subselect_clause)
                 return ((PLHQLStatementsParser.From_subselect_clauseContext) currentParent).from_alias_clause().getText();
@@ -168,6 +168,32 @@ public class ListenerUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /*
+     * Semantic Error Section
+     */
+
+    /**
+     * Check usage of unassigned variable in c function
+     *
+     * @param ctx : variable's context used to access c_function rule contents
+     */
+    static void checkVariableAssignment(PLHQLStatementsParser.Expr_atomContext ctx) {
+        if (ctx.ident() == null) return;
+        //get unassigned variables from c_function rule and check if the atom exist in it
+        String variableName = ctx.ident().getText();
+        int variableLine = ctx.start.getLine();
+        RuleContext currentParent = ctx.parent;
+        while (currentParent != null) {
+            if (currentParent.getRuleIndex() == PLHQLStatementsParser.RULE_c_function) {
+                if (((PLHQLStatementsParser.C_functionContext) currentParent).unassignedVariables.contains(variableName)) {
+                    SyntaxSemanticErrorListener.INSTANCE.warningMessage(variableLine, "Usage of unassigned variable (" + variableName + ")");
+                }
+                return;
+            }
+            currentParent = currentParent.parent;
         }
     }
 }

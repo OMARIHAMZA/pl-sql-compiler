@@ -18,6 +18,10 @@ public class SyntaxSemanticErrorListener extends BaseErrorListener {
         System.err.println("Semantic Error (Line: " + line + ") Error: " + error);
     }
 
+    void warningMessage(int line, String warning) {
+        System.err.println("\u001B[33m" + ("Warning (Line: " + line + ") Message: " + warning) + "\u001B[0m");
+    }
+
     private void underlineError(Recognizer recognizer,
                                 Token offendingToken, int line,
                                 int charPositionInLine) {

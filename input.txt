@@ -1,3 +1,5 @@
 int main(){
-SELECT * FROM EMPLOYEES JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID == DEPARTMENTS.DEPARTMENT_ID;
+int a, b=1, c = 1;
+int k;
+return a + 1;
 }

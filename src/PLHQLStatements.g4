@@ -7,7 +7,7 @@ import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
 }
 
-program : c_function+ EOF;
+program locals[ArrayList<String> functions = new ArrayList()]: c_function+ EOF;
 
 block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
@@ -116,12 +116,12 @@ assignment_c_stmt_item :
      ;
 
 assignment_stmt_single_item :
-       ident T_COLON? T_EQUAL expr
-     | T_OPEN_P ident T_CLOSE_P T_COLON? T_EQUAL expr
+       ident T_COLON? T_EQUAL expr {$c_function::unassignedVariables.remove($ident.text);}
+     | T_OPEN_P ident T_CLOSE_P T_COLON? T_EQUAL expr {$c_function::unassignedVariables.remove($ident.text);}
      ;
 
 assignment_c_stmt_single_item :
-      ident assignment_operator expr
+      ident assignment_operator expr {$c_function::unassignedVariables.remove($ident.text);}
       | increment_decrement_assignment
       ;
 
@@ -131,11 +131,11 @@ increment_decrement_assignment :
      ;
 
 assignment_stmt_multiple_item :
-       T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+       T_OPEN_P ident {$c_function::unassignedVariables.remove($ident.text);} (T_COMMA ident {$c_function::unassignedVariables.remove($ident.text);} )* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
      ;
 
 assignment_c_stmt_multiple_item :
-        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+        T_OPEN_P ident {$c_function::unassignedVariables.remove($ident.text);} (T_COMMA ident {$c_function::unassignedVariables.remove($ident.text);})* T_CLOSE_P T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
       ;
 
 assignment_stmt_select_item :
@@ -363,8 +363,8 @@ create_database_option :
     | T_LOCATION expr
     ;
 
-c_function:
-   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block
+c_function locals[ArrayList<String> unassignedVariables = new ArrayList<>()]:
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block {$program::functions.add($ident.text);}
    ;
  c_function_parameter_list:
     c_function_parameter_item (T_COMMA c_function_parameter_item)*
@@ -466,7 +466,7 @@ for_c_stmt :
       ;
 
 general_delcaration_c_stmt:
-(dtype | T_VAR) ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
+(dtype | T_VAR) ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}) (T_COMMA ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}))* T_SEMICOLON
 ;
 
 

@@ -29,6 +29,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     private StringBuilder generatedCode = new StringBuilder();
     private RubyFile rubyFile;
     private boolean initializedVariables = false; //To avoid duplicated initialization of variables
+    private ArrayList<String> programFunctions = new ArrayList<>(); //All functions defined in the program
 
     /**
      * Actions to be done when reaching a c block
@@ -84,6 +85,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             return;
         }
         scopes.peek().addSymbol(function); //Add function to parent scope
+        System.err.println(ctx.unassignedVariables.toString());
     }
 
     /**
@@ -172,6 +174,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.enterProgram(ctx);
+        programFunctions.addAll(ctx.functions);
         TypeRepository.deleteTempDataTypes();
         rubyFile = RubyFile.getInstance();
         scopes.add(new Scope());
@@ -208,6 +211,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         "Usage of undefined variable: " + ctx.getText()); //log a semantic error
             }
         }
+
+        ListenerUtils.checkVariableAssignment(ctx);
     }
 
     /**
@@ -677,6 +682,17 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         indexST.add("table_name", tableName);
         indexST.add("column_name", columnName);
         return indexST.render();
+    }
+
+    /**
+     * Code to throw error if the called c function does not exist
+     */
+    @Override
+    public void enterCall_stmt(PLHQLStatementsParser.Call_stmtContext ctx) {
+        super.enterCall_stmt(ctx);
+        if (!programFunctions.contains(ctx.ident().getText())){
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Invalid call of undeclared method (" + ctx.ident().getText() + ")");
+        }
     }
 
 
