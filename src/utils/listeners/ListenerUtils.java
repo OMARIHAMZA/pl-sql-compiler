@@ -2,7 +2,9 @@ package utils.listeners;
 
 import gen.PLHQLStatementsLexer;
 import gen.PLHQLStatementsParser;
+import org.antlr.runtime.tree.TreePatternParser;
 import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.misc.Pair;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.stringtemplate.v4.ST;
@@ -10,12 +12,17 @@ import org.stringtemplate.v4.STGroupFile;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ListenerUtils {
 
@@ -195,5 +202,64 @@ public class ListenerUtils {
             }
             currentParent = currentParent.parent;
         }
+    }
+
+    static void checkReturnStatementsType(PLHQLStatementsParser.C_functionContext ctx) {
+        String functionReturnType = ctx.dtype().getText();
+        for (String returnStatementValue : ctx.returnStatements) {
+            if (!returnTypeMatch(functionReturnType, returnStatementValue, ctx)) {
+                SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Incompatible return type (Required: " + functionReturnType + " , found: " + getExpressionType(functionReturnType, returnStatementValue, ctx) + ")");
+            }
+        }
+    }
+
+    private static boolean returnTypeMatch(String returnType, String returnStatement, PLHQLStatementsParser.C_functionContext ctx) {
+        return returnType.equalsIgnoreCase(getExpressionType(returnType, returnStatement, ctx));
+    }
+
+    private static String getExpressionType(String returnType, String expression, PLHQLStatementsParser.C_functionContext ctx) {
+        //Evaluate Expression
+        String regex = "\\w+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(expression);
+        while (matcher.find()) {
+            switch (getVariableType(matcher.group(), ctx.functionVariables)) {
+                case "INT":
+                    expression = expression.replace(matcher.group(), "1");
+                    break;
+                case "FLOAT":
+                    expression = expression.replace(matcher.group(), "1.0");
+                    break;
+                case "STRING":
+                    expression = expression.replace(matcher.group(), "\"1\"");
+                    break;
+                case "BOOL":
+                    expression = expression.replace(matcher.group(), "true");
+                    break;
+            }
+        }
+        if (returnType.equalsIgnoreCase("bool")) {
+            if (BooleanExpressionMatcher.matches(expression)) return "bool";
+        }
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+        try {
+            Object result = engine.eval(expression);
+            if (result instanceof Integer) return "int";
+            else if (result instanceof Float) return "float";
+            else if (result instanceof String) return "string";
+            else if (result instanceof Boolean) return "bool";
+            else return "invalid expression";
+        } catch (ScriptException e) {
+            e.printStackTrace();
+            return "invalid expression";
+        }
+    }
+
+    private static String getVariableType(String variableName, ArrayList<Pair<String, String>> variables) {
+        for (Pair<String, String> pair : variables) {
+            if (pair.b.equalsIgnoreCase(variableName)) return pair.a.toUpperCase();
+        }
+        return "null";
     }
 }

@@ -72,6 +72,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterC_function(PLHQLStatementsParser.C_functionContext ctx) {
         super.enterC_function(ctx);
+        ListenerUtils.checkReturnStatementsType(ctx);
         Function function = new Function(ctx.ident().getText(), ctx.dtype().getText());
         if (ctx.c_function_parameter_list() != null) {
             ctx.c_function_parameter_list().c_function_parameter_item().forEach(param -> {
@@ -85,7 +86,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             return;
         }
         scopes.peek().addSymbol(function); //Add function to parent scope
-        System.err.println(ctx.unassignedVariables.toString());
+
+        System.err.println(ctx.functionVariables.toString());
     }
 
     /**

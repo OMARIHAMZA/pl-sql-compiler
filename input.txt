@@ -1,5 +1,12 @@
-int main(){
+bool main(){
 int a, b=1, c = 1;
+bool s;
+string name;
 int k;
-return a + 1;
+if(true){
+return s * true;
+}else{
+return false * true;
+}
+return s;
 }

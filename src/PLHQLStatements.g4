@@ -363,7 +363,7 @@ create_database_option :
     | T_LOCATION expr
     ;
 
-c_function locals[ArrayList<String> unassignedVariables = new ArrayList<>()]:
+c_function locals[ArrayList<Pair<String, String>> functionVariables = new ArrayList<>(), ArrayList<String> unassignedVariables = new ArrayList<>(), ArrayList<String> returnStatements = new ArrayList<>()]:
    dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block {$program::functions.add($ident.text);}
    ;
  c_function_parameter_list:
@@ -451,7 +451,7 @@ create_index_col :
 
 
 return_stmt :           // RETURN statement
-       T_RETURN expr?
+       T_RETURN (expr{$c_function::returnStatements.add($expr.text);}|{$c_function::returnStatements.add("void");})
      ;
 
 
@@ -466,7 +466,7 @@ for_c_stmt :
       ;
 
 general_delcaration_c_stmt:
-(dtype | T_VAR) ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}) (T_COMMA ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}))* T_SEMICOLON
+(dtype ident {$c_function::functionVariables.add(new Pair($dtype.text, $ident.text));}| T_VAR ident {$c_function::functionVariables.add(new Pair("VAR", $ident.text));}) (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}) (T_COMMA ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}))* T_SEMICOLON
 ;
 
 
