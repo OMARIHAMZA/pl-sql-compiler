@@ -648,11 +648,11 @@ error_missing_bool_expr :
      ;
 
 group_by_clause :
-       T_GROUP T_BY expr { $subselect_stmt::groupByColumns.add($expr.text); } (T_COMMA expr { $subselect_stmt::groupByColumns.add($expr.text); })*
+       T_GROUP T_BY group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); } (T_COMMA group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); })*
      ;
 
 having_clause :
-       T_HAVING bool_expr
+       T_HAVING having_bool_expr
      ;
 
 qualify_clause :
@@ -675,6 +675,17 @@ bool_expr :                               // Boolean condition
      | bool_expr_atom
      ;
 
+having_bool_expr :                               // Boolean condition
+        T_NOT? T_OPEN_P having_bool_expr T_CLOSE_P
+      | having_bool_expr bool_expr_logical_operator having_bool_expr
+      | having_expr_atom
+      ;
+
+
+having_expr_atom:
+      having_bool_expr_binary
+    | bool_literal
+;
 bool_expr_atom :
       bool_expr_unary
     | bool_expr_binary
@@ -700,6 +711,9 @@ bool_expr_multi_in :
 bool_expr_binary :
        expr bool_expr_binary_operator expr
      ;
+having_bool_expr_binary:
+       (expr bool_expr_binary_operator (expr_agg_window_func | group_by_expr {notifyErrorListeners("Having clause contains only grouping functions");}) | (expr_agg_window_func | group_by_expr {notifyErrorListeners("Having clause contains only grouping functions");}) bool_expr_binary_operator expr)
+;
 
 bool_expr_logical_operator :
       bool_and
@@ -724,6 +738,25 @@ bool_expr_binary_operator :
      | T_GREATEREQUAL
      | T_NOT? (T_LIKE | T_RLIKE | T_REGEXP)
      ;
+
+group_by_expr:
+     group_by_expr interval_item
+         | select_stmt
+         | group_by_expr T_MUL group_by_expr
+         | group_by_expr T_DIV group_by_expr
+         | group_by_expr T_ADD group_by_expr
+         | group_by_expr T_SUB group_by_expr
+         | T_OPEN_P select_stmt T_CLOSE_P
+         | T_OPEN_P group_by_expr T_CLOSE_P
+         | group_by_expr T_OPEN_SB group_by_expr T_CLOSE_SB
+         | expr_interval
+         | expr_concat
+         | expr_case
+         | expr_agg_window_func
+         | expr_spec_func
+         | expr_func
+         | expr_atom
+         ;
 
 expr :
        expr interval_item

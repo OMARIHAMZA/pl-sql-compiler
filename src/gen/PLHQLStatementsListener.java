@@ -1222,6 +1222,26 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitBool_expr(PLHQLStatementsParser.Bool_exprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#having_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterHaving_bool_expr(PLHQLStatementsParser.Having_bool_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#having_bool_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitHaving_bool_expr(PLHQLStatementsParser.Having_bool_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#having_expr_atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterHaving_expr_atom(PLHQLStatementsParser.Having_expr_atomContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#having_expr_atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitHaving_expr_atom(PLHQLStatementsParser.Having_expr_atomContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_expr_atom}.
 	 * @param ctx the parse tree
 	 */
@@ -1272,6 +1292,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitBool_expr_binary(PLHQLStatementsParser.Bool_expr_binaryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#having_bool_expr_binary}.
+	 * @param ctx the parse tree
+	 */
+	void enterHaving_bool_expr_binary(PLHQLStatementsParser.Having_bool_expr_binaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#having_bool_expr_binary}.
+	 * @param ctx the parse tree
+	 */
+	void exitHaving_bool_expr_binary(PLHQLStatementsParser.Having_bool_expr_binaryContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#bool_expr_logical_operator}.
 	 * @param ctx the parse tree
 	 */
@@ -1311,6 +1341,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBool_expr_binary_operator(PLHQLStatementsParser.Bool_expr_binary_operatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#group_by_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_by_expr(PLHQLStatementsParser.Group_by_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#group_by_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_by_expr(PLHQLStatementsParser.Group_by_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#expr}.
 	 * @param ctx the parse tree

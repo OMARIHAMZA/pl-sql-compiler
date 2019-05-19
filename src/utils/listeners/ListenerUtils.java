@@ -42,7 +42,7 @@ public class ListenerUtils {
     static boolean fromSelectClause(ParseTree parseTree) {
         ParseTree currentParent = parseTree.getParent();
         while (currentParent != null) {
-            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_select_list_item) {
+            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_select_stmt) {
                 return true;
             }
             currentParent = currentParent.getParent();
@@ -262,5 +262,14 @@ public class ListenerUtils {
             if (pair.b.equalsIgnoreCase(variableName)) return pair.a.toUpperCase();
         }
         return "null";
+    }
+
+    static void validateGroupingColumns(PLHQLStatementsParser.Subselect_stmtContext ctx) {
+        if (ctx.selectionColumns.contains("*")) return;
+        for (String column : ctx.groupByColumns) {
+            if (!ctx.selectionColumns.contains(column)){
+                SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Everything in select statement should be in grouping (" + column + ")");
+            }
+        }
     }
 }

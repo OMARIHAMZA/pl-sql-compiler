@@ -1472,6 +1472,30 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHaving_bool_expr(PLHQLStatementsParser.Having_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHaving_bool_expr(PLHQLStatementsParser.Having_bool_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHaving_expr_atom(PLHQLStatementsParser.Having_expr_atomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHaving_expr_atom(PLHQLStatementsParser.Having_expr_atomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBool_expr_atom(PLHQLStatementsParser.Bool_expr_atomContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1532,6 +1556,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHaving_bool_expr_binary(PLHQLStatementsParser.Having_bool_expr_binaryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHaving_bool_expr_binary(PLHQLStatementsParser.Having_bool_expr_binaryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBool_expr_logical_operator(PLHQLStatementsParser.Bool_expr_logical_operatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1575,6 +1611,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBool_expr_binary_operator(PLHQLStatementsParser.Bool_expr_binary_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGroup_by_expr(PLHQLStatementsParser.Group_by_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_by_expr(PLHQLStatementsParser.Group_by_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

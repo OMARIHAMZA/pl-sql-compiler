@@ -13,6 +13,7 @@ import utils.TypeRepository;
 import utils.files.RubyFile;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -200,16 +201,21 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void enterExpr_atom(PLHQLStatementsParser.Expr_atomContext ctx) {
         super.enterExpr_atom(ctx);
 
-        if (ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()))
-        //If variable is not defined in the current scope
-        {
-            if (ListenerUtils.fromSelectClause(ctx)
-                    && !ListenerUtils.checkDataMemberExistence(ctx.ident().getText(), ctx)) {
-
+        if (ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null){
+            String[] splitResult = ctx.ident().getText().split("\\.");
+            if (!TypeRepository.dataMemberExists(splitResult[0], splitResult[1])){
                 SyntaxSemanticErrorListener.INSTANCE.semanticError(
                         ctx.start.getLine(),
-                        "Usage of undefined variable: " + ctx.getText()); //log a semantic error
+                        "Unknown column: " + ctx.getText()); //log a semantic error
             }
+        }
+
+        if (!ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()))
+        //If variable is not defined in the current scope
+        {
+            SyntaxSemanticErrorListener.INSTANCE.semanticError(
+                    ctx.start.getLine(),
+                    "Usage of undefined variable: " + ctx.getText()); //log a semantic error
         }
 
         ListenerUtils.checkVariableAssignment(ctx);
@@ -364,7 +370,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void exitSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.exitSubselect_stmt(ctx);
-
+        validateGroupingColumns(ctx);
         HashMap<String, Integer> tablesOffset = ctx.tablesOffset;//Offset to add to the indices
 
         String whereCondition = (ctx).whereCondition;
@@ -690,10 +696,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterCall_stmt(PLHQLStatementsParser.Call_stmtContext ctx) {
         super.enterCall_stmt(ctx);
-        if (!programFunctions.contains(ctx.ident().getText())){
+        if (!programFunctions.contains(ctx.ident().getText())) {
             SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Invalid call of undeclared method (" + ctx.ident().getText() + ")");
         }
     }
-
 
 }

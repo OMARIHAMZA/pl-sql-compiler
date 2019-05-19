@@ -1,12 +1,3 @@
 int main(){
-int a, b=1, c = 1;
-bool s = true;
-string name;
-int k;
-if(true){
-return s * true;
-}else{
-return false * true;
-}
-return a;
+SELECT COUNT(*)  FROM EMPLOYEES;
 }
