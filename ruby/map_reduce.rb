@@ -10,9 +10,9 @@ require_relative 'enumerable'
 module MapReduce
 
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
-  MAPPER_RESULT_FILE = "mapper_result.txt"
-  REDUCER_RESULT_FILE = "reducer_result.txt"
-  SHUFFLER_RESULT_FILE = "shuffler_result.json"
+  MAPPER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\mapper_result.txt"
+  REDUCER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\reducer_result.txt"
+  SHUFFLER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\shuffler_result.json"
 
   ##
   # This class maps every key (group by column)
@@ -94,8 +94,6 @@ module MapReduce
 
       result_hash = {}
 
-      puts result_file
-
       File.foreach(@input_file_name) do |line|
 
         key_values = line.split(":")
@@ -115,6 +113,7 @@ module MapReduce
       end
 
       result_file.puts JSON.generate(result_hash)
+
 
       result_file.close
 
@@ -137,6 +136,7 @@ module MapReduce
       @grouping_columns = grouping_columns
       @aggregation_columns = aggregation_columns
       @having_conditions = having_conditions
+      @selection_columns = selection_columns
 
     end
 
@@ -213,15 +213,13 @@ module MapReduce
 
     def reduce_with_shuffle
 
-
-      puts @having_conditions
-
       input_hash = JSON.parse(File.read(@input_file))
 
       output_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
-
       result_array = []
+
+      has_summarize = false
 
       input_hash.each_key do |key|
 
@@ -233,43 +231,48 @@ module MapReduce
 
           array_value = map_array_by_type(array_value, index)
 
-          file_contents.write "," + case @aggregation_columns[index][:function]
+          res = case @aggregation_columns[index][:function]
 
-                                    when :SUM
-                                      array_value.sum.to_s
+                when :SUM
+                  array_value.sum.to_s
 
-                                    when :MAX
-                                      array_value.max.to_s
+                when :MAX
+                  array_value.max.to_s
 
-                                    when :MIN
-                                      array_value.min.to_s
+                when :MIN
+                  array_value.min.to_s
 
-                                    when :AVG
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.avg.to_s :
-                                          array_value.avg.to_s
+                when :AVG
+                  @aggregation_columns[index][:distinct] ?
+                      array_value.uniq.avg.to_s :
+                      array_value.avg.to_s
 
-                                    when :STDEV
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.stdev.to_s :
-                                          array_value.stdev.to_s
+                when :STDEV
+                  @aggregation_columns[index][:distinct] ?
+                      array_value.uniq.stdev.to_s :
+                      array_value.stdev.to_s
 
-                                    when :VARIANCE
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.variance.to_s :
-                                          array_value.variance.to_s
+                when :VARIANCE
+                  @aggregation_columns[index][:distinct] ?
+                      array_value.uniq.variance.to_s :
+                      array_value.variance.to_s
 
-                                    when :COUNT
-                                      if @aggregation_columns[index][:index] == -1
-                                        array_value.size.to_s
-                                      else
-                                        @aggregation_columns[index][:distinct] ?
-                                            array_value.uniq.size.to_s :
-                                            array_value.size {|value| !value.empty?}.to_s
-                                      end
+                when :COUNT
+                  if @aggregation_columns[index][:index] == -1
+                    array_value.size.to_s
+                  else
+                    @aggregation_columns[index][:distinct] ?
+                        array_value.uniq.size.to_s :
+                        array_value.size {|value| !value.empty?}.to_s
+                  end
 
+                when :SUMMARIZE
+                  has_summarize = true
+                  "#{array_value.mean},#{array_value.median {|n| n}},#{array_value.mode},#{array_value.min},#{array_value.max},#{array_value.median {|n| n}},#{array_value.q3 {|n| n}},#{array_value.stdev},#{array_value.size}"
+                end
 
-                                    end
+          file_contents.write "," + res
+
 
         end
 
@@ -302,7 +305,7 @@ module MapReduce
 
       result_array.map! do |line|
         line.split(",").values_at(*(0...@aggregation_columns.length).to_a).join(",")
-      end
+      end unless has_summarize
 
       output_file.puts result_array
 

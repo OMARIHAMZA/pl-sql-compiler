@@ -722,9 +722,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
     /**
      * returns the index of the aggregation function in the select list
+     *
      * @param functionName: Aggregation function name, Example: COUNT
-     * @param columnName: Example: EMPLOYEES.SALARY
-     * @param ctx ;
+     * @param columnName:   Example: EMPLOYEES.SALARY
+     * @param ctx           ;
      * @return function index
      */
     private int getIndexOfFunction(String functionName, String columnName, PLHQLStatementsParser.Subselect_stmtContext ctx) {
