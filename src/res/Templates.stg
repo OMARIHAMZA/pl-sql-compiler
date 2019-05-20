@@ -88,9 +88,13 @@ mapReduceTemplate() ::=<<
 
   mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
 
-  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+  shuffler_file_name = ""
 
-  MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless grouping_columns.empty?
+
+  MapReduce::Reducer.new(grouping_columns.empty? ? mapper_file_name : shuffler_file_name, grouping_columns, aggregation_columns, having_conditions).reduce
+
+  puts File.read(MapReduce::REDUCER_RESULT_FILE)
 
   end
 

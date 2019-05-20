@@ -94,6 +94,8 @@ module MapReduce
 
       result_hash = {}
 
+      puts result_file
+
       File.foreach(@input_file_name) do |line|
 
         key_values = line.split(":")
@@ -129,14 +131,12 @@ module MapReduce
 
   class Reducer
 
-    def initialize(input_file, grouping_columns, aggregation_columns)
+    def initialize(input_file, grouping_columns, aggregation_columns, having_conditions)
 
       @input_file = input_file
       @grouping_columns = grouping_columns
       @aggregation_columns = aggregation_columns
-
-      puts grouping_columns.to_s
-      puts aggregation_columns.to_s
+      @having_conditions = having_conditions
 
     end
 
@@ -150,17 +150,21 @@ module MapReduce
 
     def reduce_without_shuffle
 
-      line_number = 0
+      line_number = -1
 
       result_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
+      result_string = ""
+
       File.foreach(@input_file) do |line|
+
+        line_number += 1
 
         values_array = line.split(",")
 
         values_array = map_array_by_type(values_array, line_number)
 
-        result_file.puts case @aggregation_columns[line_number][:function]
+        result_string << case @aggregation_columns[line_number][:function]
 
                          when :SUM
                            values_array.sum.to_s
@@ -172,35 +176,37 @@ module MapReduce
                            values_array.min.to_s
 
                          when :AVG
-                           @aggregation_columns[index][:distinct] ?
+                           @aggregation_columns[line_number][:distinct] ?
                                values_array.uniq.avg.to_s :
                                values_array.avg.to_s
 
                          when :STDEV
-                           @aggregation_columns[index][:distinct] ?
+                           @aggregation_columns[line_number][:distinct] ?
                                values_array.uniq.stdev.to_s :
                                values_array.stdev.to_s
 
                          when :VARIANCE
-                           @aggregation_columns[index][:distinct] ?
+                           @aggregation_columns[line_number][:distinct] ?
                                values_array.uniq.variance.to_s :
                                values_array.variance.to_s
 
                          when :COUNT
-                           if @aggregation_columns[index][:index] == -1
+                           if @aggregation_columns[line_number][:index] == -1
                              values_array.size.to_s
                            else
-                             @aggregation_columns[index][:distinct] ?
+                             @aggregation_columns[line_number][:distinct] ?
                                  values_array.uniq.size.to_s :
                                  values_array.size {|value| !value.empty?}.to_s
                            end
 
+                         when :SUMMARIZE
+                           "Mean: #{values_array.mean}, Median: #{values_array.median {|n| n}}, Mode: #{values_array.mode}, Min: #{values_array.min}, Max: #{values_array.max}, Q2: #{values_array.median {|n| n}}, Q3: #{values_array.q3 {|n| n}}, STD: #{values_array.stdev}, Count: #{values_array.size}"
 
-                           line_number += 1
+                         end + ","
 
-                         end
       end
 
+      result_file.puts result_string.chomp(",")
       result_file.close
 
     end
@@ -208,62 +214,97 @@ module MapReduce
     def reduce_with_shuffle
 
 
+      puts @having_conditions
+
       input_hash = JSON.parse(File.read(@input_file))
 
       output_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
 
+      result_array = []
+
       input_hash.each_key do |key|
 
-        output_file.write key
+        file_contents = StringIO.new
+
+        file_contents.write key
 
         input_hash[key].each_with_index do |array_value, index|
 
           array_value = map_array_by_type(array_value, index)
 
-          output_file.write "," + case @aggregation_columns[index][:function]
+          file_contents.write "," + case @aggregation_columns[index][:function]
 
-                                  when :SUM
-                                    array_value.sum.to_s
+                                    when :SUM
+                                      array_value.sum.to_s
 
-                                  when :MAX
-                                    array_value.max.to_s
+                                    when :MAX
+                                      array_value.max.to_s
 
-                                  when :MIN
-                                    array_value.min.to_s
+                                    when :MIN
+                                      array_value.min.to_s
 
-                                  when :AVG
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.avg.to_s :
-                                        array_value.avg.to_s
-
-                                  when :STDEV
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.stdev.to_s :
-                                        array_value.stdev.to_s
-
-                                  when :VARIANCE
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.variance.to_s :
-                                        array_value.variance.to_s
-
-                                  when :COUNT
-                                    if @aggregation_columns[index][:index] == -1
-                                      array_value.size.to_s
-                                    else
+                                    when :AVG
                                       @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.size.to_s :
-                                          array_value.size {|value| !value.empty?}.to_s
+                                          array_value.uniq.avg.to_s :
+                                          array_value.avg.to_s
+
+                                    when :STDEV
+                                      @aggregation_columns[index][:distinct] ?
+                                          array_value.uniq.stdev.to_s :
+                                          array_value.stdev.to_s
+
+                                    when :VARIANCE
+                                      @aggregation_columns[index][:distinct] ?
+                                          array_value.uniq.variance.to_s :
+                                          array_value.variance.to_s
+
+                                    when :COUNT
+                                      if @aggregation_columns[index][:index] == -1
+                                        array_value.size.to_s
+                                      else
+                                        @aggregation_columns[index][:distinct] ?
+                                            array_value.uniq.size.to_s :
+                                            array_value.size {|value| !value.empty?}.to_s
+                                      end
+
+
                                     end
-
-
-                                  end
 
         end
 
-        output_file.puts
+        result_array << file_contents.string
 
       end
+
+      result_array.keep_if do |line|
+
+        attributes = line.split(",")
+
+        @having_conditions.each do |condition|
+
+          current_condition = ""
+
+          if condition[:function_after_condition]
+            current_condition = condition[:condition] + attributes[condition[:index]]
+          else
+            current_condition = attributes[condition[:index]] + condition[:condition]
+          end
+
+          break false unless eval(current_condition)
+
+          true
+
+        end
+
+      end unless @having_conditions.empty?
+
+
+      result_array.map! do |line|
+        line.split(",").values_at(*(0...@aggregation_columns.length).to_a).join(",")
+      end
+
+      output_file.puts result_array
 
       output_file.close
 

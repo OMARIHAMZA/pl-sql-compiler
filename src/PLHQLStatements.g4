@@ -521,7 +521,7 @@ subselect_stmt locals[
     ArrayList<String> selectionColumns = new ArrayList(),
     HashMap<String, String> orderingColumnsMap = new HashMap<>(),
     boolean isDistinct = false,
-    ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList(),
+    Set<Pair<String, String>> aggregateFunctionColumns = new LinkedHashSet<>(),
     ArrayList<String> groupByColumns = new ArrayList<>(),
     ArrayList<String> tables = new ArrayList<>(),
     HashMap<String, Integer> tablesOffset = new HashMap<>();
@@ -549,9 +549,7 @@ select_list_limit :
      ;
 
 select_list_item :
-       ((ident T_EQUAL)? expr select_list_alias? | select_list_asterisk){
-       $subselect_stmt::selectionColumns.add($text);
-       }
+       ((ident T_EQUAL {$subselect_stmt::selectionColumns.add($ident.text);})? expr select_list_alias? | select_list_asterisk){$subselect_stmt::selectionColumns.add($text);}
      ;
 
 select_list_alias :
@@ -651,7 +649,7 @@ group_by_clause :
        T_GROUP T_BY group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); } (T_COMMA group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); })*
      ;
 
-having_clause :
+having_clause locals[LinkedList<Pair<String, String>> aggregateFunctionColumns = new LinkedList<>(), LinkedList<Pair<String, String>> conditions = new LinkedList<>()]:
        T_HAVING having_bool_expr
      ;
 
@@ -712,7 +710,8 @@ bool_expr_binary :
        expr bool_expr_binary_operator expr
      ;
 having_bool_expr_binary:
-       (expr bool_expr_binary_operator (expr_agg_window_func | group_by_expr {notifyErrorListeners("Having clause contains only grouping functions");}) | (expr_agg_window_func | group_by_expr {notifyErrorListeners("Having clause contains only grouping functions");}) bool_expr_binary_operator expr)
+         expr bool_expr_binary_operator expr_agg_window_func {$having_clause::conditions.add(new Pair<>("AFTER", $expr.text + $bool_expr_binary_operator.text));}
+       | expr_agg_window_func bool_expr_binary_operator expr {$having_clause::conditions.add(new Pair<>("BEFORE", $bool_expr_binary_operator.text + $expr.text ));}
 ;
 
 bool_expr_logical_operator :
@@ -752,7 +751,6 @@ group_by_expr:
          | expr_interval
          | expr_concat
          | expr_case
-         | expr_agg_window_func
          | expr_spec_func
          | expr_func
          | expr_atom
@@ -827,24 +825,141 @@ expr_case_searched :
        T_CASE (T_WHEN bool_expr T_THEN expr)+ (T_ELSE expr)? T_END
      ;
 
-
 expr_agg_window_func :
-       T_AVG T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text)); }  T_CLOSE_P expr_func_over_clause?
-     | T_COUNT T_OPEN_P ((expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text)); }) | '*' { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", "*")); }) T_CLOSE_P expr_func_over_clause?
-     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
+       T_AVG T_OPEN_P expr_func_all_distinct expr {
+
+       $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+
+       try{
+
+       $having_clause::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+
+       }catch(NullPointerException ignored){
+
+       }
+
+       }  T_CLOSE_P expr_func_over_clause?
+     | T_COUNT T_OPEN_P ((expr_func_all_distinct expr {
+
+         $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text));
+
+         try{
+
+         $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text));
+
+         }catch(NullPointerException ignored){
+
+         }
+
+      })
+        | '*' {
+
+         $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+
+         try{
+
+         $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+
+         }catch(NullPointerException ignored){
+
+         }
+
+         }) T_CLOSE_P expr_func_over_clause?
+     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct expr {
+
+      $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG",  ":" + $expr.text));
+
+      try{
+
+      $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNTBIG",  ":" + $expr.text));
+
+      }catch(NullPointerException ignored){
+
+      }
+
+      }) | '*') T_CLOSE_P expr_func_over_clause?
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_DENSE_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_FIRST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LAG T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
      | T_LAST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LEAD T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
-     | T_MAX T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_MIN T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_MAX T_OPEN_P expr_func_all_distinct expr {
+
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+
+     try{
+
+     $having_clause::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+
+     }catch(NullPointerException ignored){
+
+     }
+
+     } T_CLOSE_P expr_func_over_clause?
+     | T_MIN T_OPEN_P expr_func_all_distinct expr {
+
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     try{
+
+     $having_clause::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     }catch(NullPointerException ignored){
+
+     }
+
+     } T_CLOSE_P expr_func_over_clause?
      | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_STDEV T_OPEN_P expr_func_all_distinct expr{ $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_SUM T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_STDEV T_OPEN_P expr_func_all_distinct expr{
+
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     try{
+
+     $having_clause::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     }catch(NullPointerException ignored){
+
+     }
+
+
+     } T_CLOSE_P expr_func_over_clause?
+     | T_SUM T_OPEN_P expr_func_all_distinct expr {
+
+     try{
+
+     $having_clause::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     }catch(NullPointerException ignored){
+
+     }
+
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+
+     } T_CLOSE_P expr_func_over_clause?
+     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr {
+
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     try{
+
+     $having_clause::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+     }catch(NullPointerException ignored){
+
+     }
+
+
+     } T_CLOSE_P expr_func_over_clause?
+
+     | T_SUMMARIZE T_OPEN_P expr T_CLOSE_P{
+
+      $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUMMARIZE", ":" + $expr.text));
+
+     }
 
      ;
 
@@ -1274,6 +1389,7 @@ non_reserved_words :                      // Tokens that are not reserved words 
      | T_XACT_ABORT
      | T_XML
      | T_YES
+     | T_SUMMARIZE
      ;
 
 error_invalid_token:

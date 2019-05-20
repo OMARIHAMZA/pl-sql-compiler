@@ -13,7 +13,6 @@ import utils.TypeRepository;
 import utils.files.RubyFile;
 
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -201,9 +200,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void enterExpr_atom(PLHQLStatementsParser.Expr_atomContext ctx) {
         super.enterExpr_atom(ctx);
 
-        if (ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null){
+        if (ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null) {
             String[] splitResult = ctx.ident().getText().split("\\.");
-            if (!TypeRepository.dataMemberExists(splitResult[0], splitResult[1])){
+            if (!TypeRepository.dataMemberExists(splitResult[0], splitResult[1])) {
                 SyntaxSemanticErrorListener.INSTANCE.semanticError(
                         ctx.start.getLine(),
                         "Unknown column: " + ctx.getText()); //log a semantic error
@@ -397,6 +396,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             generatedCode.append("\nrecords.keep_if {|record| ").append(whereCondition).append("}");
         }
 
+        generatedCode.append("\n").append(generateHavingCode(ctx));
+
         generatedCode.append("\n").append(
                 getAggregateFunctionColumns(
                         ctx.aggregateFunctionColumns));
@@ -450,8 +451,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             subselectionST.add("selection_columns", getColumnsJSONArray(ctx.selectionColumns, ctx.tables));
             generatedCode.append(subselectionST.render());
             generatedCode.append("\nrecords = []\n");
+            generatedCode.append("\nselection_columns = []\n");
         } else {
-            generatedCode.append("\nputs records");
+            generatedCode.append("\nputs records if aggregation_columns.empty?\n");
         }
 
     }
@@ -564,10 +566,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         return result.toString();
     }
 
-    private String getAggregateFunctionColumns(ArrayList<Pair<String, String>> aggregateFunctionColumns) {
+    private String getAggregateFunctionColumns(Set<Pair<String, String>> aggregateFunctionColumns) {
         StringBuilder result = new StringBuilder();
         for (Pair<String, String> pair : aggregateFunctionColumns) {
-            if (pair.b.equalsIgnoreCase("*")) {
+            if (pair.b.contains("*")) {
                 result.append("{:function=>:").append(pair.a.toUpperCase())
                         .append(",:index=>").append("-1")
                         .append("},");
@@ -688,6 +690,50 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         indexST.add("table_name", tableName);
         indexST.add("column_name", columnName);
         return indexST.render();
+    }
+
+    private String generateHavingCode(PLHQLStatementsParser.Subselect_stmtContext ctx) {
+        StringBuilder result = new StringBuilder();
+        if (ctx.having_clause() != null) {
+            PLHQLStatementsParser.Having_clauseContext havingClauseContext = ctx.having_clause();
+            int counter = 1;
+            for (Pair<String, String> pair : ctx.having_clause().aggregateFunctionColumns) {
+                Pair<String, String> currentCondition = havingClauseContext.conditions.get(counter - 1);
+                if (pair.b.equalsIgnoreCase("*")) {
+                    result.append(",:index=>").append(getIndexOfFunction(pair.a, pair.b, ctx))
+                            .append("},");
+                } else {
+                    //DISTINCT:TABLE_NAME.COLUMN_NAME
+                    String[] splitted = pair.b.split(":");
+                    //TABLE_NAME.COLUMN_NAME
+                    String[] splitResult = splitted[1].split("\\.");
+                    result.append("{:function=>:").append(pair.a.toUpperCase())
+                            .append(",:index=>").append(getIndexOfFunction(pair.a, pair.b, ctx))
+                            .append(",:condition=>").append("\"").append(currentCondition.b).append("\"")
+                            .append(",:function_after_condition=>").append(currentCondition.a.equalsIgnoreCase("AFTER"))
+                            .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                            .append("},");
+                }
+                counter++;
+            }
+        }
+        return "having_conditions = [" + result.toString() + "]";
+    }
+
+    /**
+     * returns the index of the aggregation function in the select list
+     * @param functionName: Aggregation function name, Example: COUNT
+     * @param columnName: Example: EMPLOYEES.SALARY
+     * @param ctx ;
+     * @return function index
+     */
+    private int getIndexOfFunction(String functionName, String columnName, PLHQLStatementsParser.Subselect_stmtContext ctx) {
+        int counter = 0;
+        for (Pair<String, String> pair : ctx.aggregateFunctionColumns) {
+            counter += 1;
+            if (pair.a.equalsIgnoreCase(functionName) && pair.b.equalsIgnoreCase(columnName)) return counter;
+        }
+        return -1;
     }
 
     /**
