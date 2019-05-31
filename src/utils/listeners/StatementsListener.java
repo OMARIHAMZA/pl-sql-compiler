@@ -391,7 +391,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     currentTableST.add("counter", counter++);
 
 
-                    if (ctx.tables.isEmpty()) {
+                   /* if (ctx.tables.isEmpty()) {
                         //Process outer joins
                         ST leftRightJoinST = ListenerUtils
                                 .ST_GROUP_FILE
@@ -402,7 +402,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         leftRightJoinST.add("left_counter", counter - 1);
                         leftRightJoinST.add("right_columns_count", previousColumnsCount);
                         currentTableST.add("left_join", leftRightJoinST.render());
-                    }
+                    }*/
                     code = new StringBuilder(currentTableST.render());
                     previousColumnsCount = TypeRepository.typeHashMap.get(currentItem).getMembers().size();
                 }
@@ -723,11 +723,18 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             firstTable = ctx.tables.pop();
         }
 
-        if (ctx.joinType.toUpperCase().startsWith("RIGHT")) {
+        if (ctx.joinType.toUpperCase().contains("LEFT")
+                || ctx.joinType.toUpperCase().contains("RIGHT")
+                || ctx.joinType.toUpperCase().contains("OUTER")) {
+
+            return processOuterJoin(firstTable, secondTable, counter + 1, counter, currentItem, columnsIndices);
+
+        }
+     /*   if (ctx.joinType.toUpperCase().startsWith("RIGHT")) {
             String temp = firstTable;
             firstTable = secondTable;
             secondTable = temp;
-        }
+        }*/
 
         final String regex = "\\w+\\.\\w+";
         final Pattern pattern = Pattern.compile(regex);
@@ -869,5 +876,56 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         super.exitSelect_stmt(ctx);
         generatedCode.append("\n  ExecutionPlanUtilities::write_query_to_file(records, query_counter)\nquery_counter += 1\n");
         queryCounter += 1;
+    }
+
+
+    private String processOuterJoin(String leftTable, String rightTable, int leftCounter, int rightCounter, String joinCondition, StringBuilder columnsIndices) {
+        StringBuilder outerJoinCode = new StringBuilder();
+
+        ST outerJoinTemplate = ST_GROUP_FILE.getInstanceOf(OUTER_JOIN_TEMPLATE);
+
+        outerJoinTemplate.add("left_table_name", leftTable.toLowerCase());
+        outerJoinTemplate.add("left_table_counter", leftCounter);
+        outerJoinTemplate.add("right_table_name", rightTable.toLowerCase());
+        outerJoinTemplate.add("right_counter", rightCounter);
+        outerJoinTemplate.add("right_table_length", TypeRepository.typeHashMap.get(rightTable.toUpperCase()).getMembers().size());
+        outerJoinTemplate.add("left_table_length", TypeRepository.typeHashMap.get(leftTable.toUpperCase()).getMembers().size());
+
+        String processedJoinCondition = processJoinCondition(joinCondition, leftTable, rightTable, leftCounter, rightCounter, columnsIndices);
+
+        outerJoinTemplate.add("join_condition", processedJoinCondition);
+
+        System.err.println(columnsIndices.toString());
+        System.err.println(outerJoinTemplate.render());
+
+        return outerJoinCode.toString();
+    }
+
+    @SuppressWarnings("ALL")
+    private String processJoinCondition(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+        final String regex = "\\w+\\.\\w+";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(condition);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+            int tempCounter = tableName.equalsIgnoreCase(secondTable) ? secondCounter :firstCounter;
+            //Column Index
+            ST indexST = new ST("<table_name>_<counter>_<column_name>_index=  ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+            indexST.add("table_name", tableName);
+            indexST.add("counter", tempCounter);
+            indexST.add("column_name", columnName);
+            columnsIndices.append(indexST.render());
+            columnsIndices.append("\n");
+
+            //Term Value
+            String type = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+            ST termValueST = new ST("<table_name>_<counter>_line.split(\",\")[<table_name>_<counter>_<column_name>_index].strip<conversion>");
+            termValueST.add("table_name", tableName);
+            termValueST.add("counter", tempCounter);
+            termValueST.add("column_name", columnName);
+            condition = ListenerUtils.getConversion(condition, group, type, termValueST);
+        }
+        return condition;
     }
 }

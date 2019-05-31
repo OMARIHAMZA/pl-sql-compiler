@@ -24,48 +24,9 @@ records = []
 
 
   ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
-join_type = "JOIN"
-pos_1_product_id_index=  ExecutionPlanUtilities::get_column_index("pos", "product_id")
-products_0_id_index=  ExecutionPlanUtilities::get_column_index("products", "id")
-pos_1_table_location, pos_field_terminator = ExecutionPlanUtilities.get_table_location("pos")
-pos_1_csv_files = ExecutionPlanUtilities.get_csv_files(pos_1_table_location)
-pos_1_file_index = 0
-pos_1_pos = 0
-
-until pos_1_file_index == pos_1_csv_files.length
-
-  pos_1_line, pos_1_file_index, pos_1_pos = ExecutionPlanUtilities.read_record(pos_1_table_location, pos_1_csv_files, pos_1_file_index, pos_1_pos, pos_field_terminator)
-  record_1 = "" + pos_1_line.chomp
-
-    pos_1_joined_flag = false
-    products_0_table_location, products_field_terminator = ExecutionPlanUtilities.get_table_location("products")
-    products_0_csv_files = ExecutionPlanUtilities.get_csv_files(products_0_table_location)
-    products_0_file_index = 0
-    products_0_pos = 0
-
-    until products_0_file_index == products_0_csv_files.length
-
-      products_0_line, products_0_file_index, products_0_pos = ExecutionPlanUtilities.read_record(products_0_table_location, products_0_csv_files, products_0_file_index, products_0_pos, products_field_terminator)
-      record_0 = record_1 + "," + products_0_line.chomp
-
-        products_0_joined_flag = false
-            if pos_1_line.split(",")[pos_1_product_id_index].strip.to_i==products_0_line.split(",")[products_0_id_index].strip.to_i
-
-        products_0_joined_flag = true
-
-        records <<  record_0
-
-    end
-
-
-    end
-
-
-      records << pos_1_line.chomp + ("," * 2) if !pos_1_joined_flag and join_type.start_with?("LEFT")
-
-      records << (("," * 2) + pos_1_line.chomp) if !pos_1_joined_flag and join_type.start_with?("RIGHT")
-
-end
+join_type = "FULLOUTERJOIN"
+employees_1_department_id_index=  ExecutionPlanUtilities::get_column_index("employees", "department_id")
+departments_0_department_id_index=  ExecutionPlanUtilities::get_column_index("departments", "department_id")
 
 having_conditions = []
 aggregation_columns = []

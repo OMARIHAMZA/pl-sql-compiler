@@ -57,13 +57,6 @@ singleTableSelection(table_name, where_condition = "true") ::= <<
 
 >>
 
-leftRightJoinTemplate(left_table_name, left_counter, right_columns_count) ::= <<
-
-    records \<\< <left_table_name>_<left_counter>_line.chomp + ("," * <right_columns_count>) if !<left_table_name>_<left_counter>_joined_flag and join_type.start_with?("LEFT")
-
-    records \<\< (("," * <right_columns_count>) + <left_table_name>_<left_counter>_line.chomp) if !<left_table_name>_<left_counter>_joined_flag and join_type.start_with?("RIGHT")
->>
-
 selectionColumnTemplate(table_name, column_name, table_offset = "0") ::= <<
 
 selection_columns \<\< <table_offset> + ExecutionPlanUtilities::get_column_index("<table_name>", "<column_name>")
@@ -141,6 +134,93 @@ processAnalyticalFunction(analytical_keys, analytical_aggregation_function)::=<<
 queryAssignment(name, members)::=<<
 
 ExecutionPlanUtilities::add_temp_data_type("<name>", <members>, query_counter)
+
+>>
+
+OuterJoinTemplate(left_table_name, left_table_counter, right_table_name, right_counter, join_condition, right_table_length, left_table_length) ::= <<
+
+#LEFT
+<left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_file_index = 0
+<left_table_name>_<left_table_counter>_pos = 0
+
+until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<left_table_counter>_csv_files.length
+
+  <left_table_name>_<left_table_counter>_line, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos =
+    ExecutionPlanUtilities.read_record(<left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_csv_files, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos, <left_table_name>_field_terminator)
+
+  record_<left_table_counter> = "" + <left_table_name>_<left_table_counter>_line.chomp
+
+  <left_table_name>_<left_table_counter>_joined_flag = false
+
+<right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_file_index = 0
+<right_table_name>_<right_counter>_pos = 0
+
+until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right_counter>_csv_files.length
+
+  <right_table_name>_<right_counter>_line, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos = ExecutionPlanUtilities.read_record(<right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_csv_files, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos, <right_table_name>_field_terminator)
+  record_<right_counter> = record_<left_table_counter> + <right_table_name>_<right_counter>_line.chomp
+
+    <right_table_name>_<right_counter>_joined_flag = false
+
+    if <join_condition>
+
+            <left_table_name>_<left_table_counter>_joined_flag = true
+
+            records \<\< record_<right_counter>
+
+    end
+
+
+end
+
+ records \<\< <left_table_name>_<left_table_counter>_line.chomp + ("," * <right_table_length>) unless <left_table_name>_<left_table_counter>_joined_flag
+
+end
+
+#RIGHT
+<right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_file_index = 0
+<right_table_name>_<right_counter>_pos = 0
+
+until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right_counter>_csv_files.length
+
+  <right_table_name>_<right_counter>_line, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos =
+    ExecutionPlanUtilities.read_record(<right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_csv_files, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos, <right_table_name>_field_terminator)
+
+  record_<right_counter> = "" + <right_table_name>_<right_counter>_line.chomp
+
+  <right_table_name>_<right_counter>_joined_flag = false
+
+<left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_file_index = 0
+<left_table_name>_<left_table_counter>_pos = 0
+
+until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<left_table_counter>_csv_files.length
+
+  <left_table_name>_<left_table_counter>_line, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos = ExecutionPlanUtilities.read_record(<left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_csv_files, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos, <left_table_name>_field_terminator)
+  record_<left_table_counter> = record_<right_counter> + <left_table_name>_<left_table_counter>_line.chomp
+
+    <left_table_name>_<left_table_counter>_joined_flag = false
+
+    if <join_condition>
+
+            <right_table_name>_<right_counter>_joined_flag = true
+
+            break
+    end
+
+
+end
+
+ records \<\<  ("," * (<left_table_length> - 1)) + <right_table_name>_<right_counter>_line.chomp unless <right_table_name>_<right_counter>_joined_flag
+
+end
 
 >>
 

@@ -31,7 +31,6 @@ public class ListenerUtils {
 
     private static final String TEMPLATES_FILE_PATH = "res/Templates.stg";
     static final String JOIN_LOOP_TEMPLATE_NAME = "joinLoopTemplate";
-    static final String LEFT_RIGHT_JOIN_TEMPLATE_NAME = "leftRightJoinTemplate";
     static final String SINGLE_TABLE_SELECTION_TEMPLATE_NAME = "singleTableSelection";
     static final String MULTIPLE_JOINS_TEMPLATE_NAME = "multipleJoinsTemplate";
     static final String SELECTION_COLUMN_TEMPLATE = "selectionColumnTemplate";
@@ -39,6 +38,7 @@ public class ListenerUtils {
     static final String ORDER_BY_STATEMENT_TEMPLATE = "orderByStatementTemplate";
     static final String MAP_REDUCE_TEMPLATE_NAME = "mapReduceTemplate";
     static final String RUBY_MAIN_CLASS_TEMPLATE = "rubyMainClassTemplate";
+    static final String OUTER_JOIN_TEMPLATE = "OuterJoinTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 
