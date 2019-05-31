@@ -125,7 +125,7 @@ public class TypeRepository {
             JSONArray jsonArray = new JSONArray(new Scanner(new FileInputStream(filePath)).useDelimiter("\\Z").next());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject currentJSONObject = jsonArray.getJSONObject(i);
-                HashMap<String, DataMember> dataMembers = new HashMap<>();
+                LinkedHashMap<String, DataMember> dataMembers = new LinkedHashMap<>();
                 JSONArray membersJSONArray = currentJSONObject.getJSONArray("members");
                 for (int j = 0; j < membersJSONArray.length(); j++) {
                     JSONObject currentMember = membersJSONArray.getJSONObject(j);
@@ -136,6 +136,7 @@ public class TypeRepository {
                 DataType type = new DataType(currentJSONObject.getString("name"), dataMembers);
                 type.setTableLocation(currentJSONObject.getString("location"));
                 type.setTemp(currentJSONObject.getBoolean("is_temp"));
+                type.setFieldTerminator(currentJSONObject.getString("field_terminator"));
                 typeHashMap.put(type.getName(), type);
             }
         } catch (NoSuchElementException e) {

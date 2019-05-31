@@ -3,6 +3,7 @@ package models;
 import utils.TypeRepository;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Data type class
@@ -10,24 +11,24 @@ import java.util.HashMap;
 public class DataType {
 
     private final String name;
-    private final HashMap<String, DataMember> members;
+    private final LinkedHashMap<String, DataMember> members;
     private boolean isTemp = false;
     private String tableLocation, fieldTerminator;
 
     public DataType(String name) {
         this.name = name;
-        this.members = new HashMap<>();
+        this.members = new LinkedHashMap<>();
     }
 
     public DataType(String name, String tableLocation, String fieldTerminator) {
         this.name = name;
-        this.members = new HashMap<>();
+        this.members = new LinkedHashMap<>();
         this.tableLocation = tableLocation;
         this.fieldTerminator = fieldTerminator;
         TypeRepository.createDirectories(tableLocation, name);
     }
 
-    public DataType(String name, HashMap<String, DataMember> members) {
+    public DataType(String name, LinkedHashMap<String, DataMember> members) {
         this.name = name;
         this.members = members;
     }

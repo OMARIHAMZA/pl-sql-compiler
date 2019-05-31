@@ -121,7 +121,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
             ArrayList<String> tables = context.fullselect_stmt().fullselect_stmt_item(0).subselect_stmt().tables;
 
-            HashMap<String, DataMember> dataMembers = new HashMap<>();
+            LinkedHashMap<String, DataMember> dataMembers = new LinkedHashMap<>();
 
             if (columns.contains("*")) {
                 for (String table : tables) {
@@ -141,6 +141,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             DataType dataType = new DataType(dataTypeName, dataMembers);
             dataType.setTemp(true);
             dataType.setTableLocation("C:/Users/Asus/Documents/Github/pl-sql-compiler/ruby/" + queryCounter + "_query");
+            dataType.setFieldTerminator(",");
 
             try {
                 TypeRepository.addDataType(dataType);

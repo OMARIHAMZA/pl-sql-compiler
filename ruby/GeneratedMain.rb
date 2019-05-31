@@ -23,16 +23,16 @@ selection_columns = []
 records = []
 
 join_type = "null"
-    employees_table_location = ExecutionPlanUtilities.get_table_location("employees")
-    employees_csv_files = ExecutionPlanUtilities.get_csv_files(employees_table_location)
-    employees_file_index = 0
-    employees_pos = 0
+    products_table_location, products_field_terminator = ExecutionPlanUtilities.get_table_location("products")
+    products_csv_files = ExecutionPlanUtilities.get_csv_files(products_table_location)
+    products_file_index = 0
+    products_pos = 0
 
-    until employees_file_index == employees_csv_files.length
+    until products_file_index == products_csv_files.length
 
-      employees_line, employees_file_index, employees_pos = ExecutionPlanUtilities.read_record(employees_table_location, employees_csv_files, employees_file_index, employees_pos)
+      products_line, products_file_index, products_pos = ExecutionPlanUtilities.read_record(products_table_location, products_csv_files, products_file_index, products_pos,  products_field_terminator)
 
-      records << employees_line.chomp if true
+      records << products_line.chomp if true
 
     end
 
@@ -67,16 +67,16 @@ puts records if aggregation_columns.empty? && ! true
   ExecutionPlanUtilities::write_query_to_file(records, query_counter)
 query_counter += 1
 join_type = "null"
-    tab_table_location = ExecutionPlanUtilities.get_table_location("tab")
-    tab_csv_files = ExecutionPlanUtilities.get_csv_files(tab_table_location)
-    tab_file_index = 0
-    tab_pos = 0
+    q_table_location, q_field_terminator = ExecutionPlanUtilities.get_table_location("q")
+    q_csv_files = ExecutionPlanUtilities.get_csv_files(q_table_location)
+    q_file_index = 0
+    q_pos = 0
 
-    until tab_file_index == tab_csv_files.length
+    until q_file_index == q_csv_files.length
 
-      tab_line, tab_file_index, tab_pos = ExecutionPlanUtilities.read_record(tab_table_location, tab_csv_files, tab_file_index, tab_pos)
+      q_line, q_file_index, q_pos = ExecutionPlanUtilities.read_record(q_table_location, q_csv_files, q_file_index, q_pos,  q_field_terminator)
 
-      records << tab_line.chomp if true
+      records << q_line.chomp if true
 
     end
 
@@ -87,7 +87,7 @@ aggregation_columns = []
 
 if aggregation_columns.empty?
 
-selection_columns << 0 + ExecutionPlanUtilities::get_column_index("tab", "salary")
+selection_columns << 0 + ExecutionPlanUtilities::get_column_index("q", "name")
 
 end
 

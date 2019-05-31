@@ -1,7 +1,6 @@
 int main(){
 
-var tab = SELECT * FROM EMPLOYEES;
+var q = SELECT * FROM PRODUCTS;
 
-SELECT tab.SALARY from tab;
-
+SELECT q.name FROM q;
 }

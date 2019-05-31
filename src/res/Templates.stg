@@ -42,14 +42,14 @@ joinTypesTemplate(join_condition, join_type, first_table_name, second_table_name
 >>
 
 singleTableSelection(table_name, where_condition = "true") ::= <<
-    <table_name>_table_location = ExecutionPlanUtilities.get_table_location("<table_name>")
+    <table_name>_table_location, <table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<table_name>")
     <table_name>_csv_files = ExecutionPlanUtilities.get_csv_files(<table_name>_table_location)
     <table_name>_file_index = 0
     <table_name>_pos = 0
 
     until <table_name>_file_index == <table_name>_csv_files.length
 
-      <table_name>_line, <table_name>_file_index, <table_name>_pos = ExecutionPlanUtilities.read_record(<table_name>_table_location, <table_name>_csv_files, <table_name>_file_index, <table_name>_pos)
+      <table_name>_line, <table_name>_file_index, <table_name>_pos = ExecutionPlanUtilities.read_record(<table_name>_table_location, <table_name>_csv_files, <table_name>_file_index, <table_name>_pos,  <table_name>_field_terminator)
 
       records \<\< <table_name>_line.chomp if <where_condition>
 
