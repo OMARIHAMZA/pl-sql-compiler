@@ -268,7 +268,7 @@ public class ListenerUtils {
     }
 
     static void validateGroupingColumns(PLHQLStatementsParser.Subselect_stmtContext ctx) {
-        if (ctx.selectionColumns.contains("*")) return;
+        if (ctx.selectionColumns.contains("*") || ctx.groupByColumns.isEmpty()) return;
         List<String> filteredSelectionColumns = ctx.selectionColumns.stream()
                 .filter(ListenerUtils::matchesColumnSyntax)
                 .collect(Collectors.toList());

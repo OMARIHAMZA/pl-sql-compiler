@@ -517,7 +517,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 String[] splitResult = exprContext.getText().split("\\.");
                 String tableName = splitResult[0], columnName = splitResult[1];
                 analyticalKeys.append(getColumnIndex(tableName, columnName)).append(",");
-
             }
 
             analyticalKeys.append("]");
@@ -536,14 +535,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                         .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
                         .append("},");
+
             }
-
             ST st = ST_GROUP_FILE.getInstanceOf("processAnalyticalFunction");
-
             st.add("analytical_keys", analyticalKeys);
             st.add("analytical_aggregation_function", analyticalAggregationColumn);
 
-            result.append("\n").append(st.render());
+            result.append("\n").append(st.render()).append("\nselection_columns << record_length");
         }
 
 

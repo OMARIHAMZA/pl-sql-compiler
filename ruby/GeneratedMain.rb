@@ -39,13 +39,18 @@ aggregation_columns = []
 
 if aggregation_columns.empty?
 
+selection_columns << 0 + ExecutionPlanUtilities::get_column_index("employees", "employee_name")
 
 end
 records.sort_by!{|record| [ ]}
+  records, record_length = ExecutionPlanUtilities::process_analytic_function(records, [ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID"),], {:function=>:MIN,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},)
 
-  ExecutionPlanUtilities::process_analytic_function(records, [ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID"),], {:function=>:MIN,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},)
 
-  ExecutionPlanUtilities::process_analytic_function(records, [ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID"),], {:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},)
+selection_columns << record_length
+  records, record_length = ExecutionPlanUtilities::process_analytic_function(records, [ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID"),], {:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},)
+
+
+selection_columns << record_length
 
 unless selection_columns.empty?
 records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
