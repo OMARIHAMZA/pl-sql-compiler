@@ -22,115 +22,65 @@ ordering_columns = []
 selection_columns = []
 records = []
 
+join_type = "null"
+    employees_table_location, employees_field_terminator = ExecutionPlanUtilities.get_table_location("employees")
+    employees_csv_files = ExecutionPlanUtilities.get_csv_files(employees_table_location)
+    employees_file_index = 0
+    employees_pos = 0
 
-  ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
-join_type = "RIGHTJOIN"
-departments_1_branch_id_index=  ExecutionPlanUtilities::get_column_index("departments", "branch_id")
-departments_1_branch_id_index=  ExecutionPlanUtilities::get_column_index("departments", "branch_id")
-prev_outer_department_id_index =  ExecutionPlanUtilities::get_column_index("employees", "department_id")
-departments_1_department_id_index =  ExecutionPlanUtilities::get_column_index("departments", "department_id")
+    until employees_file_index == employees_csv_files.length
 
+      employees_line, employees_file_index, employees_pos = ExecutionPlanUtilities.read_record(employees_table_location, employees_csv_files, employees_file_index, employees_pos,  employees_field_terminator)
 
-
-branches_0_table_location, branches_field_terminator = ExecutionPlanUtilities.get_table_location("branches")
-branches_0_csv_files = ExecutionPlanUtilities.get_csv_files(branches_0_table_location)
-branches_0_file_index = 0
-branches_0_pos = 0
-
-until branches_0_file_index == branches_0_csv_files.length
-
-  branches_0_line, branches_0_file_index, branches_0_pos =
-    ExecutionPlanUtilities.read_record(branches_0_table_location, branches_0_csv_files, branches_0_file_index, branches_0_pos, branches_field_terminator)
-
-  record_0 = "" + branches_0_line.chomp
-
-  branches_0_joined_flag = false
-
-departments_1_table_location, departments_field_terminator = ExecutionPlanUtilities.get_table_location("departments")
-departments_1_csv_files = ExecutionPlanUtilities.get_csv_files(departments_1_table_location)
-departments_1_file_index = 0
-departments_1_pos = 0
-
-until departments_1_file_index == departments_1_csv_files.length
-
-  departments_1_line, departments_1_file_index, departments_1_pos = ExecutionPlanUtilities.read_record(departments_1_table_location, departments_1_csv_files, departments_1_file_index, departments_1_pos, departments_field_terminator)
-  record_1 = record_0 + "," + departments_1_line.chomp
-
-    departments_1_joined_flag = false
-
-    if departments_1_line.split(",")[departments_1_branch_id_index].strip.to_i==departments_1_line.split(",")[departments_1_branch_id_index].strip.to_i
-
-            branches_0_joined_flag = true
-
-            records << record_1
+      records << employees_line.chomp if true
 
     end
 
+having_conditions = []
+aggregation_columns = []
 
+
+
+records.sort_by!{|record| [ ]}
+
+unless selection_columns.empty?
+records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
 end
 
- records << ("," * 3) + branches_0_line.chomp unless branches_0_joined_flag
+records.uniq! if false
+  unless aggregation_columns.empty?
 
+  mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
 
-end
+  shuffler_file_name = ""
 
-FileUtils.mkdir_p("prev/")
+  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless grouping_columns.empty?
 
-prev_outer_file = File.open("prev/prev_file.csv", "w")
+  MapReduce::Reducer.new(grouping_columns.empty? ? mapper_file_name : shuffler_file_name, grouping_columns, aggregation_columns, having_conditions).reduce
 
-prev_outer_file.puts records
+  puts File.read(MapReduce::REDUCER_RESULT_FILE)
 
-prev_outer_file.close
+  end
+ExecutionPlanUtilities.process_subselect_statement(records, "E", [{"EMPLOYEE_ID":"INT"},{"SALARY":"INT"},{"DEPARTMENT_ID":"INT"},{"EMPLOYEE_NAME":"STRING"}])
+records = []
 
-prev_outer_length = 3 + 3
+selection_columns = []
 
+  ExecutionPlanUtilities::write_query_to_file(records, query_counter)
+query_counter += 1
+join_type = "null"
+    e_table_location, e_field_terminator = ExecutionPlanUtilities.get_table_location("e")
+    e_csv_files = ExecutionPlanUtilities.get_csv_files(e_table_location)
+    e_file_index = 0
+    e_pos = 0
 
-   records = []
+    until e_file_index == e_csv_files.length
 
-      departments_1_table_location, departments_field_terminator = ExecutionPlanUtilities.get_table_location("departments")
-      departments_1_csv_files = ExecutionPlanUtilities.get_csv_files(departments_1_table_location)
-      departments_1_file_index = 0
-      departments_1_pos = 0
+      e_line, e_file_index, e_pos = ExecutionPlanUtilities.read_record(e_table_location, e_csv_files, e_file_index, e_pos,  e_field_terminator)
 
-      until departments_1_file_index == departments_1_csv_files.length
+      records << e_line.chomp if true
 
-        departments_1_line, departments_1_file_index, departments_1_pos =
-          ExecutionPlanUtilities.read_record(departments_1_table_location, departments_1_csv_files, departments_1_file_index, departments_1_pos, departments_field_terminator)
-
-        record_1 = "" + departments_1_line.chomp
-
-        departments_1_joined_flag = false
-
-      prev_outer_table_location = "prev"
-      prev_outer_field_terminator = ","
-      prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
-      prev_outer_file_index = 0
-      prev_outer_pos = 0
-
-      until prev_outer_file_index == prev_outer_csv_files.length
-
-        prev_outer_line, prev_outer_file_index, prev_outer_pos = ExecutionPlanUtilities.read_record(prev_outer_table_location, prev_outer_csv_files, prev_outer_file_index, prev_outer_pos, prev_outer_field_terminator)
-        record = record_1 + "," + prev_outer_line.chomp
-
-          prev_outer_joined_flag = false
-
-          if prev_outer_line.split(",")[prev_outer_department_id_index].strip.to_i==departments_1_line.split(",")[departments_1_department_id_index].strip.to_i
-
-                  departments_1_joined_flag = true
-
-                  records << record
-
-          end
-
-
-      end
-
-       records << ("," * prev_outer_length) + departments_1_line.chomp unless departments_1_joined_flag
-
-
-      end
-
-
+    end
 
 having_conditions = []
 aggregation_columns = []

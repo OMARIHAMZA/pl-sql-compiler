@@ -296,6 +296,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             }
             DataType dataType = new DataType(ListenerUtils.getSubselectStmtAlias(ctx), members);
             dataType.setTemp(true);
+            dataType.setFieldTerminator(",");
             new File("C:/Users/ASUS/Documents/GitHub/pl-sql-compiler/ruby/" + getSubselectStmtAlias(ctx)).mkdirs();
             dataType.setTableLocation("C:/Users/ASUS/Documents/GitHub/pl-sql-compiler/ruby/" + getSubselectStmtAlias(ctx));
             try {
