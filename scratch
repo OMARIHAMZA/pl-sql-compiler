@@ -1,0 +1,44 @@
+
+records = []
+
+<left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+      <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+      <left_table_name>_<left_counter>_file_index = 0
+      <left_table_name>_<left_counter>_pos = 0
+
+      until <left_table_name>_<left_counter>_file_index == <left_table_name>_<left_counter>_csv_files.length
+
+        <left_table_name>_<left_counter>_line, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos = ExecutionPlanUtilities.read_record(<left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_csv_files, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos, <left_table_name>_<left_counter>_field_terminator)
+        record_<left_counter> = <left_table_name>_<left_counter>_line.chomp
+
+          prev_join_table_location, prev_join_field_terminator = ExecutionPlanUtilities.get_table_location("prev_join")
+            prev_join_csv_files = ExecutionPlanUtilities.get_csv_files(prev_join_table_location)
+            prev_join_file_index = 0
+            prev_join_pos = 0
+
+            until prev_join_file_index == prev_join_csv_files.length
+
+              prev_join_line, prev_join_file_index, prev_join_pos = ExecutionPlanUtilities.read_record(prev_join_table_location, prev_join_csv_files, prev_join_file_index, prev_join_pos, prev_join_field_terminator)
+              record = record_<left_counter> + prev_join_line.chomp
+
+                if <join_condition>
+
+                    records \<\< <left_table_name>_<left_counter>_line.chomp + "," + prev_join_line.chomp
+
+                end
+
+
+            end
+
+
+      end
+
+      FileUtils.mkdir_p("prev_join/")
+
+      prev_join_file = File.open("prev_join/prev_join.csv", "w")
+
+      prev_join_file.puts records
+
+      prev_join_file.close
+
+      prev_join_length = prev_join_length + <left_table_length>

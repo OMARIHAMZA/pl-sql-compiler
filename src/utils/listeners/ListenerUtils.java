@@ -38,7 +38,10 @@ public class ListenerUtils {
     static final String ORDER_BY_STATEMENT_TEMPLATE = "orderByStatementTemplate";
     static final String MAP_REDUCE_TEMPLATE_NAME = "mapReduceTemplate";
     static final String RUBY_MAIN_CLASS_TEMPLATE = "rubyMainClassTemplate";
-    static final String OUTER_JOIN_TEMPLATE = "OuterJoinTemplate";
+    static final String FIRST_OUTER_JOIN_TEMPLATE = "FirstOuterJoinTemplate";
+    static final String NON_FIRST_JOIN_TEMPLATE = "NonFirstOuterJoinTemplate";
+    static final String FIRST_INNER_JOIN_LOOP_TEMPLATE  = "FirstInnerJoinLoopTemplate";
+    static final String NON_FIRST_INNER_JOIN_LOOP_TEMPLATE  = "NonFirstInnerJoinLoopTemplate";
     static final STGroupFile ST_GROUP_FILE = new STGroupFile(TEMPLATES_FILE_PATH);
 
 
