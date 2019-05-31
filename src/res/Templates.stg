@@ -32,9 +32,9 @@ FirstInnerJoinLoopTemplate(left_table_name, right_table_name, left_counter, righ
 
       end
 
-      FileUtils.mkdir_p("prev_join/")
+      FileUtils.mkdir_p("prev/")
 
-      prev_join_file = File.open("prev_join/prev_join.csv", "w")
+      prev_join_file = File.open("pre/prev_file.csv", "w")
 
       prev_join_file.puts records
 
@@ -58,7 +58,7 @@ records = []
         <left_table_name>_<left_counter>_line, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos = ExecutionPlanUtilities.read_record(<left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_csv_files, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos, <left_table_name>_<left_counter>_field_terminator)
         record_<left_counter> = <left_table_name>_<left_counter>_line.chomp
 
-          prev_join_table_location = "prev_join/"
+          prev_join_table_location = "prev/"
           prev_join_field_terminator = ","
           prev_join_csv_files = ExecutionPlanUtilities.get_csv_files(prev_join_table_location)
           prev_join_file_index = 0
@@ -81,9 +81,9 @@ records = []
 
       end
 
-      FileUtils.mkdir_p("prev_join/")
+      FileUtils.mkdir_p("prev/")
 
-      prev_join_file = File.open("prev_join/prev_join.csv", "w")
+      prev_join_file = File.open("prev/prev_file.csv", "w")
 
       prev_join_file.puts records
 
@@ -296,9 +296,9 @@ end
 
 end
 
-FileUtils.mkdir_p("prev_outer/")
+FileUtils.mkdir_p("prev/")
 
-prev_outer_file = File.open("prev_outer/prev_outer_file.csv", "w")
+prev_outer_file = File.open("prev/prev_file.csv", "w")
 
 prev_outer_file.puts records
 
@@ -327,7 +327,7 @@ until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<le
 
   <left_table_name>_<left_table_counter>_joined_flag = false
 
-prev_outer_table_location = "prev_outer/"
+prev_outer_table_location = "prev/"
 prev_outer_field_terminator = ","
 prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
 prev_outer_file_index = 0
@@ -356,7 +356,7 @@ end
 end
 
 #RIGHT
-prev_outer_table_location = "prev_outer/"
+prev_outer_table_location = "prev/"
 prev_outer_field_terminator = ","
 prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
 prev_outer_file_index = 0
@@ -398,6 +398,216 @@ end
 
 
 end
+
+>>
+
+FirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_counter)::=<<
+
+<left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_file_index = 0
+<left_table_name>_<left_table_counter>_pos = 0
+
+until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<left_table_counter>_csv_files.length
+
+  <left_table_name>_<left_table_counter>_line, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos =
+    ExecutionPlanUtilities.read_record(<left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_csv_files, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos, <left_table_name>_field_terminator)
+
+  record_<left_table_counter> = "" + <left_table_name>_<left_table_counter>_line.chomp
+
+  <left_table_name>_<left_table_counter>_joined_flag = false
+
+<right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_file_index = 0
+<right_table_name>_<right_counter>_pos = 0
+
+until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right_counter>_csv_files.length
+
+  <right_table_name>_<right_counter>_line, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos = ExecutionPlanUtilities.read_record(<right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_csv_files, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos, <right_table_name>_field_terminator)
+  record_<right_counter> = record_<left_table_counter> + "," + <right_table_name>_<right_counter>_line.chomp
+
+    <right_table_name>_<right_counter>_joined_flag = false
+
+    if <join_condition>
+
+            <left_table_name>_<left_table_counter>_joined_flag = true
+
+            records \<\< record_<right_counter>
+
+    end
+
+
+end
+
+ records \<\< <left_table_name>_<left_table_counter>_line.chomp + ("," * <right_table_length>)
+
+
+end
+
+FileUtils.mkdir_p("prev/")
+
+prev_outer_file = File.open("prev/prev_file.csv", "w")
+
+prev_outer_file.puts records
+
+prev_outer_file.close
+
+prev_outer_length = <right_table_length> + <left_table_length>
+
+>>
+
+NonFirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_counter)::=<<
+
+   records = []
+
+      <left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+      <left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+      <left_table_name>_<left_table_counter>_file_index = 0
+      <left_table_name>_<left_table_counter>_pos = 0
+
+      until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<left_table_counter>_csv_files.length
+
+        <left_table_name>_<left_table_counter>_line, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos =
+          ExecutionPlanUtilities.read_record(<left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_csv_files, <left_table_name>_<left_table_counter>_file_index, <left_table_name>_<left_table_counter>_pos, <left_table_name>_field_terminator)
+
+        record_<left_table_counter> = "" + <left_table_name>_<left_table_counter>_line.chomp
+
+        <left_table_name>_<left_table_counter>_joined_flag = false
+
+      prev_outer_table_location = "prev/"
+      prev_outer_field_terminator = ","
+      prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+      prev_outer_file_index = 0
+      prev_outer_pos = 0
+
+      until prev_outer_file_index == prev_outer_csv_files.length
+
+        prev_outer_line, prev_outer_file_index, prev_outer_pos = ExecutionPlanUtilities.read_record(prev_outer_table_location, prev_outer_csv_files, prev_outer_file_index, prev_outer_pos, prev_outer_field_terminator)
+        record = record_<left_table_counter> + "," + prev_outer_line.chomp
+
+          prev_outer_joined_flag = false
+
+          if <join_condition>
+
+                  <left_table_name>_<left_table_counter>_joined_flag = true
+
+                  records \<\< record
+
+          end
+
+
+      end
+
+       records \<\< <left_table_name>_<left_table_counter>_line.chomp + ("," * prev_outer_length)
+
+
+      end
+
+>>
+
+FirstRightOuterJoin(left_table_name, right_table_name, left_counter, right_counter)::=<<
+
+<right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_file_index = 0
+<right_table_name>_<right_counter>_pos = 0
+
+until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right_counter>_csv_files.length
+
+  <right_table_name>_<right_counter>_line, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos =
+    ExecutionPlanUtilities.read_record(<right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_csv_files, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos, <right_table_name>_field_terminator)
+
+  record_<right_counter> = "" + <right_table_name>_<right_counter>_line.chomp
+
+  <right_table_name>_<right_counter>_joined_flag = false
+
+<left_table_name>_<left_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
+<left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+<left_table_name>_<left_counter>_file_index = 0
+<left_table_name>_<left_counter>_pos = 0
+
+until <left_table_name>_<left_counter>_file_index == <left_table_name>_<left_counter>_csv_files.length
+
+  <left_table_name>_<left_counter>_line, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos = ExecutionPlanUtilities.read_record(<left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_csv_files, <left_table_name>_<left_counter>_file_index, <left_table_name>_<left_counter>_pos, <left_table_name>_field_terminator)
+  record_<left_counter> = record_<right_counter> + "," + <left_table_name>_<left_counter>_line.chomp
+
+    <left_table_name>_<left_counter>_joined_flag = false
+
+    if <join_condition>
+
+            <right_table_name>_<right_counter>_joined_flag = true
+
+            records \<\< record_<left_counter>
+
+    end
+
+
+end
+
+ records \<\< ("," * <left_table_length>) + <right_table_name>_<right_counter>_line.chomp
+
+
+end
+
+FileUtils.mkdir_p("prev/")
+
+prev_outer_file = File.open("prev/prev_file.csv", "w")
+
+prev_outer_file.puts records
+
+prev_outer_file.close
+
+prev_outer_length = <right_table_length> + <left_table_length>
+
+>>
+
+NonFirstRightOuterJoin(left_table_name, right_table_name, left_counter, right_counter)::=<<
+
+   records = []
+
+      <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
+      <right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+      <right_table_name>_<right_counter>_file_index = 0
+      <right_table_name>_<right_counter>_pos = 0
+
+      until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right_counter>_csv_files.length
+
+        <right_table_name>_<right_counter>_line, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos =
+          ExecutionPlanUtilities.read_record(<right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_csv_files, <right_table_name>_<right_counter>_file_index, <right_table_name>_<right_counter>_pos, <right_table_name>_field_terminator)
+
+        record_<right_counter> = "" + <right_table_name>_<right_counter>_line.chomp
+
+        <right_table_name>_<right_counter>_joined_flag = false
+
+      prev_outer_table_location, prev_outer_field_terminator = ExecutionPlanUtilities.get_table_location("prev_outer")
+      prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+      prev_outer_file_index = 0
+      prev_outer_pos = 0
+
+      until prev_outer_file_index == prev_outer_csv_files.length
+
+        prev_outer_line, prev_outer_file_index, prev_outer_pos = ExecutionPlanUtilities.read_record(prev_outer_table_location, prev_outer_csv_files, prev_outer_file_index, prev_outer_pos, prev_outer_field_terminator)
+        record = record_<right_counter> + "," + prev_outer_line.chomp
+
+          prev_outer_joined_flag = false
+
+          if <join_condition>
+
+                  <right_table_name>_<right_counter>_joined_flag = true
+
+                  records \<\< record
+
+          end
+
+
+      end
+
+       records \<\< ("," * <prev_outer_length>) + <right_table_name>_<right_counter>_line.chomp
+
+
+      end
+
 
 >>
 

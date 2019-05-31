@@ -24,108 +24,203 @@ records = []
 
 
   ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
-join_type = "INNERJOIN"
+join_type = "FULLOUTERJOIN"
 departments_1_branch_id_index=  ExecutionPlanUtilities::get_column_index("departments", "branch_id")
 branches_0_branch_id_index=  ExecutionPlanUtilities::get_column_index("branches", "branch_id")
 employees_2_department_id_index =  ExecutionPlanUtilities::get_column_index("employees", "department_id")
-prev_join_department_id_index =  ExecutionPlanUtilities::get_column_index("departments", "department_id")
+prev_outer_department_id_index =  ExecutionPlanUtilities::get_column_index("departments", "department_id")
 
 
-  departments_1_table_location, departments_1_field_terminator = ExecutionPlanUtilities.get_table_location("departments")
-      departments_1_csv_files = ExecutionPlanUtilities.get_csv_files(departments_1_table_location)
-      departments_1_file_index = 0
-      departments_1_pos = 0
 
-      until departments_1_file_index == departments_1_csv_files.length
+#LEFT
+departments_1_table_location, departments_field_terminator = ExecutionPlanUtilities.get_table_location("departments")
+departments_1_csv_files = ExecutionPlanUtilities.get_csv_files(departments_1_table_location)
+departments_1_file_index = 0
+departments_1_pos = 0
 
-        departments_1_line, departments_1_file_index, departments_1_pos = ExecutionPlanUtilities.read_record(departments_1_table_location, departments_1_csv_files, departments_1_file_index, departments_1_pos, departments_1_field_terminator)
-        record_1 = departments_1_line.chomp
+until departments_1_file_index == departments_1_csv_files.length
 
-          branches_0_table_location, branches_0_field_terminator = ExecutionPlanUtilities.get_table_location("branches")
-            branches_0_csv_files = ExecutionPlanUtilities.get_csv_files(branches_0_table_location)
-            branches_0_file_index = 0
-            branches_0_pos = 0
+  departments_1_line, departments_1_file_index, departments_1_pos =
+    ExecutionPlanUtilities.read_record(departments_1_table_location, departments_1_csv_files, departments_1_file_index, departments_1_pos, departments_field_terminator)
 
-            until branches_0_file_index == branches_0_csv_files.length
+  record_1 = "" + departments_1_line.chomp
 
-              branches_0_line, branches_0_file_index, branches_0_pos = ExecutionPlanUtilities.read_record(branches_0_table_location, branches_0_csv_files, branches_0_file_index, branches_0_pos, branches_0_field_terminator)
-              record_0 = record_1 + branches_0_line.chomp
+  departments_1_joined_flag = false
 
-                if departments_1_line.split(",")[departments_1_branch_id_index].strip.to_i==branches_0_line.split(",")[branches_0_branch_id_index].strip.to_i
+branches_0_table_location, branches_field_terminator = ExecutionPlanUtilities.get_table_location("branches")
+branches_0_csv_files = ExecutionPlanUtilities.get_csv_files(branches_0_table_location)
+branches_0_file_index = 0
+branches_0_pos = 0
 
-                    records << departments_1_line.chomp + "," + branches_0_line.chomp
+until branches_0_file_index == branches_0_csv_files.length
 
-                end
+  branches_0_line, branches_0_file_index, branches_0_pos = ExecutionPlanUtilities.read_record(branches_0_table_location, branches_0_csv_files, branches_0_file_index, branches_0_pos, branches_field_terminator)
+  record_0 = record_1 + "," + branches_0_line.chomp
+
+    branches_0_joined_flag = false
+
+    if departments_1_line.split(",")[departments_1_branch_id_index].strip.to_i==branches_0_line.split(",")[branches_0_branch_id_index].strip.to_i
+
+            departments_1_joined_flag = true
+
+            records << record_0
+
+    end
 
 
-            end
+end
+
+ records << departments_1_line.chomp + ("," * 3) unless departments_1_joined_flag
+
+end
+
+#RIGHT
+branches_0_table_location, branches_field_terminator = ExecutionPlanUtilities.get_table_location("branches")
+branches_0_csv_files = ExecutionPlanUtilities.get_csv_files(branches_0_table_location)
+branches_0_file_index = 0
+branches_0_pos = 0
+
+until branches_0_file_index == branches_0_csv_files.length
+
+  branches_0_line, branches_0_file_index, branches_0_pos =
+    ExecutionPlanUtilities.read_record(branches_0_table_location, branches_0_csv_files, branches_0_file_index, branches_0_pos, branches_field_terminator)
+
+  record_0 = "" + branches_0_line.chomp
+
+  branches_0_joined_flag = false
+
+departments_1_table_location, departments_field_terminator = ExecutionPlanUtilities.get_table_location("departments")
+departments_1_csv_files = ExecutionPlanUtilities.get_csv_files(departments_1_table_location)
+departments_1_file_index = 0
+departments_1_pos = 0
+
+until departments_1_file_index == departments_1_csv_files.length
+
+  departments_1_line, departments_1_file_index, departments_1_pos = ExecutionPlanUtilities.read_record(departments_1_table_location, departments_1_csv_files, departments_1_file_index, departments_1_pos, departments_field_terminator)
+  record_1 = record_0 + "," + departments_1_line.chomp
+
+    departments_1_joined_flag = false
+
+    if departments_1_line.split(",")[departments_1_branch_id_index].strip.to_i==branches_0_line.split(",")[branches_0_branch_id_index].strip.to_i
+
+            branches_0_joined_flag = true
+
+            break
+    end
 
 
-      end
+end
 
-      FileUtils.mkdir_p("prev_join/")
+ records <<  ("," * (3 - 1)) + branches_0_line.chomp unless branches_0_joined_flag
 
-      prev_join_file = File.open("prev_join/prev_join.csv", "w")
+end
 
-      prev_join_file.puts records
+FileUtils.mkdir_p("prev/")
 
-      prev_join_file.close
+prev_outer_file = File.open("prev/prev_file.csv", "w")
 
-      prev_join_length = 3 + 3
+prev_outer_file.puts records
 
-  
+prev_outer_file.close
+
+prev_outer_length = 3 + 3
+
+
 records = []
 
+#LEFT
 employees_2_table_location, employees_2_field_terminator = ExecutionPlanUtilities.get_table_location("employees")
-      employees_2_csv_files = ExecutionPlanUtilities.get_csv_files(employees_2_table_location)
-      employees_2_file_index = 0
-      employees_2_pos = 0
+employees_2_csv_files = ExecutionPlanUtilities.get_csv_files(employees_2_table_location)
+employees_2_file_index = 0
+employees_2_pos = 0
 
-      until employees_2_file_index == employees_2_csv_files.length
+until employees_2_file_index == employees_2_csv_files.length
 
-        employees_2_line, employees_2_file_index, employees_2_pos = ExecutionPlanUtilities.read_record(employees_2_table_location, employees_2_csv_files, employees_2_file_index, employees_2_pos, employees_2_field_terminator)
-        record_2 = employees_2_line.chomp
+  employees_2_line, employees_2_file_index, employees_2_pos =
+    ExecutionPlanUtilities.read_record(employees_2_table_location, employees_2_csv_files, employees_2_file_index, employees_2_pos, employees_2_field_terminator)
 
-          prev_join_table_location = "prev_join/"
-          prev_join_field_terminator = ","
-          prev_join_csv_files = ExecutionPlanUtilities.get_csv_files(prev_join_table_location)
-          prev_join_file_index = 0
-          prev_join_pos = 0
+  record_2 = "" + employees_2_line.chomp
 
-            until prev_join_file_index == prev_join_csv_files.length
+  employees_2_joined_flag = false
 
-              prev_join_line, prev_join_file_index, prev_join_pos = ExecutionPlanUtilities.read_record(prev_join_table_location, prev_join_csv_files, prev_join_file_index, prev_join_pos, prev_join_field_terminator)
-              record = record_2 + prev_join_line.chomp
+prev_outer_table_location = "prev/"
+prev_outer_field_terminator = ","
+prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+prev_outer_file_index = 0
+prev_outer_pos = 0
 
-                if employees_2_line.split(",")[employees_2_department_id_index].strip.to_i==prev_join_line.split(",")[prev_join_department_id_index].strip.to_i
+until prev_outer_file_index == prev_outer_csv_files.length
 
-                    records << employees_2_line.chomp + "," + prev_join_line.chomp
+  prev_outer_line, prev_outer_file_index, prev_outer_pos = ExecutionPlanUtilities.read_record(prev_outer_table_location, prev_outer_csv_files, prev_outer_file_index, prev_outer_pos, prev_outer_field_terminator)
+  record_prev_outer = record_2 + "," + prev_outer_line.chomp
 
-                end
+    prev_outer_joined_flag = false
+
+    if employees_2_line.split(",")[employees_2_department_id_index].strip.to_i==prev_outer_line.split(",")[prev_outer_department_id_index].strip.to_i
+
+            employees_2_joined_flag = true
+
+            records << record_prev_outer
+
+    end
 
 
-            end
+end
+
+ records << employees_2_line.chomp + ("," * prev_outer_length) unless employees_2_joined_flag
+
+end
+
+#RIGHT
+prev_outer_table_location = "prev/"
+prev_outer_field_terminator = ","
+prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+prev_outer_file_index = 0
+prev_outer_pos = 0
+
+until prev_outer_file_index == prev_outer_csv_files.length
+
+  prev_outer_line, prev_outer_file_index, prev_outer_pos =
+    ExecutionPlanUtilities.read_record(prev_outer_table_location, prev_outer_csv_files, prev_outer_file_index, prev_outer_pos, prev_outer_field_terminator)
+
+  record_prev_outer = "" + prev_outer_line.chomp
+
+  prev_outer_joined_flag = false
+
+employees_2_table_location, employees_2_field_terminator = ExecutionPlanUtilities.get_table_location("employees")
+employees_2_csv_files = ExecutionPlanUtilities.get_csv_files(employees_2_table_location)
+employees_2_file_index = 0
+employees_2_pos = 0
+
+until employees_2_file_index == employees_2_csv_files.length
+
+  employees_2_line, employees_2_file_index, employees_2_pos = ExecutionPlanUtilities.read_record(employees_2_table_location, employees_2_csv_files, employees_2_file_index, employees_2_pos, employees_2_field_terminator)
+  record_employees_2 = record_2 + "," + employees_2_line.chomp
+
+    employees_2_joined_flag = false
+
+    if employees_2_line.split(",")[employees_2_department_id_index].strip.to_i==prev_outer_line.split(",")[prev_outer_department_id_index].strip.to_i
+
+            prev_outer_joined_flag = true
+
+            break
+
+    end
 
 
-      end
+end
 
-      FileUtils.mkdir_p("prev_join/")
+ records <<  ("," * (4 - 1)) + prev_outer_line.chomp unless prev_outer_joined_flag
 
-      prev_join_file = File.open("prev_join/prev_join.csv", "w")
 
-      prev_join_file.puts records
+end
 
-      prev_join_file.close
-
-      prev_join_length = prev_join_length + 4
-
-  
 
   ExecutionPlanUtilities::write_to_execution_plan("Where Condition")
 
-branches_branch_location_index = ExecutionPlanUtilities::get_column_index("branches", "branch_location")
+employees_employee_name_index = ExecutionPlanUtilities::get_column_index("employees", "employee_name")
 
-records.keep_if {|record| record.split(",")[7 + branches_branch_location_index]=="Damascus"}
+records.keep_if {|record| record.split(",")[0 + employees_employee_name_index]!="Anas"}
 having_conditions = []
 aggregation_columns = []
 
