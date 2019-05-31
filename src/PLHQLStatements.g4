@@ -522,6 +522,7 @@ subselect_stmt locals[
     HashMap<String, String> orderingColumnsMap = new HashMap<>(),
     boolean isDistinct = false,
     Set<Pair<String, String>> aggregateFunctionColumns = new LinkedHashSet<>(),
+    HashMap<Pair<String, String>, ParserRuleContext> analyticalFunctions = new HashMap<>(),
     ArrayList<String> groupByColumns = new ArrayList<>(),
     ArrayList<String> tables = new ArrayList<>(),
     HashMap<String, Integer> tablesOffset = new HashMap<>();
@@ -826,21 +827,28 @@ expr_case_searched :
      ;
 
 expr_agg_window_func :
-       T_AVG T_OPEN_P expr_func_all_distinct expr {
+       T_AVG T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+       //Analytical Function
+       $subselect_stmt::analyticalFunctions.put(new Pair<>("AVG",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
 
-       $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+       }|{
+       //Group Function
+       {
 
-       try{
+              $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
 
-       $having_clause::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+              try{
 
-       }catch(NullPointerException ignored){
+              $having_clause::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
 
-       }
+              }catch(NullPointerException ignored){
 
-       }  T_CLOSE_P expr_func_over_clause?
-     | T_COUNT T_OPEN_P ((expr_func_all_distinct expr {
+              }
 
+              }
+       })
+     | T_COUNT T_OPEN_P (((expr_func_all_distinct expr) {
+     //Group Function
          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text));
 
          try{
@@ -851,109 +859,159 @@ expr_agg_window_func :
 
          }
 
-      })
-        | '*' {
+     }| '*'{
 
-         $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+    //Group Function
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
 
-         try{
+             try{
 
-         $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+             $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
 
-         }catch(NullPointerException ignored){
+             }catch(NullPointerException ignored){
 
-         }
+             }
 
-         }) T_CLOSE_P expr_func_over_clause?
-     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct expr {
 
-      $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG",  ":" + $expr.text));
+     }) T_CLOSE_P
+        | ((expr_func_all_distinct expr) {
+        //Analytical Function
+        $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
 
-      try{
+        }| '*' {
+        //Analytical Function
+        $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",":*"), $expr_func_over_clause.ctx);
 
-      $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNTBIG",  ":" + $expr.text));
+        }) T_CLOSE_P expr_func_over_clause)
 
-      }catch(NullPointerException ignored){
 
-      }
-
-      }) | '*') T_CLOSE_P expr_func_over_clause?
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_DENSE_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_FIRST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LAG T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
      | T_LAST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LEAD T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
-     | T_MAX T_OPEN_P expr_func_all_distinct expr {
+     | T_MAX T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("MAX",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
 
-     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+     }|{
+     //Group Function
+     {
 
-     try{
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
 
-     $having_clause::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+          try{
 
-     }catch(NullPointerException ignored){
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
 
-     }
+          }catch(NullPointerException ignored){
 
-     } T_CLOSE_P expr_func_over_clause?
-     | T_MIN T_OPEN_P expr_func_all_distinct expr {
+          }
 
-     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+          }
+     })
+     | T_MIN T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("MIN",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
 
-     try{
+     }|{
+     //Group Function
+     {
 
-     $having_clause::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
 
-     }catch(NullPointerException ignored){
+          try{
 
-     }
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
 
-     } T_CLOSE_P expr_func_over_clause?
-     | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_STDEV T_OPEN_P expr_func_all_distinct expr{
+          }catch(NullPointerException ignored){
 
-     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+          }
 
-     try{
+          }
+     })
+     | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause{
 
-     $having_clause::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
-
-     }catch(NullPointerException ignored){
-
-     }
-
-
-     } T_CLOSE_P expr_func_over_clause?
-     | T_SUM T_OPEN_P expr_func_all_distinct expr {
-
-     try{
-
-     $having_clause::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
-
-     }catch(NullPointerException ignored){
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("RANK",""), $expr_func_over_clause.ctx);
 
      }
+     | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause{
 
-     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
-
-
-     } T_CLOSE_P expr_func_over_clause?
-     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr {
-
-     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
-
-     try{
-
-     $having_clause::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
-
-     }catch(NullPointerException ignored){
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("ROW_NUMBER",""), $expr_func_over_clause.ctx);
 
      }
+     | T_STDEV T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+          $subselect_stmt::analyticalFunctions.put(new Pair<>("STDEV",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+     }|{
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
 
 
-     } T_CLOSE_P expr_func_over_clause?
+          }
+     })
+     | T_SUM T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+
+     //Analytical Function
+     {$subselect_stmt::analyticalFunctions.put(new Pair<>("SUM",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);}
+     }
+     |{
+
+     //Group Function
+     {
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+
+          }
+
+     })
+
+     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+
+     //Analytical Function
+
+          {$subselect_stmt::analyticalFunctions.put(new Pair<>("VARIANCE",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);}
+
+
+     }|{
+
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+
+          }
+
+     })
 
      | T_SUMMARIZE T_OPEN_P expr T_CLOSE_P{
 

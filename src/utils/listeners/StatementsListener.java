@@ -3,11 +3,13 @@ package utils.listeners;
 import gen.PLHQLStatementsBaseListener;
 import gen.PLHQLStatementsParser;
 import models.*;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Pair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.stringtemplate.v4.ST;
+import org.stringtemplate.v4.STGroup;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
@@ -202,11 +204,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         if (ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null) {
             String[] splitResult = ctx.ident().getText().split("\\.");
-            if (!TypeRepository.dataMemberExists(splitResult[0], splitResult[1])) {
-                SyntaxSemanticErrorListener.INSTANCE.semanticError(
-                        ctx.start.getLine(),
-                        "Unknown column: " + ctx.getText()); //log a semantic error
-            }
+            if (splitResult.length == 2)
+                if (!TypeRepository.dataMemberExists(splitResult[0], splitResult[1])) {
+                    SyntaxSemanticErrorListener.INSTANCE.semanticError(
+                            ctx.start.getLine(),
+                            "Unknown column: " + ctx.getText()); //log a semantic error
+                }
         }
 
         if (!ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()))
@@ -229,6 +232,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
+        for (HashMap.Entry<Pair<String, String>, ParserRuleContext> entry : ctx.analyticalFunctions.entrySet()) {
+            System.out.println(((PLHQLStatementsParser.Expr_func_over_clauseContext) entry.getValue()).expr_func_partition_by_clause() == null);
+        }
         if (isSubselectStatement(ctx.parent)) {
             ArrayList<String> selectionColumns = ctx.selectionColumns;
             LinkedHashMap<String, DataMember> members = new LinkedHashMap<>();
@@ -430,6 +436,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 append(" ]}");
         //Generate code to order generatedCode set
 
+        generatedCode.append(generateAnalyticalFunctions(ctx.analyticalFunctions));
+
         generatedCode.append(
                 "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         //Generate code for select clause (projection)
@@ -491,6 +499,57 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         return resultArray.toString();
     }
 
+    private String generateAnalyticalFunctions(HashMap<Pair<String, String>, ParserRuleContext> analyticalFunctions) {
+
+        StringBuilder result = new StringBuilder();
+
+        for (HashMap.Entry<Pair<String, String>, ParserRuleContext> entry : analyticalFunctions.entrySet()) {
+
+            StringBuilder analyticalKeys = new StringBuilder("[");
+            StringBuilder analyticalAggregationColumn = new StringBuilder();
+
+            PLHQLStatementsParser.Expr_func_over_clauseContext ctx = (PLHQLStatementsParser.Expr_func_over_clauseContext) entry.getValue();
+
+            if (ctx.expr_func_partition_by_clause() == null) break;
+
+            for (PLHQLStatementsParser.ExprContext exprContext : ctx.expr_func_partition_by_clause().expr()) {
+                //exprContext.getText() = TABLE_NAME.COLUMN_NAME
+                String[] splitResult = exprContext.getText().split("\\.");
+                String tableName = splitResult[0], columnName = splitResult[1];
+                analyticalKeys.append(getColumnIndex(tableName, columnName)).append(",");
+
+            }
+
+            analyticalKeys.append("]");
+
+            if (entry.getKey().b.contains("*")) {
+                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>").append("-1")
+                        .append("},");
+            } else {
+                //DISTINCT:TABLE_NAME.COLUMN_NAME
+                String[] splitted = entry.getKey().b.split(":");
+                //TABLE_NAME.COLUMN_NAME
+                String[] splitResult = splitted[1].split("\\.");
+                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                        .append("},");
+            }
+
+            ST st = ST_GROUP_FILE.getInstanceOf("processAnalyticalFunction");
+
+            st.add("analytical_keys", analyticalKeys);
+            st.add("analytical_aggregation_function", analyticalAggregationColumn);
+
+            result.append("\n").append(st.render());
+        }
+
+
+        return result.toString() + "\n";
+    }
+
     /**
      * Code for select clause (projection)
      *
@@ -505,10 +564,13 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         StringBuilder result = new StringBuilder();
         result.append("\n\n");
 
+        int counter = 0;
+
         for (String column : selectionColumns) {
 
-            // TODO: 5/16/2019 When selecting from single table, the user does not need to specify table name before column name
             if (!column.contains(".")) return "";
+
+            if (!matchesColumnSyntax(column)) continue;
 
             String[] splittedColumn = column.split("\\.");
             String tableName = splittedColumn[0], columnName = splittedColumn[1];
@@ -648,7 +710,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         multipleJoinsTemplate.add("inner_code", counter == 0 ? "records <<  record_0" : joinsCode);
         return multipleJoinsTemplate.render();
     }
-
 
     private String mapSingleTableWhereCondition(String whereCondition, StringBuilder columnIndex) {
         final String regex = "\\w+\\.\\w+";

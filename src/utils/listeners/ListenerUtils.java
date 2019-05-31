@@ -20,9 +20,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ListenerUtils {
 
@@ -266,10 +269,20 @@ public class ListenerUtils {
 
     static void validateGroupingColumns(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         if (ctx.selectionColumns.contains("*")) return;
-        for (String column : ctx.groupByColumns) {
-            if (!ctx.selectionColumns.contains(column)){
+        List<String> filteredSelectionColumns = ctx.selectionColumns.stream()
+                .filter(ListenerUtils::matchesColumnSyntax)
+                .collect(Collectors.toList());
+        for (String column : filteredSelectionColumns) {
+            if (!ctx.groupByColumns.contains(column)){
                 SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Everything in select statement should be in grouping (" + column + ")");
             }
         }
+    }
+
+    static boolean matchesColumnSyntax(String s){
+        String regex = "(\\w)+\\.(\\w)+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
     }
 }

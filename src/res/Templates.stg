@@ -123,3 +123,11 @@ puts Time.now - start
 
 >>
 
+
+processAnalyticalFunction(analytical_keys, analytical_aggregation_function)::=<<
+
+  ExecutionPlanUtilities::process_analytic_function(records, <analytical_keys>, <analytical_aggregation_function>)
+
+
+>>
+

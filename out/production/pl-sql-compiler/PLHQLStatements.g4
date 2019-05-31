@@ -7,7 +7,7 @@ import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
 }
 
-program : c_function+ EOF;
+program locals[ArrayList<String> functions = new ArrayList()]: c_function+ EOF;
 
 block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
@@ -116,12 +116,12 @@ assignment_c_stmt_item :
      ;
 
 assignment_stmt_single_item :
-       ident T_COLON? T_EQUAL expr
-     | T_OPEN_P ident T_CLOSE_P T_COLON? T_EQUAL expr
+       ident T_COLON? T_EQUAL expr {$c_function::unassignedVariables.remove($ident.text);}
+     | T_OPEN_P ident T_CLOSE_P T_COLON? T_EQUAL expr {$c_function::unassignedVariables.remove($ident.text);}
      ;
 
 assignment_c_stmt_single_item :
-      ident assignment_operator expr
+      ident assignment_operator expr {$c_function::unassignedVariables.remove($ident.text);}
       | increment_decrement_assignment
       ;
 
@@ -131,11 +131,11 @@ increment_decrement_assignment :
      ;
 
 assignment_stmt_multiple_item :
-       T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+       T_OPEN_P ident {$c_function::unassignedVariables.remove($ident.text);} (T_COMMA ident {$c_function::unassignedVariables.remove($ident.text);} )* T_CLOSE_P T_COLON? assignment_operator T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
      ;
 
 assignment_c_stmt_multiple_item :
-        T_OPEN_P ident (T_COMMA ident)* T_CLOSE_P T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
+        T_OPEN_P ident {$c_function::unassignedVariables.remove($ident.text);} (T_COMMA ident {$c_function::unassignedVariables.remove($ident.text);})* T_CLOSE_P T_EQUAL T_OPEN_P expr (T_COMMA expr)* T_CLOSE_P
       ;
 
 assignment_stmt_select_item :
@@ -363,8 +363,8 @@ create_database_option :
     | T_LOCATION expr
     ;
 
-c_function:
-   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block
+c_function locals[ArrayList<Pair<String, String>> functionVariables = new ArrayList<>(), ArrayList<String> unassignedVariables = new ArrayList<>(), ArrayList<String> returnStatements = new ArrayList<>()]:
+   dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block {$program::functions.add($ident.text);}
    ;
  c_function_parameter_list:
     c_function_parameter_item (T_COMMA c_function_parameter_item)*
@@ -451,7 +451,7 @@ create_index_col :
 
 
 return_stmt :           // RETURN statement
-       T_RETURN expr?
+       T_RETURN (expr{$c_function::returnStatements.add($expr.text);}|{$c_function::returnStatements.add("void");})
      ;
 
 
@@ -466,7 +466,7 @@ for_c_stmt :
       ;
 
 general_delcaration_c_stmt:
-(dtype | T_VAR) ident (T_EQUAL expr)? (T_COMMA ident (T_EQUAL expr)?)* T_SEMICOLON
+(dtype ident {$c_function::functionVariables.add(new Pair($dtype.text, $ident.text));}| T_VAR ident {$c_function::functionVariables.add(new Pair("VAR", $ident.text));}) (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}) (T_COMMA ident (T_EQUAL expr|{$c_function::unassignedVariables.add($ident.text);}))* T_SEMICOLON
 ;
 
 
@@ -485,7 +485,7 @@ error_for_range_stmt :        // FOR (Integer range) statement
      ;
 
 
-select_stmt :            // SELECT statement
+select_stmt locals[ArrayList<String> tempTables = new ArrayList<>()]:            // SELECT statement
        cte_select_stmt? fullselect_stmt
      ;
 
@@ -521,9 +521,11 @@ subselect_stmt locals[
     ArrayList<String> selectionColumns = new ArrayList(),
     HashMap<String, String> orderingColumnsMap = new HashMap<>(),
     boolean isDistinct = false,
-    ArrayList<Pair<String,String>> aggregateFunctionColumns = new ArrayList(),
-    ArrayList<String> groupByColumns = new ArrayList<>()
-
+    Set<Pair<String, String>> aggregateFunctionColumns = new LinkedHashSet<>(),
+    HashMap<Pair<String, String>, ParserRuleContext> analyticalFunctions = new HashMap<>(),
+    ArrayList<String> groupByColumns = new ArrayList<>(),
+    ArrayList<String> tables = new ArrayList<>(),
+    HashMap<String, Integer> tablesOffset = new HashMap<>();
     ] :
        (T_SELECT | T_SEL) select_list into_clause? from_clause where_clause? group_by_clause? (having_clause | qualify_clause)? order_by_clause?
      ;
@@ -548,9 +550,7 @@ select_list_limit :
      ;
 
 select_list_item :
-       ((ident T_EQUAL)? expr select_list_alias? | select_list_asterisk){
-       $subselect_stmt::selectionColumns.add($text);
-       }
+       ((ident T_EQUAL {$subselect_stmt::selectionColumns.add($ident.text);})? expr select_list_alias? | select_list_asterisk){$subselect_stmt::selectionColumns.add($text);}
      ;
 
 select_list_alias :
@@ -586,11 +586,16 @@ from_table_name_clause :
        table_name from_alias_clause? {
        $from_clause::tables.push($table_name.text);
        $from_clause::tablesCount+=1;
+       $subselect_stmt::tables.add($table_name.text);
        }
      ;
 
 from_subselect_clause :
-       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause?
+       T_OPEN_P select_stmt T_CLOSE_P from_alias_clause {
+       $from_clause::tables.push($from_alias_clause.text);
+       $from_clause::tablesCount+=1;
+       $select_stmt::tempTables.add($from_alias_clause.text);
+       }
      ;
 
 from_join_clause :
@@ -642,11 +647,11 @@ error_missing_bool_expr :
      ;
 
 group_by_clause :
-       T_GROUP T_BY expr { $subselect_stmt::groupByColumns.add($expr.text); } (T_COMMA expr { $subselect_stmt::groupByColumns.add($expr.text); })*
+       T_GROUP T_BY group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); } (T_COMMA group_by_expr { $subselect_stmt::groupByColumns.add($group_by_expr.text); })*
      ;
 
-having_clause :
-       T_HAVING bool_expr
+having_clause locals[LinkedList<Pair<String, String>> aggregateFunctionColumns = new LinkedList<>(), LinkedList<Pair<String, String>> conditions = new LinkedList<>()]:
+       T_HAVING having_bool_expr
      ;
 
 qualify_clause :
@@ -669,6 +674,17 @@ bool_expr :                               // Boolean condition
      | bool_expr_atom
      ;
 
+having_bool_expr :                               // Boolean condition
+        T_NOT? T_OPEN_P having_bool_expr T_CLOSE_P
+      | having_bool_expr bool_expr_logical_operator having_bool_expr
+      | having_expr_atom
+      ;
+
+
+having_expr_atom:
+      having_bool_expr_binary
+    | bool_literal
+;
 bool_expr_atom :
       bool_expr_unary
     | bool_expr_binary
@@ -694,6 +710,10 @@ bool_expr_multi_in :
 bool_expr_binary :
        expr bool_expr_binary_operator expr
      ;
+having_bool_expr_binary:
+         expr bool_expr_binary_operator expr_agg_window_func {$having_clause::conditions.add(new Pair<>("AFTER", $expr.text + $bool_expr_binary_operator.text));}
+       | expr_agg_window_func bool_expr_binary_operator expr {$having_clause::conditions.add(new Pair<>("BEFORE", $bool_expr_binary_operator.text + $expr.text ));}
+;
 
 bool_expr_logical_operator :
       bool_and
@@ -718,6 +738,24 @@ bool_expr_binary_operator :
      | T_GREATEREQUAL
      | T_NOT? (T_LIKE | T_RLIKE | T_REGEXP)
      ;
+
+group_by_expr:
+     group_by_expr interval_item
+         | select_stmt
+         | group_by_expr T_MUL group_by_expr
+         | group_by_expr T_DIV group_by_expr
+         | group_by_expr T_ADD group_by_expr
+         | group_by_expr T_SUB group_by_expr
+         | T_OPEN_P select_stmt T_CLOSE_P
+         | T_OPEN_P group_by_expr T_CLOSE_P
+         | group_by_expr T_OPEN_SB group_by_expr T_CLOSE_SB
+         | expr_interval
+         | expr_concat
+         | expr_case
+         | expr_spec_func
+         | expr_func
+         | expr_atom
+         ;
 
 expr :
        expr interval_item
@@ -788,30 +826,205 @@ expr_case_searched :
        T_CASE (T_WHEN bool_expr T_THEN expr)+ (T_ELSE expr)? T_END
      ;
 
-
 expr_agg_window_func :
-       T_AVG T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr.text)); }  T_CLOSE_P expr_func_over_clause?
-     | T_COUNT T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
-     | T_COUNT_BIG T_OPEN_P ((expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNTBIG", $expr.text)); }) | '*') T_CLOSE_P expr_func_over_clause?
+       T_AVG T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+       //Analytical Function
+       $subselect_stmt::analyticalFunctions.put(new Pair<>("AVG",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+
+       }|{
+       //Group Function
+       {
+
+              $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+
+              try{
+
+              $having_clause::aggregateFunctionColumns.add(new Pair<>("AVG", $expr_func_all_distinct.text + ":" + $expr.text));
+
+              }catch(NullPointerException ignored){
+
+              }
+
+              }
+       })
+     | T_COUNT T_OPEN_P (((expr_func_all_distinct expr) {
+     //Group Function
+         $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text));
+
+         try{
+
+         $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT", $expr_func_all_distinct.text + ":" + $expr.text));
+
+         }catch(NullPointerException ignored){
+
+         }
+
+     }| '*'{
+
+    //Group Function
+     $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+
+             try{
+
+             $having_clause::aggregateFunctionColumns.add(new Pair<>("COUNT",  ":" + "*"));
+
+             }catch(NullPointerException ignored){
+
+             }
+
+
+     }) T_CLOSE_P
+        | ((expr_func_all_distinct expr) {
+        //Analytical Function
+        $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+
+        }| '*' {
+        //Analytical Function
+        $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",":*"), $expr_func_over_clause.ctx);
+
+        }) T_CLOSE_P expr_func_over_clause)
+
+
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_DENSE_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
      | T_FIRST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LAG T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
      | T_LAST_VALUE T_OPEN_P expr T_CLOSE_P expr_func_over_clause
      | T_LEAD T_OPEN_P expr (T_COMMA expr (T_COMMA expr)?)? T_CLOSE_P expr_func_over_clause
-     | T_MAX T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_MIN T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause
-     | T_STDEV T_OPEN_P expr_func_all_distinct? expr{ $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_SUM T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr.text)); } T_CLOSE_P expr_func_over_clause?
-     | T_VARIANCE T_OPEN_P expr_func_all_distinct? expr { $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr.text)); } T_CLOSE_P expr_func_over_clause?
+     | T_MAX T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("MAX",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+
+     }|{
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("MAX", $expr_func_all_distinct.text + ":" +$expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+          }
+     })
+     | T_MIN T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("MIN",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+
+     }|{
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("MIN", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+          }
+     })
+     | T_RANK T_OPEN_P T_CLOSE_P expr_func_over_clause{
+
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("RANK",""), $expr_func_over_clause.ctx);
+
+     }
+     | T_ROW_NUMBER T_OPEN_P T_CLOSE_P expr_func_over_clause{
+
+     $subselect_stmt::analyticalFunctions.put(new Pair<>("ROW_NUMBER",""), $expr_func_over_clause.ctx);
+
+     }
+     | T_STDEV T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+     //Analytical Function
+          $subselect_stmt::analyticalFunctions.put(new Pair<>("STDEV",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
+     }|{
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("STDEV", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+
+          }
+     })
+     | T_SUM T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+
+     //Analytical Function
+     {$subselect_stmt::analyticalFunctions.put(new Pair<>("SUM",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);}
+     }
+     |{
+
+     //Group Function
+     {
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUM", $expr_func_all_distinct.text + ":" + $expr.text));
+
+
+          }
+
+     })
+
+     | T_VARIANCE T_OPEN_P expr_func_all_distinct expr T_CLOSE_P (expr_func_over_clause{
+
+     //Analytical Function
+
+          {$subselect_stmt::analyticalFunctions.put(new Pair<>("VARIANCE",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);}
+
+
+     }|{
+
+     //Group Function
+     {
+
+          $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          try{
+
+          $having_clause::aggregateFunctionColumns.add(new Pair<>("VARIANCE", $expr_func_all_distinct.text + ":" + $expr.text));
+
+          }catch(NullPointerException ignored){
+
+          }
+
+
+          }
+
+     })
+
+     | T_SUMMARIZE T_OPEN_P expr T_CLOSE_P{
+
+      $subselect_stmt::aggregateFunctionColumns.add(new Pair<>("SUMMARIZE", ":" + $expr.text));
+
+     }
 
      ;
 
 expr_func_all_distinct :
        T_ALL
      | T_DISTINCT
+     |
      ;
 
 expr_func_over_clause :
@@ -1234,6 +1447,7 @@ non_reserved_words :                      // Tokens that are not reserved words 
      | T_XACT_ABORT
      | T_XML
      | T_YES
+     | T_SUMMARIZE
      ;
 
 error_invalid_token:

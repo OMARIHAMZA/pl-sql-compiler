@@ -303,9 +303,12 @@ module MapReduce
       end unless @having_conditions.empty?
 
 
+=begin
       result_array.map! do |line|
+        puts line + "|"
         line.split(",").values_at(*(0...@aggregation_columns.length).to_a).join(",")
       end unless has_summarize
+=end
 
       output_file.puts result_array
 

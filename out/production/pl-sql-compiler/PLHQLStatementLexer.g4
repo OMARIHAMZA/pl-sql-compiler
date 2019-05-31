@@ -315,6 +315,7 @@ T_WORK            : W O R K ;
 T_XACT_ABORT      : X A C T '_' A B O R T ;
 T_XML             : X M L ;
 T_YES             : Y E S ;
+T_SUMMARIZE       : S U M M A R I Z E ;
 
 
 // Functions with specific syntax
