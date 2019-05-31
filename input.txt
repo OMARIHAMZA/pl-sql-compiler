@@ -1,6 +1,6 @@
 int main(){
 
-var q = SELECT * FROM PRODUCTS;
 
-SELECT q.name FROM q;
+SELECT * FROM POS JOIN PRODUCTS ON POS.product_id == PRODUCTS.id;
+
 }
