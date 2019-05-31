@@ -731,9 +731,53 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             firstTable = ctx.tables.pop();
         }
 
+        //Left Outer Join
+        if (ctx.joinType.toUpperCase().contains("LEFT")) {
+
+            String result;
+
+            if (firstJoin) {
+                firstJoin = false;
+                result = processFirstLeftJoin(currentItem, firstTable, secondTable, counter + 1, counter, columnsIndices);
+            } else {
+                result = processNonFirstLeftJoin(currentItem, firstTable, secondTable, counter + 1, counter, columnsIndices);
+            }
+
+            ctx.tables.push(firstTable);
+            if (tempBooleanExpression != null)
+                ctx.tables.push(tempBooleanExpression);
+            ctx.tables.push(secondTable);
+
+
+            firstJoin = false;
+
+            return joinsCode + "\n\n" + result;
+
+
+        }else if (ctx.joinType.toUpperCase().contains("RIGHT")){
+
+            String result;
+
+            if (firstJoin) {
+                firstJoin = false;
+                result = processFirstRightJoin(currentItem, firstTable, secondTable, counter + 1, counter, columnsIndices);
+            } else {
+                result = processNonFirstRightJoin(currentItem, firstTable, secondTable, counter + 1, counter, columnsIndices);
+            }
+
+            ctx.tables.push(firstTable);
+            if (tempBooleanExpression != null)
+                ctx.tables.push(tempBooleanExpression);
+            ctx.tables.push(secondTable);
+
+
+            firstJoin = false;
+
+            return joinsCode + "\n\n" + result;
+
+        }
         //Outer Join
-        if (ctx.joinType.toUpperCase().contains("LEFT")
-                || ctx.joinType.toUpperCase().contains("RIGHT")
+        if (ctx.joinType.toUpperCase().contains("RIGHT")
                 || ctx.joinType.toUpperCase().contains("OUTER")) {
 
             String result = processOuterJoin(firstTable, secondTable, counter + 1, counter, currentItem, columnsIndices);
@@ -758,7 +802,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         ST innerJoinST;
 
         //First Inner Join
-        if (firstJoin){
+        if (firstJoin) {
             firstJoin = false;
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
@@ -791,8 +835,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             innerJoinST.add("left_table_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
             innerJoinST.add("right_table_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
             innerJoinST.add("join_condition", currentItem);
-        }
-        else{ // Non-first inner join
+        } else { // Non-first inner join
             innerJoinST = ST_GROUP_FILE.getInstanceOf(NON_FIRST_INNER_JOIN_LOOP_TEMPLATE);
             innerJoinST.add("left_table_name", firstTable.toLowerCase());
             innerJoinST.add("left_counter", counter + 1);
@@ -1001,6 +1044,87 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             termValueST.add("table_name", tableName);
             termValueST.add("column_name", columnName);
             termValueST.add("counter", mCounter);
+            condition = ListenerUtils.getConversion(condition, group, type, termValueST);
+        }
+        return condition;
+    }
+
+    @SuppressWarnings("ALL")
+    private String processFirstLeftJoin(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+
+        ST leftJoinST = ST_GROUP_FILE.getInstanceOf("FirstLeftOuterJoin");
+
+        leftJoinST.add("left_table_name", firstTable.toLowerCase());
+        leftJoinST.add("left_counter", firstCounter);
+        leftJoinST.add("right_table_name", secondTable.toLowerCase());
+        leftJoinST.add("right_counter", secondCounter);
+        leftJoinST.add("join_condition", processOuterJoinCondition(condition, firstTable, secondTable, firstCounter, secondCounter, columnsIndices));
+        leftJoinST.add("left_table_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
+        leftJoinST.add("right_table_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
+
+        return leftJoinST.render();
+
+    }
+
+    private String processNonFirstLeftJoin(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+        ST leftJoinST = ST_GROUP_FILE.getInstanceOf("NonFirstLeftOuterJoin");
+        leftJoinST.add("left_table_name", firstTable.toLowerCase());
+        leftJoinST.add("left_counter", firstCounter);
+        leftJoinST.add("right_table_name", secondTable.toLowerCase());
+        leftJoinST.add("right_counter", secondCounter);
+        leftJoinST.add("join_condition", processNonFirstOuterJoinCondition(condition, firstTable, firstCounter, columnsIndices, "prev_outer"));
+        leftJoinST.add("left_table_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
+        leftJoinST.add("right_table_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
+        return leftJoinST.render();
+
+    }
+
+    private String processFirstRightJoin(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+        ST rightJoinST = ST_GROUP_FILE.getInstanceOf("FirstRightOuterJoin");
+        rightJoinST.add("left_table_name", firstTable.toLowerCase());
+        rightJoinST.add("right_table_name", secondTable.toLowerCase());
+        rightJoinST.add("left_counter", firstCounter);
+        rightJoinST.add("left_table_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
+        rightJoinST.add("right_table_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
+        rightJoinST.add("right_counter", secondCounter);
+        rightJoinST.add("join_condition", processOuterJoinCondition(condition, firstTable, secondTable, firstCounter, secondCounter, columnsIndices));
+        return rightJoinST.render();
+    }
+
+    private String processNonFirstRightJoin(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+        ST rightJoinST = ST_GROUP_FILE.getInstanceOf("NonFirstRightOuterJoin");
+        rightJoinST.add("left_table_name", firstTable.toLowerCase());
+        rightJoinST.add("right_table_name", secondTable.toLowerCase());
+        rightJoinST.add("left_counter", firstCounter);
+        rightJoinST.add("left_table_length", TypeRepository.typeHashMap.get(firstTable.toUpperCase()).getMembers().size());
+        rightJoinST.add("right_table_length", TypeRepository.typeHashMap.get(secondTable.toUpperCase()).getMembers().size());
+        rightJoinST.add("right_counter", secondCounter);
+        rightJoinST.add("join_condition", processNonFirstOuterJoinCondition(condition, secondTable, secondCounter, columnsIndices, "prev_outer"));
+        return rightJoinST.render();
+    }
+
+    @SuppressWarnings("ALL")
+    private String processOuterJoinCondition(String condition, String firstTable, String secondTable, int firstCounter, int secondCounter, StringBuilder columnsIndices) {
+        final String regex = "\\w+\\.\\w+";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(condition);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+            int tempCounter = tableName.equalsIgnoreCase(secondTable) ? secondCounter : firstCounter;
+            //Column Index
+            ST indexST = new ST("<table_name>_<counter>_<column_name>_index=  ExecutionPlanUtilities::get_column_index(\"<table_name>\", \"<column_name>\")");
+            indexST.add("table_name", tableName);
+            indexST.add("counter", tempCounter);
+            indexST.add("column_name", columnName);
+            columnsIndices.append(indexST.render());
+            columnsIndices.append("\n");
+            //Term Value
+            String type = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+            ST termValueST = new ST("<table_name>_<counter>_line.split(\",\")[<table_name>_<counter>_<column_name>_index].strip<conversion>");
+            termValueST.add("table_name", tableName);
+            termValueST.add("counter", tempCounter);
+            termValueST.add("column_name", columnName);
             condition = ListenerUtils.getConversion(condition, group, type, termValueST);
         }
         return condition;
