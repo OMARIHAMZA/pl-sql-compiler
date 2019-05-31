@@ -285,4 +285,15 @@ public class ListenerUtils {
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
+
+    static boolean fromDeclarationStatement(ParseTree parseTree){
+        ParseTree currentParent = parseTree.getParent();
+        while (currentParent != null) {
+            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_general_delcaration_c_stmt) {
+                return true;
+            }
+            currentParent = currentParent.getParent();
+        }
+        return false;
+    }
 }

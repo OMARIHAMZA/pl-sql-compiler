@@ -31,6 +31,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     private RubyFile rubyFile;
     private boolean initializedVariables = false; //To avoid duplicated initialization of variables
     private ArrayList<String> programFunctions = new ArrayList<>(); //All functions defined in the program
+    private int queryCounter = 0;
 
     /**
      * Actions to be done when reaching a c block
@@ -99,7 +100,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         super.enterGeneral_delcaration_c_stmt(ctx);
 
         ctx.ident().forEach(identifier -> {
-                    Variable variable = new Variable(identifier.getText(), ctx.dtype().getText());
+                    Variable variable = new Variable(identifier.getText(), ctx.dtype() != null ? ctx.dtype().getText() : "var");
                     if (variable.checkOccurrence(scopes.peek())) {
                         SyntaxSemanticErrorListener.INSTANCE.semanticError(ctx.start.getLine(), "Redeclaration of variable: " + variable.getName());
                         return;
@@ -107,6 +108,47 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     scopes.peek().addSymbol(variable);
                 }
         );
+
+        //Check if the current statement is assigning query result to a variable
+        if (ctx.expr(0).select_stmt() != null) {
+            PLHQLStatementsParser.Select_stmtContext context = ctx.expr(0).select_stmt();
+
+            //Create Temp Data Type
+
+            String dataTypeName = ctx.ident.getText().toUpperCase();
+
+            ArrayList<String> columns = context.fullselect_stmt().fullselect_stmt_item(0).subselect_stmt().selectionColumns;
+
+            ArrayList<String> tables = context.fullselect_stmt().fullselect_stmt_item(0).subselect_stmt().tables;
+
+            HashMap<String, DataMember> dataMembers = new HashMap<>();
+
+            if (columns.contains("*")) {
+                for (String table : tables) {
+                    dataMembers.putAll(TypeRepository.typeHashMap.get(table.toUpperCase()).getMembers());
+                }
+            } else {
+                for (String column : columns) {
+                    String[] splitResult = column.split("\\.");
+                    String tableName = splitResult[0], columnName = splitResult[1];
+                    dataMembers.put(columnName, new DataMember(columnName, TypeRepository.getMemberType(tableName, columnName)));
+                }
+            }
+
+            JSONArray jsonArray = new JSONArray();
+            dataMembers.forEach((s, dataMember) -> jsonArray.put(dataMember.toJSON()));
+
+            DataType dataType = new DataType(dataTypeName, dataMembers);
+            dataType.setTemp(true);
+            dataType.setTableLocation("C:/Users/Asus/Documents/Github/pl-sql-compiler/ruby/" + queryCounter + "_query");
+
+            try {
+                TypeRepository.addDataType(dataType);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     /**
@@ -427,7 +469,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         //Generate code for getting columns to select
 
 
-
         generatedCode.append("\n").append(
                 getOrderColumns(
                         ctx.orderingColumnsMap,
@@ -451,7 +492,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         //Generate code for select clause (projection)
 
-        if (ctx.isDistinct){
+        if (ctx.isDistinct) {
             generatedCode.append("\n  ExecutionPlanUtilities::write_to_execution_plan(\"Distinct\")\n");
         }
         generatedCode.append("\nrecords.uniq! if ")
@@ -473,10 +514,11 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             generatedCode.append("\nrecords = []\n");
             generatedCode.append("\nselection_columns = []\n");
         } else {
-            generatedCode.append("\nputs records if aggregation_columns.empty?\n");
+            generatedCode.append("\nputs records if aggregation_columns.empty? && ! ").append(fromDeclarationStatement(ctx)).append("\n");
         }
 
     }
+
 
     private String getColumnsJSONArray(ArrayList<String> selectionColumns, ArrayList<String> tables) {
         JSONArray resultArray = new JSONArray();
@@ -821,4 +863,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         }
     }
 
+    @Override
+    public void exitSelect_stmt(PLHQLStatementsParser.Select_stmtContext ctx) {
+        super.exitSelect_stmt(ctx);
+        generatedCode.append("\n  ExecutionPlanUtilities::write_query_to_file(records, query_counter)\nquery_counter += 1\n");
+        queryCounter += 1;
+    }
 }

@@ -117,7 +117,13 @@ begin
 
 ExecutionPlanUtilities::init_execution_plan_file()
 
+query_counter = 0
+
 <code>
+
+
+ExecutionPlanUtilities::delete_query_files(query_counter)
+
 
 end
 
@@ -130,6 +136,11 @@ processAnalyticalFunction(analytical_keys, analytical_aggregation_function)::=<<
 
   records, record_length = ExecutionPlanUtilities::process_analytic_function(records, <analytical_keys>, <analytical_aggregation_function>)
 
+>>
+
+queryAssignment(name, members)::=<<
+
+ExecutionPlanUtilities::add_temp_data_type("<name>", <members>, query_counter)
 
 >>
 
