@@ -39,6 +39,8 @@ module MapReduce
 
     def mapper_without_shuffling(records, aggregation_columns)
 
+      ExecutionPlanUtilities::write_to_execution_plan("Mapper")
+
       result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
 
       aggregation_columns.each do |entry|
@@ -54,6 +56,8 @@ module MapReduce
     end
 
     def mapper_with_shuffling(records, grouping_columns, aggregation_columns)
+
+      ExecutionPlanUtilities::write_to_execution_plan("Mapper")
 
       result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
 
@@ -89,6 +93,8 @@ module MapReduce
     end
 
     def shuffle
+
+      ExecutionPlanUtilities::write_to_execution_plan("Shuffler")
 
       result_file = File.open(MapReduce::SHUFFLER_RESULT_FILE, "w")
 
@@ -139,6 +145,8 @@ module MapReduce
     end
 
     def reduce
+
+      ExecutionPlanUtilities::write_to_execution_plan("Reducer")
 
       @grouping_columns.empty? ? #No grouping functions so we are reducing without a previous shuffler
           reduce_without_shuffle :

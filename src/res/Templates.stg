@@ -115,6 +115,8 @@ start = Time.now
 
 begin
 
+ExecutionPlanUtilities::init_execution_plan_file()
+
 <code>
 
 end

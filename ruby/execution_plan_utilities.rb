@@ -1,5 +1,8 @@
 module ExecutionPlanUtilities
 
+  EXECUTION_PLAN_FILE_NAME = "execution_plan.txt"
+
+  @counter = 0
 
   def self.get_table_location(table_name)
 
@@ -101,6 +104,22 @@ module ExecutionPlanUtilities
     end
 
     [records, record_length]
+
+  end
+
+  def self.init_execution_plan_file
+
+    File.delete(EXECUTION_PLAN_FILE_NAME)
+
+  end
+
+  def self.write_to_execution_plan(log)
+
+    file = File.open(EXECUTION_PLAN_FILE_NAME, "a")
+
+    file.puts (@counter += 1).to_s + " - " + log
+
+    file.close
 
   end
 

@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.stringtemplate.v4.ST;
-import org.stringtemplate.v4.STGroup;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
@@ -301,6 +300,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             // Joins
             String previousTable = null;
 
+            generatedCode.append("\n  ExecutionPlanUtilities::write_to_execution_plan(\"Nested Loop Join\")\n");
+
             //Multiple Tables
             while (!ctx.tables.empty()) {
                 String currentItem = ctx.tables.pop();
@@ -380,6 +381,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         String whereCondition = (ctx).whereCondition;
         if (!whereCondition.isEmpty() && !tablesOffset.isEmpty()) {
+
+            generatedCode.append("\n  ExecutionPlanUtilities::write_to_execution_plan(\"Where Condition\")\n");
+
             //If there is a where condition generate appropriate code
 
             final String regex = "\\w+\\.\\w+";
@@ -422,11 +426,16 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         ctx.tablesOffset));
         //Generate code for getting columns to select
 
-        generatedCode.append(
+
+
+        generatedCode.append("\n").append(
                 getOrderColumns(
                         ctx.orderingColumnsMap,
                         tablesOffset));
         //Generate code for getting columns to order by
+
+        if (ctx.orderingColumnsMap.size() > 0)
+            generatedCode.append("\n  ExecutionPlanUtilities::write_to_execution_plan(\"Sort Order By\")\n");
 
         generatedCode.append(
                 "\nrecords.sort_by!{|record| [")
@@ -442,6 +451,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
         //Generate code for select clause (projection)
 
+        if (ctx.isDistinct){
+            generatedCode.append("\n  ExecutionPlanUtilities::write_to_execution_plan(\"Distinct\")\n");
+        }
         generatedCode.append("\nrecords.uniq! if ")
                 .append(
                         ctx.isDistinct);
@@ -611,6 +623,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @SuppressWarnings("ALL")
     private String getOrderStatement(HashMap<String, String> orderColumnsMap, HashMap<String, Integer> tablesOffset) {
         StringBuilder result = new StringBuilder();
+
+
         for (HashMap.Entry<String, String> entry : orderColumnsMap.entrySet()) {
             String[] splitResult = entry.getKey().split("\\.");
             String tableName = splitResult[0], columnName = splitResult[1];
