@@ -7,6 +7,8 @@ public class SyntaxSemanticErrorListener extends BaseErrorListener {
 
     public static final SyntaxSemanticErrorListener INSTANCE = new SyntaxSemanticErrorListener();
 
+    public static boolean semanticErrorOccurred = false;
+
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e)
             throws ParseCancellationException {
@@ -16,6 +18,7 @@ public class SyntaxSemanticErrorListener extends BaseErrorListener {
 
     void semanticError(int line, String error) {
         System.err.println("Semantic Error (Line: " + line + ") Error: " + error);
+        semanticErrorOccurred = true;
     }
 
     void warningMessage(int line, String warning) {

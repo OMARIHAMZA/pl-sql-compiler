@@ -230,10 +230,12 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void exitProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.exitProgram(ctx);
         scopes.pop();
-        ST mainClassTemplate = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.RUBY_MAIN_CLASS_TEMPLATE);
-        mainClassTemplate.add("code", generatedCode);
-        rubyFile.print(mainClassTemplate.render());
-        runRubyProgram();
+        if (!SyntaxSemanticErrorListener.semanticErrorOccurred){
+            ST mainClassTemplate = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.RUBY_MAIN_CLASS_TEMPLATE);
+            mainClassTemplate.add("code", generatedCode);
+            rubyFile.print(mainClassTemplate.render());
+            runRubyProgram();
+        }
     }
 
     /**
@@ -351,7 +353,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             //Multiple Tables
             while (!ctx.tables.empty()) {
                 String currentItem = ctx.tables.pop();
-                ListenerUtils.checkSemanticError(ctx, currentItem);
                 if (BooleanExpressionMatcher.matches(currentItem)) {
                     //This is a join condition for example "on (table1.id==table2.fk)"
 
@@ -364,6 +365,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
 
                 } else { //Calculate tables offset
+                    ListenerUtils.checkSemanticError(ctx, currentItem);
                     if (previousTable != null) {
                         //Not the first table to be added
                         if (TypeRepository.typeHashMap.containsKey(currentItem.toUpperCase())) {
@@ -422,8 +424,6 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         generatedCode.append(code);
         generatedCode = new StringBuilder(generatedCode.toString().replaceAll("<most_inner>", joinsCode));
         ((PLHQLStatementsParser.Subselect_stmtContext) ctx.parent).tablesOffset.putAll(tablesOffset);
-
-        System.out.println(columnsIndices);
     }
 
     @Override
