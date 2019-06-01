@@ -586,11 +586,17 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 String[] splitted = entry.getKey().b.split(":");
                 //TABLE_NAME.COLUMN_NAME
                 String[] splitResult = splitted[1].split("\\.");
-                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
-                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append("+").append(tablesOffset.get(splitResult[0].toUpperCase()))
+
+                analyticalAggregationColumn
+                        .append("{:function=>:")
+                        .append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append("+")
+                        .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                         .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
                         .append("},");
+
                 break;
             }
 
