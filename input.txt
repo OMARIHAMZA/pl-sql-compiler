@@ -1,4 +1,7 @@
-void main(){
+int main(){
 
-select EMPLOYEES.EMPLOYEE_NAME,SUM(EMPLOYEES.SALARY) OVER() from EMPLOYEES
+int a;
+
+return a;
+
 }

@@ -111,7 +111,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         );
 
         //Check if the current statement is assigning query result to a variable
-        if (ctx.expr(0).select_stmt() != null) {
+        if (ctx.expr(0) != null && ctx.expr(0).select_stmt() != null) {
             PLHQLStatementsParser.Select_stmtContext context = ctx.expr(0).select_stmt();
 
             //Create Temp Data Type

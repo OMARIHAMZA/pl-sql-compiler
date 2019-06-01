@@ -19,7 +19,7 @@ module ExecutionPlanUtilities
 
     csv_files = Dir.entries(table_location).select {|f| (!File.directory? f) && (File.extname(f).casecmp?(".csv"))}
 
-    ExecutionPlanUtilities::write_to_execution_plan("Fetch rows from table " + table_name) if csv_files.size > 0 && !table_name.empty?
+    ExecutionPlanUtilities::write_to_execution_plan("Fetch row from table #{table_name} into memory") if csv_files.size > 0 && !table_name.empty?
 
     csv_files
 
@@ -98,7 +98,7 @@ module ExecutionPlanUtilities
 
     records = records.map do |record|
 
-      record_length = record.split(",").length
+      record_length = (record.split(",").length > record_length) ? record.split(",").length : record_length
 
       if analytical_keys.empty?
 
