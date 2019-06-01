@@ -3,6 +3,7 @@ package gen;
 
 import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
+import utils.listeners.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -601,6 +602,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#entry_point}.
+	 * @param ctx the parse tree
+	 */
+	void enterEntry_point(PLHQLStatementsParser.Entry_pointContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#entry_point}.
+	 * @param ctx the parse tree
+	 */
+	void exitEntry_point(PLHQLStatementsParser.Entry_pointContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#c_function}.
 	 * @param ctx the parse tree

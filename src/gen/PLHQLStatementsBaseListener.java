@@ -3,6 +3,7 @@ package gen;
 
 import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
+import utils.listeners.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -723,6 +724,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreate_database_option(PLHQLStatementsParser.Create_database_optionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEntry_point(PLHQLStatementsParser.Entry_pointContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEntry_point(PLHQLStatementsParser.Entry_pointContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

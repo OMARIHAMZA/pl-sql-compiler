@@ -1,10 +1,11 @@
 module ExecutionPlanUtilities
 
-  EXECUTION_PLAN_FILE_NAME = "execution_plan.txt"
 
   FILES_PARENT = "C:\\Users\\Asus\\Documents\\Github\\pl-sql-compiler\\ruby\\"
 
-  @counter = 1
+  EXECUTION_PLAN_FILE_NAME = FILES_PARENT + "\\execution_plan.txt"
+
+  @counter = 0
 
   def self.get_table_location(table_name)
 
@@ -14,8 +15,14 @@ module ExecutionPlanUtilities
     end
   end
 
-  def self.get_csv_files(table_location)
-    Dir.entries(table_location).select {|f| (!File.directory? f) && (File.extname(f).casecmp?(".csv"))}
+  def self.get_csv_files(table_location, table_name = "")
+
+    csv_files = Dir.entries(table_location).select {|f| (!File.directory? f) && (File.extname(f).casecmp?(".csv"))}
+
+    ExecutionPlanUtilities::write_to_execution_plan("Fetch rows from table " + table_name) if csv_files.size > 0 && !table_name.empty?
+
+    csv_files
+
   end
 
   def self.read_record(location, files, file_index, pos, field_terminator)

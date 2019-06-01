@@ -5,9 +5,10 @@ import PLHQLStatementLexer;
 @header{
 import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
+import utils.listeners.*;
 }
 
-program locals[ArrayList<String> functions = new ArrayList()]: c_function+ EOF;
+program locals[ArrayList<String> functions = new ArrayList()]: entry_point c_function* EOF;
 
 block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
@@ -363,6 +364,17 @@ create_database_option :
     | T_LOCATION expr
     ;
 
+entry_point:
+
+    c_function {
+
+    if(!$c_function.ctx.ident.getText().equalsIgnoreCase("main")){
+        SyntaxSemanticErrorListener.INSTANCE.semanticError($c_function.ctx.start.getLine(), "Entery point function must be main");
+    }
+
+    }
+
+;
 c_function locals[ArrayList<Pair<String, String>> functionVariables = new ArrayList<>(), ArrayList<String> unassignedVariables = new ArrayList<>(), ArrayList<String> returnStatements = new ArrayList<>()]:
    dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block {$program::functions.add($ident.text);}
    ;

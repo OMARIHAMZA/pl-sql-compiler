@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class to store type systems
@@ -226,6 +228,12 @@ public class TypeRepository {
     }
 
     public static String getMemberType(String tableName, String memberName) {
+        String regex = "\\w+.\\w+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(tableName + "." + memberName);
+        if (!matcher.matches()) {
+            return "";
+        }
         return typeHashMap.get(tableName.toUpperCase()).getMembers().get(memberName.toUpperCase()).getType();
     }
 

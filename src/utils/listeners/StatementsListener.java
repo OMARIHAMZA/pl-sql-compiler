@@ -292,6 +292,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 }
             } else {
                 for (String selectionColumn : ctx.selectionColumns) {
+                   /* String regex = "\\w+.\\w+";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(selectionColumn);
+                    if (!matcher.matches()) continue;*/
                     String[] splitResult = selectionColumn.split("\\.");
                     members.put(splitResult[1].toUpperCase(), new DataMember(splitResult[1].toUpperCase(), TypeRepository.getMemberType(splitResult[0].toUpperCase(), splitResult[1].toUpperCase())));
                 }

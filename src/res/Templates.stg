@@ -1,7 +1,10 @@
 FirstInnerJoinLoopTemplate(left_table_name, right_table_name, left_counter, right_counter, left_table_length, right_table_length, join_condition) ::= <<
 
+
+   ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
   <left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-      <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+      <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location, "<left_table_name>")
       <left_table_name>_<left_counter>_file_index = 0
       <left_table_name>_<left_counter>_pos = 0
 
@@ -11,7 +14,7 @@ FirstInnerJoinLoopTemplate(left_table_name, right_table_name, left_counter, righ
         record_<left_counter> = <left_table_name>_<left_counter>_line.chomp
 
           <right_table_name>_<right_counter>_table_location, <right_table_name>_<right_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-            <right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+            <right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
             <right_table_name>_<right_counter>_file_index = 0
             <right_table_name>_<right_counter>_pos = 0
 
@@ -46,10 +49,13 @@ FirstInnerJoinLoopTemplate(left_table_name, right_table_name, left_counter, righ
 
 NonFirstInnerJoinLoopTemplate(left_table_name, left_counter, left_table_length, join_condition) ::= <<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
+
 records = []
 
 <left_table_name>_<left_counter>_table_location, <left_table_name>_<left_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-      <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+      <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location, "<left_table_name>")
       <left_table_name>_<left_counter>_file_index = 0
       <left_table_name>_<left_counter>_pos = 0
 
@@ -60,7 +66,7 @@ records = []
 
           prev_join_table_location = "prev/"
           prev_join_field_terminator = ","
-          prev_join_csv_files = ExecutionPlanUtilities.get_csv_files(prev_join_table_location)
+          prev_join_csv_files = ExecutionPlanUtilities.get_csv_files(prev_join_table_location, "")
           prev_join_file_index = 0
           prev_join_pos = 0
 
@@ -117,7 +123,7 @@ joinTypesTemplate(join_condition, join_type, first_table_name, second_table_name
 
 singleTableSelection(table_name, where_condition = "true") ::= <<
     <table_name>_table_location, <table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<table_name>")
-    <table_name>_csv_files = ExecutionPlanUtilities.get_csv_files(<table_name>_table_location)
+    <table_name>_csv_files = ExecutionPlanUtilities.get_csv_files(<table_name>_table_location, "<table_name>")
     <table_name>_file_index = 0
     <table_name>_pos = 0
 
@@ -213,9 +219,11 @@ ExecutionPlanUtilities::add_temp_data_type("<name>", <members>, query_counter)
 
 FirstOuterJoinTemplate(left_table_name, left_table_counter, right_table_name, right_counter, join_condition, right_table_length, left_table_length) ::= <<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
 #LEFT
 <left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_table_counter>_file_index = 0
 <left_table_name>_<left_table_counter>_pos = 0
 
@@ -229,7 +237,7 @@ until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<le
   <left_table_name>_<left_table_counter>_joined_flag = false
 
 <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
 <right_table_name>_<right_counter>_file_index = 0
 <right_table_name>_<right_counter>_pos = 0
 
@@ -257,7 +265,7 @@ end
 
 #RIGHT
 <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
 <right_table_name>_<right_counter>_file_index = 0
 <right_table_name>_<right_counter>_pos = 0
 
@@ -271,7 +279,7 @@ until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right
   <right_table_name>_<right_counter>_joined_flag = false
 
 <left_table_name>_<left_table_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_table_counter>_file_index = 0
 <left_table_name>_<left_table_counter>_pos = 0
 
@@ -310,11 +318,14 @@ prev_outer_length = <right_table_length> + <left_table_length>
 
 NonFirstOuterJoinTemplate(left_table_name, left_table_counter, join_condition, left_table_length)::=<<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
+
 records = []
 
 #LEFT
 <left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_table_counter>_file_index = 0
 <left_table_name>_<left_table_counter>_pos = 0
 
@@ -329,7 +340,7 @@ until <left_table_name>_<left_table_counter>_file_index == <left_table_name>_<le
 
 prev_outer_table_location = "prev/"
 prev_outer_field_terminator = ","
-prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location, "")
 prev_outer_file_index = 0
 prev_outer_pos = 0
 
@@ -358,7 +369,7 @@ end
 #RIGHT
 prev_outer_table_location = "prev/"
 prev_outer_field_terminator = ","
-prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location, "")
 prev_outer_file_index = 0
 prev_outer_pos = 0
 
@@ -372,7 +383,7 @@ until prev_outer_file_index == prev_outer_csv_files.length
   prev_outer_joined_flag = false
 
 <left_table_name>_<left_table_counter>_table_location, <left_table_name>_<left_table_counter>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location)
+<left_table_name>_<left_table_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_table_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_table_counter>_file_index = 0
 <left_table_name>_<left_table_counter>_pos = 0
 
@@ -403,8 +414,11 @@ end
 
 FirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_counter, join_condition, left_table_length, right_table_length)::=<<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
+
 <left_table_name>_<left_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+<left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_counter>_file_index = 0
 <left_table_name>_<left_counter>_pos = 0
 
@@ -418,7 +432,7 @@ until <left_table_name>_<left_counter>_file_index == <left_table_name>_<left_cou
   <left_table_name>_<left_counter>_joined_flag = false
 
 <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
 <right_table_name>_<right_counter>_file_index = 0
 <right_table_name>_<right_counter>_pos = 0
 
@@ -459,10 +473,12 @@ prev_outer_length = <right_table_length> + <left_table_length>
 
 NonFirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_counter, join_condition, left_table_length, right_table_length)::=<<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
    records = []
 
          <left_table_name>_<left_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-         <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+         <left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location, "<left_table_name>")
          <left_table_name>_<left_counter>_file_index = 0
          <left_table_name>_<left_counter>_pos = 0
 
@@ -477,7 +493,7 @@ NonFirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_cou
 
          prev_outer_table_location = "prev/"
          prev_outer_field_terminator = ","
-         prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+         prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location, "")
          prev_outer_file_index = 0
          prev_outer_pos = 0
 
@@ -508,8 +524,11 @@ NonFirstLeftOuterJoin(left_table_name, right_table_name, left_counter, right_cou
 
 FirstRightOuterJoin(left_table_name, right_table_name, left_counter, right_counter, join_condition, left_table_length, right_table_length)::=<<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
+
 <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+<right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
 <right_table_name>_<right_counter>_file_index = 0
 <right_table_name>_<right_counter>_pos = 0
 
@@ -523,7 +542,7 @@ until <right_table_name>_<right_counter>_file_index == <right_table_name>_<right
   <right_table_name>_<right_counter>_joined_flag = false
 
 <left_table_name>_<left_counter>_table_location, <left_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<left_table_name>")
-<left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location)
+<left_table_name>_<left_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<left_table_name>_<left_counter>_table_location, "<left_table_name>")
 <left_table_name>_<left_counter>_file_index = 0
 <left_table_name>_<left_counter>_pos = 0
 
@@ -564,10 +583,12 @@ prev_outer_length = <right_table_length> + <left_table_length>
 
 NonFirstRightOuterJoin(left_table_name, right_table_name, left_counter, right_counter, join_condition, left_table_length, right_table_length)::=<<
 
+ExecutionPlanUtilities::write_to_execution_plan("Nested Loop Join")
+
    records = []
 
       <right_table_name>_<right_counter>_table_location, <right_table_name>_field_terminator = ExecutionPlanUtilities.get_table_location("<right_table_name>")
-      <right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location)
+      <right_table_name>_<right_counter>_csv_files = ExecutionPlanUtilities.get_csv_files(<right_table_name>_<right_counter>_table_location, "<right_table_name>")
       <right_table_name>_<right_counter>_file_index = 0
       <right_table_name>_<right_counter>_pos = 0
 
@@ -582,7 +603,7 @@ NonFirstRightOuterJoin(left_table_name, right_table_name, left_counter, right_co
 
       prev_outer_table_location = "prev"
       prev_outer_field_terminator = ","
-      prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location)
+      prev_outer_csv_files = ExecutionPlanUtilities.get_csv_files(prev_outer_table_location, "")
       prev_outer_file_index = 0
       prev_outer_pos = 0
 

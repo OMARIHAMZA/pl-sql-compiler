@@ -16,7 +16,7 @@ public class SyntaxSemanticErrorListener extends BaseErrorListener {
         System.err.println("line " + line + ":" + charPositionInLine + " " + msg);
     }
 
-    void semanticError(int line, String error) {
+    public void semanticError(int line, String error) {
         System.err.println("Semantic Error (Line: " + line + ") Error: " + error);
         semanticErrorOccurred = true;
     }
