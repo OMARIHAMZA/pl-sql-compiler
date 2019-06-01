@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.stringtemplate.v4.ST;
-import org.stringtemplate.v4.STGroup;
 import utils.BooleanExpressionMatcher;
 import utils.TypeRepository;
 import utils.files.RubyFile;
@@ -230,7 +229,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     public void exitProgram(PLHQLStatementsParser.ProgramContext ctx) {
         super.exitProgram(ctx);
         scopes.pop();
-        if (!SyntaxSemanticErrorListener.semanticErrorOccurred){
+        if (!SyntaxSemanticErrorListener.semanticErrorOccurred) {
             ST mainClassTemplate = ListenerUtils.ST_GROUP_FILE.getInstanceOf(ListenerUtils.RUBY_MAIN_CLASS_TEMPLATE);
             mainClassTemplate.add("code", generatedCode);
             rubyFile.print(mainClassTemplate.render());
@@ -502,7 +501,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 append(" ]}");
         //Generate code to order generatedCode set
 
-        generatedCode.append(generateAnalyticalFunctions(ctx.analyticalFunctions));
+        if (!ctx.analyticalFunctions.isEmpty()) {
+            generatedCode.append(generateAnalyticalFunctions(ctx.analyticalFunctions, ctx.tablesOffset));
+        }
 
         generatedCode.append(
                 "\nunless selection_columns.empty?\nrecords.map!{|record| record.split(\",\").values_at(*selection_columns).join(\",\")}\nend\n");
@@ -569,24 +570,36 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         return resultArray.toString();
     }
 
-    private String generateAnalyticalFunctions(HashMap<Pair<String, String>, ParserRuleContext> analyticalFunctions) {
+    private String generateAnalyticalFunctions(HashMap<Pair<String, String>, ParserRuleContext> analyticalFunctions,
+                                               HashMap<String, Integer> tablesOffset) {
 
         StringBuilder result = new StringBuilder();
+        StringBuilder analyticalKeys = new StringBuilder();
+        StringBuilder analyticalAggregationColumn = new StringBuilder();
 
         for (HashMap.Entry<Pair<String, String>, ParserRuleContext> entry : analyticalFunctions.entrySet()) {
 
-            StringBuilder analyticalKeys = new StringBuilder("[");
-            StringBuilder analyticalAggregationColumn = new StringBuilder();
 
             PLHQLStatementsParser.Expr_func_over_clauseContext ctx = (PLHQLStatementsParser.Expr_func_over_clauseContext) entry.getValue();
 
-            if (ctx.expr_func_partition_by_clause() == null) break;
+            if (ctx.expr_func_partition_by_clause() == null) {
+                String[] splitted = entry.getKey().b.split(":");
+                //TABLE_NAME.COLUMN_NAME
+                String[] splitResult = splitted[1].split("\\.");
+                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append("+").append(tablesOffset.get(splitResult[0].toUpperCase()))
+                        .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                        .append("},");
+                break;
+            }
 
+            analyticalKeys.append("[");
             for (PLHQLStatementsParser.ExprContext exprContext : ctx.expr_func_partition_by_clause().expr()) {
                 //exprContext.getText() = TABLE_NAME.COLUMN_NAME
                 String[] splitResult = exprContext.getText().split("\\.");
                 String tableName = splitResult[0], columnName = splitResult[1];
-                analyticalKeys.append(getColumnIndex(tableName, columnName)).append(",");
+                analyticalKeys.append(getColumnIndex(tableName, columnName) + "+" + tablesOffset.get(tableName)).append(",");
             }
 
             analyticalKeys.append("]");
@@ -601,20 +614,21 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 //TABLE_NAME.COLUMN_NAME
                 String[] splitResult = splitted[1].split("\\.");
                 analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
-                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()) + "+" + tablesOffset.get(splitResult[0].toUpperCase()))
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                         .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
                         .append("},");
 
             }
-            ST st = ST_GROUP_FILE.getInstanceOf("processAnalyticalFunction");
-            st.add("analytical_keys", analyticalKeys);
-            st.add("analytical_aggregation_function", analyticalAggregationColumn);
 
-            result.append("\n").append(st.render()).append("\nselection_columns << record_length");
         }
 
+        ST st = ST_GROUP_FILE.getInstanceOf("processAnalyticalFunction");
+        if (analyticalKeys.length() == 0) analyticalKeys.append("[]");
+        st.add("analytical_keys", analyticalKeys);
+        st.add("analytical_aggregation_function", analyticalAggregationColumn);
 
+        result.append("\n").append(st.render()).append("\nselection_columns << record_length");
         return result.toString() + "\n";
     }
 
@@ -761,7 +775,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             return joinsCode + "\n\n" + result;
 
 
-        }else if (ctx.joinType.toUpperCase().contains("RIGHT")){
+        } else if (ctx.joinType.toUpperCase().contains("RIGHT")) {
 
             String result;
 
