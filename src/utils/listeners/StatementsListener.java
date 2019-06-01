@@ -277,9 +277,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     @Override
     public void enterSubselect_stmt(PLHQLStatementsParser.Subselect_stmtContext ctx) {
         super.enterSubselect_stmt(ctx);
-        for (HashMap.Entry<Pair<String, String>, ParserRuleContext> entry : ctx.analyticalFunctions.entrySet()) {
+    /*    for (HashMap.Entry<Pair<String, String>, ParserRuleContext> entry : ctx.analyticalFunctions.entrySet()) {
             System.out.println(((PLHQLStatementsParser.Expr_func_over_clauseContext) entry.getValue()).expr_func_partition_by_clause() == null);
-        }
+        }*/
         if (isSubselectStatement(ctx.parent)) {
             ArrayList<String> selectionColumns = ctx.selectionColumns;
             LinkedHashMap<String, DataMember> members = new LinkedHashMap<>();
@@ -583,19 +583,33 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             PLHQLStatementsParser.Expr_func_over_clauseContext ctx = (PLHQLStatementsParser.Expr_func_over_clauseContext) entry.getValue();
 
             if (ctx.expr_func_partition_by_clause() == null) {
-                String[] splitted = entry.getKey().b.split(":");
-                //TABLE_NAME.COLUMN_NAME
-                String[] splitResult = splitted[1].split("\\.");
 
-                analyticalAggregationColumn
-                        .append("{:function=>:")
-                        .append(entry.getKey().a.toUpperCase())
-                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
-                        .append("+")
-                        .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
-                        .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
-                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
-                        .append("},");
+
+                if (entry.getKey().b.contains("*")) {
+
+                    analyticalAggregationColumn.append("{:function=>:")
+                            .append(entry.getKey().a.toUpperCase())
+                            .append(",:index=>")
+                            .append("-1")
+                            .append("},");
+
+                } else {
+                    String[] splitted = entry.getKey().b.split(":");
+                    //TABLE_NAME.COLUMN_NAME
+                    String[] splitResult = splitted[1].split("\\.");
+
+                    analyticalAggregationColumn
+                            .append("{:function=>:")
+                            .append(entry.getKey().a.toUpperCase())
+                            .append(",:index=>")
+                            .append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                            .append("+")
+                            .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
+                            .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                            .append(",:distinct=>")
+                            .append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                            .append("},");
+                }
 
                 break;
             }
@@ -605,22 +619,34 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 //exprContext.getText() = TABLE_NAME.COLUMN_NAME
                 String[] splitResult = exprContext.getText().split("\\.");
                 String tableName = splitResult[0], columnName = splitResult[1];
-                analyticalKeys.append(getColumnIndex(tableName, columnName) + "+" + tablesOffset.get(tableName)).append(",");
+                analyticalKeys
+                        .append(getColumnIndex(tableName, columnName))
+                        .append("+")
+                        .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(tableName))
+                        .append(",");
             }
 
             analyticalKeys.append("]");
 
             if (entry.getKey().b.contains("*")) {
-                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
-                        .append(",:index=>").append("-1")
+                analyticalAggregationColumn.append("{:function=>:")
+                        .append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>")
+                        .append("-1")
                         .append("},");
             } else {
                 //DISTINCT:TABLE_NAME.COLUMN_NAME
                 String[] splitted = entry.getKey().b.split(":");
                 //TABLE_NAME.COLUMN_NAME
                 String[] splitResult = splitted[1].split("\\.");
-                analyticalAggregationColumn.append("{:function=>:").append(entry.getKey().a.toUpperCase())
-                        .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()) + "+" + tablesOffset.get(splitResult[0].toUpperCase()))
+
+                analyticalAggregationColumn
+                        .append("{:function=>:")
+                        .append(entry.getKey().a.toUpperCase())
+                        .append(",:index=>")
+                        .append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                        .append("+")
+                        .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                         .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
                         .append("},");
@@ -656,7 +682,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
         for (String column : selectionColumns) {
 
-            if (!column.contains(".")) return "";
+            if (!column.contains(".") && !"count(*)OVER()".equalsIgnoreCase(column)) return "";
 
             if (!matchesColumnSyntax(column)) continue;
 
