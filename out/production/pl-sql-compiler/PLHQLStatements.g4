@@ -5,9 +5,10 @@ import PLHQLStatementLexer;
 @header{
 import java.util.*;
 import org.antlr.v4.runtime.misc.Pair;
+import utils.listeners.*;
 }
 
-program locals[ArrayList<String> functions = new ArrayList()]: c_function+ EOF;
+program locals[ArrayList<String> functions = new ArrayList()]: entry_point c_function* EOF;
 
 block : ((begin_end_block | stmt|error_stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
 
@@ -363,6 +364,17 @@ create_database_option :
     | T_LOCATION expr
     ;
 
+entry_point:
+
+    c_function {
+
+    if(!$c_function.ctx.ident.getText().equalsIgnoreCase("main")){
+        SyntaxSemanticErrorListener.INSTANCE.semanticError($c_function.ctx.start.getLine(), "Entery point function must be main");
+    }
+
+    }
+
+;
 c_function locals[ArrayList<Pair<String, String>> functionVariables = new ArrayList<>(), ArrayList<String> unassignedVariables = new ArrayList<>(), ArrayList<String> returnStatements = new ArrayList<>()]:
    dtype ident T_OPEN_P c_function_parameter_list? T_CLOSE_P  c_block {$program::functions.add($ident.text);}
    ;
@@ -874,15 +886,14 @@ expr_agg_window_func :
 
 
      }) T_CLOSE_P
-        | ((expr_func_all_distinct expr) {
+        | ((expr_func_all_distinct expr) T_CLOSE_P expr_func_over_clause{
         //Analytical Function
         $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
-
-        }| '*' {
+         }
+         | '*' T_CLOSE_P expr_func_over_clause{
         //Analytical Function
         $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",":*"), $expr_func_over_clause.ctx);
-
-        }) T_CLOSE_P expr_func_over_clause)
+        }))
 
 
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause

@@ -886,15 +886,14 @@ expr_agg_window_func :
 
 
      }) T_CLOSE_P
-        | ((expr_func_all_distinct expr) {
+        | ((expr_func_all_distinct expr) T_CLOSE_P expr_func_over_clause{
         //Analytical Function
         $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",$expr_func_all_distinct.text + ":" + $expr.text), $expr_func_over_clause.ctx);
-
-        }| '*' {
+         }
+         | '*' T_CLOSE_P expr_func_over_clause{
         //Analytical Function
         $subselect_stmt::analyticalFunctions.put(new Pair<>("COUNT",":*"), $expr_func_over_clause.ctx);
-
-        }) T_CLOSE_P expr_func_over_clause)
+        }))
 
 
      | T_CUME_DIST T_OPEN_P T_CLOSE_P expr_func_over_clause
