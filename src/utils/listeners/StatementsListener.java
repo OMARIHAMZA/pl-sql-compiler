@@ -441,6 +441,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
+            whereCondition = whereCondition.replaceAll("isnull", " ==\"\"");
+            whereCondition = whereCondition.replaceAll("isnotnull", " !=\"\"");
             final Matcher matcher = pattern.matcher(whereCondition);
             while (matcher.find()) {
                 String group = matcher.group();
@@ -848,8 +850,10 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     }
 
     private String mapSingleTableWhereCondition(String whereCondition, StringBuilder columnIndex) {
-        final String regex = "\\w+\\.\\w+";
+        final String regex = "(\\w+\\.\\w+)";
         final Pattern pattern = Pattern.compile(regex);
+        whereCondition = whereCondition.replaceAll("isnull", " ==\"\"");
+        whereCondition = whereCondition.replaceAll("isnotnull", " !=\"\"");
         final Matcher matcher = pattern.matcher(whereCondition);
         while (matcher.find()) {
             String group = matcher.group();
