@@ -44,7 +44,7 @@ module ExecutionPlanUtilities
 
     end
 
-    return line.gsub(/#{field_terminator}/, ","), file_index, pos
+    return line.gsub(/[#{field_terminator}]/, ","), file_index, pos
 
   end
 
@@ -84,7 +84,11 @@ module ExecutionPlanUtilities
 
   def self.process_analytic_function(records, analytical_keys, analytical_aggregation_column)
 
-    analytical_aggregation_columns = [analytical_aggregation_column]
+    if analytical_aggregation_column.class == Array
+      analytical_aggregation_columns = analytical_aggregation_column
+    else
+      analytical_aggregation_columns = [analytical_aggregation_column]
+    end
 
     mapper_file_name = MapReduce::Mapper.new.map(records, analytical_keys, analytical_aggregation_columns)
 

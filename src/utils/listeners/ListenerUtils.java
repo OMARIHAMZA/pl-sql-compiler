@@ -136,6 +136,7 @@ public class ListenerUtils {
         Object[] tablesArray = tables.toArray();
         for (Object currentString : tablesArray) {
             if (!BooleanExpressionMatcher.matches(String.valueOf(currentString))) {
+                checkSemanticError(ctx.from_clause(), String.valueOf(currentString));
                 count += TypeRepository.getColumnsCount(String.valueOf(currentString));
 
             }
@@ -182,6 +183,17 @@ public class ListenerUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    static boolean explainStatement(ParseTree parseTree){
+        ParseTree currentParent = parseTree.getParent();
+        while (currentParent != null) {
+            if (((RuleContext) currentParent).getRuleIndex() == PLHQLStatementsParser.RULE_explain_plan_stmt) {
+                return true;
+            }
+            currentParent = currentParent.getParent();
+        }
+        return false;
     }
 
     /*

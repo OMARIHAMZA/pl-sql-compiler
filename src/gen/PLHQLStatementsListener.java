@@ -123,6 +123,16 @@ public interface PLHQLStatementsListener extends ParseTreeListener {
 	 */
 	void exitStmt(PLHQLStatementsParser.StmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PLHQLStatementsParser#explain_plan_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PLHQLStatementsParser#explain_plan_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PLHQLStatementsParser#semicolon_stmt}.
 	 * @param ctx the parse tree
 	 */

@@ -184,8 +184,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
         ctx.create_table_definition().create_table_columns().create_table_columns_item()
                 .forEach(column -> {
                     DataMember dataMember = new DataMember(
-                            column.dtype().getText().toUpperCase(),
-                            column.column_name().getText().toUpperCase());//Add each column to the table definition
+                            column.column_name().getText().toUpperCase(),
+                            column.dtype().getText().toUpperCase());//Add each column to the table definition
 
                     dataType.getMembers().put(dataMember.getName().toUpperCase(), dataMember);
                 });
@@ -257,7 +257,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 }
         }
 
-        if (!ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()))
+        if (!ListenerUtils.fromSelectClause(ctx) && ctx.ident() != null && !scopes.peek().containsSymbol(ctx.getText()) && !ctx.ident().getText().contains("\""))
         //If variable is not defined in the current scope
         {
             SyntaxSemanticErrorListener.INSTANCE.semanticError(
@@ -444,8 +444,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
 
             final String regex = "\\w+\\.\\w+";
             final Pattern pattern = Pattern.compile(regex);
-            whereCondition = whereCondition.replaceAll("isnull", " ==\"\"");
-            whereCondition = whereCondition.replaceAll("isnotnull", " !=\"\"");
+            whereCondition = whereCondition.replaceAll("(?i)isnull", " ==\"\"");
+            whereCondition = whereCondition.replaceAll("(?i)isnotnull", " !=\"\"");
             final Matcher matcher = pattern.matcher(whereCondition);
             while (matcher.find()) {
                 String group = matcher.group();
@@ -531,7 +531,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             generatedCode.append("\nrecords = []\n");
             generatedCode.append("\nselection_columns = []\n");
         } else {
-            generatedCode.append("\nputs records if aggregation_columns.empty? && ! ").append(fromDeclarationStatement(ctx)).append("\n");
+            generatedCode.append("\n  puts File.read(ExecutionPlanUtilities::EXECUTION_PLAN_FILE_NAME) if ").append(explainStatement(ctx)).append("\n");
+            generatedCode.append("\nputs records if aggregation_columns.empty? && ! ").append(fromDeclarationStatement(ctx)).append(" && ! ").append(explainStatement(ctx)).append("\n");
         }
 
     }
@@ -607,7 +608,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                             .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
                             .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                             .append(",:distinct=>")
-                            .append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                            .append(splitted[0].toUpperCase().isEmpty() ? "nil" : "true")
                             .append("},");
                 }
 
@@ -648,7 +649,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                         .append("+")
                         .append(tablesOffset.isEmpty() ? 0 : tablesOffset.get(splitResult[0].toUpperCase()))
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
-                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : "ture")
                         .append("},");
 
             }
@@ -759,7 +760,7 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                 result.append("{:function=>:").append(pair.a.toUpperCase())
                         .append(",:index=>").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                         .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
-                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : splitted[0].toUpperCase())
+                        .append(",:distinct=>").append(splitted[0].toUpperCase().isEmpty() ? "nil" : "true")
                         .append("},");
             }
         }
@@ -769,6 +770,8 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
     private String getGroupingColumns(ArrayList<String> groupingColumns, HashMap<String, Integer> tablesOffset) {
         StringBuilder result = new StringBuilder();
         for (String s : groupingColumns) {
+            s = s.replaceAll("\\(", "");
+            s = s.replaceAll("\\)", "");
             String[] splitResult = s.split("\\.");
             result.append("\ngrouping_columns << ").append(getColumnIndex(splitResult[0].toLowerCase(), splitResult[1].toLowerCase())).append(" + ").append(tablesOffset.get(splitResult[0].toUpperCase()) == null ? "0" : tablesOffset.get(splitResult[0].toUpperCase()));
         }
@@ -960,9 +963,9 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
                     String[] splitResult = splitted[1].split("\\.");
                     result.append("{:function=>:").append(pair.a.toUpperCase())
                             .append(",:index=>").append(getIndexOfFunction(pair.a, pair.b, ctx))
-                            .append(",:condition=>").append("\"").append(currentCondition.b).append("\"")
+                            .append(",:condition=>").append("\"").append(processHavingCondition(currentCondition.b)).append("\"")
                             .append(",:function_after_condition=>").append(currentCondition.a.equalsIgnoreCase("AFTER"))
-                            .append(",:type=>:").append(TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
+                            .append(",:type=>:").append(pair.b.contains("*")? "nil" : TypeRepository.getMemberType(splitResult[0].toLowerCase(), splitResult[1].toLowerCase()))
                             .append("},");
                 }
                 counter++;
@@ -1183,5 +1186,34 @@ public class StatementsListener extends PLHQLStatementsBaseListener {
             condition = ListenerUtils.getConversion(condition, group, type, termValueST);
         }
         return condition;
+    }
+
+    private String processHavingCondition(String condition) {
+
+        final String regex = "\\w+\\.\\w+";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(condition);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String tableName = group.split("\\.")[0].toLowerCase(), columnName = group.split("\\.")[1].toLowerCase();
+
+            ArrayList<String> arrayList = new ArrayList<>(TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().keySet());
+            String dataType = TypeRepository.typeHashMap.get(tableName.toUpperCase()).getMembers().get(columnName.toUpperCase()).getType();
+
+            condition = condition.replaceFirst(group, "attributes[" + arrayList.indexOf(columnName.toUpperCase()) + "]" + getConversion(dataType));
+        }
+
+        return condition;
+
+    }
+
+    @Override
+    public void enterExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx) {
+        super.enterExplain_plan_stmt(ctx);
+    }
+
+    @Override
+    public void exitExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx) {
+        super.exitExplain_plan_stmt(ctx);
     }
 }

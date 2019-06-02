@@ -1,0 +1,4 @@
+1 - Fetch row from table employees into memory
+2 - Mapper
+3 - Shuffler
+4 - Reducer

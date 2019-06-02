@@ -153,6 +153,18 @@ public class PLHQLStatementsBaseListener implements PLHQLStatementsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExplain_plan_stmt(PLHQLStatementsParser.Explain_plan_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSemicolon_stmt(PLHQLStatementsParser.Semicolon_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}

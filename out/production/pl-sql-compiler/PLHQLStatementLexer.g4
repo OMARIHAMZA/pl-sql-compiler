@@ -316,7 +316,7 @@ T_XACT_ABORT      : X A C T '_' A B O R T ;
 T_XML             : X M L ;
 T_YES             : Y E S ;
 T_SUMMARIZE       : S U M M A R I Z E ;
-
+T_EXPLAIN         : E X P L A I N ;
 
 // Functions with specific syntax
 T_ACTIVITY_COUNT       : A C T I V I T Y '_' C O U N T ;

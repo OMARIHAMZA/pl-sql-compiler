@@ -66,6 +66,7 @@ c_block:
     T_OPEN_B stmt* T_CLOSE_B
 ;
 
+
 stmt :
        assignment_stmt
      | break_stmt
@@ -82,8 +83,17 @@ stmt :
      | return_stmt
      | null_stmt
      | expr
+     | explain_plan_stmt
     | semicolon_stmt      // Placed here to allow null statements ;;...
      ;
+
+
+explain_plan_stmt:
+
+T_EXPLAIN select_stmt
+
+;
+
 
 semicolon_stmt:
     T_SEMICOLON

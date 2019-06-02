@@ -224,7 +224,11 @@ public class TypeRepository {
     }
 
     public static int getColumnsCount(String dataTypeName) {
-        return typeHashMap.get(dataTypeName.toUpperCase()).getMembers().size();
+        try {
+            return typeHashMap.get(dataTypeName.toUpperCase()).getMembers().size();
+        }catch (Exception e){
+            return 0;
+        }
     }
 
     public static String getMemberType(String tableName, String memberName) {

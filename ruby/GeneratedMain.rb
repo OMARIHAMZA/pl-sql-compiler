@@ -36,21 +36,19 @@ join_type = "null"
 
     end
 
-having_conditions = []
-aggregation_columns = []
+having_conditions = [{:function=>:SUM,:index=>1,:condition=>">20000000",:function_after_condition=>false,:type=>:INT},]
+aggregation_columns = [{:function=>:SUM,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},]
 
+grouping_columns << ExecutionPlanUtilities::get_column_index("employees", "department_id") + 0
 
 
 if aggregation_columns.empty?
 
+selection_columns << 0 + ExecutionPlanUtilities::get_column_index("employees", "department_id")
 
 end
 
 records.sort_by!{|record| [ ]}
-  records, record_length = ExecutionPlanUtilities::process_analytic_function(records, [ExecutionPlanUtilities::get_column_index("EMPLOYEES", "SALARY")+null,], {:function=>:COUNT,:index=>-1},)
-
-selection_columns << record_length
-
 unless selection_columns.empty?
 records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
 end
@@ -70,7 +68,9 @@ records.uniq! if false
 
   end
 
-puts records if aggregation_columns.empty? && ! false
+  puts File.read(ExecutionPlanUtilities::EXECUTION_PLAN_FILE_NAME) if false
+
+puts records if aggregation_columns.empty? && ! false && ! false
 
   ExecutionPlanUtilities::write_query_to_file(records, query_counter)
 query_counter += 1
